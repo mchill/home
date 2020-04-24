@@ -1,0 +1,29 @@
+api:
+  dashboard: true
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entrypoint:
+          to: websecure
+          scheme: https
+  websecure:
+    address: ":443"
+  sftp:
+    address: ":2222/tcp"
+
+providers:
+  docker:
+    exposedbydefault: false
+  file:
+    directory: /config
+    watch: true
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: matthewchill7@gmail.com
+      httpChallenge:
+        entryPoint: web

@@ -1,0 +1,160 @@
+version: '3'
+
+services:
+  traefik:
+    image: traefik:2.2
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+      - 2222:2222
+    environment:
+      - TZ=America/New_York
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - $PWD/traefik.yml:/etc/traefik/traefik.yml
+      - $PWD/traefik:/config
+      - /data/server/acme.json:/acme.json
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.tls=true
+      - traefik.http.routers.traefik.tls.certresolver=letsencrypt
+      - traefik.http.routers.traefik.middlewares=auth@file
+      - traefik.http.routers.traefik.rule=Host(`mchill.duckdns.org`)
+      - traefik.http.routers.traefik.service=api@internal
+
+  portainer:
+    image: portainer/portainer
+    restart: always
+    environment:
+      - TZ=America/New_York
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --no-auth
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.portainer.tls=true
+      - traefik.http.routers.portainer.tls.certresolver=letsencrypt
+      - traefik.http.routers.portainer.middlewares=auth@file
+      - traefik.http.routers.portainer.rule=Host(`portainer.mchill.duckdns.org`)
+      - traefik.http.services.portainer.loadbalancer.server.port=9000
+
+  duckdns:
+    image: linuxserver/duckdns
+    restart: always
+    environment:
+      - TZ=America/New_York
+      - SUBDOMAINS=mchill.duckdns.org
+      - TOKEN=$DUCKDNS_TOKEN
+
+  oauth:
+    image: thomseddon/traefik-forward-auth:2
+    restart: always
+    environment:
+      - TZ=America/New_York
+      - PROVIDERS_GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID
+      - PROVIDERS_GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET
+      - AUTH_HOST=auth.mchill.duckdns.org
+      - COOKIE_DOMAIN=mchill.duckdns.org
+      - SECRET=$OAUTH_SECRET
+      - WHITELIST=matthewchill7@gmail.com
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.oauth.tls=true
+      - traefik.http.routers.oauth.tls.certresolver=letsencrypt
+      - traefik.http.routers.oauth.middlewares=auth@file
+      - traefik.http.routers.oauth.rule=Host(`auth.mchill.duckdns.org`)
+      - traefik.http.services.oauth.loadbalancer.server.port=4181
+
+  sftp:
+    image: atmoz/sftp:alpine
+    restart: always
+    environment:
+      - TZ=America/New_York
+      - SFTP_USERS=mchill:$$1$$KvZr5bVS$$maxr0gZ.kIm0dRYKs3Yh91:e:1000
+    volumes:
+      - $PWD/id_rsa.pub:/home/mchill/.ssh/keys/id_rsa.pub:ro
+      - /data/server/keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
+      - /data/server/keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
+      - /data/server:/home/mchill/server
+    labels:
+      - traefik.enable=true
+      - traefik.tcp.routers.sftp.rule=HostSNI(`*`)
+      - traefik.tcp.routers.sftp.entrypoints=sftp
+      - traefik.tcp.services.sftp.loadbalancer.server.port=22
+
+  filestash:
+    image: machines/filestash
+    restart: always
+    environment:
+      - TZ=America/New_York
+    volumes:
+      - /data/server/filestash/config.json:/app/data/state/config/config.json
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.filestash.tls=true
+      - traefik.http.routers.filestash.tls.certresolver=letsencrypt
+      - traefik.http.routers.filestash.middlewares=auth@file
+      - traefik.http.routers.filestash.rule=Host(`files.mchill.duckdns.org`)
+      - traefik.http.services.filestash.loadbalancer.server.port=8334
+
+  plex:
+    image: plexinc/pms-docker
+    restart: always
+    ports:
+      - 32400:32400
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+    environment:
+      - TZ=America/New_York
+      - ADVERTISE_IP=https://plex.mchill.duckdns.org
+      - PLEX_CLAIM=$PLEX_CLAIM
+    volumes:
+      - /data/server/plex/config:/config
+      - /data/server/plex/data:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.plex.tls=true
+      - traefik.http.routers.plex.tls.certresolver=letsencrypt
+      - traefik.http.routers.plex.rule=Host(`plex.mchill.duckdns.org`)
+      - traefik.http.services.plex.loadbalancer.server.port=32400
+
+  qbittorrent:
+    image: markusmcnugen/qbittorrentvpn
+    restart: always
+    privileged: true
+    environment:
+      - TZ=America/New_York
+      - VPN_ENABLED=yes
+      - VPN_USERNAME=$OPENVPN_USERNAME
+      - VPN_PASSWORD=$OPENVPN_PASSWORD
+      - LAN_NETWORK=192.168.1.0/24
+      - NAME_SERVERS=1.1.1.1,8.8.8.8
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /data/server/qbittorrent/config:/config
+      - /data/server/qbittorrent/downloads:/downloads
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.qbittorrent.tls=true
+      - traefik.http.routers.qbittorrent.tls.certresolver=letsencrypt
+      - traefik.http.routers.qbittorrent.middlewares=auth@file
+      - traefik.http.routers.qbittorrent.rule=Host(`torrent.mchill.duckdns.org`)
+      - traefik.http.services.qbittorrent.loadbalancer.server.port=8080
+
+  minecraft:
+    image: itzg/minecraft-server
+    restart: always
+    ports:
+      - 25565:25565
+    environment:
+      - TZ=America/New_York
+      - EULA=TRUE
+      - MEMORY=2G
+      - VERSION=1.15.2
+    volumes:
+      - $PWD/minecraft:/data
+      - /data/server/minecraft:/data/world
