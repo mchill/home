@@ -10,7 +10,7 @@ Set the following environment variables.
 
 Variable                       | Description
 ---                            | ---
-TOKEN                          | DuckDNS API token (https://www.duckdns.org/)
+DUCKDNS_TOKEN                  | DuckDNS API token (https://www.duckdns.org/)
 PROVIDERS_GOOGLE_CLIENT_ID     | Google Oauth client ID (https://console.developers.google.com/apis/credentials)
 PROVIDERS_GOOGLE_CLIENT_SECRET | Google Oauth client secret (https://console.developers.google.com/apis/credentials)
 SECRET                         | Internal OAuth secret

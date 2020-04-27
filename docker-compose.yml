@@ -13,6 +13,7 @@ services:
       - $JVB_TCP_PORT:$JVB_TCP_PORT
     environment:
       - TZ
+      - DUCKDNS_TOKEN
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - $PWD/traefik.yml:/etc/traefik/traefik.yml
@@ -22,6 +23,8 @@ services:
       - traefik.enable=true
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
+      - traefik.http.routers.blog.tls.domains[0].main=$URL
+      - traefik.http.routers.blog.tls.domains[0].sans=*.$URL
       - traefik.http.routers.traefik.middlewares=auth@file
       - traefik.http.routers.traefik.entrypoints=web,websecure
       - traefik.http.routers.traefik.rule=Host(`$URL`)
@@ -49,7 +52,7 @@ services:
     restart: always
     environment:
       - TZ
-      - TOKEN
+      - TOKEN=$DUCKDNS_TOKEN
       - SUBDOMAINS=$URL
 
   oauth:

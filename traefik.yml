@@ -31,5 +31,6 @@ certificatesResolvers:
   letsencrypt:
     acme:
       email: matthewchill7@gmail.com
-      httpChallenge:
-        entryPoint: web
+      dnsChallenge:
+        provider: duckdns
+        
