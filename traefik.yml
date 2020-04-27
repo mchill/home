@@ -13,6 +13,12 @@ entryPoints:
     address: ":443"
   sftp:
     address: ":2222/tcp"
+  minecraft:
+    address: ":25565/tcp"
+  jitsi-tcp:
+    address: ":4443/tcp"
+  jitsi-udp:
+    address: ":10000/udp"
 
 providers:
   docker:

@@ -8,8 +8,11 @@ services:
       - 80:80
       - 443:443
       - 2222:2222
+      - 25565:25565/udp
+      - $JVB_PORT:$JVB_PORT/udp
+      - $JVB_TCP_PORT:$JVB_TCP_PORT
     environment:
-      - TZ=America/New_York
+      - TZ
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - $PWD/traefik.yml:/etc/traefik/traefik.yml
@@ -20,14 +23,15 @@ services:
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
       - traefik.http.routers.traefik.middlewares=auth@file
-      - traefik.http.routers.traefik.rule=Host(`mchill.duckdns.org`)
+      - traefik.http.routers.traefik.entrypoints=web,websecure
+      - traefik.http.routers.traefik.rule=Host(`$URL`)
       - traefik.http.routers.traefik.service=api@internal
 
   portainer:
     image: portainer/portainer
     restart: always
     environment:
-      - TZ=America/New_York
+      - TZ
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --no-auth
@@ -36,41 +40,43 @@ services:
       - traefik.http.routers.portainer.tls=true
       - traefik.http.routers.portainer.tls.certresolver=letsencrypt
       - traefik.http.routers.portainer.middlewares=auth@file
-      - traefik.http.routers.portainer.rule=Host(`portainer.mchill.duckdns.org`)
+      - traefik.http.routers.portainer.entrypoints=web,websecure
+      - traefik.http.routers.portainer.rule=Host(`portainer.$URL`)
       - traefik.http.services.portainer.loadbalancer.server.port=9000
 
   duckdns:
     image: linuxserver/duckdns
     restart: always
     environment:
-      - TZ=America/New_York
-      - SUBDOMAINS=mchill.duckdns.org
-      - TOKEN=$DUCKDNS_TOKEN
+      - TZ
+      - TOKEN
+      - SUBDOMAINS=$URL
 
   oauth:
     image: thomseddon/traefik-forward-auth:2
     restart: always
     environment:
-      - TZ=America/New_York
-      - PROVIDERS_GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID
-      - PROVIDERS_GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET
-      - AUTH_HOST=auth.mchill.duckdns.org
-      - COOKIE_DOMAIN=mchill.duckdns.org
-      - SECRET=$OAUTH_SECRET
+      - TZ
+      - SECRET
+      - PROVIDERS_GOOGLE_CLIENT_ID
+      - PROVIDERS_GOOGLE_CLIENT_SECRET
+      - AUTH_HOST=auth.$URL
+      - COOKIE_DOMAIN=$URL
       - WHITELIST=matthewchill7@gmail.com
     labels:
       - traefik.enable=true
       - traefik.http.routers.oauth.tls=true
       - traefik.http.routers.oauth.tls.certresolver=letsencrypt
       - traefik.http.routers.oauth.middlewares=auth@file
-      - traefik.http.routers.oauth.rule=Host(`auth.mchill.duckdns.org`)
+      - traefik.http.routers.oauth.entrypoints=web,websecure
+      - traefik.http.routers.oauth.rule=Host(`auth.$URL`)
       - traefik.http.services.oauth.loadbalancer.server.port=4181
 
   sftp:
     image: atmoz/sftp:alpine
     restart: always
     environment:
-      - TZ=America/New_York
+      - TZ
       - SFTP_USERS=mchill:$$1$$KvZr5bVS$$maxr0gZ.kIm0dRYKs3Yh91:e:1000
     volumes:
       - $PWD/id_rsa.pub:/home/mchill/.ssh/keys/id_rsa.pub:ro
@@ -87,7 +93,7 @@ services:
     image: machines/filestash
     restart: always
     environment:
-      - TZ=America/New_York
+      - TZ
     volumes:
       - /data/server/filestash/config.json:/app/data/state/config/config.json
     labels:
@@ -95,7 +101,8 @@ services:
       - traefik.http.routers.filestash.tls=true
       - traefik.http.routers.filestash.tls.certresolver=letsencrypt
       - traefik.http.routers.filestash.middlewares=auth@file
-      - traefik.http.routers.filestash.rule=Host(`files.mchill.duckdns.org`)
+      - traefik.http.routers.filestash.entrypoints=web,websecure
+      - traefik.http.routers.filestash.rule=Host(`files.$URL`)
       - traefik.http.services.filestash.loadbalancer.server.port=8334
 
   plex:
@@ -108,9 +115,9 @@ services:
       - 32413:32413/udp
       - 32414:32414/udp
     environment:
-      - TZ=America/New_York
-      - ADVERTISE_IP=https://plex.mchill.duckdns.org
-      - PLEX_CLAIM=$PLEX_CLAIM
+      - TZ
+      - PLEX_CLAIM
+      - ADVERTISE_IP=https://plex.$URL
     volumes:
       - /data/server/plex/config:/config
       - /data/server/plex/data:/data
@@ -118,7 +125,8 @@ services:
       - traefik.enable=true
       - traefik.http.routers.plex.tls=true
       - traefik.http.routers.plex.tls.certresolver=letsencrypt
-      - traefik.http.routers.plex.rule=Host(`plex.mchill.duckdns.org`)
+      - traefik.http.routers.plex.entrypoints=web,websecure
+      - traefik.http.routers.plex.rule=Host(`plex.$URL`)
       - traefik.http.services.plex.loadbalancer.server.port=32400
 
   qbittorrent:
@@ -126,10 +134,10 @@ services:
     restart: always
     privileged: true
     environment:
-      - TZ=America/New_York
+      - TZ
+      - VPN_USERNAME
+      - VPN_PASSWORD
       - VPN_ENABLED=yes
-      - VPN_USERNAME=$OPENVPN_USERNAME
-      - VPN_PASSWORD=$OPENVPN_PASSWORD
       - LAN_NETWORK=192.168.1.0/24
       - NAME_SERVERS=1.1.1.1,8.8.8.8
       - PUID=1000
@@ -142,19 +150,131 @@ services:
       - traefik.http.routers.qbittorrent.tls=true
       - traefik.http.routers.qbittorrent.tls.certresolver=letsencrypt
       - traefik.http.routers.qbittorrent.middlewares=auth@file
-      - traefik.http.routers.qbittorrent.rule=Host(`torrent.mchill.duckdns.org`)
+      - traefik.http.routers.qbittorrent.entrypoints=web,websecure
+      - traefik.http.routers.qbittorrent.rule=Host(`torrent.$URL`)
       - traefik.http.services.qbittorrent.loadbalancer.server.port=8080
 
   minecraft:
     image: itzg/minecraft-server
     restart: always
-    ports:
-      - 25565:25565
     environment:
-      - TZ=America/New_York
+      - TZ
       - EULA=TRUE
-      - MEMORY=2G
+      - MEMORY=3G
       - VERSION=1.15.2
     volumes:
       - $PWD/minecraft:/data
       - /data/server/minecraft:/data/world
+    labels:
+      - traefik.enable=true
+      - traefik.tcp.routers.minecraft.rule=HostSNI(`*`)
+      - traefik.tcp.routers.minecraft.entrypoints=minecraft
+      - traefik.tcp.services.minecraft.loadbalancer.server.port=25565
+
+  jitsi-web:
+    image: jitsi/web
+    restart: always
+    networks:
+      default:
+        aliases:
+          - $XMPP_DOMAIN
+    volumes:
+      - /data/server/jitsi/web:/config
+    environment:
+      - TZ
+      - ENABLE_AUTH
+      - ENABLE_GUESTS
+      - ENABLE_TRANSCRIPTIONS
+      - DISABLE_HTTPS
+      - JICOFO_AUTH_USER
+      - XMPP_DOMAIN
+      - XMPP_AUTH_DOMAIN
+      - XMPP_BOSH_URL_BASE
+      - XMPP_GUEST_DOMAIN
+      - XMPP_MUC_DOMAIN
+      - PUBLIC_URL=https://jitsi.$URL
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.jitsi.tls=true
+      - traefik.http.routers.jitsi.tls.certresolver=letsencrypt
+      - traefik.http.routers.jitsi.entrypoints=web,websecure
+      - traefik.http.routers.jitsi.rule=Host(`jitsi.$URL`)
+      - traefik.http.services.jitsi.loadbalancer.server.port=80
+
+  jitsi-prosody:
+    image: jitsi/prosody
+    restart: always
+    networks:
+      default:
+        aliases:
+          - $XMPP_SERVER
+    volumes:
+      - /data/server/jitsi/prosody/config:/config
+      - /data/server/jitsi/prosody/prosody-plugins-custom:/prosody-plugins-custom
+    environment:
+      - TZ
+      - AUTH_TYPE
+      - ENABLE_AUTH
+      - ENABLE_GUESTS
+      - GLOBAL_MODULES
+      - GLOBAL_CONFIG
+      - XMPP_DOMAIN
+      - XMPP_AUTH_DOMAIN
+      - XMPP_GUEST_DOMAIN
+      - XMPP_MUC_DOMAIN
+      - XMPP_INTERNAL_MUC_DOMAIN
+      - JICOFO_COMPONENT_SECRET
+      - JICOFO_AUTH_USER
+      - JICOFO_AUTH_PASSWORD
+      - JVB_AUTH_USER
+      - JVB_AUTH_PASSWORD
+      - LOG_LEVEL
+
+  jitsi-jicofo:
+    image: jitsi/jicofo
+    restart: always
+    depends_on:
+      - jitsi-prosody
+    volumes:
+      - /data/server/jitsi/jicofo:/config
+    environment:
+      - TZ
+      - ENABLE_AUTH
+      - XMPP_DOMAIN
+      - XMPP_AUTH_DOMAIN
+      - XMPP_INTERNAL_MUC_DOMAIN
+      - XMPP_SERVER
+      - JICOFO_COMPONENT_SECRET
+      - JICOFO_AUTH_USER
+      - JICOFO_AUTH_PASSWORD
+      - JVB_BREWERY_MUC
+
+  jitsi-jvb:
+    image: jitsi/jvb
+    restart: always
+    depends_on:
+      - jitsi-prosody
+    expose:
+      - $JVB_PORT/udp
+      - $JVB_TCP_PORT
+    volumes:
+      - /data/server/jitsi/jvb:/config
+    environment:
+      - TZ
+      - XMPP_AUTH_DOMAIN
+      - XMPP_INTERNAL_MUC_DOMAIN
+      - XMPP_SERVER
+      - JVB_AUTH_USER
+      - JVB_AUTH_PASSWORD
+      - JVB_BREWERY_MUC
+      - JVB_PORT
+      - JVB_TCP_HARVESTER_DISABLED
+      - JVB_TCP_PORT
+      - JVB_STUN_SERVERS
+    labels:
+      - traefik.enable=true
+      - traefik.tcp.routers.jitsi-tcp.rule=HostSNI(`*`)
+      - traefik.tcp.routers.jitsi-tcp.entrypoints=jitsi-tcp
+      - traefik.tcp.services.jitsi-tcp.loadbalancer.server.port=$JVB_TCP_PORT
+      - traefik.udp.routers.jitsi-udp.entrypoints=jitsi-udp
+      - traefik.udp.services.jitsi-udp.loadbalancer.server.port=$JVB_PORT
