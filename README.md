@@ -2,9 +2,53 @@
 
 This is the configuration for my home server.
 
+[Trello Board](https://trello.com/b/XNVnSBvI/home-server)
+
 ## Configuration
 
-All traffic is routed through Traefik, so only the entrypoints listed in traefik.yml need to be opened on the router. The plex container maps some more ports to the host, but only for the purpose of local server detection.
+### Network
+
+All HTTP traffic is routed through Traefik, but TCP and UDP connections are directly exposed to the host. Although additional routers and services could be configured to handle these connections, it adds no benefit other than load balancing due to the lack of host or path matching.
+
+Because Pihole must expose ports 80 and 443 to work properly, HTTP and HTTPS traffic is forwarded to host ports 8080 and 4433, respectively.
+
+The following ports need to be fowarded by your router (TCP unless otherwise noted).
+
+External   | Internal  | Service
+---        | ---       | ---
+80         | 8080      | HTTP
+443        | 4433      | HTTPS
+2222       | 2222      | SFTP
+25565      | 25565     | Minecraft
+4443       | 4443      | Jitsi
+10000/udp  | 10000/udp | Jitsi
+
+### Filesystem
+
+Create the following local file structure which will be mounted as volumes. The entire directory will be backed up to cloud storage.
+
+```
+/data/server             # Mounted in the SFTP server
+  acme.json              # Ensure file permission 0600
+  keys/                  # Public keys generated for the server
+    ssh_host_ed25519_key
+    ssh_host_rsa_key
+  filestash/             # Persisted configs
+  jitsi/                 # Persisted configs
+    /web
+    /prosody
+    /jicofo
+    /jvb
+  qbittorrent/
+    config/              # Persisted configs
+    downloads/           # Downloaded torrent files
+  plex/
+    config/              # Persisted configs
+    data/                # Hosted media
+  minecraft/             # Minecraft world
+```
+
+### Environment
 
 Set the following environment variables.
 
@@ -21,30 +65,6 @@ JICOFO_COMPONENT_SECRET        | Internal Jitsi secret
 JICOFO_AUTH_PASSWORD           | Internal Jitsi password
 JVB_AUTH_PASSWORD              | Internal Jitsi password
 
-Create the following local file structure which will be mounted as volumes. The entire directory will be backed up to cloud storage.
-
-```
-/data/server             # Mounted in the SFTP server
-  acme.json              # Ensure file permission 0600
-  keys/                  # Public keys generated for the server
-    ssh_host_ed25519_key
-    ssh_host_rsa_key
-  filestash/
-    config.json          # Persisted configs
-  jitsi/                 # Persisted configs
-    /web
-    /prosody
-    /jicofo
-    /jvb
-  qbittorrent/
-    config/              # Persisted configs
-    downloads/           # Downloaded torrent files
-  plex/
-    config/              # Persisted configs
-    data/                # Hosted media
-  minecraft/             # Minecraft world
-```
-
 ## Usage
 
 Traefik, Portainer, Filestash, and qBittorrent are secured behind Google forward authentication. Plex, Jitsi, and Minecraft handle their own authentication.
@@ -52,6 +72,7 @@ Traefik, Portainer, Filestash, and qBittorrent are secured behind Google forward
 Service           | URL
 ---               | ---
 Traefik Dashboard | https://mchill.duckdns.org
+Pi-hole           | https://pihole.mchill.duckdns.org
 Portainer         | https://portainer.mchill.duckdns.org
 Filestash         | https://files.mchill.duckdns.org
 qBittorrent       | https://torrent.mchill.duckdns.org
@@ -59,9 +80,3 @@ Plex              | https://plex.mchill.duckdns.org
 Jitsi             | https://jitsi.mchill.duckdns.org
 SFTP              | mchill.duckdns.org:2222
 Minecraft         | mchill.duckdns.org:25565
-
-## To Install
-
-1. Home Assistant
-2. rclone
-3. Traefik Metrics

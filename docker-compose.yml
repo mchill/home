@@ -5,12 +5,8 @@ services:
     image: traefik:2.2
     restart: always
     ports:
-      - 80:80
-      - 443:443
-      - 2222:2222
-      - 25565:25565/udp
-      - $JVB_PORT:$JVB_PORT/udp
-      - $JVB_TCP_PORT:$JVB_TCP_PORT
+      - 8080:80
+      - 4433:443
     environment:
       - TZ
       - DUCKDNS_TOKEN
@@ -23,8 +19,8 @@ services:
       - traefik.enable=true
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
-      - traefik.http.routers.blog.tls.domains[0].main=$URL
-      - traefik.http.routers.blog.tls.domains[0].sans=*.$URL
+      - traefik.http.routers.traefik.tls.domains[0].main=$URL
+      - traefik.http.routers.traefik.tls.domains[0].sans=*.$URL
       - traefik.http.routers.traefik.middlewares=auth@file
       - traefik.http.routers.traefik.entrypoints=web,websecure
       - traefik.http.routers.traefik.rule=Host(`$URL`)
@@ -75,9 +71,35 @@ services:
       - traefik.http.routers.oauth.rule=Host(`auth.$URL`)
       - traefik.http.services.oauth.loadbalancer.server.port=4181
 
+  pihole:
+    image: pihole/pihole
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+      - 53:53
+      - 53:53/udp
+    environment:
+      - TZ
+      - WEBPASSWORD=
+    volumes:
+      - /data/server/pihole:/etc/pihole
+      - /data/server/dnsmasq:/etc/dnsmasq.d
+    labels:
+      - traefik.enable=true
+      - traefik.http.middlewares.pihole.addprefix.prefix=/admin
+      - traefik.http.routers.pihole.tls=true
+      - traefik.http.routers.pihole.tls.certresolver=letsencrypt
+      - traefik.http.routers.pihole.middlewares=auth@file,pihole
+      - traefik.http.routers.pihole.entrypoints=web,websecure
+      - traefik.http.routers.pihole.rule=Host(`pihole.$URL`)
+      - traefik.http.services.pihole.loadbalancer.server.port=80
+
   sftp:
     image: atmoz/sftp:alpine
     restart: always
+    ports:
+      - 2222:2222
     environment:
       - TZ
       - SFTP_USERS=mchill:$$1$$KvZr5bVS$$maxr0gZ.kIm0dRYKs3Yh91:e:1000
@@ -86,11 +108,6 @@ services:
       - /data/server/keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
       - /data/server/keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
       - /data/server:/home/mchill/server
-    labels:
-      - traefik.enable=true
-      - traefik.tcp.routers.sftp.rule=HostSNI(`*`)
-      - traefik.tcp.routers.sftp.entrypoints=sftp
-      - traefik.tcp.services.sftp.loadbalancer.server.port=22
 
   filestash:
     image: machines/filestash
@@ -160,6 +177,8 @@ services:
   minecraft:
     image: itzg/minecraft-server
     restart: always
+    ports:
+      - 25565:25565
     environment:
       - TZ
       - EULA=TRUE
@@ -168,11 +187,6 @@ services:
     volumes:
       - $PWD/minecraft:/data
       - /data/server/minecraft:/data/world
-    labels:
-      - traefik.enable=true
-      - traefik.tcp.routers.minecraft.rule=HostSNI(`*`)
-      - traefik.tcp.routers.minecraft.entrypoints=minecraft
-      - traefik.tcp.services.minecraft.loadbalancer.server.port=25565
 
   jitsi-web:
     image: jitsi/web
@@ -257,9 +271,9 @@ services:
     restart: always
     depends_on:
       - jitsi-prosody
-    expose:
-      - $JVB_PORT/udp
-      - $JVB_TCP_PORT
+    ports:
+      - $JVB_PORT:$JVB_PORT/udp
+      - $JVB_TCP_PORT:$JVB_TCP_PORT
     volumes:
       - /data/server/jitsi/jvb:/config
     environment:
@@ -274,10 +288,3 @@ services:
       - JVB_TCP_HARVESTER_DISABLED
       - JVB_TCP_PORT
       - JVB_STUN_SERVERS
-    labels:
-      - traefik.enable=true
-      - traefik.tcp.routers.jitsi-tcp.rule=HostSNI(`*`)
-      - traefik.tcp.routers.jitsi-tcp.entrypoints=jitsi-tcp
-      - traefik.tcp.services.jitsi-tcp.loadbalancer.server.port=$JVB_TCP_PORT
-      - traefik.udp.routers.jitsi-udp.entrypoints=jitsi-udp
-      - traefik.udp.services.jitsi-udp.loadbalancer.server.port=$JVB_PORT

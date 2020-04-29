@@ -11,14 +11,13 @@ entryPoints:
           scheme: https
   websecure:
     address: ":443"
-  sftp:
-    address: ":2222/tcp"
-  minecraft:
-    address: ":25565/tcp"
-  jitsi-tcp:
-    address: ":4443/tcp"
-  jitsi-udp:
-    address: ":10000/udp"
+    # http:
+    #   tls:
+    #     certResolver: letsencrypt
+    #     domains:
+    #       - main: mchill.duckdns.org
+    #         sans:
+    #           - "*.mchill.duckdns.org"
 
 providers:
   docker:
@@ -33,4 +32,3 @@ certificatesResolvers:
       email: matthewchill7@gmail.com
       dnsChallenge:
         provider: duckdns
-        
