@@ -33,6 +33,7 @@ Create the following local file structure which will be mounted as volumes. The 
   keys/                  # Public keys generated for the server
     ssh_host_ed25519_key
     ssh_host_rsa_key
+  prometheus/            # Collected data
   filestash/             # Persisted configs
   jitsi/                 # Persisted configs
     /web
@@ -67,13 +68,15 @@ JVB_AUTH_PASSWORD              | Internal Jitsi password
 
 ## Usage
 
-Traefik, Portainer, Filestash, and qBittorrent are secured behind Google forward authentication. Plex, Jitsi, and Minecraft handle their own authentication.
+Most services are secured behind Google forward authentication. Plex and Jitsi handle their own authentication to allow for shared usage without whitelisting.
 
 Service           | URL
 ---               | ---
 Traefik Dashboard | https://mchill.duckdns.org
 Pi-hole           | https://pihole.mchill.duckdns.org
 Portainer         | https://portainer.mchill.duckdns.org
+Prometheus        | https://prometheus.mchill.duckdns.org
+Jaeger            | https://jaeger.mchill.duckdns.org
 Filestash         | https://files.mchill.duckdns.org
 qBittorrent       | https://torrent.mchill.duckdns.org
 Plex              | https://plex.mchill.duckdns.org

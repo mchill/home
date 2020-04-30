@@ -35,6 +35,9 @@ certificatesResolvers:
 
 accessLog: {}
 
+metrics:
+  prometheus: {}
+
 tracing:
   jaeger:
     samplingServerURL: http://jaeger:5778/sampling

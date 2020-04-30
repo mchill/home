@@ -95,6 +95,21 @@ services:
       - traefik.http.routers.pihole.rule=Host(`pihole.$URL`)
       - traefik.http.services.pihole.loadbalancer.server.port=80
 
+  prometheus:
+    image: prom/prometheus
+    restart: always
+    volumes:
+      - $PWD/prometheus:/etc/prometheus
+      - /data/server/prometheus:/prometheus
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.prometheus.tls=true
+      - traefik.http.routers.prometheus.tls.certresolver=letsencrypt
+      - traefik.http.routers.prometheus.middlewares=auth@file
+      - traefik.http.routers.prometheus.entrypoints=web,websecure
+      - traefik.http.routers.prometheus.rule=Host(`prometheus.$URL`)
+      - traefik.http.services.prometheus.loadbalancer.server.port=9090
+
   jaeger:
     image: jaegertracing/all-in-one
     restart: always
