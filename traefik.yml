@@ -32,3 +32,5 @@ certificatesResolvers:
       email: matthewchill7@gmail.com
       dnsChallenge:
         provider: duckdns
+
+accessLog: {}
