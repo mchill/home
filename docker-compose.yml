@@ -17,13 +17,8 @@ services:
       - /data/server/acme.json:/acme.json
     labels:
       - traefik.enable=true
-      - traefik.http.routers.traefik.tls=true
-      - traefik.http.routers.traefik.tls.certresolver=letsencrypt
-      - traefik.http.routers.traefik.tls.domains[0].main=$URL
-      - traefik.http.routers.traefik.tls.domains[0].sans=*.$URL
       - traefik.http.routers.traefik.middlewares=auth@file
-      - traefik.http.routers.traefik.entrypoints=web,websecure
-      - traefik.http.routers.traefik.rule=Host(`$URL`)
+      - traefik.http.routers.traefik.entrypoints=websecure
       - traefik.http.routers.traefik.service=api@internal
 
   portainer:
@@ -36,11 +31,8 @@ services:
     command: --no-auth
     labels:
       - traefik.enable=true
-      - traefik.http.routers.portainer.tls=true
-      - traefik.http.routers.portainer.tls.certresolver=letsencrypt
       - traefik.http.routers.portainer.middlewares=auth@file
-      - traefik.http.routers.portainer.entrypoints=web,websecure
-      - traefik.http.routers.portainer.rule=Host(`portainer.$URL`)
+      - traefik.http.routers.portainer.entrypoints=websecure
       - traefik.http.services.portainer.loadbalancer.server.port=9000
 
   duckdns:
@@ -51,7 +43,7 @@ services:
       - TOKEN=$DUCKDNS_TOKEN
       - SUBDOMAINS=$URL
 
-  oauth:
+  auth:
     image: thomseddon/traefik-forward-auth:2
     restart: always
     environment:
@@ -64,12 +56,9 @@ services:
       - WHITELIST=matthewchill7@gmail.com
     labels:
       - traefik.enable=true
-      - traefik.http.routers.oauth.tls=true
-      - traefik.http.routers.oauth.tls.certresolver=letsencrypt
-      - traefik.http.routers.oauth.middlewares=auth@file
-      - traefik.http.routers.oauth.entrypoints=web,websecure
-      - traefik.http.routers.oauth.rule=Host(`auth.$URL`)
-      - traefik.http.services.oauth.loadbalancer.server.port=4181
+      - traefik.http.routers.auth.middlewares=auth@file
+      - traefik.http.routers.auth.entrypoints=websecure
+      - traefik.http.services.auth.loadbalancer.server.port=4181
 
   pihole:
     image: pihole/pihole
@@ -88,26 +77,21 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.pihole.addprefix.prefix=/admin
-      - traefik.http.routers.pihole.tls=true
-      - traefik.http.routers.pihole.tls.certresolver=letsencrypt
       - traefik.http.routers.pihole.middlewares=auth@file,pihole
-      - traefik.http.routers.pihole.entrypoints=web,websecure
-      - traefik.http.routers.pihole.rule=Host(`pihole.$URL`)
+      - traefik.http.routers.pihole.entrypoints=websecure
       - traefik.http.services.pihole.loadbalancer.server.port=80
 
   prometheus:
     image: prom/prometheus
     restart: always
+    user: 1000:1000
     volumes:
       - $PWD/prometheus:/etc/prometheus
       - /data/server/prometheus:/prometheus
     labels:
       - traefik.enable=true
-      - traefik.http.routers.prometheus.tls=true
-      - traefik.http.routers.prometheus.tls.certresolver=letsencrypt
       - traefik.http.routers.prometheus.middlewares=auth@file
-      - traefik.http.routers.prometheus.entrypoints=web,websecure
-      - traefik.http.routers.prometheus.rule=Host(`prometheus.$URL`)
+      - traefik.http.routers.prometheus.entrypoints=websecure
       - traefik.http.services.prometheus.loadbalancer.server.port=9090
 
   jaeger:
@@ -117,11 +101,8 @@ services:
       - TZ
     labels:
       - traefik.enable=true
-      - traefik.http.routers.jaeger.tls=true
-      - traefik.http.routers.jaeger.tls.certresolver=letsencrypt
       - traefik.http.routers.jaeger.middlewares=auth@file
-      - traefik.http.routers.jaeger.entrypoints=web,websecure
-      - traefik.http.routers.jaeger.rule=Host(`jaeger.$URL`)
+      - traefik.http.routers.jaeger.entrypoints=websecure
       - traefik.http.services.jaeger.loadbalancer.server.port=16686
 
   sftp:
@@ -138,7 +119,7 @@ services:
       - /data/server/keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
       - /data/server:/home/mchill/server
 
-  filestash:
+  files:
     image: machines/filestash
     restart: always
     environment:
@@ -147,11 +128,8 @@ services:
       - /data/server/filestash/config.json:/app/data/state/config/config.json
     labels:
       - traefik.enable=true
-      - traefik.http.routers.filestash.tls=true
-      - traefik.http.routers.filestash.tls.certresolver=letsencrypt
       - traefik.http.routers.filestash.middlewares=auth@file
-      - traefik.http.routers.filestash.entrypoints=web,websecure
-      - traefik.http.routers.filestash.rule=Host(`files.$URL`)
+      - traefik.http.routers.filestash.entrypoints=websecure
       - traefik.http.services.filestash.loadbalancer.server.port=8334
 
   plex:
@@ -172,13 +150,10 @@ services:
       - /data/server/plex/data:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.plex.tls=true
-      - traefik.http.routers.plex.tls.certresolver=letsencrypt
-      - traefik.http.routers.plex.entrypoints=web,websecure
-      - traefik.http.routers.plex.rule=Host(`plex.$URL`)
+      - traefik.http.routers.plex.entrypoints=websecure
       - traefik.http.services.plex.loadbalancer.server.port=32400
 
-  qbittorrent:
+  torrent:
     image: markusmcnugen/qbittorrentvpn
     restart: always
     privileged: true
@@ -196,11 +171,8 @@ services:
       - /data/server/qbittorrent/downloads:/downloads
     labels:
       - traefik.enable=true
-      - traefik.http.routers.qbittorrent.tls=true
-      - traefik.http.routers.qbittorrent.tls.certresolver=letsencrypt
       - traefik.http.routers.qbittorrent.middlewares=auth@file
-      - traefik.http.routers.qbittorrent.entrypoints=web,websecure
-      - traefik.http.routers.qbittorrent.rule=Host(`torrent.$URL`)
+      - traefik.http.routers.qbittorrent.entrypoints=websecure
       - traefik.http.services.qbittorrent.loadbalancer.server.port=8080
 
   minecraft:
@@ -217,7 +189,7 @@ services:
       - $PWD/minecraft:/data
       - /data/server/minecraft:/data/world
 
-  jitsi-web:
+  jitsi:
     image: jitsi/web
     restart: always
     networks:
@@ -241,10 +213,7 @@ services:
       - PUBLIC_URL=https://jitsi.$URL
     labels:
       - traefik.enable=true
-      - traefik.http.routers.jitsi.tls=true
-      - traefik.http.routers.jitsi.tls.certresolver=letsencrypt
-      - traefik.http.routers.jitsi.entrypoints=web,websecure
-      - traefik.http.routers.jitsi.rule=Host(`jitsi.$URL`)
+      - traefik.http.routers.jitsi.entrypoints=websecure
       - traefik.http.services.jitsi.loadbalancer.server.port=80
 
   jitsi-prosody:

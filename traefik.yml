@@ -11,17 +11,18 @@ entryPoints:
           scheme: https
   websecure:
     address: ":443"
-    # http:
-    #   tls:
-    #     certResolver: letsencrypt
-    #     domains:
-    #       - main: mchill.duckdns.org
-    #         sans:
-    #           - "*.mchill.duckdns.org"
+    http:
+      tls:
+        certResolver: letsencrypt
+        domains:
+          - main: mchill.duckdns.org
+            sans:
+              - "*.mchill.duckdns.org"
 
 providers:
   docker:
     exposedbydefault: false
+    defaultRule: Host(`{{ trimSuffix "-home" .Name }}.mchill.duckdns.org`)
   file:
     directory: /config
     watch: true
