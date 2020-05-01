@@ -34,6 +34,7 @@ Create the following local file structure which will be mounted as volumes. The 
     ssh_host_ed25519_key
     ssh_host_rsa_key
   prometheus/            # Collected data
+  grafana/               # Dashboards and plugins
   filestash/             # Persisted configs
   jitsi/                 # Persisted configs
     /web
@@ -76,6 +77,7 @@ Traefik Dashboard | https://mchill.duckdns.org
 Pi-hole           | https://pihole.mchill.duckdns.org
 Portainer         | https://portainer.mchill.duckdns.org
 Prometheus        | https://prometheus.mchill.duckdns.org
+Grafana           | https://grafana.mchill.duckdns.org
 Jaeger            | https://jaeger.mchill.duckdns.org
 Filestash         | https://files.mchill.duckdns.org
 qBittorrent       | https://torrent.mchill.duckdns.org
