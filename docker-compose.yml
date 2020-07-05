@@ -48,7 +48,7 @@ services:
     restart: always
     environment:
       - TZ
-      - SECRET
+      - SECRET=$OAUTH_SECRET
       - PROVIDERS_GOOGLE_CLIENT_ID
       - PROVIDERS_GOOGLE_CLIENT_SECRET
       - AUTH_HOST=auth.$URL
@@ -201,7 +201,7 @@ services:
       - TZ
       - EULA=TRUE
       - MEMORY=3G
-      - VERSION=1.15.2
+      - VERSION=1.16
     volumes:
       - $PWD/minecraft:/data
       - /data/server/minecraft:/data/world

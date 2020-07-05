@@ -18,6 +18,7 @@ External   | Internal  | Service
 ---        | ---       | ---
 80         | 8080      | HTTP
 443        | 4433      | HTTPS
+22         | 22        | SSH
 2222       | 2222      | SFTP
 25565      | 25565     | Minecraft
 4443       | 4443      | Jitsi
@@ -59,7 +60,7 @@ Variable                       | Description
 DUCKDNS_TOKEN                  | DuckDNS API token (https://www.duckdns.org/)
 PROVIDERS_GOOGLE_CLIENT_ID     | Google Oauth client ID (https://console.developers.google.com/apis/credentials)
 PROVIDERS_GOOGLE_CLIENT_SECRET | Google Oauth client secret (https://console.developers.google.com/apis/credentials)
-SECRET                         | Internal OAuth secret
+OAUTH_SECRET                   | Internal OAuth secret
 VPN_USERNAME                   | OpenVPN provider username
 VPN_PASSWORD                   | OpenVPN provider password
 PLEX_CLAIM                     | Plex claim token needed for first time container setup (https://www.plex.tv/claim/)

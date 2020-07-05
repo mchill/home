@@ -1,0 +1,37 @@
+name: Home Server
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: ssh
+        run: |
+          mkdir ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          eval $(ssh-agent -s)
+          ssh-add ~/.ssh/id_rsa
+          ssh-keyscan -H mchill.duckdns.org >> ~/.ssh/known_hosts
+      - name: docker-compose
+        env:
+          DOCKER_HOST: ssh://mchill@mchill.duckdns.org
+          DUCKDNS_TOKEN: ${{ secrets.DUCKDNS_TOKEN }}
+          PROVIDERS_GOOGLE_CLIENT_ID: ${{ secrets.PROVIDERS_GOOGLE_CLIENT_ID }}
+          PROVIDERS_GOOGLE_CLIENT_SECRET: ${{ secrets.PROVIDERS_GOOGLE_CLIENT_SECRET }}
+          VPN_USERNAME: ${{ secrets.VPN_USERNAME }}
+          VPN_PASSWORD: ${{ secrets.VPN_PASSWORD }}
+          OAUTH_SECRET: ${{ secrets.OAUTH_SECRET }}
+          JICOFO_COMPONENT_SECRET: ${{ secrets.JICOFO_COMPONENT_SECRET }}
+          JICOFO_AUTH_PASSWORD: ${{ secrets.JICOFO_AUTH_PASSWORD }}
+          JVB_AUTH_PASSWORD: ${{ secrets.JVB_AUTH_PASSWORD }}
+          PLEX_CLAIM: ${{ secrets.PLEX_CLAIM }}
+        run: |
+          echo $PWD
+          cat traefik.yml
+          docker-compose pull
+          docker-compose up -d
