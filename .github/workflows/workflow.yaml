@@ -31,7 +31,6 @@ jobs:
           JVB_AUTH_PASSWORD: ${{ secrets.JVB_AUTH_PASSWORD }}
           PLEX_CLAIM: ${{ secrets.PLEX_CLAIM }}
         run: |
-          echo $PWD
-          cat traefik.yml
+          ssh mchill@mchill.duckdns.org 'cd repos/home && git pull origin master'
           docker-compose pull
           docker-compose up -d

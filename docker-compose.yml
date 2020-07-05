@@ -12,9 +12,9 @@ services:
       - DUCKDNS_TOKEN
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - $PWD/traefik.yml:/etc/traefik/traefik.yml
-      - $PWD/traefik:/config
-      - /data/server/acme.json:/acme.json
+      - $REPO_PATH/traefik.yml:/etc/traefik/traefik.yml
+      - $REPO_PATH/traefik:/config
+      - $DATA_PATH/acme.json:/acme.json
     labels:
       - traefik.enable=true
       - traefik.http.routers.traefik.middlewares=auth@file
@@ -72,8 +72,8 @@ services:
       - TZ
       - WEBPASSWORD=
     volumes:
-      - /data/server/pihole:/etc/pihole
-      - /data/server/dnsmasq:/etc/dnsmasq.d
+      - $DATA_PATH/pihole:/etc/pihole
+      - $DATA_PATH/dnsmasq:/etc/dnsmasq.d
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.pihole.addprefix.prefix=/admin
@@ -88,8 +88,8 @@ services:
     environment:
       - TZ
     volumes:
-      - $PWD/prometheus:/etc/prometheus
-      - /data/server/prometheus:/prometheus
+      - $REPO_PATH/prometheus:/etc/prometheus
+      - $DATA_PATH/prometheus:/prometheus
     labels:
       - traefik.enable=true
       - traefik.http.routers.prometheus.middlewares=auth@file
@@ -104,7 +104,7 @@ services:
       - TZ
       - GF_AUTH_ANONYMOUS_ENABLED=true
     volumes:
-      - /data/server/grafana:/var/lib/grafana
+      - $DATA_PATH/grafana:/var/lib/grafana
     labels:
       - traefik.enable=true
       - traefik.http.routers.grafana.middlewares=auth@file
@@ -131,10 +131,10 @@ services:
       - TZ
       - SFTP_USERS=mchill:$$1$$KvZr5bVS$$maxr0gZ.kIm0dRYKs3Yh91:e:1000
     volumes:
-      - $PWD/id_rsa.pub:/home/mchill/.ssh/keys/id_rsa.pub:ro
-      - /data/server/keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
-      - /data/server/keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
-      - /data/server:/home/mchill/server
+      - $REPO_PATH/id_rsa.pub:/home/mchill/.ssh/keys/id_rsa.pub:ro
+      - $DATA_PATH/keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
+      - $DATA_PATH/keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
+      - $DATA_PATH:/home/mchill/server
 
   files:
     image: machines/filestash
@@ -142,7 +142,7 @@ services:
     environment:
       - TZ
     volumes:
-      - /data/server/filestash/config.json:/app/data/state/config/config.json
+      - $DATA_PATH/filestash/config.json:/app/data/state/config/config.json
     labels:
       - traefik.enable=true
       - traefik.http.routers.filestash.middlewares=auth@file
@@ -163,8 +163,8 @@ services:
       - PLEX_CLAIM
       - ADVERTISE_IP=https://plex.$URL
     volumes:
-      - /data/server/plex/config:/config
-      - /data/server/plex/data:/data
+      - $DATA_PATH/plex/config:/config
+      - $DATA_PATH/plex/data:/data
     labels:
       - traefik.enable=true
       - traefik.http.routers.plex.entrypoints=websecure
@@ -184,8 +184,8 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - /data/server/qbittorrent/config:/config
-      - /data/server/qbittorrent/downloads:/downloads
+      - $DATA_PATH/qbittorrent/config:/config
+      - $DATA_PATH/qbittorrent/downloads:/downloads
     labels:
       - traefik.enable=true
       - traefik.http.routers.qbittorrent.middlewares=auth@file
@@ -203,8 +203,8 @@ services:
       - MEMORY=3G
       - VERSION=1.16
     volumes:
-      - $PWD/minecraft:/data
-      - /data/server/minecraft:/data/world
+      - $REPO_PATH/minecraft:/data
+      - $DATA_PATH/minecraft:/data/world
 
   jitsi:
     image: jitsi/web
@@ -214,7 +214,7 @@ services:
         aliases:
           - $XMPP_DOMAIN
     volumes:
-      - /data/server/jitsi/web:/config
+      - $DATA_PATH/jitsi/web:/config
     environment:
       - TZ
       - ENABLE_AUTH
@@ -241,8 +241,8 @@ services:
         aliases:
           - $XMPP_SERVER
     volumes:
-      - /data/server/jitsi/prosody/config:/config
-      - /data/server/jitsi/prosody/prosody-plugins-custom:/prosody-plugins-custom
+      - $DATA_PATH/jitsi/prosody/config:/config
+      - $DATA_PATH/jitsi/prosody/prosody-plugins-custom:/prosody-plugins-custom
     environment:
       - TZ
       - AUTH_TYPE
@@ -268,7 +268,7 @@ services:
     depends_on:
       - jitsi-prosody
     volumes:
-      - /data/server/jitsi/jicofo:/config
+      - $DATA_PATH/jitsi/jicofo:/config
     environment:
       - TZ
       - ENABLE_AUTH
@@ -290,7 +290,7 @@ services:
       - "$JVB_PORT:$JVB_PORT/udp"
       - "$JVB_TCP_PORT:$JVB_TCP_PORT"
     volumes:
-      - /data/server/jitsi/jvb:/config
+      - $DATA_PATH/jitsi/jvb:/config
     environment:
       - TZ
       - XMPP_AUTH_DOMAIN
