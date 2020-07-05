@@ -1,5 +1,6 @@
 node_modules/
 package-lock.json
+minecraft/server.properties
 minecraft/minecraft_server.*.jar
 minecraft/logs
 minecraft/usercache.json
