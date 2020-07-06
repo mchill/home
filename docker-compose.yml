@@ -203,8 +203,11 @@ services:
       - MEMORY=3G
       - VERSION=1.16
     volumes:
-      - $REPO_PATH/minecraft:/data
-      - $DATA_PATH/minecraft:/data/world
+      - $DATA_PATH/minecraft:/data
+      - $REPO_PATH/minecraft/ops.json:/data/ops.json
+      - $REPO_PATH/minecraft/whitelist.json:/data/whitelist.json
+      - $REPO_PATH/minecraft/banned-ips.json:/data/banned-ips.json
+      - $REPO_PATH/minecraft/banned-players.json:/data/banned-players.json
 
   jitsi:
     image: jitsi/web

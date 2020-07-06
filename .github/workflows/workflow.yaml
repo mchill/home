@@ -80,6 +80,6 @@ jobs:
           JVB_AUTH_PASSWORD: ${{ secrets.JVB_AUTH_PASSWORD }}
           PLEX_CLAIM: ${{ secrets.PLEX_CLAIM }}
         run: |
-          ssh mchill@mchill.duckdns.org 'cd repos/home && git pull origin master --force'
+          ssh mchill@mchill.duckdns.org 'cd repos/home && git fetch origin master && git reset --hard origin/master'
           docker-compose pull
           docker-compose up -d
