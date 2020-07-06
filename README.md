@@ -2,6 +2,8 @@
 
 This is the configuration for my home server.
 
+![Home Server](https://github.com/mchill/home/workflows/Home%20Server/badge.svg)
+
 [Trello Board](https://trello.com/b/XNVnSBvI/home-server)
 
 ## Configuration
