@@ -12,8 +12,8 @@ services:
       - DUCKDNS_TOKEN
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - $REPO_PATH/traefik.yml:/etc/traefik/traefik.yml
-      - $REPO_PATH/traefik:/config
+      - $REPO_PATH/traefik/traefik.yml:/etc/traefik/traefik.yml
+      - $REPO_PATH/traefik/config:/config
       - $DATA_PATH/acme.json:/acme.json
     labels:
       - traefik.enable=true
@@ -28,7 +28,7 @@ services:
       - TZ
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --no-auth
+    command: -H unix:///var/run/docker.sock --no-auth
     labels:
       - traefik.enable=true
       - traefik.http.routers.portainer.middlewares=auth@file
@@ -131,7 +131,7 @@ services:
       - TZ
       - SFTP_USERS=mchill:$$1$$KvZr5bVS$$maxr0gZ.kIm0dRYKs3Yh91:e:1000
     volumes:
-      - $REPO_PATH/id_rsa.pub:/home/mchill/.ssh/keys/id_rsa.pub:ro
+      - $REPO_PATH/sftp/id_rsa.pub:/home/mchill/.ssh/keys/id_rsa.pub:ro
       - $DATA_PATH/keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
       - $DATA_PATH/keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
       - $DATA_PATH:/home/mchill/server
