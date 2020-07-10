@@ -21,6 +21,26 @@ services:
       - traefik.http.routers.traefik.entrypoints=websecure
       - traefik.http.routers.traefik.service=api@internal
 
+  rclone:
+    image: rclone/rclone
+    restart: always
+    environment:
+      - TZ
+      - RCLONE_CONFIG_LOCAL_TYPE=local
+      - RCLONE_CONFIG_REMOTE_TYPE=onedrive
+      - RCLONE_CONFIG_REMOTE_DRIVE_TYPE=personal
+      - RCLONE_CONFIG_REMOTE_DRIVE_ID
+      - RCLONE_CONFIG_REMOTE_CLIENT_ID
+      - RCLONE_CONFIG_REMOTE_CLIENT_SECRET
+      - RCLONE_CONFIG_REMOTE_TOKEN
+    volumes:
+      - $DATA_PATH:/data/server
+      - $BACKUP_PATH:/data/backup
+      - ./rclone/local-backup.sh:/etc/periodic/daily/backup.sh:ro
+      - ./rclone/remote-backup.sh:/etc/periodic/weekly/backup.sh:ro
+    entrypoint: /bin/sh
+    command: ["-c", "'crond -f -l 2'"]
+
   portainer:
     image: portainer/portainer
     restart: always

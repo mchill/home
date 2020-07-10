@@ -28,47 +28,53 @@ External   | Internal  | Service
 
 ### Filesystem
 
-Create the following local file structure which will be mounted as volumes. The entire directory will be backed up to cloud storage.
+Create the following local file structure which will be mounted as volumes. The entire directory is backed up to cloud storage.
 
 ```
 /data/server             # Mounted in the SFTP server
   acme.json              # Ensure file permission 0600
+  dnsmasq/               # Pi-hole configs
+  filestash/             # Filestash configs
+  grafana/               # Dashboards and plugins
+  jitsi/                 # Jitsi configs
+    /jicofo
+    /jvb
+    /prosody
+    /web
   keys/                  # Public keys generated for the server
     ssh_host_ed25519_key
     ssh_host_rsa_key
-  prometheus/            # Collected data
-  grafana/               # Dashboards and plugins
-  filestash/             # Persisted configs
-  jitsi/                 # Persisted configs
-    /web
-    /prosody
-    /jicofo
-    /jvb
-  qbittorrent/
-    config/              # Persisted configs
-    downloads/           # Downloaded torrent files
-  plex/
-    config/              # Persisted configs
-    data/                # Hosted media
   minecraft/             # Minecraft world
+  pihole/                # Pi-hole configs
+  plex/
+    config/              # Plex configs
+    data/                # Hosted media
+  prometheus/            # Collected data
+  qbittorrent/
+    config/              # qBittorrent configs
+    downloads/           # Downloaded torrent files
 ```
 
 ### Environment
 
 Set the following environment variables.
 
-Variable                       | Description
----                            | ---
-DUCKDNS_TOKEN                  | DuckDNS API token (https://www.duckdns.org/)
-PROVIDERS_GOOGLE_CLIENT_ID     | Google Oauth client ID (https://console.developers.google.com/apis/credentials)
-PROVIDERS_GOOGLE_CLIENT_SECRET | Google Oauth client secret (https://console.developers.google.com/apis/credentials)
-OAUTH_SECRET                   | Internal OAuth secret
-VPN_USERNAME                   | OpenVPN provider username
-VPN_PASSWORD                   | OpenVPN provider password
-PLEX_CLAIM                     | Plex claim token needed for first time container setup (https://www.plex.tv/claim/)
-JICOFO_COMPONENT_SECRET        | Internal Jitsi secret
-JICOFO_AUTH_PASSWORD           | Internal Jitsi password
-JVB_AUTH_PASSWORD              | Internal Jitsi password
+Variable                           | Description
+---                                | ---
+DUCKDNS_TOKEN                      | DuckDNS API token (https://www.duckdns.org/)
+JICOFO_COMPONENT_SECRET            | Internal Jitsi secret
+JICOFO_AUTH_PASSWORD               | Internal Jitsi password
+JVB_AUTH_PASSWORD                  | Internal Jitsi password
+OAUTH_SECRET                       | Internal OAuth secret
+PLEX_CLAIM                         | Plex claim token needed for first time container setup (https://www.plex.tv/claim/)
+PROVIDERS_GOOGLE_CLIENT_ID         | Google Oauth client ID (https://console.developers.google.com/apis/credentials)
+PROVIDERS_GOOGLE_CLIENT_SECRET     | Google Oauth client secret (https://console.developers.google.com/apis/credentials)
+RCLONE_CONFIG_REMOTE_CLIENT_ID     | OneDrive client ID (https://rclone.org/onedrive/#getting-your-own-client-id-and-key)
+RCLONE_CONFIG_REMOTE_CLIENT_SECRET | OneDrive client secret (https://rclone.org/onedrive/#getting-your-own-client-id-and-key)
+RCLONE_CONFIG_REMOTE_DRIVE_ID      | OneDrive drive ID (https://rclone.org/onedrive/)
+RCLONE_CONFIG_REMOTE_TOKEN         | OneDrive token (https://rclone.org/onedrive/)
+VPN_USERNAME                       | OpenVPN provider username
+VPN_PASSWORD                       | OpenVPN provider password
 
 ## Usage
 
@@ -86,5 +92,6 @@ Filestash         | https://files.mchill.duckdns.org
 qBittorrent       | https://torrent.mchill.duckdns.org
 Plex              | https://plex.mchill.duckdns.org
 Jitsi             | https://jitsi.mchill.duckdns.org
+SSH               | mchill.duckdns.org:22
 SFTP              | mchill.duckdns.org:2222
 Minecraft         | mchill.duckdns.org:25565
