@@ -24,6 +24,7 @@ services:
   rclone:
     image: rclone/rclone
     restart: always
+    tty: true
     environment:
       - TZ
       - RCLONE_CONFIG_LOCAL_TYPE=local
@@ -36,10 +37,10 @@ services:
     volumes:
       - $DATA_PATH:/data/server
       - $BACKUP_PATH:/data/backup
-      - ./rclone/local-backup.sh:/etc/periodic/daily/backup.sh:ro
-      - ./rclone/remote-backup.sh:/etc/periodic/weekly/backup.sh:ro
+      - $REPO_PATH/rclone/local-backup.sh:/etc/periodic/daily/backup:ro
+      - $REPO_PATH/rclone/remote-backup.sh:/etc/periodic/weekly/backup:ro
     entrypoint: /bin/sh
-    command: ["-c", "'crond -f -l 2'"]
+    command: ["-c", "crond -f -l 5"]
 
   portainer:
     image: portainer/portainer
