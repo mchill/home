@@ -41,9 +41,6 @@ Create the following local file structure which will be mounted as volumes. The 
     /jvb
     /prosody
     /web
-  keys/                  # Public keys generated for the server
-    ssh_host_ed25519_key
-    ssh_host_rsa_key
   loki/                  # Collected logs
   minecraft/             # Minecraft world
   pihole/                # Pi-hole configs
@@ -94,5 +91,4 @@ qBittorrent       | https://torrent.mchill.duckdns.org
 Plex              | https://plex.mchill.duckdns.org
 Jitsi             | https://jitsi.mchill.duckdns.org
 SSH               | mchill.duckdns.org:22
-SFTP              | mchill.duckdns.org:2222
 Minecraft         | mchill.duckdns.org:25565

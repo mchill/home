@@ -169,21 +169,6 @@ services:
       - traefik.http.routers.jaeger.entrypoints=websecure
       - traefik.http.services.jaeger.loadbalancer.server.port=16686
 
-  sftp:
-    <<: *logging
-    image: atmoz/sftp:alpine
-    restart: always
-    ports:
-      - "2222:22"
-    environment:
-      - TZ
-      - SFTP_USERS=mchill:$$1$$KvZr5bVS$$maxr0gZ.kIm0dRYKs3Yh91:e:1000
-    volumes:
-      - $REPO_PATH/sftp/id_rsa.pub:/home/mchill/.ssh/keys/id_rsa.pub:ro
-      - $DATA_PATH/keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
-      - $DATA_PATH/keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
-      - $DATA_PATH:/home/mchill/server
-
   files:
     <<: *logging
     image: machines/filestash
