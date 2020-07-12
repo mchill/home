@@ -44,6 +44,7 @@ Create the following local file structure which will be mounted as volumes. The 
   keys/                  # Public keys generated for the server
     ssh_host_ed25519_key
     ssh_host_rsa_key
+  loki/                  # Collected logs
   minecraft/             # Minecraft world
   pihole/                # Pi-hole configs
   plex/
