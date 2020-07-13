@@ -59,6 +59,7 @@ Set the following environment variables.
 Variable                           | Description
 ---                                | ---
 DUCKDNS_TOKEN                      | DuckDNS API token (https://www.duckdns.org/)
+GF_SMTP_PASSWORD                   | Google app password (https://myaccount.google.com/apppasswords)
 JICOFO_COMPONENT_SECRET            | Internal Jitsi secret
 JICOFO_AUTH_PASSWORD               | Internal Jitsi password
 JVB_AUTH_PASSWORD                  | Internal Jitsi password

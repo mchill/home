@@ -70,6 +70,7 @@ jobs:
         env:
           DOCKER_HOST: ssh://mchill@mchill.duckdns.org
           DUCKDNS_TOKEN: ${{ secrets.DUCKDNS_TOKEN }}
+          GF_SMTP_PASSWORD: ${{ secrets.GF_SMTP_PASSWORD }}
           JICOFO_COMPONENT_SECRET: ${{ secrets.JICOFO_COMPONENT_SECRET }}
           JICOFO_AUTH_PASSWORD: ${{ secrets.JICOFO_AUTH_PASSWORD }}
           JVB_AUTH_PASSWORD: ${{ secrets.JVB_AUTH_PASSWORD }}

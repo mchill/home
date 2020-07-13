@@ -18,7 +18,7 @@ services:
       - PROVIDERS_GOOGLE_CLIENT_SECRET
       - AUTH_HOST=auth.$URL
       - COOKIE_DOMAIN=$URL
-      - WHITELIST=matthewchill7@gmail.com
+      - WHITELIST=$EMAIL
     labels:
       - traefik.enable=true
       - traefik.http.routers.auth.middlewares=auth@file
@@ -56,6 +56,11 @@ services:
     environment:
       - TZ
       - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_SMTP_ENABLED=true
+      - GF_SMTP_HOST=smtp.gmail.com:587
+      - GF_SMTP_FROM_ADDRESS=grafana@$URL
+      - GF_SMTP_USER=$EMAIL
+      - GF_SMTP_PASSWORD
     volumes:
       - $DATA_PATH/grafana:/var/lib/grafana
     labels:
