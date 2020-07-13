@@ -7,73 +7,6 @@ x-logging: &logging
       loki-url: "http://localhost:3100/loki/api/v1/push"
 
 services:
-  traefik:
-    <<: *logging
-    image: traefik:2.2
-    restart: always
-    ports:
-      - "8080:80"
-      - "4433:443"
-    environment:
-      - TZ
-      - DUCKDNS_TOKEN
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - $REPO_PATH/traefik/traefik.yml:/etc/traefik/traefik.yml
-      - $REPO_PATH/traefik/config:/config
-      - $DATA_PATH/acme.json:/acme.json
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.traefik.middlewares=auth@file
-      - traefik.http.routers.traefik.entrypoints=websecure
-      - traefik.http.routers.traefik.service=api@internal
-
-  rclone:
-    <<: *logging
-    image: rclone/rclone
-    restart: always
-    tty: true
-    environment:
-      - TZ
-      - RCLONE_CONFIG_LOCAL_TYPE=local
-      - RCLONE_CONFIG_REMOTE_TYPE=onedrive
-      - RCLONE_CONFIG_REMOTE_DRIVE_TYPE=personal
-      - RCLONE_CONFIG_REMOTE_DRIVE_ID
-      - RCLONE_CONFIG_REMOTE_CLIENT_ID
-      - RCLONE_CONFIG_REMOTE_CLIENT_SECRET
-      - RCLONE_CONFIG_REMOTE_TOKEN
-    volumes:
-      - $DATA_PATH:/data/server
-      - $BACKUP_PATH:/data/backup
-      - $REPO_PATH/rclone/local-backup.sh:/etc/periodic/daily/backup:ro
-      - $REPO_PATH/rclone/remote-backup.sh:/etc/periodic/weekly/backup:ro
-    entrypoint: /bin/sh
-    command: ["-c", "crond -f -l 5"]
-
-  portainer:
-    <<: *logging
-    image: portainer/portainer
-    restart: always
-    environment:
-      - TZ
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: -H unix:///var/run/docker.sock --no-auth
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.portainer.middlewares=auth@file
-      - traefik.http.routers.portainer.entrypoints=websecure
-      - traefik.http.services.portainer.loadbalancer.server.port=9000
-
-  duckdns:
-    <<: *logging
-    image: linuxserver/duckdns
-    restart: always
-    environment:
-      - TZ
-      - TOKEN=$DUCKDNS_TOKEN
-      - SUBDOMAINS=$URL
-
   auth:
     <<: *logging
     image: thomseddon/traefik-forward-auth:2
@@ -92,54 +25,28 @@ services:
       - traefik.http.routers.auth.entrypoints=websecure
       - traefik.http.services.auth.loadbalancer.server.port=4181
 
-  pihole:
+  duckdns:
     <<: *logging
-    image: pihole/pihole
+    image: linuxserver/duckdns
     restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-      - "53:53"
-      - "53:53/udp"
     environment:
       - TZ
-      - WEBPASSWORD=
+      - TOKEN=$DUCKDNS_TOKEN
+      - SUBDOMAINS=$URL
+
+  files:
+    <<: *logging
+    image: machines/filestash
+    restart: always
+    environment:
+      - TZ
     volumes:
-      - $DATA_PATH/pihole:/etc/pihole
-      - $DATA_PATH/dnsmasq:/etc/dnsmasq.d
+      - $DATA_PATH/filestash/config.json:/app/data/state/config/config.json
     labels:
       - traefik.enable=true
-      - traefik.http.middlewares.pihole.addprefix.prefix=/admin
-      - traefik.http.routers.pihole.middlewares=auth@file,pihole
-      - traefik.http.routers.pihole.entrypoints=websecure
-      - traefik.http.services.pihole.loadbalancer.server.port=80
-
-  loki:
-    <<: *logging
-    image: grafana/loki
-    restart: always
-    ports:
-      - "3100:3100"
-    environment:
-      - TZ
-    volumes:
-      - $DATA_PATH/loki:/loki
-
-  prometheus:
-    <<: *logging
-    image: prom/prometheus
-    restart: always
-    user: 1000:1000
-    environment:
-      - TZ
-    volumes:
-      - $REPO_PATH/prometheus:/etc/prometheus
-      - $DATA_PATH/prometheus:/prometheus
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.prometheus.middlewares=auth@file
-      - traefik.http.routers.prometheus.entrypoints=websecure
-      - traefik.http.services.prometheus.loadbalancer.server.port=9090
+      - traefik.http.routers.filestash.middlewares=auth@file
+      - traefik.http.routers.filestash.entrypoints=websecure
+      - traefik.http.services.filestash.loadbalancer.server.port=8334
 
   grafana:
     <<: *logging
@@ -169,83 +76,6 @@ services:
       - traefik.http.routers.jaeger.entrypoints=websecure
       - traefik.http.services.jaeger.loadbalancer.server.port=16686
 
-  files:
-    <<: *logging
-    image: machines/filestash
-    restart: always
-    environment:
-      - TZ
-    volumes:
-      - $DATA_PATH/filestash/config.json:/app/data/state/config/config.json
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.filestash.middlewares=auth@file
-      - traefik.http.routers.filestash.entrypoints=websecure
-      - traefik.http.services.filestash.loadbalancer.server.port=8334
-
-  plex:
-    <<: *logging
-    image: plexinc/pms-docker
-    restart: always
-    ports:
-      - "32400:32400"
-      - "32410:32410/udp"
-      - "32412:32412/udp"
-      - "32413:32413/udp"
-      - "32414:32414/udp"
-    environment:
-      - TZ
-      - PLEX_CLAIM
-      - ADVERTISE_IP=https://plex.$URL
-    volumes:
-      - $DATA_PATH/plex/config:/config
-      - $DATA_PATH/plex/data:/data
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.plex.entrypoints=websecure
-      - traefik.http.services.plex.loadbalancer.server.port=32400
-
-  torrent:
-    <<: *logging
-    image: markusmcnugen/qbittorrentvpn
-    restart: always
-    privileged: true
-    environment:
-      - TZ
-      - VPN_USERNAME
-      - VPN_PASSWORD
-      - VPN_ENABLED=yes
-      - LAN_NETWORK=192.168.1.0/24
-      - NAME_SERVERS=1.1.1.1,8.8.8.8
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - $DATA_PATH/qbittorrent/config:/config
-      - $DATA_PATH/qbittorrent/downloads:/downloads
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.qbittorrent.middlewares=auth@file
-      - traefik.http.routers.qbittorrent.entrypoints=websecure
-      - traefik.http.services.qbittorrent.loadbalancer.server.port=8080
-
-  minecraft:
-    <<: *logging
-    image: itzg/minecraft-server
-    restart: always
-    ports:
-      - "25565:25565"
-    environment:
-      - TZ
-      - EULA=TRUE
-      - MEMORY=3G
-      - VERSION=1.16.1
-    volumes:
-      - $DATA_PATH/minecraft:/data
-      - $REPO_PATH/minecraft/ops.json:/data/ops.json
-      - $REPO_PATH/minecraft/whitelist.json:/data/whitelist.json
-      - $REPO_PATH/minecraft/banned-ips.json:/data/banned-ips.json
-      - $REPO_PATH/minecraft/banned-players.json:/data/banned-players.json
-
   jitsi:
     <<: *logging
     image: jitsi/web
@@ -273,36 +103,6 @@ services:
       - traefik.enable=true
       - traefik.http.routers.jitsi.entrypoints=websecure
       - traefik.http.services.jitsi.loadbalancer.server.port=80
-
-  jitsi-prosody:
-    <<: *logging
-    image: jitsi/prosody
-    restart: always
-    networks:
-      default:
-        aliases:
-          - $XMPP_SERVER
-    volumes:
-      - $DATA_PATH/jitsi/prosody/config:/config
-      - $DATA_PATH/jitsi/prosody/prosody-plugins-custom:/prosody-plugins-custom
-    environment:
-      - TZ
-      - AUTH_TYPE
-      - ENABLE_AUTH
-      - ENABLE_GUESTS
-      - GLOBAL_MODULES
-      - GLOBAL_CONFIG
-      - XMPP_DOMAIN
-      - XMPP_AUTH_DOMAIN
-      - XMPP_GUEST_DOMAIN
-      - XMPP_MUC_DOMAIN
-      - XMPP_INTERNAL_MUC_DOMAIN
-      - JICOFO_COMPONENT_SECRET
-      - JICOFO_AUTH_USER
-      - JICOFO_AUTH_PASSWORD
-      - JVB_AUTH_USER
-      - JVB_AUTH_PASSWORD
-      - LOG_LEVEL
 
   jitsi-jicofo:
     <<: *logging
@@ -347,3 +147,203 @@ services:
       - JVB_TCP_HARVESTER_DISABLED
       - JVB_TCP_PORT
       - JVB_STUN_SERVERS
+
+  jitsi-prosody:
+    <<: *logging
+    image: jitsi/prosody
+    restart: always
+    networks:
+      default:
+        aliases:
+          - $XMPP_SERVER
+    volumes:
+      - $DATA_PATH/jitsi/prosody/config:/config
+      - $DATA_PATH/jitsi/prosody/prosody-plugins-custom:/prosody-plugins-custom
+    environment:
+      - TZ
+      - AUTH_TYPE
+      - ENABLE_AUTH
+      - ENABLE_GUESTS
+      - GLOBAL_MODULES
+      - GLOBAL_CONFIG
+      - XMPP_DOMAIN
+      - XMPP_AUTH_DOMAIN
+      - XMPP_GUEST_DOMAIN
+      - XMPP_MUC_DOMAIN
+      - XMPP_INTERNAL_MUC_DOMAIN
+      - JICOFO_COMPONENT_SECRET
+      - JICOFO_AUTH_USER
+      - JICOFO_AUTH_PASSWORD
+      - JVB_AUTH_USER
+      - JVB_AUTH_PASSWORD
+      - LOG_LEVEL
+
+  loki:
+    <<: *logging
+    image: grafana/loki
+    restart: always
+    ports:
+      - "3100:3100"
+    environment:
+      - TZ
+    volumes:
+      - $DATA_PATH/loki:/loki
+
+  minecraft:
+    <<: *logging
+    image: itzg/minecraft-server
+    restart: always
+    ports:
+      - "25565:25565"
+    environment:
+      - TZ
+      - EULA=TRUE
+      - MEMORY=3G
+      - VERSION=1.16.1
+    volumes:
+      - $DATA_PATH/minecraft:/data
+      - $REPO_PATH/minecraft/ops.json:/data/ops.json
+      - $REPO_PATH/minecraft/whitelist.json:/data/whitelist.json
+      - $REPO_PATH/minecraft/banned-ips.json:/data/banned-ips.json
+      - $REPO_PATH/minecraft/banned-players.json:/data/banned-players.json
+
+  pihole:
+    <<: *logging
+    image: pihole/pihole
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "53:53"
+      - "53:53/udp"
+    environment:
+      - TZ
+      - WEBPASSWORD=
+    volumes:
+      - $DATA_PATH/pihole:/etc/pihole
+      - $DATA_PATH/dnsmasq:/etc/dnsmasq.d
+    labels:
+      - traefik.enable=true
+      - traefik.http.middlewares.pihole.addprefix.prefix=/admin
+      - traefik.http.routers.pihole.middlewares=auth@file,pihole
+      - traefik.http.routers.pihole.entrypoints=websecure
+      - traefik.http.services.pihole.loadbalancer.server.port=80
+
+  plex:
+    <<: *logging
+    image: plexinc/pms-docker
+    restart: always
+    ports:
+      - "32400:32400"
+      - "32410:32410/udp"
+      - "32412:32412/udp"
+      - "32413:32413/udp"
+      - "32414:32414/udp"
+    environment:
+      - TZ
+      - PLEX_CLAIM
+      - ADVERTISE_IP=https://plex.$URL
+    volumes:
+      - $DATA_PATH/plex/config:/config
+      - $DATA_PATH/plex/data:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.plex.entrypoints=websecure
+      - traefik.http.services.plex.loadbalancer.server.port=32400
+
+  portainer:
+    <<: *logging
+    image: portainer/portainer
+    restart: always
+    environment:
+      - TZ
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: -H unix:///var/run/docker.sock --no-auth
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.portainer.middlewares=auth@file
+      - traefik.http.routers.portainer.entrypoints=websecure
+      - traefik.http.services.portainer.loadbalancer.server.port=9000
+
+  prometheus:
+    <<: *logging
+    image: prom/prometheus
+    restart: always
+    user: 1000:1000
+    environment:
+      - TZ
+    volumes:
+      - $REPO_PATH/prometheus:/etc/prometheus
+      - $DATA_PATH/prometheus:/prometheus
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.prometheus.middlewares=auth@file
+      - traefik.http.routers.prometheus.entrypoints=websecure
+      - traefik.http.services.prometheus.loadbalancer.server.port=9090
+
+  rclone:
+    <<: *logging
+    image: rclone/rclone
+    restart: always
+    tty: true
+    environment:
+      - TZ
+      - RCLONE_CONFIG_LOCAL_TYPE=local
+      - RCLONE_CONFIG_REMOTE_TYPE=onedrive
+      - RCLONE_CONFIG_REMOTE_DRIVE_TYPE=personal
+      - RCLONE_CONFIG_REMOTE_DRIVE_ID
+      - RCLONE_CONFIG_REMOTE_CLIENT_ID
+      - RCLONE_CONFIG_REMOTE_CLIENT_SECRET
+      - RCLONE_CONFIG_REMOTE_TOKEN
+    volumes:
+      - $DATA_PATH:/data/server
+      - $BACKUP_PATH:/data/backup
+      - $REPO_PATH/rclone/local-backup.sh:/etc/periodic/daily/backup:ro
+      - $REPO_PATH/rclone/remote-backup.sh:/etc/periodic/weekly/backup:ro
+    entrypoint: /bin/sh
+    command: ["-c", "crond -f -l 5"]
+
+  torrent:
+    <<: *logging
+    image: markusmcnugen/qbittorrentvpn
+    restart: always
+    privileged: true
+    environment:
+      - TZ
+      - VPN_USERNAME
+      - VPN_PASSWORD
+      - VPN_ENABLED=yes
+      - LAN_NETWORK=192.168.1.0/24
+      - NAME_SERVERS=1.1.1.1,8.8.8.8
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - $DATA_PATH/qbittorrent/config:/config
+      - $DATA_PATH/qbittorrent/downloads:/downloads
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.qbittorrent.middlewares=auth@file
+      - traefik.http.routers.qbittorrent.entrypoints=websecure
+      - traefik.http.services.qbittorrent.loadbalancer.server.port=8080
+
+  traefik:
+    <<: *logging
+    image: traefik:2.2
+    restart: always
+    ports:
+      - "8080:80"
+      - "4433:443"
+    environment:
+      - TZ
+      - DUCKDNS_TOKEN
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - $REPO_PATH/traefik/traefik.yml:/etc/traefik/traefik.yml
+      - $REPO_PATH/traefik/config:/config
+      - $DATA_PATH/acme.json:/acme.json
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.middlewares=auth@file
+      - traefik.http.routers.traefik.entrypoints=websecure
+      - traefik.http.routers.traefik.service=api@internal

@@ -21,7 +21,6 @@ External   | Internal  | Service
 80         | 8080      | HTTP
 443        | 4433      | HTTPS
 22         | 22        | SSH
-2222       | 2222      | SFTP
 25565      | 25565     | Minecraft
 4443       | 4443      | Jitsi
 10000/udp  | 10000/udp | Jitsi
@@ -42,7 +41,7 @@ Create the following local file structure which will be mounted as volumes. The 
     /prosody
     /web
   loki/                  # Collected logs
-  minecraft/             # Minecraft world
+  minecraft/             # Minecraft server
   pihole/                # Pi-hole configs
   plex/
     config/              # Plex configs
@@ -80,7 +79,7 @@ Most services are secured behind Google forward authentication. Plex and Jitsi h
 
 Service           | URL
 ---               | ---
-Traefik Dashboard | https://mchill.duckdns.org
+Traefik Dashboard | https://traefik.mchill.duckdns.org
 Pi-hole           | https://pihole.mchill.duckdns.org
 Portainer         | https://portainer.mchill.duckdns.org
 Prometheus        | https://prometheus.mchill.duckdns.org
