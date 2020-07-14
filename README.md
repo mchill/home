@@ -56,23 +56,24 @@ Create the following local file structure which will be mounted as volumes. The 
 
 Set the following environment variables.
 
-Variable                           | Description
----                                | ---
-DUCKDNS_TOKEN                      | DuckDNS API token (https://www.duckdns.org/)
-GF_SMTP_PASSWORD                   | Google app password (https://myaccount.google.com/apppasswords)
-JICOFO_COMPONENT_SECRET            | Internal Jitsi secret
-JICOFO_AUTH_PASSWORD               | Internal Jitsi password
-JVB_AUTH_PASSWORD                  | Internal Jitsi password
-OAUTH_SECRET                       | Internal OAuth secret
-PLEX_CLAIM                         | Plex claim token needed for first time container setup (https://www.plex.tv/claim/)
-PROVIDERS_GOOGLE_CLIENT_ID         | Google Oauth client ID (https://console.developers.google.com/apis/credentials)
-PROVIDERS_GOOGLE_CLIENT_SECRET     | Google Oauth client secret (https://console.developers.google.com/apis/credentials)
-RCLONE_CONFIG_REMOTE_CLIENT_ID     | OneDrive client ID (https://rclone.org/onedrive/#getting-your-own-client-id-and-key)
-RCLONE_CONFIG_REMOTE_CLIENT_SECRET | OneDrive client secret (https://rclone.org/onedrive/#getting-your-own-client-id-and-key)
-RCLONE_CONFIG_REMOTE_DRIVE_ID      | OneDrive drive ID (https://rclone.org/onedrive/)
-RCLONE_CONFIG_REMOTE_TOKEN         | OneDrive token (https://rclone.org/onedrive/)
-VPN_USERNAME                       | OpenVPN provider username
-VPN_PASSWORD                       | OpenVPN provider password
+Variable                            | Description
+---                                 | ---
+DUCKDNS_TOKEN                       | DuckDNS API token (https://www.duckdns.org/)
+GF_SMTP_PASSWORD                    | Google app password (https://myaccount.google.com/apppasswords)
+JICOFO_AUTH_PASSWORD                | Jitsi password
+JICOFO_COMPONENT_SECRET             | Jitsi secret
+JVB_AUTH_PASSWORD                   | Jitsi password
+OAUTH_SECRET                        | OAuth secret
+PLEX_CLAIM                          | Plex claim token needed for first time container setup (https://www.plex.tv/claim/)
+PROVIDERS_GOOGLE_CLIENT_ID          | Google Oauth client ID (https://console.developers.google.com/apis/credentials)
+PROVIDERS_GOOGLE_CLIENT_SECRET      | Google Oauth client secret (https://console.developers.google.com/apis/credentials)
+RCLONE_CONFIG_ENCRYPTED_PASSWORD    | Rclone encryption password
+RCLONE_CONFIG_ENCRYPTED_PASSWORD2   | Rclone encryption salt
+RCLONE_CONFIG_REMOTE_CLIENT_ID      | Google Oauth client ID (https://console.developers.google.com/apis/credentials)
+RCLONE_CONFIG_REMOTE_CLIENT_SECRET  | Google Oauth client secret (https://console.developers.google.com/apis/credentials)
+RCLONE_CONFIG_REMOTE_TOKEN          | Google Drive client secret (https://rclone.org/drive/#getting-your-own-client-id-and-key)
+VPN_USERNAME                        | OpenVPN provider username
+VPN_PASSWORD                        | OpenVPN provider password
 
 ## Usage
 
