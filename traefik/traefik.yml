@@ -1,9 +1,6 @@
 api:
   dashboard: true
 
-global:
-  insecureSNI: true
-
 entryPoints:
   web:
     address: ":80"
