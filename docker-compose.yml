@@ -291,7 +291,6 @@ services:
     <<: *logging
     image: rclone/rclone
     restart: always
-    tty: true
     environment:
       - TZ
       - RCLONE_CONFIG_LOCAL_TYPE=local

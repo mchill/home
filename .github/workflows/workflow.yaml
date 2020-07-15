@@ -69,6 +69,8 @@ jobs:
       - name: Deploy server
         env:
           DOCKER_HOST: ssh://mchill@mchill.duckdns.org
+          COMPOSE_HTTP_TIMEOUT: 300
+          DOCKER_HTTP_TIMEOUT: 300
           DUCKDNS_TOKEN: ${{ secrets.DUCKDNS_TOKEN }}
           GF_SMTP_PASSWORD: ${{ secrets.GF_SMTP_PASSWORD }}
           JICOFO_COMPONENT_SECRET: ${{ secrets.JICOFO_COMPONENT_SECRET }}
