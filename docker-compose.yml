@@ -41,7 +41,7 @@ services:
     environment:
       - TZ
     volumes:
-      - $DATA_PATH/filestash/config.json:/app/data/state/config/config.json
+      - $SERVER_PATH/filestash/config.json:/app/data/state/config/config.json
     labels:
       - traefik.enable=true
       - traefik.http.routers.filestash.middlewares=auth@file
@@ -62,7 +62,7 @@ services:
       - GF_SMTP_USER=$EMAIL
       - GF_SMTP_PASSWORD
     volumes:
-      - $DATA_PATH/grafana:/var/lib/grafana
+      - $SERVER_PATH/grafana:/var/lib/grafana
     labels:
       - traefik.enable=true
       - traefik.http.routers.grafana.middlewares=auth@file
@@ -90,7 +90,7 @@ services:
         aliases:
           - $XMPP_DOMAIN
     volumes:
-      - $DATA_PATH/jitsi/web:/config
+      - $SERVER_PATH/jitsi/web:/config
     environment:
       - TZ
       - ENABLE_AUTH
@@ -116,7 +116,7 @@ services:
     depends_on:
       - jitsi-prosody
     volumes:
-      - $DATA_PATH/jitsi/jicofo:/config
+      - $SERVER_PATH/jitsi/jicofo:/config
     environment:
       - TZ
       - ENABLE_AUTH
@@ -139,7 +139,7 @@ services:
       - "$JVB_PORT:$JVB_PORT/udp"
       - "$JVB_TCP_PORT:$JVB_TCP_PORT"
     volumes:
-      - $DATA_PATH/jitsi/jvb:/config
+      - $SERVER_PATH/jitsi/jvb:/config
     environment:
       - TZ
       - XMPP_AUTH_DOMAIN
@@ -162,8 +162,8 @@ services:
         aliases:
           - $XMPP_SERVER
     volumes:
-      - $DATA_PATH/jitsi/prosody/config:/config
-      - $DATA_PATH/jitsi/prosody/prosody-plugins-custom:/prosody-plugins-custom
+      - $SERVER_PATH/jitsi/prosody/config:/config
+      - $SERVER_PATH/jitsi/prosody/prosody-plugins-custom:/prosody-plugins-custom
     environment:
       - TZ
       - AUTH_TYPE
@@ -192,7 +192,7 @@ services:
     environment:
       - TZ
     volumes:
-      - $DATA_PATH/loki:/loki
+      - $SERVER_PATH/loki:/loki
 
   minecraft:
     <<: *logging
@@ -206,7 +206,7 @@ services:
       - MEMORY=3G
       - VERSION=1.16.1
     volumes:
-      - $DATA_PATH/minecraft:/data
+      - $SERVER_PATH/minecraft:/data
       - $REPO_PATH/minecraft/ops.json:/data/ops.json
       - $REPO_PATH/minecraft/whitelist.json:/data/whitelist.json
       - $REPO_PATH/minecraft/banned-ips.json:/data/banned-ips.json
@@ -225,8 +225,8 @@ services:
       - TZ
       - WEBPASSWORD=
     volumes:
-      - $DATA_PATH/pihole:/etc/pihole
-      - $DATA_PATH/dnsmasq:/etc/dnsmasq.d
+      - $SERVER_PATH/pihole:/etc/pihole
+      - $SERVER_PATH/dnsmasq:/etc/dnsmasq.d
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.pihole.addprefix.prefix=/admin
@@ -249,8 +249,8 @@ services:
       - PLEX_CLAIM
       - ADVERTISE_IP=https://plex.$URL
     volumes:
-      - $DATA_PATH/plex/config:/config
-      - $DATA_PATH/plex/data:/data
+      - $SERVER_PATH/plex/config:/config
+      - /data/plex:/data
     labels:
       - traefik.enable=true
       - traefik.http.routers.plex.entrypoints=websecure
@@ -280,7 +280,7 @@ services:
       - TZ
     volumes:
       - $REPO_PATH/prometheus:/etc/prometheus
-      - $DATA_PATH/prometheus:/prometheus
+      - $SERVER_PATH/prometheus:/prometheus
     labels:
       - traefik.enable=true
       - traefik.http.routers.prometheus.middlewares=auth@file
@@ -307,8 +307,8 @@ services:
       - RCLONE_CONFIG_ENCRYPTED_PASSWORD
       - RCLONE_CONFIG_ENCRYPTED_PASSWORD2
     volumes:
-      - $DATA_PATH:/data/server
-      - $BACKUP_PATH:/data/backup
+      - $SERVER_PATH:/server
+      - $BACKUP_PATH:/backup
       - $REPO_PATH/rclone/local-backup.sh:/etc/periodic/daily/backup:ro
       - $REPO_PATH/rclone/remote-backup.sh:/etc/periodic/weekly/backup:ro
     entrypoint: /bin/sh
@@ -329,8 +329,8 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - $DATA_PATH/qbittorrent/config:/config
-      - $DATA_PATH/qbittorrent/downloads:/downloads
+      - $SERVER_PATH/qbittorrent/config:/config
+      - $SERVER_PATH/qbittorrent/downloads:/downloads
     labels:
       - traefik.enable=true
       - traefik.http.routers.qbittorrent.middlewares=auth@file
@@ -351,7 +351,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - $REPO_PATH/traefik/traefik.yml:/etc/traefik/traefik.yml
       - $REPO_PATH/traefik/config:/config
-      - $DATA_PATH/acme.json:/acme.json
+      - $SERVER_PATH/acme.json:/acme.json
     labels:
       - traefik.enable=true
       - traefik.http.routers.traefik.middlewares=auth@file
