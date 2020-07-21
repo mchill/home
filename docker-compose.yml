@@ -234,11 +234,15 @@ services:
     <<: *logging
     image: prom/node-exporter
     restart: always
+    network_mode: host
+    pid: host
+    ports:
+      - "9100:9100"
     environment:
       - TZ
     volumes:
-      - /:/rootfs:ro,rslave
-    command: ["--path.rootfs=/host"]
+      - /:/rootfs:ro
+    command: ["--path.rootfs=/rootfs"]
 
   pihole:
     <<: *logging
