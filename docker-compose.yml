@@ -268,7 +268,7 @@ services:
       - ADVERTISE_IP=https://plex.$URL
     volumes:
       - $SERVER_PATH/plex/config:/config
-      - /data/plex:/data
+      - $DATA_PATH/plex:/data
     labels:
       - traefik.enable=true
       - traefik.http.routers.plex.entrypoints=websecure
@@ -326,7 +326,7 @@ services:
       - RCLONE_CONFIG_ENCRYPTED_PASSWORD2
     volumes:
       - $SERVER_PATH:/server
-      - $BACKUP_PATH:/backup
+      - $DATA_PATH/backup:/backup
       - $REPO_PATH/rclone/local-backup.sh:/etc/periodic/daily/backup:ro
       - $REPO_PATH/rclone/remote-backup.sh:/etc/periodic/weekly/backup:ro
     entrypoint: /bin/sh
@@ -348,7 +348,7 @@ services:
       - PGID=1000
     volumes:
       - $SERVER_PATH/qbittorrent/config:/config
-      - $SERVER_PATH/qbittorrent/downloads:/downloads
+      - $DATA_PATH/qbittorrent:/downloads
     labels:
       - traefik.enable=true
       - traefik.http.routers.qbittorrent.middlewares=auth@file

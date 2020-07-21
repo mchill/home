@@ -6,3 +6,16 @@ http:
         trustForwardHeader: true
         authResponseHeaders:
           - X-Forwarded-User
+  routers:
+    nas:
+      rule: Host("nas.mchill.duckdns.org")
+      service: nas
+      middlewares:
+        - auth
+      entryPoints:
+        - websecure
+  services:
+    nas:
+      loadBalancer:
+        servers:
+          - url: http://192.168.86.159:5000

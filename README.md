@@ -27,30 +27,7 @@ External   | Internal  | Service
 
 ### Filesystem
 
-Create the following local file structure which will be mounted as volumes. The entire directory is backed up to cloud storage.
-
-```
-/data/server             # Mounted in the SFTP server
-  acme.json              # Ensure file permission 0600
-  dnsmasq/               # Pi-hole configs
-  filestash/             # Filestash configs
-  grafana/               # Dashboards and plugins
-  jitsi/                 # Jitsi configs
-    /jicofo
-    /jvb
-    /prosody
-    /web
-  loki/                  # Collected logs
-  minecraft/             # Minecraft server
-  pihole/                # Pi-hole configs
-  plex/
-    config/              # Plex configs
-    data/                # Hosted media
-  prometheus/            # Collected data
-  qbittorrent/
-    config/              # qBittorrent configs
-    downloads/           # Downloaded torrent files
-```
+The filesystem is split into three parts: version controlled configuration, persisted server data, and large media (for Plex library and torrents). The root paths are configured in .env as REPO_PATH, SERVER_PATH, and DATA_PATH.
 
 ### Environment
 
@@ -81,15 +58,17 @@ Most services are secured behind Google forward authentication. Plex and Jitsi h
 
 Service           | URL
 ---               | ---
-Traefik Dashboard | https://traefik.mchill.duckdns.org
-Pi-hole           | https://pihole.mchill.duckdns.org
-Portainer         | https://portainer.mchill.duckdns.org
-Prometheus        | https://prometheus.mchill.duckdns.org
+cAdvisor          | https://cadvisor.mchill.duckdns.org
+Filestash         | https://files.mchill.duckdns.org
 Grafana           | https://grafana.mchill.duckdns.org
 Jaeger            | https://jaeger.mchill.duckdns.org
-Filestash         | https://files.mchill.duckdns.org
-qBittorrent       | https://torrent.mchill.duckdns.org
-Plex              | https://plex.mchill.duckdns.org
 Jitsi             | https://jitsi.mchill.duckdns.org
-SSH               | mchill.duckdns.org:22
 Minecraft         | mchill.duckdns.org:25565
+Pi-hole           | https://pihole.mchill.duckdns.org
+Plex              | https://plex.mchill.duckdns.org
+Portainer         | https://portainer.mchill.duckdns.org
+Prometheus        | https://prometheus.mchill.duckdns.org
+SSH               | mchill.duckdns.org:22
+Synology DSM      | https://nas.mchill.duckdns.org
+Traefik Dashboard | https://traefik.mchill.duckdns.org
+qBittorrent       | https://torrent.mchill.duckdns.org
