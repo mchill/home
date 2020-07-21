@@ -25,6 +25,24 @@ services:
       - traefik.http.routers.auth.entrypoints=websecure
       - traefik.http.services.auth.loadbalancer.server.port=4181
 
+  cadvisor:
+    <<: *logging
+    image: google/cadvisor
+    restart: always
+    environment:
+      - TZ
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    command: ["--docker_only=true", "--enable_load_reader=true"]
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.cadvisor.middlewares=auth@file
+      - traefik.http.routers.cadvisor.entrypoints=websecure
+      - traefik.http.services.cadvisor.loadbalancer.server.port=8080
+
   duckdns:
     <<: *logging
     image: linuxserver/duckdns
