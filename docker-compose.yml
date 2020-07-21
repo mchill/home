@@ -230,6 +230,16 @@ services:
       - $REPO_PATH/minecraft/banned-ips.json:/data/banned-ips.json
       - $REPO_PATH/minecraft/banned-players.json:/data/banned-players.json
 
+  nodeexporter:
+    <<: *logging
+    image: prom/node-exporter
+    restart: always
+    environment:
+      - TZ
+    volumes:
+      - /:/rootfs:ro,rslave
+    command: ["--path.rootfs=/host"]
+
   pihole:
     <<: *logging
     image: pihole/pihole
