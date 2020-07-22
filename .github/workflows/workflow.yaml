@@ -90,4 +90,4 @@ jobs:
         run: |
           ssh mchill@mchill.duckdns.org 'cd repos/home && git fetch origin master && git reset --hard origin/master'
           docker-compose pull
-          docker-compose up -d
+          docker-compose --compatibility up -d

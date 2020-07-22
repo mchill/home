@@ -270,6 +270,10 @@ services:
     <<: *logging
     image: plexinc/pms-docker
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: "4"
     ports:
       - "32400:32400"
       - "32410:32410/udp"
