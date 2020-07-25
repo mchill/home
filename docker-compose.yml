@@ -323,30 +323,19 @@ services:
       - traefik.http.routers.prometheus.entrypoints=websecure
       - traefik.http.services.prometheus.loadbalancer.server.port=9090
 
-  rclone:
+  rsync:
     <<: *logging
-    image: rclone/rclone
+    image: instrumentisto/rsync-ssh
     restart: always
+    extra_hosts:
+      - "nas:$NAS_IP"
     environment:
       - TZ
-      - RCLONE_CONFIG_LOCAL_TYPE=local
-      - RCLONE_CONFIG_REMOTE_TYPE=drive
-      - RCLONE_CONFIG_REMOTE_SCOPE=drive.appfolder
-      - RCLONE_CONFIG_REMOTE_ROOT_FOLDER_ID=appDataFolder
-      - RCLONE_CONFIG_REMOTE_CLIENT_ID
-      - RCLONE_CONFIG_REMOTE_CLIENT_SECRET
-      - RCLONE_CONFIG_REMOTE_TOKEN
-      - RCLONE_CONFIG_ENCRYPTED_TYPE=crypt
-      - "RCLONE_CONFIG_ENCRYPTED_REMOTE=remote:"
-      - RCLONE_CONFIG_ENCRYPTED_FILENAME_ENCRYPTION=standard
-      - RCLONE_CONFIG_ENCRYPTED_DIRECTORY_NAME_ENCRYPTION=true
-      - RCLONE_CONFIG_ENCRYPTED_PASSWORD
-      - RCLONE_CONFIG_ENCRYPTED_PASSWORD2
     volumes:
-      - $SERVER_PATH:/server
-      - $DATA_PATH/backup:/backup
-      - $REPO_PATH/rclone/local-backup.sh:/etc/periodic/daily/backup:ro
-      - $REPO_PATH/rclone/remote-backup.sh:/etc/periodic/weekly/backup:ro
+      - /home/mchill/.ssh:/root/.ssh
+      - $SERVER_PATH:/backup/server:ro
+      - $DATA_PATH:/backup/data:ro
+      - $REPO_PATH/rsync/backup.sh:/etc/periodic/daily/backup:ro
     entrypoint: /bin/sh
     command: ["-c", "crond -f -l 5"]
 

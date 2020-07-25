@@ -29,6 +29,8 @@ External   | Internal  | Service
 
 The filesystem is split into three parts: version controlled configuration, persisted server data, and large media (for Plex library and torrents). The root paths are configured in .env as REPO_PATH, SERVER_PATH, and DATA_PATH.
 
+SERVER_PATH and DATA_PATH are backed up daily to both local and cloud storage.
+
 ### Environment
 
 Set the following environment variables.
@@ -44,11 +46,6 @@ OAUTH_SECRET                        | OAuth secret
 PLEX_CLAIM                          | Plex claim token needed for first time container setup (https://www.plex.tv/claim/)
 PROVIDERS_GOOGLE_CLIENT_ID          | Google Oauth client ID (https://console.developers.google.com/apis/credentials)
 PROVIDERS_GOOGLE_CLIENT_SECRET      | Google Oauth client secret (https://console.developers.google.com/apis/credentials)
-RCLONE_CONFIG_ENCRYPTED_PASSWORD    | Rclone encryption password
-RCLONE_CONFIG_ENCRYPTED_PASSWORD2   | Rclone encryption salt
-RCLONE_CONFIG_REMOTE_CLIENT_ID      | Google Oauth client ID (https://console.developers.google.com/apis/credentials)
-RCLONE_CONFIG_REMOTE_CLIENT_SECRET  | Google Oauth client secret (https://console.developers.google.com/apis/credentials)
-RCLONE_CONFIG_REMOTE_TOKEN          | Google Drive client secret (https://rclone.org/drive/#getting-your-own-client-id-and-key)
 VPN_USERNAME                        | OpenVPN provider username
 VPN_PASSWORD                        | OpenVPN provider password
 

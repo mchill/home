@@ -3,4 +3,5 @@
 cd /server
 command -v getfacl || apk add acl
 getfacl -R . > permissions.facl
-rclone sync -lv --local-no-check-updated /server local:/backup
+ssh-keyscan -H nas >> ~/.ssh/known_hosts
+rsync -av /backup rsync@nas:/volume1/Server
