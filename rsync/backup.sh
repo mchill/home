@@ -1,7 +1,7 @@
 #!/bin/sh
 
-cd /server
+cd /backup
 command -v getfacl || apk add acl
 getfacl -R . > permissions.facl
 ssh-keyscan -H nas >> ~/.ssh/known_hosts
-rsync -av /backup rsync@nas:/volume1/Server
+rsync -av --delete /backup-before rsync@nas:/volume1/Server
