@@ -45,12 +45,10 @@ services:
 
   dashboard:
     <<: *logging
-    image: nginx
+    build: dashboard
     restart: always
     environment:
       - TZ
-    volumes:
-      - $REPO_PATH/dashboard/build:/usr/share/nginx/html
     labels:
       - traefik.enable=true
       - traefik.http.routers.dashboard.rule=Host(`$URL`)
