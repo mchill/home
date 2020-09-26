@@ -5,11 +5,67 @@ on:
       - master
 
 jobs:
-  deploy:
-    name: deploy
+  dependencies:
+    name: dependencies
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-node-${{ hashFiles('**/dashboard/package-lock.json') }}
+          path: dashboard/node_modules/
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: npm ci
+        working-directory: dashboard
+
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    needs: dependencies
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-node-${{ hashFiles('**/dashboard/package-lock.json') }}
+          path: dashboard/node_modules/
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: npm run test -- --watchAll=false --passWithNoTests
+        working-directory: dashboard
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    needs: dependencies
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-node-${{ hashFiles('**/dashboard/package-lock.json') }}
+          path: dashboard/node_modules/
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: npm run build
+        working-directory: dashboard
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: dashboard/build
+
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    needs: [test, build]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: dashboard/build
       - name: Setup SSH
         run: |
           mkdir ~/.ssh
@@ -37,4 +93,4 @@ jobs:
         run: |
           ssh mchill@mchill.duckdns.org 'cd repos/home && git fetch origin master && git reset --hard origin/master'
           docker-compose pull
-          docker-compose --compatibility up -d
+          docker-compose --compatibility up --build -d
