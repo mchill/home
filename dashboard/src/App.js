@@ -6,10 +6,12 @@ import {
 import { Menu } from '@material-ui/icons';
 import styled from 'styled-components';
 
+import cadvisor from './logos/cadvisor.png';
 import filestash from './logos/filestash.png';
 import grafana from './logos/grafana.png';
 import jaeger from './logos/jaeger.png';
 import jitsi from './logos/jitsi.png';
+import nas from './logos/nas.png';
 import pihole from './logos/pihole.png';
 import plex from './logos/plex.png';
 import portainer from './logos/portainer.png';
@@ -20,18 +22,28 @@ import traefik from './logos/traefik.png';
 const AppList = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    width: 100%;
     margin: auto;
-    margin-top: 50px;
-    max-width: 800px;
+    margin-top: 25px;
+    @media (min-width:330px) {
+        width: 330px;
+    }
+    @media (min-width:495px) {
+        width: 495px;
+    }
+    @media (min-width:660px) {
+        width: 660px;
+    }
 `;
 
 const AppCard = styled(Card)`
     display: flex;
-    background-color: ghostwhite;
+    background-color: whitesmoke;
     box-shadow: none;
     min-width: 150px;
     height: 150px;
+    margin-bottom: 15px;
+    margin-right: 15px;
     transform: all 0.2s ease-in-out;
     &:hover {
         transform: scale(1.1);
@@ -47,6 +59,7 @@ const AppAction = styled(CardActionArea)`
 const AppImage = styled(CardMedia)`
     flex-grow: 1;
     width: 100%;
+    margin-top: 15px;
     background-size: contain;
 `;
 
@@ -55,10 +68,12 @@ const AppName = styled(Typography)`
 `;
 
 const apps = [
+    { name: "cAdvisor", subdomain: "cadvisor", logo: cadvisor },
     { name: "Filestash", subdomain: "files", logo: filestash },
     { name: "Grafana", subdomain: "grafana", logo: grafana },
     { name: "Jaeger", subdomain: "jaeger", logo: jaeger },
     { name: "Jitsi", subdomain: "jitsi", logo: jitsi },
+    { name: "NAS", subdomain: "nas", logo: nas },
     { name: "Pi-hole", subdomain: "pihole", logo: pihole },
     { name: "Plex", subdomain: "plex", logo: plex },
     { name: "Portainer", subdomain: "portainer", logo: portainer },
@@ -82,7 +97,7 @@ function App() {
             </AppBar>
             <AppList>
                 {apps.map((app) => (
-                <AppCard color={app.color}>
+                <AppCard key={app.name}>
                     <AppAction onClick={() => window.location.assign("https://" + app.subdomain + ".mchill.duckdns.org")}>
                         <AppImage image={app.logo} />
                         <CardContent>
