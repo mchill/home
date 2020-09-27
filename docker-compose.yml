@@ -21,7 +21,7 @@ services:
       - WHITELIST=$EMAIL
     labels:
       - traefik.enable=true
-      - traefik.http.routers.auth.middlewares=auth@file
+      - traefik.http.routers.auth.middlewares=auth-error@file,auth@file
       - traefik.http.routers.auth.entrypoints=websecure
       - traefik.http.services.auth.loadbalancer.server.port=4181
 
@@ -39,7 +39,7 @@ services:
     command: ["--docker_only=true", "--enable_load_reader=true"]
     labels:
       - traefik.enable=true
-      - traefik.http.routers.cadvisor.middlewares=auth@file
+      - traefik.http.routers.cadvisor.middlewares=auth-error@file,auth@file
       - traefik.http.routers.cadvisor.entrypoints=websecure
       - traefik.http.services.cadvisor.loadbalancer.server.port=8080
 
@@ -52,7 +52,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.dashboard.rule=Host(`$URL`)
-      - traefik.http.routers.dashboard.middlewares=auth@file
+      - traefik.http.routers.dashboard.middlewares=auth-error@file,auth@file
       - traefik.http.routers.dashboard.entrypoints=websecure
       - traefik.http.services.dashboard.loadbalancer.server.port=80
 
@@ -75,7 +75,7 @@ services:
       - $SERVER_PATH/filestash/config.json:/app/data/state/config/config.json
     labels:
       - traefik.enable=true
-      - traefik.http.routers.filestash.middlewares=auth@file
+      - traefik.http.routers.filestash.middlewares=auth-error@file,auth@file
       - traefik.http.routers.filestash.entrypoints=websecure
       - traefik.http.services.filestash.loadbalancer.server.port=8334
 
@@ -96,7 +96,7 @@ services:
       - $SERVER_PATH/grafana:/var/lib/grafana
     labels:
       - traefik.enable=true
-      - traefik.http.routers.grafana.middlewares=auth@file
+      - traefik.http.routers.grafana.middlewares=auth-error@file,auth@file
       - traefik.http.routers.grafana.entrypoints=websecure
       - traefik.http.services.grafana.loadbalancer.server.port=3000
 
@@ -108,7 +108,7 @@ services:
       - TZ
     labels:
       - traefik.enable=true
-      - traefik.http.routers.jaeger.middlewares=auth@file
+      - traefik.http.routers.jaeger.middlewares=auth-error@file,auth@file
       - traefik.http.routers.jaeger.entrypoints=websecure
       - traefik.http.services.jaeger.loadbalancer.server.port=16686
 
@@ -243,6 +243,21 @@ services:
       - $REPO_PATH/minecraft/banned-ips.json:/data/banned-ips.json
       - $REPO_PATH/minecraft/banned-players.json:/data/banned-players.json
 
+  errors:
+    <<: *logging
+    image: nginx
+    restart: always
+    environment:
+      - TZ
+    volumes:
+      - $REPO_PATH/nginx:/usr/share/nginx/html
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.errors.rule=HostRegexp(`{host:.+}`)
+      - traefik.http.routers.errors.priority=1
+      - traefik.http.routers.errors.entrypoints=websecure
+      - traefik.http.services.errors.loadbalancer.server.port=80
+
   nodeexporter:
     <<: *logging
     image: prom/node-exporter
@@ -275,7 +290,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.pihole.addprefix.prefix=/admin
-      - traefik.http.routers.pihole.middlewares=auth@file,pihole
+      - traefik.http.routers.pihole.middlewares=auth-error@file,auth@file,pihole
       - traefik.http.routers.pihole.entrypoints=websecure
       - traefik.http.services.pihole.loadbalancer.server.port=80
 
@@ -316,7 +331,7 @@ services:
     command: -H unix:///var/run/docker.sock --no-auth
     labels:
       - traefik.enable=true
-      - traefik.http.routers.portainer.middlewares=auth@file
+      - traefik.http.routers.portainer.middlewares=auth-error@file,auth@file
       - traefik.http.routers.portainer.entrypoints=websecure
       - traefik.http.services.portainer.loadbalancer.server.port=9000
 
@@ -332,7 +347,7 @@ services:
       - $SERVER_PATH/prometheus:/prometheus
     labels:
       - traefik.enable=true
-      - traefik.http.routers.prometheus.middlewares=auth@file
+      - traefik.http.routers.prometheus.middlewares=auth-error@file,auth@file
       - traefik.http.routers.prometheus.entrypoints=websecure
       - traefik.http.services.prometheus.loadbalancer.server.port=9090
 
@@ -371,7 +386,7 @@ services:
       - $DATA_PATH/qbittorrent:/downloads
     labels:
       - traefik.enable=true
-      - traefik.http.routers.qbittorrent.middlewares=auth@file
+      - traefik.http.routers.qbittorrent.middlewares=auth-error@file,auth@file
       - traefik.http.routers.qbittorrent.entrypoints=websecure
       - traefik.http.services.qbittorrent.loadbalancer.server.port=8080
 
@@ -392,6 +407,6 @@ services:
       - $SERVER_PATH/acme.json:/acme.json
     labels:
       - traefik.enable=true
-      - traefik.http.routers.traefik.middlewares=auth@file
+      - traefik.http.routers.traefik.middlewares=auth-error@file,auth@file
       - traefik.http.routers.traefik.entrypoints=websecure
       - traefik.http.routers.traefik.service=api@internal

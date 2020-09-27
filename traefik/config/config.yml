@@ -6,6 +6,12 @@ http:
         trustForwardHeader: true
         authResponseHeaders:
           - X-Forwarded-User
+    auth-error:
+      errors:
+        status:
+          - 401
+        service: errors@docker
+        query: /401.html
   routers:
     nas:
       rule: Host("nas.mchill.duckdns.org")
