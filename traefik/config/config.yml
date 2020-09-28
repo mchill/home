@@ -1,6 +1,11 @@
 http:
   middlewares:
     auth:
+      chain:
+        middlewares:
+          - auth-error
+          - forward-auth
+    forward-auth:
       forwardAuth:
         address: http://auth:4181
         trustForwardHeader: true
