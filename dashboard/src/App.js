@@ -7,7 +7,7 @@ import { Menu } from '@material-ui/icons';
 import styled from 'styled-components';
 
 import cadvisor from './logos/cadvisor.png';
-import filestash from './logos/filestash.png';
+import filebrowser from './logos/filebrowser.png';
 import grafana from './logos/grafana.png';
 import jaeger from './logos/jaeger.png';
 import jitsi from './logos/jitsi.png';
@@ -69,7 +69,7 @@ const AppName = styled(Typography)`
 
 const apps = [
     { name: "cAdvisor", subdomain: "cadvisor", logo: cadvisor },
-    { name: "Filestash", subdomain: "files", logo: filestash },
+    { name: "File Browser", subdomain: "files", logo: filebrowser },
     { name: "Grafana", subdomain: "grafana", logo: grafana },
     { name: "Jaeger", subdomain: "jaeger", logo: jaeger },
     { name: "Jitsi", subdomain: "jitsi", logo: jitsi },

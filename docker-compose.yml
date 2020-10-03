@@ -67,17 +67,21 @@ services:
 
   files:
     <<: *logging
-    image: machines/filestash
+    image: filebrowser/filebrowser
     restart: always
+    user: 1000:1000
     environment:
       - TZ
+      - FB_PORT=8080
+      - FB_NOAUTH=true
     volumes:
-      - $SERVER_PATH/filestash/config.json:/app/data/state/config/config.json
+      - $DATA_PATH:/srv
+      - $SERVER_PATH/filebrowser/database.db:/database.db
     labels:
       - traefik.enable=true
-      - traefik.http.routers.filestash.middlewares=auth@file
-      - traefik.http.routers.filestash.entrypoints=websecure
-      - traefik.http.services.filestash.loadbalancer.server.port=8334
+      - traefik.http.routers.filebrowser.middlewares=auth@file
+      - traefik.http.routers.filebrowser.entrypoints=websecure
+      - traefik.http.services.filebrowser.loadbalancer.server.port=8080
 
   grafana:
     <<: *logging

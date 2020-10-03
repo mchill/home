@@ -57,7 +57,7 @@ Service           | URL
 ---               | ---
 Dashboard         | https://mchill.duckdns.org
 cAdvisor          | https://cadvisor.mchill.duckdns.org
-Filestash         | https://files.mchill.duckdns.org
+File Browser      | https://files.mchill.duckdns.org
 Grafana           | https://grafana.mchill.duckdns.org
 Jaeger            | https://jaeger.mchill.duckdns.org
 Jitsi             | https://jitsi.mchill.duckdns.org
