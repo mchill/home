@@ -104,6 +104,16 @@ services:
       - traefik.http.routers.grafana.entrypoints=websecure
       - traefik.http.services.grafana.loadbalancer.server.port=3000
 
+  homeassistant:
+    <<: *logging
+    image: homeassistant/home-assistant:stable
+    restart: always
+    network_mode: host
+    environment:
+      - TZ
+    volumes:
+      - $SERVER_PATH/homeassistant:/config
+
   jaeger:
     <<: *logging
     image: jaegertracing/all-in-one

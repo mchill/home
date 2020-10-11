@@ -25,8 +25,19 @@ http:
         - auth
       entryPoints:
         - websecure
+    homeassistant:
+      rule: Host("home.mchill.duckdns.org")
+      service: homeassistant
+      middlewares:
+        - auth
+      entryPoints:
+        - websecure
   services:
     nas:
       loadBalancer:
         servers:
           - url: http://192.168.86.159:5000
+    homeassistant:
+      loadBalancer:
+        servers:
+          - url: http://192.168.86.149:8123

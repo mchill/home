@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import cadvisor from './logos/cadvisor.png';
 import filebrowser from './logos/filebrowser.png';
 import grafana from './logos/grafana.png';
+import homeassistant from './logos/homeassistant.png';
 import jaeger from './logos/jaeger.png';
 import jitsi from './logos/jitsi.png';
 import nas from './logos/nas.png';
@@ -71,6 +72,7 @@ const apps = [
     { name: "cAdvisor", subdomain: "cadvisor", logo: cadvisor },
     { name: "File Browser", subdomain: "files", logo: filebrowser },
     { name: "Grafana", subdomain: "grafana", logo: grafana },
+    { name: "Home Assistant", subdomain: "home", logo: homeassistant }
     { name: "Jaeger", subdomain: "jaeger", logo: jaeger },
     { name: "Jitsi", subdomain: "jitsi", logo: jitsi },
     { name: "NAS", subdomain: "nas", logo: nas },
