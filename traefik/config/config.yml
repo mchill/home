@@ -15,7 +15,7 @@ http:
       errors:
         status:
           - 401
-        service: errors@docker
+        service: static@docker
         query: /401.html
   routers:
     nas:

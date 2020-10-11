@@ -254,23 +254,24 @@ services:
       - $SERVER_PATH/minecraft:/data
       - $REPO_PATH/minecraft/ops.json:/data/ops.json
       - $REPO_PATH/minecraft/whitelist.json:/data/whitelist.json
-      - $REPO_PATH/minecraft/banned-ips.json:/data/banned-ips.json
-      - $REPO_PATH/minecraft/banned-players.json:/data/banned-players.json
 
-  errors:
+  minecraft2:
     <<: *logging
-    image: nginx
+    image: itzg/minecraft-server
     restart: always
+    ports:
+      - "25566:25565"
     environment:
       - TZ
+      - EULA=TRUE
+      - MEMORY=3G
+      - VERSION=1.13.2
+      - RESOURCE_PACK=https://static.mchill.duckdns.org/resources.zip
+      - RESOURCE_PACK_SHA1=4c8f4238298074764d48d5f0a5625bc9b8a1e8dc
     volumes:
-      - $REPO_PATH/nginx:/usr/share/nginx/html
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.errors.rule=HostRegexp(`{host:.+}`)
-      - traefik.http.routers.errors.priority=1
-      - traefik.http.routers.errors.entrypoints=websecure
-      - traefik.http.services.errors.loadbalancer.server.port=80
+      - $SERVER_PATH/minecraft2:/data
+      - $REPO_PATH/minecraft/ops.json:/data/ops.json
+      - $REPO_PATH/minecraft/whitelist.json:/data/whitelist.json
 
   nodeexporter:
     <<: *logging
@@ -380,6 +381,22 @@ services:
       - $REPO_PATH/rsync/backup.sh:/etc/periodic/daily/backup:ro
     entrypoint: /bin/sh
     command: ["-c", "crond -f -l 5"]
+
+  static:
+    <<: *logging
+    image: nginx
+    restart: always
+    environment:
+      - TZ
+    volumes:
+      - $REPO_PATH/nginx:/usr/share/nginx/html
+      - $SERVER_PATH/minecraft2/world/resources.zip:/usr/share/nginx/html/resources.zip
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.static.rule=HostRegexp(`{host:.+}`)
+      - traefik.http.routers.static.priority=1
+      - traefik.http.routers.static.entrypoints=websecure
+      - traefik.http.services.static.loadbalancer.server.port=80
 
   torrent:
     <<: *logging

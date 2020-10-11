@@ -22,6 +22,7 @@ External   | Internal  | Service
 443        | 4433      | HTTPS
 22         | 22        | SSH
 25565      | 25565     | Minecraft
+25566      | 25566     | Minecraft
 4443       | 4443      | Jitsi
 10000/udp  | 10000/udp | Jitsi
 
@@ -53,21 +54,22 @@ VPN_PASSWORD                        | OpenVPN provider password
 
 Most services are secured behind Google forward authentication. Plex and Jitsi handle their own authentication to allow for shared usage without whitelisting.
 
-Service           | URL
----               | ---
-Dashboard         | https://mchill.duckdns.org
-cAdvisor          | https://cadvisor.mchill.duckdns.org
-File Browser      | https://files.mchill.duckdns.org
-Grafana           | https://grafana.mchill.duckdns.org
-Home Assistant    | https://home.mchill.duckdns.org
-Jaeger            | https://jaeger.mchill.duckdns.org
-Jitsi             | https://jitsi.mchill.duckdns.org
-Minecraft         | mchill.duckdns.org:25565
-Pi-hole           | https://pihole.mchill.duckdns.org
-Plex              | https://plex.mchill.duckdns.org
-Portainer         | https://portainer.mchill.duckdns.org
-Prometheus        | https://prometheus.mchill.duckdns.org
-SSH               | mchill.duckdns.org:22
-Synology DSM      | https://nas.mchill.duckdns.org
-Traefik Dashboard | https://traefik.mchill.duckdns.org
-qBittorrent       | https://torrent.mchill.duckdns.org
+Service              | URL
+---                  | ---
+Dashboard            | https://mchill.duckdns.org
+cAdvisor             | https://cadvisor.mchill.duckdns.org
+File Browser         | https://files.mchill.duckdns.org
+Grafana              | https://grafana.mchill.duckdns.org
+Home Assistant       | https://home.mchill.duckdns.org
+Jaeger               | https://jaeger.mchill.duckdns.org
+Jitsi                | https://jitsi.mchill.duckdns.org
+Minecraft            | mchill.duckdns.org:25565
+Minecraft (Hogwarts) | mchill.duckdns.org:25566
+Pi-hole              | https://pihole.mchill.duckdns.org
+Plex                 | https://plex.mchill.duckdns.org
+Portainer            | https://portainer.mchill.duckdns.org
+Prometheus           | https://prometheus.mchill.duckdns.org
+SSH                  | mchill.duckdns.org:22
+Synology DSM         | https://nas.mchill.duckdns.org
+Traefik Dashboard    | https://traefik.mchill.duckdns.org
+qBittorrent          | https://torrent.mchill.duckdns.org
