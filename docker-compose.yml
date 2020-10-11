@@ -249,7 +249,7 @@ services:
       - TZ
       - EULA=TRUE
       - MEMORY=3G
-      - VERSION=1.16.1
+      - VERSION=1.16.3
     volumes:
       - $SERVER_PATH/minecraft:/data
       - $REPO_PATH/minecraft/ops.json:/data/ops.json
