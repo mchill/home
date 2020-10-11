@@ -72,7 +72,7 @@ const apps = [
     { name: "cAdvisor", subdomain: "cadvisor", logo: cadvisor },
     { name: "File Browser", subdomain: "files", logo: filebrowser },
     { name: "Grafana", subdomain: "grafana", logo: grafana },
-    { name: "Home Assistant", subdomain: "home", logo: homeassistant }
+    { name: "Home Assistant", subdomain: "home", logo: homeassistant },
     { name: "Jaeger", subdomain: "jaeger", logo: jaeger },
     { name: "Jitsi", subdomain: "jitsi", logo: jitsi },
     { name: "NAS", subdomain: "nas", logo: nas },

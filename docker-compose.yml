@@ -266,8 +266,6 @@ services:
       - EULA=TRUE
       - MEMORY=3G
       - VERSION=1.13.2
-      - RESOURCE_PACK=https://static.mchill.duckdns.org/resources.zip
-      - RESOURCE_PACK_SHA1=4c8f4238298074764d48d5f0a5625bc9b8a1e8dc
     volumes:
       - $SERVER_PATH/minecraft2:/data
       - $REPO_PATH/minecraft/ops.json:/data/ops.json
