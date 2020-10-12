@@ -52,7 +52,7 @@ VPN_PASSWORD                        | OpenVPN provider password
 
 ## Usage
 
-Most services are secured behind Google forward authentication. Plex and Jitsi handle their own authentication to allow for shared usage without whitelisting.
+Most services are secured behind Google forward authentication. Some services handle their own authentication to allow for shared usage without whitelisting.
 
 Service              | URL
 ---                  | ---

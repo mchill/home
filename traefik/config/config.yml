@@ -28,8 +28,6 @@ http:
     homeassistant:
       rule: Host("home.mchill.duckdns.org")
       service: homeassistant
-      middlewares:
-        - auth
       entryPoints:
         - websecure
   services:
