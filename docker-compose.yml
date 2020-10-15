@@ -250,6 +250,7 @@ services:
       - EULA=TRUE
       - MEMORY=3G
       - VERSION=1.16.3
+      - TYPE=FABRIC
     volumes:
       - $SERVER_PATH/minecraft:/data
       - $REPO_PATH/minecraft/ops.json:/data/ops.json
