@@ -1,0 +1,9 @@
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: nas
+subsets:
+  - addresses:
+      - ip: 192.168.86.159
+    ports:
+      - port: 5000
