@@ -1,0 +1,25 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: server-volume
+  namespace: kube-system
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "5Gi"
+  storageClassName: "microk8s-hostpath"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: server-volume
+  namespace: default
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "5Gi"
+  storageClassName: "microk8s-hostpath"

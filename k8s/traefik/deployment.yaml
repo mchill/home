@@ -1,0 +1,80 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: traefik
+spec:
+  replicas: 1
+  template:
+    spec:
+      serviceAccountName: traefik-ingress-controller
+      containers:
+        - name: traefik-ingress-controller
+          image: traefik:v2.3
+          args:
+            - --api.dashboard
+            - --accesslog
+            - --providers.kubernetesingress
+            - --providers.file.directory=/config
+            - --providers.file.watch=true
+            - --entryPoints.web.address=:30080
+            - --entrypoints.web.http.redirections.entrypoint.to=websecure
+            - --entrypoints.web.http.redirections.entrypoint.scheme=https
+            - --entryPoints.websecure.address=:30443
+            - --entrypoints.websecure.http.middlewares=traefik-forward-auth@file
+            - --entrypoints.websecure.http.tls.certresolver=letsencrypt
+            - --entrypoints.websecure.http.tls.domains[0].main=staging.mchill.duckdns.org
+            - --entrypoints.websecure.http.tls.domains[0].sans=*.staging.mchill.duckdns.org
+            - --certificatesresolvers.letsencrypt.acme.email=matthewchill7@gmail.com
+            - --certificatesresolvers.letsencrypt.acme.dnschallenge.provider=duckdns
+            - --certificatesresolvers.letsencrypt.acme.storage=/acme/acme.json
+          ports:
+            - name: http
+              containerPort: 30080
+            - name: https
+              containerPort: 30443
+          env:
+            - name: DUCKDNS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: traefik
+                  key: DUCKDNS_TOKEN
+          volumeMounts:
+            - name: server-volume
+              mountPath: /acme
+              subPath: traefik
+            - name: traefik-ingress-controller
+              mountPath: /config
+              readOnly: true
+        - name: traefik-forward-auth
+          image: thomseddon/traefik-forward-auth:2
+          ports:
+            - containerPort: 4181
+          env:
+            - name: COOKIE_DOMAIN
+              value: staging.mchill.duckdns.org
+            - name: AUTH_HOST
+              value: auth.staging.mchill.duckdns.org:30443
+            - name: WHITELIST
+              value: matthewchill7@gmail.com
+            - name: SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: traefik
+                  key: SECRET
+            - name: PROVIDERS_GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: traefik
+                  key: PROVIDERS_GOOGLE_CLIENT_ID
+            - name: PROVIDERS_GOOGLE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: traefik
+                  key: PROVIDERS_GOOGLE_CLIENT_SECRET
+      volumes:
+        - name: server-volume
+          persistentVolumeClaim:
+            claimName: server-volume
+        - name: traefik-ingress-controller
+          configMap:
+            name: traefik-ingress-controller
