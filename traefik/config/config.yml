@@ -18,6 +18,16 @@ http:
         service: static@docker
         query: /401.html
   routers:
+    staging-web:
+      rule: HostRegexp("staging.mchill.duckdns.org", "{subdomain:[a-z]+}.staging.mchill.duckdns.org")
+      service: staging-web
+      entryPoints:
+        - web
+    staging-websecure:
+      rule: HostRegexp("staging.mchill.duckdns.org", "{subdomain:[a-z0-9]+}.staging.mchill.duckdns.org")
+      service: staging-websecure
+      entryPoints:
+        - websecure
     nas:
       rule: Host("nas.mchill.duckdns.org")
       service: nas
@@ -31,6 +41,14 @@ http:
       entryPoints:
         - websecure
   services:
+    staging-web:
+      loadBalancer:
+        servers:
+          - url: http://192.168.86.149:30080
+    staging-websecure:
+      loadBalancer:
+        servers:
+          - url: https://192.168.86.149:30443
     nas:
       loadBalancer:
         servers:

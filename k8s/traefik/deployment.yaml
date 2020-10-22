@@ -16,10 +16,10 @@ spec:
             - --providers.kubernetesingress
             - --providers.file.directory=/config
             - --providers.file.watch=true
-            - --entryPoints.web.address=:30080
+            - --entryPoints.web.address=:80
             - --entrypoints.web.http.redirections.entrypoint.to=websecure
             - --entrypoints.web.http.redirections.entrypoint.scheme=https
-            - --entryPoints.websecure.address=:30443
+            - --entryPoints.websecure.address=:443
             - --entrypoints.websecure.http.middlewares=auth@file
             - --entrypoints.websecure.http.tls.certresolver=letsencrypt
             - --entrypoints.websecure.http.tls.domains[0].main=staging.mchill.duckdns.org
@@ -29,9 +29,9 @@ spec:
             - --certificatesresolvers.letsencrypt.acme.storage=/acme/acme.json
           ports:
             - name: http
-              containerPort: 30080
+              containerPort: 80
             - name: https
-              containerPort: 30443
+              containerPort: 443
           env:
             - name: DUCKDNS_TOKEN
               valueFrom:
@@ -53,7 +53,7 @@ spec:
             - name: COOKIE_DOMAIN
               value: staging.mchill.duckdns.org
             - name: AUTH_HOST
-              value: auth.staging.mchill.duckdns.org:30443
+              value: auth.staging.mchill.duckdns.org
             - name: WHITELIST
               value: matthewchill7@gmail.com
             - name: SECRET
