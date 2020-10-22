@@ -11,4 +11,4 @@ resources:
   - ingress.yaml
   - sealedsecret.yaml
 commonLabels:
-  app: traefik-ingress-controller
+  app: traefik

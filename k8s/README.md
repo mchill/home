@@ -10,10 +10,19 @@ Then create a sealed secret from the secret. Be sure to specify the correct name
 
 ## Deploy
 
-First, do a dry run to make sure the changes look okay. Run the following from the root directory.
+```bash
+kustomize build | microk8s kubectl apply -f - --prune -l prune=true --dry-run=client
+kustomize build | microk8s kubectl apply -f - --prune -l prune=true
+```
 
-`microk8s kubectl apply -k . --prune -l prune=true --dry-run=client`
+## Reset Cluster
 
-If everything looks right, go ahead and deploy.
+```bash
+sudo snap remove microk8s
+sudo snap install microk8s --classic
+microk8s enable storage
+microk8s enable rbac
+microk8s enable dns
+```
 
-`microk8s kubectl apply -k . --prune -l prune=true --dry-run=client`
+You'll also have to regenerate all sealed secrets, now that the decryption key is different.

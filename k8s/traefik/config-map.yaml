@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: traefik-ingress-controller
+  name: traefik
 data:
   config.yaml: |
     http:
       middlewares:
-        traefik-forward-auth:
+        auth:
           chain:
             middlewares:
               - forward-auth

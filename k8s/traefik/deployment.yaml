@@ -6,7 +6,7 @@ spec:
   replicas: 1
   template:
     spec:
-      serviceAccountName: traefik-ingress-controller
+      serviceAccountName: traefik
       containers:
         - name: traefik-ingress-controller
           image: traefik:v2.3
@@ -20,7 +20,7 @@ spec:
             - --entrypoints.web.http.redirections.entrypoint.to=websecure
             - --entrypoints.web.http.redirections.entrypoint.scheme=https
             - --entryPoints.websecure.address=:30443
-            - --entrypoints.websecure.http.middlewares=traefik-forward-auth@file
+            - --entrypoints.websecure.http.middlewares=auth@file
             - --entrypoints.websecure.http.tls.certresolver=letsencrypt
             - --entrypoints.websecure.http.tls.domains[0].main=staging.mchill.duckdns.org
             - --entrypoints.websecure.http.tls.domains[0].sans=*.staging.mchill.duckdns.org
@@ -42,7 +42,7 @@ spec:
             - name: server-volume
               mountPath: /acme
               subPath: traefik
-            - name: traefik-ingress-controller
+            - name: traefik
               mountPath: /config
               readOnly: true
         - name: traefik-forward-auth
@@ -75,6 +75,6 @@ spec:
         - name: server-volume
           persistentVolumeClaim:
             claimName: server-volume
-        - name: traefik-ingress-controller
+        - name: traefik
           configMap:
-            name: traefik-ingress-controller
+            name: traefik
