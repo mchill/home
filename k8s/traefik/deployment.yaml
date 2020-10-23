@@ -33,6 +33,8 @@ spec:
             - name: https
               containerPort: 443
           env:
+            - name: TZ
+              value: America/New_York
             - name: DUCKDNS_TOKEN
               valueFrom:
                 secretKeyRef:

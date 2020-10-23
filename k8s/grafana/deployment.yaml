@@ -1,0 +1,40 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: grafana
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: GF_AUTH_ANONYMOUS_ENABLED
+              value: "true"
+            - name: GF_SMTP_ENABLED
+              value: "true"
+            - name: GF_SMTP_HOST
+              value: smtp.gmail.com:587
+            - name: GF_SMTP_FROM_ADDRESS
+              value: grafana@mchill.duckdns.org
+            - name: GF_SMTP_USER
+              value: matthewchill7@gmail.com
+            - name: GF_SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: grafana
+                  key: GF_SMTP_PASSWORD
+          volumeMounts:
+            - name: server
+              mountPath: /var/lib/grafana
+              subPath: grafana
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server

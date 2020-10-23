@@ -10,6 +10,8 @@ spec:
         - name: duckdns
           image: linuxserver/duckdns
           env:
+            - name: TZ
+              value: America/New_York
             - name: SUBDOMAINS
               value: mchill.duckdns.org
             - name: TOKEN

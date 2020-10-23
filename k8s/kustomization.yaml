@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.6/controller.yaml
   - ./duckdns
+  - ./grafana
   - ./kubernetes-dashboard
   - ./nas
   - ./pihole
