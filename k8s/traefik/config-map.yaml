@@ -16,6 +16,9 @@ data:
             trustForwardHeader: true
             authResponseHeaders:
               - X-Forwarded-User
+        pihole:
+          addPrefix:
+            prefix: "/admin"
       routers:
         traefik:
           rule: Host("traefik.staging.mchill.duckdns.org")

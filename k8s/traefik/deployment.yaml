@@ -39,7 +39,7 @@ spec:
                   name: traefik
                   key: DUCKDNS_TOKEN
           volumeMounts:
-            - name: server-volume
+            - name: server
               mountPath: /acme
               subPath: traefik
             - name: traefik
@@ -72,9 +72,9 @@ spec:
                   name: traefik
                   key: PROVIDERS_GOOGLE_CLIENT_SECRET
       volumes:
-        - name: server-volume
+        - name: server
           persistentVolumeClaim:
-            claimName: server-volume
+            claimName: server
         - name: traefik
           configMap:
             name: traefik

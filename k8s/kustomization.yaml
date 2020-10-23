@@ -5,6 +5,7 @@ resources:
   - ./duckdns
   - ./kubernetes-dashboard
   - ./nas
+  - ./pihole
   - ./traefik
   - pv.yaml
   - pvc.yaml

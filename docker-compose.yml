@@ -277,28 +277,6 @@ services:
       - /:/rootfs:ro
     command: ["--path.rootfs=/rootfs"]
 
-  pihole:
-    <<: *logging
-    image: pihole/pihole
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-      - "53:53"
-      - "53:53/udp"
-    environment:
-      - TZ
-      - WEBPASSWORD=
-    volumes:
-      - $SERVER_PATH/pihole:/etc/pihole
-      - $SERVER_PATH/dnsmasq:/etc/dnsmasq.d
-    labels:
-      - traefik.enable=true
-      - traefik.http.middlewares.pihole.addprefix.prefix=/admin
-      - traefik.http.routers.pihole.middlewares=auth@file,pihole
-      - traefik.http.routers.pihole.entrypoints=websecure
-      - traefik.http.services.pihole.loadbalancer.server.port=80
-
   plex:
     <<: *logging
     image: plexinc/pms-docker

@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: server-volume
+  name: server
   namespace: kube-system
 spec:
   accessModes:
@@ -14,7 +14,7 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: server-volume
+  name: server
   namespace: default
 spec:
   accessModes:
