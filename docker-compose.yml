@@ -56,15 +56,6 @@ services:
       - traefik.http.routers.dashboard.entrypoints=websecure
       - traefik.http.services.dashboard.loadbalancer.server.port=80
 
-  duckdns:
-    <<: *logging
-    image: linuxserver/duckdns
-    restart: always
-    environment:
-      - TZ
-      - TOKEN=$DUCKDNS_TOKEN
-      - SUBDOMAINS=$URL
-
   files:
     <<: *logging
     image: filebrowser/filebrowser
