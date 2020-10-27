@@ -1,3 +1,5 @@
-namespace: monitoring
+namespace: server
 generators:
   - chart-inflator.yaml
+commonLabels:
+  app: jaeger

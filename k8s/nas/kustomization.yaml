@@ -1,4 +1,4 @@
-namespace: default
+namespace: server
 resources:
   - ingress.yaml
   - service.yaml

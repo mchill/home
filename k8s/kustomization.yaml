@@ -5,8 +5,7 @@ resources:
   - ./loki-stack
   - ./nas
   - ./pihole
+  - ./server
   - ./traefik
-  - pv.yaml
-  - pvc.yaml
 commonLabels:
   prune: "true"

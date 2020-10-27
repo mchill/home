@@ -1,7 +1,8 @@
-namespace: monitoring
+namespace: server
 resources:
   - ingress.yaml
-  - namespace.yaml
   - sealed-secret.yaml
 generators:
   - chart-inflator.yaml
+commonLabels:
+  app: loki

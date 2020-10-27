@@ -1,4 +1,4 @@
-namespace: default
+namespace: server
 resources:
   - deployment.yaml
   - sealed-secret.yaml

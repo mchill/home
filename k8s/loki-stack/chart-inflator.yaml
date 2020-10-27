@@ -5,5 +5,5 @@ metadata:
 chartRelease: loki
 chartName: loki-stack
 releaseName: loki
-releaseNamespace: monitoring
+releaseNamespace: server
 values: values.yaml

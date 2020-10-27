@@ -28,6 +28,13 @@ prometheus:
       enabled: true
       existingClaim: server
       subPath: prometheus/server
+    strategy:
+      type: Recreate
+    resources:
+      limits:
+        memory: 1Gi
+      requests:
+        memory: 512Mi
   pushgateway:
     persistentVolume:
       enabled: true
