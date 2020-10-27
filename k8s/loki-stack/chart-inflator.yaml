@@ -1,0 +1,9 @@
+apiVersion: someteam.example.com/v1
+kind: ChartInflator
+metadata:
+  name: loki
+chartRelease: loki
+chartName: loki-stack
+releaseName: loki
+releaseNamespace: monitoring
+values: values.yaml

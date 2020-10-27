@@ -1,0 +1,35 @@
+grafana:
+  enabled: true
+  testFramework:
+    enabled: false
+  persistence:
+    enabled: true
+    existingClaim: server
+    subPath: grafana
+  adminPassword: admin
+  smtp:
+    existingSecret: grafana
+    userKey: GF_SMTP_USER
+    passwordKey: GF_SMTP_PASSWORD
+  env:
+    GF_AUTH_ANONYMOUS_ENABLED: "true"
+    GF_SMTP_ENABLED: "true"
+    GF_SMTP_HOST: smtp.gmail.com:587
+    GF_SMTP_FROM_ADDRESS: grafana@mchill.duckdns.org
+prometheus:
+  enabled: true
+  alertmanager:
+    persistentVolume:
+      enabled: true
+      existingClaim: server
+      subPath: prometheus/alertmanager
+  server:
+    persistentVolume:
+      enabled: true
+      existingClaim: server
+      subPath: prometheus/server
+  pushgateway:
+    persistentVolume:
+      enabled: true
+      existingClaim: server
+      subPath: prometheus/pushgateway

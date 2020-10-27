@@ -23,3 +23,16 @@ spec:
     requests:
       storage: "5Gi"
   storageClassName: "microk8s-hostpath"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: server
+  namespace: monitoring
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "5Gi"
+  storageClassName: "microk8s-hostpath"

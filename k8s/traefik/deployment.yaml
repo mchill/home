@@ -13,6 +13,9 @@ spec:
           args:
             - --api.dashboard
             - --accesslog
+            # - --metrics.prometheus
+            # - --tracing.jaeger.samplingServerURL=http://jaeger:5778/sampling
+            # - --tracing.jaeger.localAgentHostPort=jaeger:6831
             - --providers.kubernetesingress
             - --providers.file.directory=/config
             - --providers.file.watch=true

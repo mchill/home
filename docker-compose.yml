@@ -7,24 +7,6 @@ x-logging: &logging
       loki-url: "http://localhost:3100/loki/api/v1/push"
 
 services:
-  cadvisor:
-    <<: *logging
-    image: google/cadvisor
-    restart: always
-    environment:
-      - TZ
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:rw
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-    command: ["--docker_only=true", "--enable_load_reader=true"]
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.cadvisor.middlewares=auth@file
-      - traefik.http.routers.cadvisor.entrypoints=websecure
-      - traefik.http.services.cadvisor.loadbalancer.server.port=8080
-
   dashboard:
     <<: *logging
     build: dashboard
@@ -65,18 +47,6 @@ services:
       - TZ
     volumes:
       - $SERVER_PATH/homeassistant:/config
-
-  jaeger:
-    <<: *logging
-    image: jaegertracing/all-in-one
-    restart: always
-    environment:
-      - TZ
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.jaeger.middlewares=auth@file
-      - traefik.http.routers.jaeger.entrypoints=websecure
-      - traefik.http.services.jaeger.loadbalancer.server.port=16686
 
   jitsi:
     <<: *logging
@@ -180,17 +150,6 @@ services:
       - JVB_AUTH_PASSWORD
       - LOG_LEVEL
 
-  loki:
-    <<: *logging
-    image: grafana/loki
-    restart: always
-    ports:
-      - "3100:3100"
-    environment:
-      - TZ
-    volumes:
-      - $SERVER_PATH/loki:/loki
-
   minecraft:
     <<: *logging
     image: itzg/minecraft-server
@@ -223,20 +182,6 @@ services:
       - $SERVER_PATH/minecraft2:/data
       - $REPO_PATH/minecraft/ops.json:/data/ops.json
       - $REPO_PATH/minecraft/whitelist.json:/data/whitelist.json
-
-  nodeexporter:
-    <<: *logging
-    image: prom/node-exporter
-    restart: always
-    network_mode: host
-    pid: host
-    ports:
-      - "9100:9100"
-    environment:
-      - TZ
-    volumes:
-      - /:/rootfs:ro
-    command: ["--path.rootfs=/rootfs"]
 
   plex:
     <<: *logging
@@ -278,22 +223,6 @@ services:
       - traefik.http.routers.portainer.middlewares=auth@file
       - traefik.http.routers.portainer.entrypoints=websecure
       - traefik.http.services.portainer.loadbalancer.server.port=9000
-
-  prometheus:
-    <<: *logging
-    image: prom/prometheus
-    restart: always
-    user: 1000:1000
-    environment:
-      - TZ
-    volumes:
-      - $REPO_PATH/prometheus:/etc/prometheus
-      - $SERVER_PATH/prometheus:/prometheus
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.prometheus.middlewares=auth@file
-      - traefik.http.routers.prometheus.entrypoints=websecure
-      - traefik.http.services.prometheus.loadbalancer.server.port=9090
 
   rsync:
     <<: *logging
@@ -370,6 +299,24 @@ services:
       - traefik.http.routers.auth.entrypoints=websecure
       - traefik.http.services.auth.loadbalancer.server.port=4181
 
+  cadvisor:
+    <<: *logging
+    image: google/cadvisor
+    restart: always
+    environment:
+      - TZ
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    command: ["--docker_only=true", "--enable_load_reader=true"]
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.cadvisor.middlewares=auth@file
+      - traefik.http.routers.cadvisor.entrypoints=websecure
+      - traefik.http.services.cadvisor.loadbalancer.server.port=8080
+
   grafana:
     <<: *logging
     image: grafana/grafana
@@ -390,6 +337,59 @@ services:
       - traefik.http.routers.grafana.middlewares=auth@file
       - traefik.http.routers.grafana.entrypoints=websecure
       - traefik.http.services.grafana.loadbalancer.server.port=3000
+
+  jaeger:
+    <<: *logging
+    image: jaegertracing/all-in-one
+    restart: always
+    environment:
+      - TZ
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.jaeger.middlewares=auth@file
+      - traefik.http.routers.jaeger.entrypoints=websecure
+      - traefik.http.services.jaeger.loadbalancer.server.port=16686
+
+  loki:
+    <<: *logging
+    image: grafana/loki
+    restart: always
+    ports:
+      - "3100:3100"
+    environment:
+      - TZ
+    volumes:
+      - $SERVER_PATH/loki:/loki
+
+  nodeexporter:
+    <<: *logging
+    image: prom/node-exporter
+    restart: always
+    network_mode: host
+    pid: host
+    environment:
+      - TZ
+    volumes:
+      - /:/rootfs:ro
+    command:
+      - --path.rootfs=/rootfs
+      - --web.listen-address=:9101
+
+  prometheus:
+    <<: *logging
+    image: prom/prometheus
+    restart: always
+    user: 1000:1000
+    environment:
+      - TZ
+    volumes:
+      - $REPO_PATH/prometheus:/etc/prometheus
+      - $SERVER_PATH/prometheus:/prometheus
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.prometheus.middlewares=auth@file
+      - traefik.http.routers.prometheus.entrypoints=websecure
+      - traefik.http.services.prometheus.loadbalancer.server.port=9090
 
   traefik:
     <<: *logging
