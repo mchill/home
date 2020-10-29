@@ -40,3 +40,8 @@ prometheus:
       enabled: true
       existingClaim: server
       subPath: prometheus/pushgateway
+  extraScrapeConfigs: |
+    - job_name: traefik
+      static_configs:
+        - targets:
+          - traefik-api:8080

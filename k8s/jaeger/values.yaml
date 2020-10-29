@@ -1,11 +1,28 @@
-cassandra:
-  config:
-    max_heap_size: 256M
-    heap_new_size: 128M
+provisionDataStore:
+  cassandra: false
+  elasticsearch: true
+storage:
+  type: elasticsearch
+elasticsearch:
+  replicas: 1
+  minimumMasterNodes: 1
+  extraEnvs:
+    - name: ES_JAVA_OPTS
+      value: -Xms512m -Xmx512m
+  persistence:
+    enabled: false
+  extraVolumes:
+    - name: server
+      persistentVolumeClaim:
+        claimName: server
+  extraVolumeMounts:
+    - name: server
+      mountPath: /usr/share/elasticsearch/data
+      subPath: elasticsearch
   resources:
-    requests:
-      memory: 512Mi
-      cpu: 0.1
     limits:
-      memory: 512Mi
+      cpu: 0.25
+      memory: 1Gi
+    requests:
       cpu: 0.1
+      memory: 1Gi

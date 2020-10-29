@@ -1,5 +1,5 @@
 namespace: server
+resources:
+  - ingress.yaml
 generators:
   - chart-inflator.yaml
-commonLabels:
-  app: jaeger

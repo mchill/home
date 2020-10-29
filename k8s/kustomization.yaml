@@ -1,6 +1,7 @@
 resources:
   - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.6/controller.yaml
   - ./duckdns
+  - ./jaeger
   - ./kubernetes-dashboard
   - ./loki-stack
   - ./nas

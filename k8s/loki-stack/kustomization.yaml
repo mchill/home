@@ -4,5 +4,3 @@ resources:
   - sealed-secret.yaml
 generators:
   - chart-inflator.yaml
-commonLabels:
-  app: loki
