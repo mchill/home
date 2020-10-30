@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jitsi
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+        - name: jicofo
+          image: jitsi/jicofo
+          envFrom:
+            - configMapRef:
+                name: jitsi
+            - secretRef:
+                name: jitsi
+          volumeMounts:
+            - name: server
+              mountPath: /config
+              subPath: jitsi/jicofo
+        - name: prosody
+          image: jitsi/prosody
+          envFrom:
+            - configMapRef:
+                name: jitsi
+            - secretRef:
+                name: jitsi
+          volumeMounts:
+            - name: server
+              mountPath: /config
+              subPath: jitsi/prosody/config
+            - name: server
+              mountPath: /prosody-plugins-custom
+              subPath: jitsi/prosody/prosody-plugins-custom
+        - name: web
+          image: jitsi/web
+          ports:
+            - name: jitsi
+              containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: jitsi
+          volumeMounts:
+            - name: server
+              mountPath: /config
+              subPath: jitsi/web
+        - name: jvb
+          image: jitsi/jvb
+          ports:
+            - name: jvb
+              containerPort: 10000
+          envFrom:
+            - configMapRef:
+                name: jitsi
+            - secretRef:
+                name: jitsi
+          volumeMounts:
+            - name: server
+              mountPath: /config
+              subPath: jitsi/jvb
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server

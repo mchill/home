@@ -63,6 +63,11 @@ ports:
         - main: staging.mchill.duckdns.org
           sans:
             - "*.staging.mchill.duckdns.org"
+  jvb:
+    port: 10000
+    exposedPort: 30000
+    protocol: UDP
+    expose: true
 service:
   type: NodePort
 persistence:

@@ -1,0 +1,25 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jitsi
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("jitsi.staging.mchill.duckdns.org")
+      kind: Rule
+      services:
+        - name: jitsi
+          port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteUDP
+metadata:
+  name: jvb
+spec:
+  entryPoints:
+    - jvb
+  routes:
+    - services:
+        - name: jitsi
+          port: 10000

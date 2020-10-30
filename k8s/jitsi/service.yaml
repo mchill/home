@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jitsi
+spec:
+  type: ClusterIP
+  ports:
+    - name: jitsi
+      port: 80
+      targetPort: jitsi
+    - name: jvb
+      port: 10000
+      targetPort: jvb
+      protocol: UDP
