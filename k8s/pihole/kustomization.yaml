@@ -2,6 +2,7 @@ namespace: server
 resources:
   - deployment.yaml
   - ingress.yaml
+  - middleware.yaml
   - service.yaml
 commonLabels:
   app: pihole

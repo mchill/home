@@ -44,4 +44,4 @@ prometheus:
     - job_name: traefik
       static_configs:
         - targets:
-          - traefik-api:8080
+          - traefik-internal:8080

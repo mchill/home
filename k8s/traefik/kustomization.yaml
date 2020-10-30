@@ -2,9 +2,10 @@ namespace: server
 resources:
   - cluster-role.yaml
   - cluster-role-binding.yaml
-  - config-map.yaml
+  - crd.yaml
   - deployment.yaml
   - ingress.yaml
+  - middleware.yaml
   - sealed-secret.yaml
   - service.yaml
   - service-account.yaml

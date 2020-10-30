@@ -16,14 +16,12 @@ spec:
             - --metrics.prometheus
             - --tracing.jaeger.samplingServerURL=http://jaeger-agent:5778/sampling
             - --tracing.jaeger.localAgentHostPort=jaeger-agent:6831
-            - --providers.kubernetesingress
-            - --providers.file.directory=/config
-            - --providers.file.watch=true
+            - --providers.kubernetescrd
             - --entryPoints.web.address=:80
             - --entrypoints.web.http.redirections.entrypoint.to=websecure
             - --entrypoints.web.http.redirections.entrypoint.scheme=https
             - --entryPoints.websecure.address=:443
-            - --entrypoints.websecure.http.middlewares=auth@file
+            - --entrypoints.websecure.http.middlewares=server-auth@kubernetescrd
             - --entrypoints.websecure.http.tls.certresolver=letsencrypt
             - --entrypoints.websecure.http.tls.domains[0].main=staging.mchill.duckdns.org
             - --entrypoints.websecure.http.tls.domains[0].sans=*.staging.mchill.duckdns.org
@@ -47,9 +45,6 @@ spec:
             - name: server
               mountPath: /acme
               subPath: traefik
-            - name: traefik
-              mountPath: /config
-              readOnly: true
         - name: traefik-forward-auth
           image: thomseddon/traefik-forward-auth:2
           ports:
@@ -80,6 +75,3 @@ spec:
         - name: server
           persistentVolumeClaim:
             claimName: server
-        - name: traefik
-          configMap:
-            name: traefik

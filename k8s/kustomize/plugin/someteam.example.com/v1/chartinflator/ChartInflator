@@ -163,6 +163,7 @@ function v3InflateChart {
       --release-name $releaseName \
       --namespace $releaseNamespace \
       --values $valuesFile \
+      --include-crds \
       $chartHome/$chartName
 
 }

@@ -1,19 +1,13 @@
-kind: Ingress
-apiVersion: networking.k8s.io/v1
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
   name: nas
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
-  rules:
-    - host: nas.staging.mchill.duckdns.org
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: nas
-                port:
-                  number: 5000
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("nas.staging.mchill.duckdns.org")
+      kind: Rule
+      services:
+        - name: nas
+          port: 5000

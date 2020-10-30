@@ -1,19 +1,27 @@
-kind: Ingress
-apiVersion: networking.k8s.io/v1
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
-  name: traefik
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+  name: traefik-dashboard
 spec:
-  rules:
-    - host: auth.staging.mchill.duckdns.org
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: traefik-forward-auth
-                port:
-                  number: 4181
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("traefik.staging.mchill.duckdns.org")
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-forward-auth
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("auth.staging.mchill.duckdns.org")
+      kind: Rule
+      services:
+        - name: traefik-internal
+          port: 4181

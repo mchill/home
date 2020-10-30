@@ -1,19 +1,13 @@
-kind: Ingress
-apiVersion: networking.k8s.io/v1
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
   name: jaeger
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
-  rules:
-    - host: jaeger.staging.mchill.duckdns.org
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: jaeger-query
-                port:
-                  number: 80
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("jaeger.staging.mchill.duckdns.org")
+      kind: Rule
+      services:
+        - name: jaeger-query
+          port: 80
