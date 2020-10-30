@@ -1,0 +1,9 @@
+apiVersion: someteam.example.com/v1
+kind: ChartInflator
+metadata:
+  name: traefik
+chartRelease: traefik
+chartName: traefik
+releaseName: traefik
+releaseNamespace: server
+values: values.yaml

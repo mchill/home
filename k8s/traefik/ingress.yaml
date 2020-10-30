@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: traefik-dashboard
+  name: traefik
 spec:
   entryPoints:
     - websecure
@@ -11,15 +11,6 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: traefik-forward-auth
-spec:
-  entryPoints:
-    - websecure
-  routes:
     - match: Host("auth.staging.mchill.duckdns.org")
       kind: Rule
       services:

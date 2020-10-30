@@ -1,0 +1,71 @@
+image:
+  tag: v2.3
+deployment:
+  additionalContainers:
+    - name: traefik-forward-auth
+      image: thomseddon/traefik-forward-auth:2
+      ports:
+        - name: auth
+          containerPort: 4181
+      env:
+        - name: COOKIE_DOMAIN
+          value: staging.mchill.duckdns.org
+        - name: AUTH_HOST
+          value: auth.staging.mchill.duckdns.org
+        - name: WHITELIST
+          value: matthewchill7@gmail.com
+        - name: SECRET
+          valueFrom:
+            secretKeyRef:
+              name: traefik
+              key: SECRET
+        - name: PROVIDERS_GOOGLE_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: traefik
+              key: PROVIDERS_GOOGLE_CLIENT_ID
+        - name: PROVIDERS_GOOGLE_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: traefik
+              key: PROVIDERS_GOOGLE_CLIENT_SECRET
+ingressRoute:
+  dashboard:
+    enabled: false
+logs:
+  access:
+    enabled: true
+globalArguments: []
+additionalArguments:
+  - --metrics.prometheus
+  - --tracing.jaeger.samplingServerURL=http://jaeger-agent:5778/sampling
+  - --tracing.jaeger.localAgentHostPort=jaeger-agent:6831
+  - --entrypoints.websecure.http.middlewares=server-auth@kubernetescrd
+  - --certificatesresolvers.letsencrypt.acme.email=matthewchill7@gmail.com
+  - --certificatesresolvers.letsencrypt.acme.dnschallenge.provider=duckdns
+  - --certificatesresolvers.letsencrypt.acme.storage=/data/acme.json
+env:
+  - name: DUCKDNS_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: traefik
+        key: DUCKDNS_TOKEN
+ports:
+  web:
+    nodePort: 30080
+    redirectTo: websecure
+  websecure:
+    nodePort: 30443
+    tls:
+      enabled: true
+      certResolver: letsencrypt
+      domains:
+        - main: staging.mchill.duckdns.org
+          sans:
+            - "*.staging.mchill.duckdns.org"
+service:
+  type: NodePort
+persistence:
+  enabled: true
+  existingClaim: server
+  subPath: traefik

@@ -1,13 +1,10 @@
 namespace: server
 resources:
-  - cluster-role.yaml
-  - cluster-role-binding.yaml
-  - crd.yaml
-  - deployment.yaml
   - ingress.yaml
   - middleware.yaml
   - sealed-secret.yaml
   - service.yaml
-  - service-account.yaml
+generators:
+  - chart-inflator.yaml
 commonLabels:
   app: traefik

@@ -12,6 +12,8 @@ Then create a sealed secret from the secret. Be sure to specify the correct name
 
 ```bash
 kustomize build | microk8s kubectl apply -f - --prune -l prune=true --dry-run=client
+microk8s kubectl delete --all ingressroute -n server
+microk8s kubectl delete --all middleware -n server
 kustomize build | microk8s kubectl apply -f - --prune -l prune=true
 ```
 
