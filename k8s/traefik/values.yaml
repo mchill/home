@@ -52,10 +52,12 @@ env:
         key: DUCKDNS_TOKEN
 ports:
   web:
-    nodePort: 30080
+    port: 8000
+    nodePort: 8000
     redirectTo: websecure
   websecure:
-    nodePort: 30443
+    port: 8443
+    nodePort: 8443
     tls:
       enabled: true
       certResolver: letsencrypt
@@ -65,7 +67,7 @@ ports:
             - "*.staging.mchill.duckdns.org"
   jvb:
     port: 10000
-    exposedPort: 30000
+    nodePort: 10000
     protocol: UDP
     expose: true
 service:

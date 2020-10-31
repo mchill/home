@@ -22,6 +22,8 @@ kustomize build | microk8s kubectl apply -f - --prune -l prune=true
 ```bash
 sudo snap remove microk8s
 sudo snap install microk8s --classic
+echo "--service-node-port-range=0-65535" >> /var/snap/microk8s/current/args/kube-apiserver
+sudo systemctl restart snap.microk8s.daemon-apiserver
 microk8s enable storage
 microk8s enable rbac
 microk8s enable dns

@@ -32,7 +32,7 @@ http:
     staging-websecure:
       loadBalancer:
         servers:
-          - url: https://192.168.86.149:30443
+          - url: https://192.168.86.149:8443
     homeassistant:
       loadBalancer:
         servers:

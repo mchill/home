@@ -51,6 +51,7 @@ spec:
           ports:
             - name: jvb
               containerPort: 10000
+              protocol: UDP
           envFrom:
             - configMapRef:
                 name: jitsi
