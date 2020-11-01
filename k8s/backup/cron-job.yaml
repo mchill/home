@@ -1,0 +1,53 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: backup
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: backup
+              image: instrumentisto/rsync-ssh
+              args:
+                - /bin/sh
+                - -cex
+                - |
+                  command -v getfacl || apk add acl;
+                  mkdir -p /root/.ssh;
+                  ssh-keyscan -H nas >> /root/.ssh/known_hosts;
+                  cd /backup;
+                  getfacl -R . > permissions.facl;
+                  rsync -av -e "ssh -i /root/ssh/id_rsa" --delete-before /backup rsync@nas:/volume1/Server;
+              env:
+                - name: TZ
+                  value: America/New_York
+              volumeMounts:
+                - name: ssh
+                  mountPath: /root/ssh
+                - name: server2
+                  readOnly: true
+                  mountPath: /backup/server2
+                - name: server
+                  readOnly: true
+                  mountPath: /backup/server
+                - name: data
+                  readOnly: true
+                  mountPath: /backup/data
+          volumes:
+            - name: ssh
+              secret:
+                secretName: backup
+                defaultMode: 384
+            - name: server2
+              persistentVolumeClaim:
+                claimName: server2
+            - name: server
+              persistentVolumeClaim:
+                claimName: server
+            - name: data
+              persistentVolumeClaim:
+                claimName: data

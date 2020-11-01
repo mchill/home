@@ -1,9 +1,12 @@
-kind: Endpoints
 apiVersion: v1
+kind: Endpoints
 metadata:
   name: nas
 subsets:
   - addresses:
       - ip: 192.168.86.159
     ports:
-      - port: 5000
+      - name: http
+        port: 5000
+      - name: ssh
+        port: 22

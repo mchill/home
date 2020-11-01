@@ -109,21 +109,6 @@ services:
       - traefik.http.routers.portainer.entrypoints=websecure
       - traefik.http.services.portainer.loadbalancer.server.port=9000
 
-  rsync:
-    image: instrumentisto/rsync-ssh
-    restart: always
-    extra_hosts:
-      - "nas:$NAS_IP"
-    environment:
-      - TZ
-    volumes:
-      - /home/mchill/.ssh:/root/.ssh
-      - $SERVER_PATH:/backup/server:ro
-      - $DATA_PATH:/backup/data:ro
-      - $REPO_PATH/rsync/backup.sh:/etc/periodic/daily/backup:ro
-    entrypoint: /bin/sh
-    command: ["-c", "crond -f -l 5"]
-
   static:
     image: nginx
     restart: always

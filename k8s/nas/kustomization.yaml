@@ -3,5 +3,3 @@ resources:
   - ingress.yaml
   - service.yaml
   - endpoint.yaml
-commonLabels:
-  app: nas

@@ -9,5 +9,5 @@ spec:
     - match: Host("jaeger.staging.mchill.duckdns.org")
       kind: Rule
       services:
-        - name: jaeger-query
+        - name: jaegertracing-query
           port: 80

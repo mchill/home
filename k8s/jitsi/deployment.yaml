@@ -17,7 +17,7 @@ spec:
             - secretRef:
                 name: jitsi
           volumeMounts:
-            - name: server
+            - name: server2
               mountPath: /config
               subPath: jitsi/jicofo
         - name: prosody
@@ -28,10 +28,10 @@ spec:
             - secretRef:
                 name: jitsi
           volumeMounts:
-            - name: server
+            - name: server2
               mountPath: /config
               subPath: jitsi/prosody/config
-            - name: server
+            - name: server2
               mountPath: /prosody-plugins-custom
               subPath: jitsi/prosody/prosody-plugins-custom
         - name: web
@@ -43,7 +43,7 @@ spec:
             - configMapRef:
                 name: jitsi
           volumeMounts:
-            - name: server
+            - name: server2
               mountPath: /config
               subPath: jitsi/web
         - name: jvb
@@ -58,10 +58,10 @@ spec:
             - secretRef:
                 name: jitsi
           volumeMounts:
-            - name: server
+            - name: server2
               mountPath: /config
               subPath: jitsi/jvb
       volumes:
-        - name: server
+        - name: server2
           persistentVolumeClaim:
-            claimName: server
+            claimName: server2

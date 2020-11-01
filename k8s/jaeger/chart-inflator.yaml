@@ -4,6 +4,6 @@ metadata:
   name: jaeger
 chartRelease: jaegertracing
 chartName: jaeger
-releaseName: jaeger
+releaseName: jaegertracing
 releaseNamespace: server
 values: values.yaml

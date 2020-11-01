@@ -1,7 +1,7 @@
 loki:
   persistence:
     enabled: true
-    existingClaim: server
+    existingClaim: server2
     subPath: loki
 grafana:
   enabled: true
@@ -9,7 +9,7 @@ grafana:
     enabled: false
   persistence:
     enabled: true
-    existingClaim: server
+    existingClaim: server2
     subPath: grafana
   adminPassword: admin
   smtp:
@@ -26,12 +26,12 @@ prometheus:
   alertmanager:
     persistentVolume:
       enabled: true
-      existingClaim: server
+      existingClaim: server2
       subPath: prometheus/alertmanager
   server:
     persistentVolume:
       enabled: true
-      existingClaim: server
+      existingClaim: server2
       subPath: prometheus/server
     strategy:
       type: Recreate
@@ -43,7 +43,7 @@ prometheus:
   pushgateway:
     persistentVolume:
       enabled: true
-      existingClaim: server
+      existingClaim: server2
       subPath: prometheus/pushgateway
   extraScrapeConfigs: |
     - job_name: traefik

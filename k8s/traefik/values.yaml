@@ -74,5 +74,5 @@ service:
   type: NodePort
 persistence:
   enabled: true
-  existingClaim: server
+  existingClaim: server2
   subPath: traefik

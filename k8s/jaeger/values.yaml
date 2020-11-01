@@ -12,17 +12,15 @@ elasticsearch:
   persistence:
     enabled: false
   extraVolumes:
-    - name: server
+    - name: server2
       persistentVolumeClaim:
-        claimName: server
+        claimName: server2
   extraVolumeMounts:
-    - name: server
+    - name: server2
       mountPath: /usr/share/elasticsearch/data
       subPath: elasticsearch
   resources:
     limits:
-      cpu: 0.25
       memory: 1Gi
     requests:
-      cpu: 0.1
       memory: 1Gi
