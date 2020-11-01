@@ -3,8 +3,22 @@ kind: Service
 metadata:
   name: pihole
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - name: http
       port: 80
       targetPort: http
+      nodePort: 80
+    - name: https
+      port: 443
+      targetPort: https
+      nodePort: 443
+    - name: dns-tcp
+      port: 53
+      targetPort: dns-tcp
+      nodePort: 53
+    - name: dns-udp
+      port: 53
+      targetPort: dns-udp
+      nodePort: 53
+      protocol: UDP

@@ -4,8 +4,6 @@ metadata:
   name: pihole
 spec:
   replicas: 1
-  strategy:
-    type: Recreate
   template:
     spec:
       containers:
@@ -14,16 +12,12 @@ spec:
           ports:
             - name: http
               containerPort: 80
-              hostPort: 80
             - name: https
               containerPort: 443
-              hostPort: 443
             - name: dns-tcp
               containerPort: 53
-              hostPort: 53
             - name: dns-udp
               containerPort: 53
-              hostPort: 53
               protocol: UDP
           env:
             - name: TZ
