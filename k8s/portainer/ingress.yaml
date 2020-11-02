@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: portainer
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("portainer.staging.mchill.duckdns.org")
+      kind: Rule
+      services:
+        - name: portainer
+          port: 9000

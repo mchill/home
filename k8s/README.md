@@ -27,6 +27,7 @@ sudo systemctl restart snap.microk8s.daemon-apiserver
 microk8s enable storage
 microk8s enable rbac
 microk8s enable dns
+microk8s enable metrics-server
 ```
 
 You'll also have to regenerate all sealed secrets, now that the decryption key is different.

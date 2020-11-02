@@ -37,8 +37,10 @@ prometheus:
       type: Recreate
     resources:
       limits:
+        cpu: 0.1
         memory: 1Gi
       requests:
+        cpu: 0.05
         memory: 512Mi
   pushgateway:
     persistentVolume:

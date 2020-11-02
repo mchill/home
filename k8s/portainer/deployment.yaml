@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portainer
+spec:
+  replicas: 1
+  template:
+    spec:
+      serviceAccountName: portainer
+      containers:
+        - name: portainer
+          image: portainer/portainer-ce
+          ports:
+            - name: http
+              containerPort: 9000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 9000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 9000
+          volumeMounts:
+            - name: server2
+              mountPath: /data
+              subPath: portainer
+      volumes:
+        - name: server2
+          persistentVolumeClaim:
+            claimName: server2

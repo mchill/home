@@ -95,20 +95,6 @@ services:
       - traefik.http.routers.plex.entrypoints=websecure
       - traefik.http.services.plex.loadbalancer.server.port=32400
 
-  portainer:
-    image: portainer/portainer
-    restart: always
-    environment:
-      - TZ
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: -H unix:///var/run/docker.sock --no-auth
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.portainer.middlewares=auth@file
-      - traefik.http.routers.portainer.entrypoints=websecure
-      - traefik.http.services.portainer.loadbalancer.server.port=9000
-
   static:
     image: nginx
     restart: always

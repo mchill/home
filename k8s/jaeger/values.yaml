@@ -9,6 +9,7 @@ elasticsearch:
   extraEnvs:
     - name: ES_JAVA_OPTS
       value: -Xms512m -Xmx512m
+  clusterHealthCheckParams: wait_for_status=yellow&timeout=1s
   persistence:
     enabled: false
   extraVolumes:

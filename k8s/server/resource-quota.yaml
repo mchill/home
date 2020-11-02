@@ -4,7 +4,7 @@ metadata:
   name: resources
 spec:
   hard:
-    requests.cpu: "6"
-    requests.memory: 14Gi
-    limits.cpu: "6"
-    limits.memory: 14Gi
+    requests.cpu: "8"
+    requests.memory: 18Gi
+    limits.cpu: "8"
+    limits.memory: 18Gi
