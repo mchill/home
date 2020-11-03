@@ -9,6 +9,7 @@ resources:
   - ./nas
   - ./pihole
   - ./portainer
+  - ./qbittorrent
   - ./server
   - ./traefik
 transformers:

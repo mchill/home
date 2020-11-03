@@ -1,0 +1,49 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: qbittorrent
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: qbittorrent
+          image: markusmcnugen/qbittorrentvpn
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - NET_ADMIN
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: VPN_ENABLED
+              value: "yes"
+            - name: PUID
+              value: "1000"
+            - name: GUID
+              value: "1000"
+            - name: LAN_NETWORK
+              value: 10.0.0.0/8
+            - name: NAME_SERVERS
+              value: 1.1.1.1,8.8.8.8
+          envFrom:
+            - secretRef:
+                name: qbittorrent
+          volumeMounts:
+            - name: server2
+              mountPath: /config
+              subPath: qbittorrent
+            - name: data
+              mountPath: /downloads
+              subPath: qbittorrent
+      volumes:
+        - name: server2
+          persistentVolumeClaim:
+            claimName: server2
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
