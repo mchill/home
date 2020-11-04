@@ -3,6 +3,7 @@ resources:
   - ./backup
   - ./duckdns
   - ./filebrowser
+  - ./homeassistant
   - ./jaeger
   - ./jitsi
   - ./kubernetes-dashboard

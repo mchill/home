@@ -13,15 +13,6 @@ services:
       - traefik.http.routers.dashboard.entrypoints=websecure
       - traefik.http.services.dashboard.loadbalancer.server.port=80
 
-  homeassistant:
-    image: homeassistant/home-assistant:stable
-    restart: always
-    network_mode: host
-    environment:
-      - TZ
-    volumes:
-      - $SERVER_PATH/homeassistant:/config
-
   minecraft:
     image: itzg/minecraft-server
     restart: always

@@ -23,17 +23,8 @@ http:
       service: staging-websecure
       entryPoints:
         - websecure
-    homeassistant:
-      rule: Host("home.mchill.duckdns.org")
-      service: homeassistant
-      entryPoints:
-        - websecure
   services:
     staging-websecure:
       loadBalancer:
         servers:
           - url: https://192.168.86.149:8443
-    homeassistant:
-      loadBalancer:
-        servers:
-          - url: http://192.168.86.149:8123
