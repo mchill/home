@@ -8,3 +8,7 @@ generators:
   - chart-inflator.yaml
 commonLabels:
   app: traefik
+configMapGenerator:
+- name: traefik-forward-auth
+  files:
+    - traefik-forward-auth.ini

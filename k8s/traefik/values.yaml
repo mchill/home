@@ -8,6 +8,8 @@ deployment:
         - name: auth
           containerPort: 4181
       env:
+        - name: CONFIG
+          value: /config
         - name: COOKIE_DOMAIN
           value: staging.mchill.duckdns.org
         - name: AUTH_HOST
@@ -29,6 +31,14 @@ deployment:
             secretKeyRef:
               name: traefik
               key: PROVIDERS_GOOGLE_CLIENT_SECRET
+      volumeMounts:
+        - name: traefik-forward-auth
+          mountPath: /config
+          subPath: traefik-forward-auth.ini
+  additionalVolumes:
+    - name: traefik-forward-auth
+      configMap:
+        name: traefik-forward-auth
 ingressRoute:
   dashboard:
     enabled: false
