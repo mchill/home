@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("portainer.staging.mchill.duckdns.org")
+    - match: Host("portainer.mchill.duckdns.org")
       kind: Rule
       services:
         - name: portainer

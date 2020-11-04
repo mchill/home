@@ -1,17 +1,17 @@
 version: '3.8'
 
 services:
-  dashboard:
-    build: dashboard
-    restart: always
-    environment:
-      - TZ
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.dashboard.rule=Host(`$URL`)
-      - traefik.http.routers.dashboard.middlewares=auth@file
-      - traefik.http.routers.dashboard.entrypoints=websecure
-      - traefik.http.services.dashboard.loadbalancer.server.port=80
+  # dashboard:
+  #   build: dashboard
+  #   restart: always
+  #   environment:
+  #     - TZ
+  #   labels:
+  #     - traefik.enable=true
+  #     - traefik.http.routers.dashboard.rule=Host(`$URL`)
+  #     - traefik.http.routers.dashboard.middlewares=auth@file
+  #     - traefik.http.routers.dashboard.entrypoints=websecure
+  #     - traefik.http.services.dashboard.loadbalancer.server.port=80
 
   minecraft:
     image: itzg/minecraft-server
@@ -44,56 +44,17 @@ services:
       - $REPO_PATH/minecraft/ops.json:/data/ops.json
       - $REPO_PATH/minecraft/whitelist.json:/data/whitelist.json
 
-  static:
-    image: nginx
-    restart: always
-    environment:
-      - TZ
-    volumes:
-      - $REPO_PATH/nginx:/usr/share/nginx/html
-      - $SERVER_PATH/minecraft2/world/resources.zip:/usr/share/nginx/html/resources.zip
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.static.rule=HostRegexp(`{host:.+}`)
-      - traefik.http.routers.static.priority=1
-      - traefik.http.routers.static.entrypoints=websecure
-      - traefik.http.services.static.loadbalancer.server.port=80
-
-# Migrated
-
-  auth:
-    image: thomseddon/traefik-forward-auth:2
-    restart: always
-    environment:
-      - TZ
-      - SECRET=$OAUTH_SECRET
-      - PROVIDERS_GOOGLE_CLIENT_ID
-      - PROVIDERS_GOOGLE_CLIENT_SECRET
-      - AUTH_HOST=auth.$URL
-      - COOKIE_DOMAIN=$URL
-      - WHITELIST=$EMAIL
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.auth.middlewares=auth@file
-      - traefik.http.routers.auth.entrypoints=websecure
-      - traefik.http.services.auth.loadbalancer.server.port=4181
-
-  traefik:
-    image: traefik:2.2.5
-    restart: always
-    ports:
-      - "8080:80"
-      - "4433:443"
-    environment:
-      - TZ
-      - DUCKDNS_TOKEN
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - $REPO_PATH/traefik/traefik.yml:/etc/traefik/traefik.yml
-      - $REPO_PATH/traefik/config:/config
-      - $SERVER_PATH/acme.json:/acme.json
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.traefik.middlewares=auth@file
-      - traefik.http.routers.traefik.entrypoints=websecure
-      - traefik.http.routers.traefik.service=api@internal
+  # static:
+  #   image: nginx
+  #   restart: always
+  #   environment:
+  #     - TZ
+  #   volumes:
+  #     - $REPO_PATH/nginx:/usr/share/nginx/html
+  #     - $SERVER_PATH/minecraft2/world/resources.zip:/usr/share/nginx/html/resources.zip
+  #   labels:
+  #     - traefik.enable=true
+  #     - traefik.http.routers.static.rule=HostRegexp(`{host:.+}`)
+  #     - traefik.http.routers.static.priority=1
+  #     - traefik.http.routers.static.entrypoints=websecure
+  #     - traefik.http.services.static.loadbalancer.server.port=80

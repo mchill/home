@@ -6,12 +6,12 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("traefik.staging.mchill.duckdns.org")
+    - match: Host("traefik.mchill.duckdns.org")
       kind: Rule
       services:
         - name: api@internal
           kind: TraefikService
-    - match: Host("auth.staging.mchill.duckdns.org")
+    - match: Host("auth.mchill.duckdns.org")
       kind: Rule
       services:
         - name: traefik-internal

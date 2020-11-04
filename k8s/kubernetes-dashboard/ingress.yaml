@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("k8s.staging.mchill.duckdns.org")
+    - match: Host("k8s.mchill.duckdns.org")
       kind: Rule
       services:
         - name: kubernetes-dashboard

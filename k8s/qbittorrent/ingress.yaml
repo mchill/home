@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("torrent.staging.mchill.duckdns.org")
+    - match: Host("torrent.mchill.duckdns.org")
       kind: Rule
       services:
         - name: qbittorrent

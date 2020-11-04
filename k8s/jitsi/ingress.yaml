@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("jitsi.staging.mchill.duckdns.org")
+    - match: Host("jitsi.mchill.duckdns.org")
       kind: Rule
       services:
         - name: jitsi

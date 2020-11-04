@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("files.staging.mchill.duckdns.org")
+    - match: Host("files.mchill.duckdns.org")
       kind: Rule
       services:
         - name: filebrowser

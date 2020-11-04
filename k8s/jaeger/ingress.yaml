@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("jaeger.staging.mchill.duckdns.org")
+    - match: Host("jaeger.mchill.duckdns.org")
       kind: Rule
       services:
         - name: jaegertracing-query

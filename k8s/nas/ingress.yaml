@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("nas.staging.mchill.duckdns.org")
+    - match: Host("nas.mchill.duckdns.org")
       kind: Rule
       services:
         - name: nas
