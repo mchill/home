@@ -11,15 +11,3 @@ spec:
       services:
         - name: jitsi
           port: 80
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRouteUDP
-metadata:
-  name: jvb
-spec:
-  entryPoints:
-    - jvb
-  routes:
-    - services:
-        - name: jitsi
-          port: 10000
