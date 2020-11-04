@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: filebrowser
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: filebrowser
+          image: filebrowser/filebrowser
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: FB_PORT
+              value: "8080"
+            - name: FB_NOAUTH
+              value: "true"
+          volumeMounts:
+            - name: server2
+              mountPath: /database.db
+              subPath: filebrowser/database.db
+            - name: data
+              mountPath: /srv
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+      volumes:
+        - name: server2
+          persistentVolumeClaim:
+            claimName: server2
+        - name: data
+          persistentVolumeClaim:
+            claimName: data

@@ -13,23 +13,6 @@ services:
       - traefik.http.routers.dashboard.entrypoints=websecure
       - traefik.http.services.dashboard.loadbalancer.server.port=80
 
-  files:
-    image: filebrowser/filebrowser
-    restart: always
-    user: 1000:1000
-    environment:
-      - TZ
-      - FB_PORT=8080
-      - FB_NOAUTH=true
-    volumes:
-      - $DATA_PATH:/srv
-      - $SERVER_PATH/filebrowser/database.db:/database.db
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.filebrowser.middlewares=auth@file
-      - traefik.http.routers.filebrowser.entrypoints=websecure
-      - traefik.http.services.filebrowser.loadbalancer.server.port=8080
-
   homeassistant:
     image: homeassistant/home-assistant:stable
     restart: always

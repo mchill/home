@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: filebrowser
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("files.staging.mchill.duckdns.org")
+      kind: Rule
+      services:
+        - name: filebrowser
+          port: 8080
