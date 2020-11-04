@@ -70,31 +70,6 @@ services:
       - $REPO_PATH/minecraft/ops.json:/data/ops.json
       - $REPO_PATH/minecraft/whitelist.json:/data/whitelist.json
 
-  plex:
-    image: plexinc/pms-docker
-    restart: always
-    deploy:
-      resources:
-        limits:
-          cpus: "4"
-    ports:
-      - "32400:32400"
-      - "32410:32410/udp"
-      - "32412:32412/udp"
-      - "32413:32413/udp"
-      - "32414:32414/udp"
-    environment:
-      - TZ
-      - PLEX_CLAIM
-      - ADVERTISE_IP=https://plex.$URL
-    volumes:
-      - $SERVER_PATH/plex/config:/config
-      - $DATA_PATH/plex:/data
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.plex.entrypoints=websecure
-      - traefik.http.services.plex.loadbalancer.server.port=32400
-
   static:
     image: nginx
     restart: always

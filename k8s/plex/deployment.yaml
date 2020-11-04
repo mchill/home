@@ -1,0 +1,50 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: plex
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: plex
+          image: plexinc/pms-docker
+          ports:
+            - name: plex
+              containerPort: 32400
+            - name: gdm-1
+              containerPort: 32410
+              protocol: UDP
+            - name: gdm-2
+              containerPort: 32412
+              protocol: UDP
+            - name: gdm-3
+              containerPort: 32413
+              protocol: UDP
+            - name: gdm-4
+              containerPort: 32414
+              protocol: UDP
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: ADVERTISE_IP
+              value: http://192.168.86.149:32400
+          resources:
+            limits:
+              cpu: 2
+            requests:
+              cpu: 1
+          volumeMounts:
+            - name: server2
+              mountPath: /config
+              subPath: plex
+            - name: data
+              mountPath: /data
+              subPath: plex
+      volumes:
+        - name: server2
+          persistentVolumeClaim:
+            claimName: server2
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
