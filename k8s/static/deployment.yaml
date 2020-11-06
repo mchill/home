@@ -1,0 +1,34 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: static
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: static
+          image: nginx
+          ports:
+            - name: http
+              containerPort: 80
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: static
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html
+            - name: static
+              mountPath: /usr/share/nginx/html/401.html
+              subPath: 401.html
+            - name: server
+              mountPath: /usr/share/nginx/html/resources.zip
+              subPath: minecraft2/world/resources.zip
+      volumes:
+        - name: static
+          configMap:
+            name: static
+        - name: server
+          persistentVolumeClaim:
+            claimName: server

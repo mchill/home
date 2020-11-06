@@ -1,0 +1,12 @@
+namespace: server
+resources:
+  - deployment.yaml
+  - ingress.yaml
+  - service.yaml
+commonLabels:
+  app: static
+configMapGenerator:
+- name: static
+  files:
+    - index.html
+    - 401.html
