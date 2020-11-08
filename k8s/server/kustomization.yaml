@@ -5,3 +5,4 @@ resources:
   - resource-quota.yaml
   - pv.yaml
   - pvc.yaml
+  - sealed-secret.yaml
