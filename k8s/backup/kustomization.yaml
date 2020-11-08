@@ -1,6 +1,6 @@
 namespace: server
 resources:
   - cron-job.yaml
-  - secret.yaml
+  - sealed-secret.yaml
 commonLabels:
   app: backup

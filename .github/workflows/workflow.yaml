@@ -67,36 +67,36 @@ jobs:
           name: build
           path: dashboard/build
       - name: Publish image
+        working-directory: dashboard
         run: |
           echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
           IMAGE=ghcr.io/$GITHUB_REPOSITORY/dashboard:latest
-          docker build dashboard --tag $IMAGE
+          docker build . --tag $IMAGE
           docker push $IMAGE
 
-  # deploy:
-  #   name: deploy
-  #   runs-on: ubuntu-latest
-  #   needs: [test, build]
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/download-artifact@v2
-  #       with:
-  #         name: build
-  #         path: dashboard/build
-  #     - name: Setup SSH
-  #       run: |
-  #         mkdir ~/.ssh
-  #         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-  #         chmod 600 ~/.ssh/id_rsa
-  #         eval $(ssh-agent -s)
-  #         ssh-add ~/.ssh/id_rsa
-  #         ssh-keyscan -H mchill.duckdns.org >> ~/.ssh/known_hosts
-  #     - name: Deploy server
-  #       env:
-  #         DOCKER_HOST: ssh://mchill@mchill.duckdns.org
-  #         COMPOSE_HTTP_TIMEOUT: 300
-  #         DOCKER_HTTP_TIMEOUT: 300
-  #       run: |
-  #         ssh mchill@mchill.duckdns.org 'cd repos/home && git fetch origin master && git reset --hard origin/master'
-  #         docker-compose pull
-  #         docker-compose --compatibility up --build -d
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    needs: publish
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup kubectl
+        env:
+          KUBECTL_VER: 1.19.3
+        run: |
+          curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/kubectl
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+          sudo mv kustomize /usr/local/bin/kustomize
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | sudo bash
+          helm repo add traefik https://helm.traefik.io/traefik
+          helm repo add loki https://grafana.github.io/loki/charts
+          helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
+          chmod 0600 ~/.kube/config
+      - name: Deploy server
+        working-directory: k8s
+        run: |
+          kustomize build --enable_alpha_plugins | kubectl apply -f - --prune -l prune=true

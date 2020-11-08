@@ -38,14 +38,15 @@ HTTPS traffic is secured behind Google forward authentication by default. Some e
 
 The following ports need to be fowarded by your router.
 
-External   | Internal  | Service
----        | ---       | ---
-80         | 8000      | HTTP
-443        | 8443      | HTTPS
-22         | 22        | SSH
-25565      | 25565     | Minecraft
-25566      | 25566     | Minecraft
-10000/udp  | 10000/udp | Jitsi
+External  | Internal  | Service
+---       | ---       | ---
+80        | 8000      | HTTP
+443       | 8443      | HTTPS
+22        | 22        | SSH
+16443     | 16443     | Kube API Server
+25565     | 25565     | Minecraft
+25566     | 25566     | Minecraft
+10000/udp | 10000/udp | Jitsi
 
 ### Filesystem
 
