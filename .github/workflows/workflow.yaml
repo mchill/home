@@ -56,8 +56,8 @@ jobs:
           name: build
           path: dashboard/build
 
-  deploy:
-    name: deploy
+  publish:
+    name: publish
     runs-on: ubuntu-latest
     needs: [test, build]
     steps:
@@ -66,31 +66,37 @@ jobs:
         with:
           name: build
           path: dashboard/build
-      - name: Setup SSH
+      - name: Publish image
         run: |
-          mkdir ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          eval $(ssh-agent -s)
-          ssh-add ~/.ssh/id_rsa
-          ssh-keyscan -H mchill.duckdns.org >> ~/.ssh/known_hosts
-      - name: Deploy server
-        env:
-          DOCKER_HOST: ssh://mchill@mchill.duckdns.org
-          COMPOSE_HTTP_TIMEOUT: 300
-          DOCKER_HTTP_TIMEOUT: 300
-          DUCKDNS_TOKEN: ${{ secrets.DUCKDNS_TOKEN }}
-          GF_SMTP_PASSWORD: ${{ secrets.GF_SMTP_PASSWORD }}
-          JICOFO_COMPONENT_SECRET: ${{ secrets.JICOFO_COMPONENT_SECRET }}
-          JICOFO_AUTH_PASSWORD: ${{ secrets.JICOFO_AUTH_PASSWORD }}
-          JVB_AUTH_PASSWORD: ${{ secrets.JVB_AUTH_PASSWORD }}
-          OAUTH_SECRET: ${{ secrets.OAUTH_SECRET }}
-          PLEX_CLAIM: ${{ secrets.PLEX_CLAIM }}
-          PROVIDERS_GOOGLE_CLIENT_ID: ${{ secrets.PROVIDERS_GOOGLE_CLIENT_ID }}
-          PROVIDERS_GOOGLE_CLIENT_SECRET: ${{ secrets.PROVIDERS_GOOGLE_CLIENT_SECRET }}
-          VPN_USERNAME: ${{ secrets.VPN_USERNAME }}
-          VPN_PASSWORD: ${{ secrets.VPN_PASSWORD }}
-        run: |
-          ssh mchill@mchill.duckdns.org 'cd repos/home && git fetch origin master && git reset --hard origin/master'
-          docker-compose pull
-          docker-compose --compatibility up --build -d
+          echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+          IMAGE=ghcr.io/$GITHUB_REPOSITORY/dashboard:latest
+          docker build dashboard --tag $IMAGE
+          docker push $IMAGE
+
+  # deploy:
+  #   name: deploy
+  #   runs-on: ubuntu-latest
+  #   needs: [test, build]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/download-artifact@v2
+  #       with:
+  #         name: build
+  #         path: dashboard/build
+  #     - name: Setup SSH
+  #       run: |
+  #         mkdir ~/.ssh
+  #         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+  #         chmod 600 ~/.ssh/id_rsa
+  #         eval $(ssh-agent -s)
+  #         ssh-add ~/.ssh/id_rsa
+  #         ssh-keyscan -H mchill.duckdns.org >> ~/.ssh/known_hosts
+  #     - name: Deploy server
+  #       env:
+  #         DOCKER_HOST: ssh://mchill@mchill.duckdns.org
+  #         COMPOSE_HTTP_TIMEOUT: 300
+  #         DOCKER_HTTP_TIMEOUT: 300
+  #       run: |
+  #         ssh mchill@mchill.duckdns.org 'cd repos/home && git fetch origin master && git reset --hard origin/master'
+  #         docker-compose pull
+  #         docker-compose --compatibility up --build -d
