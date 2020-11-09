@@ -1,0 +1,11 @@
+namespace: server
+resources:
+  - deployment.yaml
+  - service.yaml
+commonLabels:
+  app: minecraft-mattcraft
+configMapGenerator:
+- name: minecraft-mattcraft
+  files:
+    - ops.json
+    - whitelist.json

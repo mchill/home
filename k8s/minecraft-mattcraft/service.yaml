@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: minecraft-mattcraft
+spec:
+  type: NodePort
+  ports:
+    - name: minecraft
+      port: 25565
+      targetPort: minecraft
+      nodePort: 25565

@@ -9,6 +9,8 @@ resources:
   - ./jitsi
   - ./kubernetes-dashboard
   - ./loki-stack
+  - ./minecraft-hogwarts
+  - ./minecraft-mattcraft
   - ./nas
   - ./pihole
   - ./plex

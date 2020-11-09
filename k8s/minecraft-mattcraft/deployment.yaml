@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-mattcraft
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+        - name: minecraft-mattcraft
+          image: itzg/minecraft-server
+          ports:
+            - name: minecraft
+              containerPort: 25565
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: EULA
+              value: "TRUE"
+            - name: MEMORY
+              value: 3G
+            - name: VERSION
+              value: 1.16.3
+            - name: TYPE
+              value: FABRIC
+          volumeMounts:
+            - name: server2
+              mountPath: /data
+              subPath: minecraft-mattcraft
+            - name: minecraft-mattcraft
+              mountPath: /data/ops.json
+              subPath: ops.json
+            - name: minecraft-mattcraft
+              mountPath: /data/whitelist.json
+              subPath: whitelist.json
+          resources:
+            limits:
+              cpu: 0.5
+              memory: 3Gi
+            requests:
+              cpu: 0.2
+              memory: 3Gi
+      volumes:
+        - name: server2
+          persistentVolumeClaim:
+            claimName: server2
+        - name: minecraft-mattcraft
+          configMap:
+            name: minecraft-mattcraft
