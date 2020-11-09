@@ -1,4 +1,3 @@
 node_modules/
 build/
-nginx/resources.zip
 secret.yaml

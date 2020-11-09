@@ -6,12 +6,12 @@ import {
 import { Menu } from '@material-ui/icons';
 import styled from 'styled-components';
 
-import cadvisor from './logos/cadvisor.png';
 import filebrowser from './logos/filebrowser.png';
 import grafana from './logos/grafana.png';
 import homeassistant from './logos/homeassistant.png';
 import jaeger from './logos/jaeger.png';
 import jitsi from './logos/jitsi.png';
+import kubernetes from './logos/kubernetes.png';
 import nas from './logos/nas.png';
 import pihole from './logos/pihole.png';
 import plex from './logos/plex.png';
@@ -69,15 +69,15 @@ const AppName = styled(Typography)`
 `;
 
 const apps = [
-    { name: "cAdvisor", subdomain: "cadvisor", logo: cadvisor },
     { name: "File Browser", subdomain: "files", logo: filebrowser },
     { name: "Grafana", subdomain: "grafana", logo: grafana },
     { name: "Home Assistant", subdomain: "home", logo: homeassistant },
     { name: "Jaeger", subdomain: "jaeger", logo: jaeger },
     { name: "Jitsi", subdomain: "jitsi", logo: jitsi },
+    { name: "K8s Dashboard", subdomain: "k8s", logo: kubernetes },
     { name: "NAS", subdomain: "nas", logo: nas },
     { name: "Pi-hole", subdomain: "pihole", logo: pihole },
-    { name: "Plex", subdomain: "plex", logo: plex },
+    { name: "Plex", subdomain: "plex", logo: plex, path: "/web/index.html" },
     { name: "Portainer", subdomain: "portainer", logo: portainer },
     { name: "Prometheus", subdomain: "prometheus", logo: prometheus },
     { name: "qBittorrent", subdomain: "torrent", logo: qbittorrent },
@@ -100,7 +100,7 @@ function App() {
             <AppList>
                 {apps.map((app) => (
                 <AppCard key={app.name}>
-                    <AppAction onClick={() => window.location.assign("https://" + app.subdomain + ".mchill.duckdns.org")}>
+                    <AppAction onClick={() => window.location.assign("https://" + app.subdomain + ".mchill.duckdns.org" + (app.path || ""))}>
                         <AppImage image={app.logo} />
                         <CardContent>
                             <AppName variant="body1" align="center">
