@@ -31,9 +31,6 @@ spec:
               volumeMounts:
                 - name: ssh
                   mountPath: /root/ssh
-                - name: server2
-                  readOnly: true
-                  mountPath: /backup/server2
                 - name: server
                   readOnly: true
                   mountPath: /backup/server
@@ -52,9 +49,6 @@ spec:
               secret:
                 secretName: backup
                 defaultMode: 384
-            - name: server2
-              persistentVolumeClaim:
-                claimName: server2
             - name: server
               persistentVolumeClaim:
                 claimName: server

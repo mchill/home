@@ -26,7 +26,7 @@ spec:
             - name: TYPE
               value: FABRIC
           volumeMounts:
-            - name: server2
+            - name: server
               mountPath: /data
               subPath: minecraft-mattcraft
             - name: minecraft-mattcraft
@@ -43,9 +43,9 @@ spec:
               cpu: 0.2
               memory: 3Gi
       volumes:
-        - name: server2
+        - name: server
           persistentVolumeClaim:
-            claimName: server2
+            claimName: server
         - name: minecraft-mattcraft
           configMap:
             name: minecraft-mattcraft

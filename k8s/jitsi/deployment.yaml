@@ -22,7 +22,7 @@ spec:
             requests:
               memory: 256Mi
           volumeMounts:
-            - name: server2
+            - name: server
               mountPath: /config
               subPath: jitsi/jicofo
         - name: prosody
@@ -33,10 +33,10 @@ spec:
             - secretRef:
                 name: jitsi
           volumeMounts:
-            - name: server2
+            - name: server
               mountPath: /config
               subPath: jitsi/prosody/config
-            - name: server2
+            - name: server
               mountPath: /prosody-plugins-custom
               subPath: jitsi/prosody/prosody-plugins-custom
         - name: web
@@ -48,7 +48,7 @@ spec:
             - configMapRef:
                 name: jitsi
           volumeMounts:
-            - name: server2
+            - name: server
               mountPath: /config
               subPath: jitsi/web
         - name: jvb
@@ -68,10 +68,10 @@ spec:
             requests:
               memory: 256Mi
           volumeMounts:
-            - name: server2
+            - name: server
               mountPath: /config
               subPath: jitsi/jvb
       volumes:
-        - name: server2
+        - name: server
           persistentVolumeClaim:
-            claimName: server2
+            claimName: server

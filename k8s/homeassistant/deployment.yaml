@@ -25,10 +25,10 @@ spec:
             - name: TZ
               value: America/New_York
           volumeMounts:
-            - name: server2
+            - name: server
               mountPath: /config
               subPath: homeassistant
       volumes:
-        - name: server2
+        - name: server
           persistentVolumeClaim:
-            claimName: server2
+            claimName: server

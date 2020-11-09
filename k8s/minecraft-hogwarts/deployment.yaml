@@ -24,7 +24,7 @@ spec:
             - name: VERSION
               value: 1.13.2
           volumeMounts:
-            - name: server2
+            - name: server
               mountPath: /data
               subPath: minecraft-hogwarts
             - name: minecraft-hogwarts
@@ -41,9 +41,9 @@ spec:
               cpu: 0.2
               memory: 3Gi
       volumes:
-        - name: server2
+        - name: server
           persistentVolumeClaim:
-            claimName: server2
+            claimName: server
         - name: minecraft-hogwarts
           configMap:
             name: minecraft-hogwarts

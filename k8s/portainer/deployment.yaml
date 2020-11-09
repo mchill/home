@@ -22,10 +22,10 @@ spec:
               path: /
               port: 9000
           volumeMounts:
-            - name: server2
+            - name: server
               mountPath: /data
               subPath: portainer
       volumes:
-        - name: server2
+        - name: server
           persistentVolumeClaim:
-            claimName: server2
+            claimName: server

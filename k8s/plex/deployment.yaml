@@ -37,16 +37,16 @@ spec:
               cpu: 1
               memory: 256Mi
           volumeMounts:
-            - name: server2
+            - name: server
               mountPath: /config
               subPath: plex
             - name: data
               mountPath: /data
               subPath: plex
       volumes:
-        - name: server2
+        - name: server
           persistentVolumeClaim:
-            claimName: server2
+            claimName: server
         - name: data
           persistentVolumeClaim:
             claimName: data

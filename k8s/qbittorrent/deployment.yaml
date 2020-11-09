@@ -34,16 +34,16 @@ spec:
             - secretRef:
                 name: qbittorrent
           volumeMounts:
-            - name: server2
+            - name: server
               mountPath: /config
               subPath: qbittorrent
             - name: data
               mountPath: /downloads
               subPath: qbittorrent
       volumes:
-        - name: server2
+        - name: server
           persistentVolumeClaim:
-            claimName: server2
+            claimName: server
         - name: data
           persistentVolumeClaim:
             claimName: data

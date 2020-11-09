@@ -25,13 +25,13 @@ spec:
             - name: WEBPASSWORD
               value: ""
           volumeMounts:
-            - name: server2
+            - name: server
               mountPath: /etc/pihole
               subPath: pihole/pihole
-            - name: server2
+            - name: server
               mountPath: /etc/dnsmasq.d
               subPath: pihole/dnsmasq
       volumes:
-        - name: server2
+        - name: server
           persistentVolumeClaim:
-            claimName: server2
+            claimName: server

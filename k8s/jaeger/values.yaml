@@ -13,11 +13,11 @@ elasticsearch:
   persistence:
     enabled: false
   extraVolumes:
-    - name: server2
+    - name: server
       persistentVolumeClaim:
-        claimName: server2
+        claimName: server
   extraVolumeMounts:
-    - name: server2
+    - name: server
       mountPath: /usr/share/elasticsearch/data
       subPath: elasticsearch
   resources:

@@ -20,7 +20,7 @@ spec:
             - name: FB_NOAUTH
               value: "true"
           volumeMounts:
-            - name: server2
+            - name: server
               mountPath: /database.db
               subPath: filebrowser/database.db
             - name: data
@@ -29,9 +29,9 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
       volumes:
-        - name: server2
+        - name: server
           persistentVolumeClaim:
-            claimName: server2
+            claimName: server
         - name: data
           persistentVolumeClaim:
             claimName: data

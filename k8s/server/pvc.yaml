@@ -1,18 +1,6 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: server2
-spec:
-  accessModes:
-    - "ReadWriteOnce"
-  resources:
-    requests:
-      storage: "250Gi"
-  storageClassName: "microk8s-hostpath"
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
   name: server
 spec:
   accessModes:
