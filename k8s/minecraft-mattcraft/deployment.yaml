@@ -8,6 +8,33 @@ spec:
     type: Recreate
   template:
     spec:
+      initContainers:
+        - name: mods
+          image: bash
+          args:
+            - -c
+            - |
+              mods=(
+                # https://www.curseforge.com/minecraft/mc-mods/fabric-api
+                https://media.forgecdn.net/files/3097/415/fabric-api-0.25.0%2Bbuild.415-1.16.jar
+
+                # https://www.curseforge.com/minecraft/mc-mods/phosphor
+                https://media.forgecdn.net/files/2987/621/phosphor-fabric-mc1.16.1-0.6.0%2Bbuild.7.jar
+
+                # https://www.curseforge.com/minecraft/mc-mods/lithium
+                https://media.forgecdn.net/files/3107/909/lithium-fabric-mc1.16.4-0.6.0.jar
+
+                # https://www.curseforge.com/minecraft/mc-mods/quick-shulker
+                https://media.forgecdn.net/files/3112/642/quickshulker-1.1.11-1.16.jar
+              );
+
+              for mod in "${mods[@]}"
+              do
+                wget -P /mods/ -nc $mod
+              done
+          volumeMounts:
+            - name: mods
+              mountPath: /mods
       containers:
         - name: minecraft-mattcraft
           image: itzg/minecraft-server
@@ -25,6 +52,8 @@ spec:
               value: 1.16.3
             - name: TYPE
               value: FABRIC
+            - name: REMOVE_OLD_MODS
+              value: "TRUE"
           volumeMounts:
             - name: server
               mountPath: /data
@@ -35,6 +64,8 @@ spec:
             - name: minecraft-mattcraft
               mountPath: /data/whitelist.json
               subPath: whitelist.json
+            - name: mods
+              mountPath: /mods
           resources:
             limits:
               cpu: 0.5
@@ -49,3 +80,5 @@ spec:
         - name: minecraft-mattcraft
           configMap:
             name: minecraft-mattcraft
+        - name: mods
+          emptyDir: {}
