@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-    AppBar, Card, CardActionArea, CardContent, CardMedia, IconButton,
-    Toolbar, Typography
+    AppBar, Card, CardActionArea, CardContent, CardMedia, Divider, IconButton, List,
+    ListItem, ListItemIcon, ListItemText, SwipeableDrawer, Toolbar, Typography
 } from '@material-ui/core';
-import { Menu } from '@material-ui/icons';
+import { ChevronLeft, ExitToApp, Menu } from '@material-ui/icons';
 import styled from 'styled-components';
 
 import filebrowser from './logos/filebrowser.png';
@@ -19,6 +19,13 @@ import portainer from './logos/portainer.png';
 import prometheus from './logos/prometheus.png';
 import qbittorrent from './logos/qbittorrent.svg';
 import traefik from './logos/traefik.png';
+
+const DrawerHeader = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    width: 250px;
+    height: 64px;
+`;
 
 const AppList = styled.div`
     display: flex;
@@ -85,18 +92,45 @@ const apps = [
 ];
 
 function App() {
+    const [drawer, setDrawer] = useState(false);
+
     return (
         <>
             <AppBar position="sticky" color="primary">
                 <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                    <Menu />
+                    <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setDrawer(true)}>
+                        <Menu />
                     </IconButton>
                     <Typography variant="h6" color="inherit">
                         Home Server
                     </Typography>
                 </Toolbar>
             </AppBar>
+            <SwipeableDrawer
+                variant="temporary"
+                anchor="left"
+                open={drawer}
+                onOpen={() => setDrawer(true)}
+                onClose={() => setDrawer(false)}
+                ModalProps={{
+                    keepMounted: true,
+                }}
+            >
+                <DrawerHeader>
+                    <IconButton onClick={() => setDrawer(false)}>
+                        <ChevronLeft />
+                    </IconButton>
+                </DrawerHeader>
+                <Divider />
+                <List>
+                    <ListItem button component="a" href="https://auth.mchill.duckdns.org/_oauth/logout">
+                        <ListItemIcon>
+                            <ExitToApp />
+                        </ListItemIcon>
+                        <ListItemText primary="Logout" />
+                    </ListItem>
+                </List>
+            </SwipeableDrawer>
             <AppList>
                 {apps.map((app) => (
                 <AppCard key={app.name}>
