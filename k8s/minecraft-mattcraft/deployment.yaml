@@ -16,7 +16,7 @@ spec:
             - |
               mods=(
                 # https://www.curseforge.com/minecraft/mc-mods/fabric-api
-                https://media.forgecdn.net/files/3097/415/fabric-api-0.25.0%2Bbuild.415-1.16.jar
+                https://media.forgecdn.net/files/3112/610/fabric-api-0.26.0%2B1.16.jar
 
                 # https://www.curseforge.com/minecraft/mc-mods/phosphor
                 https://media.forgecdn.net/files/2987/621/phosphor-fabric-mc1.16.1-0.6.0%2Bbuild.7.jar
@@ -49,7 +49,7 @@ spec:
             - name: MEMORY
               value: 3G
             - name: VERSION
-              value: 1.16.3
+              value: 1.16.4
             - name: TYPE
               value: FABRIC
             - name: REMOVE_OLD_MODS
