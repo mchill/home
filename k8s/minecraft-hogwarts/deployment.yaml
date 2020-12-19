@@ -22,7 +22,7 @@ spec:
             - name: MEMORY
               value: 2500M
             - name: VERSION
-              value: 1.13.2
+              value: 1.16.3
           volumeMounts:
             - name: server
               mountPath: /data
