@@ -28,6 +28,7 @@ spec:
                 https://media.forgecdn.net/files/3112/642/quickshulker-1.1.11-1.16.jar
               );
 
+              apk add --no-cache wget
               for mod in "${mods[@]}"
               do
                 wget -P /mods/ -nc $mod
