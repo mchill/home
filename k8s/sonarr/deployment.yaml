@@ -1,0 +1,43 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sonarr
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: sonarr
+          image: linuxserver/sonarr
+          ports:
+            - name: sonarr
+              containerPort: 8989
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: GUID
+              value: "1000"
+          volumeMounts:
+            - name: server
+              mountPath: /config
+              subPath: sonarr
+            - name: data
+              mountPath: /tv
+              subPath: "plex/TV Shows"
+            - name: data
+              mountPath: /downloads
+              subPath: qbittorrent
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 256Mi
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server
+        - name: data
+          persistentVolumeClaim:
+            claimName: data

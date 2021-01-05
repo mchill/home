@@ -24,6 +24,7 @@ Pi-hole              | https://pihole.mchill.duckdns.org
 Plex                 | https://plex.mchill.duckdns.org
 Portainer            | https://portainer.mchill.duckdns.org
 Prometheus           | https://prometheus.mchill.duckdns.org
+Sonarr               | https://sonarr.mchill.duckdns.org
 Synology DSM         | https://nas.mchill.duckdns.org
 Traefik Dashboard    | https://traefik.mchill.duckdns.org
 qBittorrent          | https://torrent.mchill.duckdns.org

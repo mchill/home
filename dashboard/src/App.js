@@ -18,6 +18,7 @@ import plex from './logos/plex.png';
 import portainer from './logos/portainer.png';
 import prometheus from './logos/prometheus.png';
 import qbittorrent from './logos/qbittorrent.svg';
+import sonarr from './logos/sonarr.png';
 import traefik from './logos/traefik.png';
 
 const DrawerHeader = styled.div`
@@ -88,6 +89,7 @@ const apps = [
     { name: "Portainer", subdomain: "portainer", logo: portainer },
     { name: "Prometheus", subdomain: "prometheus", logo: prometheus },
     { name: "qBittorrent", subdomain: "torrent", logo: qbittorrent },
+    { name: "Sonarr", subdomain: "sonarr", logo: sonarr },
     { name: "Traefik", subdomain: "traefik", logo: traefik }
 ];
 

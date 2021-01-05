@@ -17,6 +17,7 @@ resources:
   - ./portainer
   - ./qbittorrent
   - ./server
+  - ./sonarr
   - ./static
   - ./traefik
 transformers:
