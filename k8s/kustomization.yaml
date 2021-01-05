@@ -5,7 +5,6 @@ resources:
   - ./duckdns
   - ./filebrowser
   - ./homeassistant
-  - ./jaeger
   - ./jitsi
   - ./kubernetes-dashboard
   - ./loki-stack
