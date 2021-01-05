@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import filebrowser from './logos/filebrowser.png';
 import grafana from './logos/grafana.png';
 import homeassistant from './logos/homeassistant.png';
+import jackett from './logos/jackett.png';
 import jaeger from './logos/jaeger.png';
 import jitsi from './logos/jitsi.png';
 import kubernetes from './logos/kubernetes.png';
@@ -80,6 +81,7 @@ const apps = [
     { name: "File Browser", subdomain: "files", logo: filebrowser },
     { name: "Grafana", subdomain: "grafana", logo: grafana },
     { name: "Home Assistant", subdomain: "home", logo: homeassistant },
+    { name: "Jackett", subdomain: "jackett", logo: jackett },
     { name: "Jaeger", subdomain: "jaeger", logo: jaeger },
     { name: "Jitsi", subdomain: "jitsi", logo: jitsi },
     { name: "K8s Dashboard", subdomain: "k8s", logo: kubernetes },

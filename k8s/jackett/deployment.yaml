@@ -1,0 +1,29 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: jackett
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: jackett
+          image: ghcr.io/linuxserver/jackett
+          ports:
+            - name: jackett
+              containerPort: 9117
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: GUID
+              value: "1000"
+          volumeMounts:
+            - name: server
+              mountPath: /config
+              subPath: jackett
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server

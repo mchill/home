@@ -6,7 +6,6 @@ This is the configuration for my home server running in Kubernetes.
 
 [Trello Board](https://trello.com/b/XNVnSBvI/home-server)
 
-
 ## Applications
 
 Application          | URL
@@ -15,6 +14,7 @@ Dashboard            | https://mchill.duckdns.org
 File Browser         | https://files.mchill.duckdns.org
 Grafana              | https://grafana.mchill.duckdns.org
 Home Assistant       | https://home.mchill.duckdns.org
+Jackett              | https://jackett.mchill.duckdns.org
 Jaeger               | https://jaeger.mchill.duckdns.org
 Jitsi                | https://jitsi.mchill.duckdns.org
 Kubernetes Dashboard | https://k8s.mchill.duckdns.org
