@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: transmission
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("transmission.mchill.duckdns.org")
+      kind: Rule
+      services:
+        - name: transmission
+          port: 9091

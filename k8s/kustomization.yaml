@@ -20,5 +20,6 @@ resources:
   - ./sonarr
   - ./static
   - ./traefik
+  - ./transmission
 transformers:
   - label-transformer.yaml

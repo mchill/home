@@ -81,7 +81,7 @@ To create new sealed secret, follow these steps.
 3. Use the kubeseal cli tool to generate a Sealed Secret. Be sure to specify the correct namespace, or else the controller won't be able to decrypt the secret.
 
     ```bash
-    kubeseal <secret.yaml >sealedsecret.yaml -o yaml -n server
+    kubeseal <secret.yaml >sealed-secret.yaml -o yaml -n server
     ```
 
 ## Setup

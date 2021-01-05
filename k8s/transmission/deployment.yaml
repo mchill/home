@@ -1,0 +1,40 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: transmission
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: transmission
+          image: haugene/transmission-openvpn
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          ports:
+            - name: http
+              containerPort: 9091
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: OPENVPN_PROVIDER
+              value: NORDVPN
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: LOCAL_NETWORK
+              value: 10.0.0.0/8
+          envFrom:
+            - secretRef:
+                name: transmission
+          volumeMounts:
+            - name: data
+              mountPath: /data
+              subPath: transmission
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
