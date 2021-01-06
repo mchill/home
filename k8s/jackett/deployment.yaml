@@ -23,6 +23,11 @@ spec:
             - name: server
               mountPath: /config
               subPath: jackett
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 256Mi
       volumes:
         - name: server
           persistentVolumeClaim:

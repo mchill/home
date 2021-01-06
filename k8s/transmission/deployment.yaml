@@ -34,6 +34,13 @@ spec:
             - name: data
               mountPath: /data
               subPath: transmission
+          resources:
+            limits:
+              cpu: 0.5
+              memory: 1Gi
+            requests:
+              cpu: 0.25
+              memory: 512Mi
       volumes:
         - name: data
           persistentVolumeClaim:

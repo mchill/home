@@ -15,7 +15,6 @@ resources:
   - ./pihole
   - ./plex
   - ./portainer
-  - ./qbittorrent
   - ./server
   - ./sonarr
   - ./static

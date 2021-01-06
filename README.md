@@ -27,7 +27,7 @@ Prometheus           | https://prometheus.mchill.duckdns.org
 Sonarr               | https://sonarr.mchill.duckdns.org
 Synology DSM         | https://nas.mchill.duckdns.org
 Traefik Dashboard    | https://traefik.mchill.duckdns.org
-qBittorrent          | https://torrent.mchill.duckdns.org
+Transmission         | https://transmission.mchill.duckdns.org
 
 ## Configuration
 

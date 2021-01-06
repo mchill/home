@@ -18,9 +18,9 @@ import pihole from './logos/pihole.png';
 import plex from './logos/plex.png';
 import portainer from './logos/portainer.png';
 import prometheus from './logos/prometheus.png';
-import qbittorrent from './logos/qbittorrent.svg';
 import sonarr from './logos/sonarr.png';
 import traefik from './logos/traefik.png';
+import transmission from './logos/transmission.png';
 
 const DrawerHeader = styled.div`
     display: flex;
@@ -90,9 +90,9 @@ const apps = [
     { name: "Plex", subdomain: "plex", logo: plex, path: "/web/index.html" },
     { name: "Portainer", subdomain: "portainer", logo: portainer },
     { name: "Prometheus", subdomain: "prometheus", logo: prometheus },
-    { name: "qBittorrent", subdomain: "torrent", logo: qbittorrent },
     { name: "Sonarr", subdomain: "sonarr", logo: sonarr },
-    { name: "Traefik", subdomain: "traefik", logo: traefik }
+    { name: "Traefik", subdomain: "traefik", logo: traefik },
+    { name: "Transmission", subdomain: "transmission", logo: transmission }
 ];
 
 function App() {
