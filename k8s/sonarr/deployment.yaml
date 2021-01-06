@@ -27,8 +27,8 @@ spec:
               mountPath: /tv
               subPath: "plex/TV Shows"
             - name: data
-              mountPath: /downloads
-              subPath: qbittorrent
+              mountPath: /data
+              subPath: transmission
           resources:
             limits:
               memory: 512Mi

@@ -51,8 +51,8 @@ globalArguments: []
 additionalArguments:
   - --pilot.token=$(PILOT_TOKEN)
   - --metrics.prometheus
-  - --tracing.jaeger.samplingServerURL=http://jaegertracing-agent:5778/sampling
-  - --tracing.jaeger.localAgentHostPort=jaegertracing-agent:6831
+  # - --tracing.jaeger.samplingServerURL=http://jaegertracing-agent:5778/sampling
+  # - --tracing.jaeger.localAgentHostPort=jaegertracing-agent:6831
   - --entrypoints.websecure.http.middlewares=server-auth@kubernetescrd
   - --certificatesresolvers.letsencrypt.acme.email=matthewchill7@gmail.com
   - --certificatesresolvers.letsencrypt.acme.dnschallenge.provider=duckdns

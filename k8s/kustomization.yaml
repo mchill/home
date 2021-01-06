@@ -6,6 +6,7 @@ resources:
   - ./filebrowser
   - ./homeassistant
   - ./jackett
+  # - ./jaeger
   - ./jitsi
   - ./kubernetes-dashboard
   # - ./loki-stack
@@ -14,7 +15,7 @@ resources:
   - ./nas
   - ./pihole
   - ./plex
-  - ./portainer
+  # - ./portainer
   - ./server
   - ./sonarr
   - ./static
