@@ -1,9 +1,0 @@
-apiVersion: someteam.example.com/v1
-kind: ChartInflator
-metadata:
-  name: jaeger
-chartRelease: jaegertracing
-chartName: jaeger
-releaseName: jaegertracing
-releaseNamespace: server
-values: values.yaml

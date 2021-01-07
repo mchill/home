@@ -15,14 +15,12 @@ File Browser         | https://files.mchill.duckdns.org
 Grafana              | https://grafana.mchill.duckdns.org
 Home Assistant       | https://home.mchill.duckdns.org
 Jackett              | https://jackett.mchill.duckdns.org
-Jaeger               | https://jaeger.mchill.duckdns.org
 Jitsi                | https://jitsi.mchill.duckdns.org
 Kubernetes Dashboard | https://k8s.mchill.duckdns.org
 Minecraft            | mchill.duckdns.org:25565
 Minecraft (Hogwarts) | mchill.duckdns.org:25566
 Pi-hole              | https://pihole.mchill.duckdns.org
 Plex                 | https://plex.mchill.duckdns.org
-Portainer            | https://portainer.mchill.duckdns.org
 Prometheus           | https://prometheus.mchill.duckdns.org
 Sonarr               | https://sonarr.mchill.duckdns.org
 Synology DSM         | https://nas.mchill.duckdns.org

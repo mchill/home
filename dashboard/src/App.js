@@ -10,13 +10,11 @@ import filebrowser from './logos/filebrowser.png';
 import grafana from './logos/grafana.png';
 import homeassistant from './logos/homeassistant.png';
 import jackett from './logos/jackett.png';
-// import jaeger from './logos/jaeger.png';
 import jitsi from './logos/jitsi.png';
 import kubernetes from './logos/kubernetes.png';
 import nas from './logos/nas.png';
 import pihole from './logos/pihole.png';
 import plex from './logos/plex.png';
-import portainer from './logos/portainer.png';
 import prometheus from './logos/prometheus.png';
 import sonarr from './logos/sonarr.png';
 import traefik from './logos/traefik.png';
@@ -82,13 +80,11 @@ const apps = [
     { name: "Grafana", subdomain: "grafana", logo: grafana },
     { name: "Home Assistant", subdomain: "home", logo: homeassistant },
     { name: "Jackett", subdomain: "jackett", logo: jackett },
-    // { name: "Jaeger", subdomain: "jaeger", logo: jaeger },
     { name: "Jitsi", subdomain: "jitsi", logo: jitsi },
     { name: "K8s Dashboard", subdomain: "k8s", logo: kubernetes },
     { name: "NAS", subdomain: "nas", logo: nas },
     { name: "Pi-hole", subdomain: "pihole", logo: pihole },
     { name: "Plex", subdomain: "plex", logo: plex, path: "/web/index.html" },
-    { name: "Portainer", subdomain: "portainer", logo: portainer },
     { name: "Prometheus", subdomain: "prometheus", logo: prometheus },
     { name: "Sonarr", subdomain: "sonarr", logo: sonarr },
     { name: "Traefik", subdomain: "traefik", logo: traefik },

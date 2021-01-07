@@ -1,5 +1,0 @@
-namespace: server
-resources:
-  - ingress.yaml
-generators:
-  - chart-inflator.yaml
