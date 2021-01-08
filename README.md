@@ -101,11 +101,9 @@ microk8s enable metrics-server
 
 ### Deploy
 
-The server is automatically deployed by CI. Manual deployment can be done with the following commands. Kustomize's prune flag doesn't work on custom resource definitions, so these have to be manually deleted to ensure orphans are removed.
+The server is automatically deployed by CI. Manual deployment can be done with the following commands.
 
 ```bash
 kustomize build --enable_alpha_plugins | microk8s kubectl apply -f - --prune -l prune=true --dry-run=client
-microk8s kubectl delete --all ingressroute -n server
-microk8s kubectl delete --all middleware -n server
 kustomize build --enable_alpha_plugins | microk8s kubectl apply -f - --prune -l prune=true
 ```

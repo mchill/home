@@ -8,7 +8,7 @@ resources:
   - ./jackett
   - ./jitsi
   - ./kubernetes-dashboard
-  # - ./loki-stack
+  - ./loki-stack
   - ./minecraft-hogwarts
   - ./minecraft-mattcraft
   - ./nas

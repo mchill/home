@@ -91,7 +91,7 @@ jobs:
           sudo mv kustomize /usr/local/bin/kustomize
           curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | sudo bash
           helm repo add traefik https://helm.traefik.io/traefik
-          helm repo add loki https://grafana.github.io/loki/charts
+          helm repo add grafana https://grafana.github.io/helm-charts
           mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
           chmod 0600 ~/.kube/config

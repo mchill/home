@@ -25,15 +25,15 @@ spec:
               subPath: sonarr
             - name: data
               mountPath: /tv
-              subPath: "plex/TV Shows"
+              subPath: plex/TV
             - name: data
               mountPath: /data
               subPath: transmission
           resources:
             limits:
-              memory: 512Mi
+              memory: 1Gi
             requests:
-              memory: 256Mi
+              memory: 512Mi
       volumes:
         - name: server
           persistentVolumeClaim:
