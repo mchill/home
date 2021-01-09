@@ -14,6 +14,7 @@ resources:
   - ./nas
   - ./pihole
   - ./plex
+  - ./radarr
   - ./server
   - ./sonarr
   - ./static

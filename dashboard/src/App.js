@@ -16,6 +16,7 @@ import nas from './logos/nas.png';
 import pihole from './logos/pihole.png';
 import plex from './logos/plex.png';
 import prometheus from './logos/prometheus.png';
+import radarr from './logos/radarr.png';
 import sonarr from './logos/sonarr.png';
 import traefik from './logos/traefik.png';
 import transmission from './logos/transmission.png';
@@ -86,6 +87,7 @@ const apps = [
     { name: "Pi-hole", subdomain: "pihole", logo: pihole },
     { name: "Plex", subdomain: "plex", logo: plex, path: "/web/index.html" },
     { name: "Prometheus", subdomain: "prometheus", logo: prometheus },
+    { name: "Radarr", subdomain: "radarr", logo: radarr },
     { name: "Sonarr", subdomain: "sonarr", logo: sonarr },
     { name: "Traefik", subdomain: "traefik", logo: traefik },
     { name: "Transmission", subdomain: "transmission", logo: transmission }

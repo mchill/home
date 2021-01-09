@@ -22,6 +22,7 @@ Minecraft (Hogwarts) | mchill.duckdns.org:25566
 Pi-hole              | https://pihole.mchill.duckdns.org
 Plex                 | https://plex.mchill.duckdns.org
 Prometheus           | https://prometheus.mchill.duckdns.org
+Radarr               | https://radarr.mchill.duckdns.org
 Sonarr               | https://sonarr.mchill.duckdns.org
 Synology DSM         | https://nas.mchill.duckdns.org
 Traefik Dashboard    | https://traefik.mchill.duckdns.org

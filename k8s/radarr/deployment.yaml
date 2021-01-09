@@ -1,17 +1,17 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: sonarr
+  name: radarr
 spec:
   replicas: 1
   template:
     spec:
       containers:
-        - name: sonarr
-          image: linuxserver/sonarr:preview
+        - name: radarr
+          image: ghcr.io/linuxserver/radarr
           ports:
-            - name: sonarr
-              containerPort: 8989
+            - name: radarr
+              containerPort: 7878
           env:
             - name: TZ
               value: America/New_York
@@ -22,10 +22,10 @@ spec:
           volumeMounts:
             - name: server
               mountPath: /config
-              subPath: sonarr
+              subPath: radarr
             - name: data
-              mountPath: /tv
-              subPath: plex/TV
+              mountPath: /movies
+              subPath: plex/Movies
             - name: data
               mountPath: /data
               subPath: transmission
