@@ -17,7 +17,7 @@ spec:
               value: America/New_York
             - name: PUID
               value: "1000"
-            - name: GUID
+            - name: PGID
               value: "1000"
           volumeMounts:
             - name: server
