@@ -23,9 +23,9 @@ spec:
             - name: server
               mountPath: /config
               subPath: sonarr
-            - name: data
+            - name: media
               mountPath: /tv
-              subPath: plex/TV
+              subPath: TV
             - name: data
               mountPath: /data
               subPath: transmission
@@ -41,3 +41,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: data
+        - name: media
+          persistentVolumeClaim:
+            claimName: media

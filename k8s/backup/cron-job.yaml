@@ -34,9 +34,6 @@ spec:
                 - name: server
                   readOnly: true
                   mountPath: /backup/server
-                - name: data
-                  readOnly: true
-                  mountPath: /backup/data
               resources:
                 limits:
                   cpu: 0.2
@@ -52,6 +49,3 @@ spec:
             - name: server
               persistentVolumeClaim:
                 claimName: server
-            - name: data
-              persistentVolumeClaim:
-                claimName: data

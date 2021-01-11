@@ -31,3 +31,20 @@ spec:
     name: data
   hostPath:
     path: /data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media
+spec:
+  storageClassName: microk8s-hostpath
+  capacity:
+    storage: 1000Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: server
+    name: media
+  hostPath:
+    path: /nfs/media

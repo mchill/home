@@ -50,7 +50,11 @@ External  | Internal  | Service
 
 ### Filesystem
 
-Two hostPath persistent volumes have been created for storage. The first stores persistent application data and is located at /server. The second stores large media (Plex library and torrents) and is mounted at /data. Both volumes are backed up nightly to local and cloud storage.
+Persistent storage is split into three volumes. The first volume is backed up nightly to local and cloud storage.
+
+* /server - Application configuration and state. Exists on the boot SSD.
+* /data - Larger short-term storage used for torrents. Mounted from an internal HDD.
+* /nfs/media - Larger long-term media storage used for Plex library. Mounted from my NAS.
 
 ### Sealed Secrets
 

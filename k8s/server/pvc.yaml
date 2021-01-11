@@ -23,3 +23,16 @@ spec:
       storage: 1000Gi
   storageClassName: microk8s-hostpath
   volumeName: data
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: media
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1000Gi
+  storageClassName: microk8s-hostpath
+  volumeName: media

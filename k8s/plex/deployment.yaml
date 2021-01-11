@@ -40,13 +40,12 @@ spec:
             - name: server
               mountPath: /config
               subPath: plex
-            - name: data
+            - name: media
               mountPath: /data
-              subPath: plex
       volumes:
         - name: server
           persistentVolumeClaim:
             claimName: server
-        - name: data
+        - name: media
           persistentVolumeClaim:
-            claimName: data
+            claimName: media
