@@ -99,5 +99,5 @@ jobs:
         working-directory: k8s
         run: |
           kustomize build homeassistant | kubectl delete -f - || true
-          kustomize build --enable_alpha_plugins | kubectl apply -f - --prune -l prune=true
+          kustomize build --enable_alpha_plugins --enable_kyaml=false | kubectl apply -f - --prune -l prune=true
           kustomize build homeassistant | kubectl apply -f -
