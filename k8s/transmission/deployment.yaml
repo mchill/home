@@ -20,7 +20,11 @@ spec:
             - name: TZ
               value: America/New_York
             - name: OPENVPN_PROVIDER
-              value: NORDVPN
+              value: MULLVAD
+            - name: OPENVPN_CONFIG
+              value: us_all
+            - name: TRANSMISSION_PEER_PORT
+              value: "16724"
             - name: PUID
               value: "1000"
             - name: PGID
