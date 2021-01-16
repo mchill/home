@@ -4,6 +4,7 @@ resources:
   - ./dashboard
   - ./duckdns
   - ./filebrowser
+  - ./homeassistant
   - ./jackett
   - ./jitsi
   - ./kubernetes-dashboard

@@ -21,8 +21,6 @@ spec:
         - name: homeassistant
           image: homeassistant/home-assistant:stable
           imagePullPolicy: Always
-          securityContext:
-            privileged: true
           ports:
             - name: http
               containerPort: 8123
@@ -33,12 +31,7 @@ spec:
             - name: server
               mountPath: /config
               subPath: homeassistant
-            - name: wyzehub
-              mountPath: /dev/wyzesense
       volumes:
         - name: server
           persistentVolumeClaim:
             claimName: server
-        - name: wyzehub
-          hostPath:
-            path: /dev/wyzesense
