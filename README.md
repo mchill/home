@@ -10,6 +10,7 @@ This is the configuration for my home server running in Kubernetes.
 
 Application          | URL
 ---                  | ---
+Bazarr               | https://bazarr.mchill.duckdns.org
 Dashboard            | https://mchill.duckdns.org
 File Browser         | https://files.mchill.duckdns.org
 Grafana              | https://grafana.mchill.duckdns.org

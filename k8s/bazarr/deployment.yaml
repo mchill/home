@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: bazarr
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: bazarr
+          image: ghcr.io/linuxserver/bazarr
+          ports:
+            - name: bazarr
+              containerPort: 6767
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - name: server
+              mountPath: /config
+              subPath: bazarr
+            - name: media
+              mountPath: /tv
+              subPath: TV
+            - name: media
+              mountPath: /movies
+              subPath: Movies
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server
+        - name: media
+          persistentVolumeClaim:
+            claimName: media

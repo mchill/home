@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: bazarr
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("bazarr.mchill.duckdns.org")
+      kind: Rule
+      services:
+        - name: bazarr
+          port: 6767
