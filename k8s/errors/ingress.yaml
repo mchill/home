@@ -1,15 +1,14 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: static
+  name: errors
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("static.mchill.duckdns.org")
+    - match: HostRegexp(`{host:.+}`)
       kind: Rule
+      priority: 1
       services:
-        - name: static
+        - name: errors
           port: 80
-      middlewares:
-        - name: static

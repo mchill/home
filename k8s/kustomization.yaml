@@ -4,6 +4,7 @@ resources:
   - ./bazarr
   - ./dashboard
   - ./duckdns
+  - ./errors
   - ./filebrowser
   - ./homeassistant
   - ./jackett

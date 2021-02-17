@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: errors
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: errors
+          image: nginx
+          ports:
+            - name: http
+              containerPort: 80
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: errors
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html
+            - name: errors
+              mountPath: /usr/share/nginx/html/401.html
+              subPath: 401.html
+      volumes:
+        - name: errors
+          configMap:
+            name: errors

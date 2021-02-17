@@ -5,7 +5,6 @@ metadata:
 spec:
   chain:
     middlewares:
-      - name: auth-error
       - name: forward-auth
 ---
 apiVersion: traefik.containo.us/v1alpha1
@@ -18,16 +17,3 @@ spec:
     trustForwardHeader: true
     authResponseHeaders:
       - X-Forwarded-User
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: auth-error
-spec:
-  errors:
-    status:
-      - "401"
-    service:
-      name: static
-      port: 80
-    query: /401.html

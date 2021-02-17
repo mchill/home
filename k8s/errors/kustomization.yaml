@@ -2,8 +2,11 @@ namespace: server
 resources:
   - deployment.yaml
   - ingress.yaml
-  - middleware.yaml
-  - sealed-secret.yaml
   - service.yaml
 commonLabels:
-  app: static
+  app: errors
+configMapGenerator:
+- name: errors
+  files:
+    - index.html
+    - 401.html
