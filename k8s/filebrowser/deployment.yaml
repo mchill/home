@@ -23,8 +23,12 @@ spec:
             - name: server
               mountPath: /database.db
               subPath: filebrowser/database.db
+            - name: server
+              mountPath: /srv/server
             - name: data
-              mountPath: /srv
+              mountPath: /srv/data
+            - name: media
+              mountPath: /srv/media
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
@@ -35,3 +39,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: data
+        - name: media
+          persistentVolumeClaim:
+            claimName: media

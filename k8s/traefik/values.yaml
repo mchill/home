@@ -14,8 +14,6 @@ deployment:
           value: mchill.duckdns.org
         - name: AUTH_HOST
           value: auth.mchill.duckdns.org
-        - name: LOGOUT_REDIRECT
-          value: https://mchill.duckdns.org
         - name: WHITELIST
           value: matthewchill7@gmail.com
         - name: SECRET
