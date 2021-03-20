@@ -22,7 +22,10 @@ spec:
           volumeMounts:
             - name: server
               mountPath: /database.db
-              subPath: filebrowser/database.db
+              subPath: filebrowser/filebrowser.db
+            - name: server
+              mountPath: /filebrowser.json
+              subPath: filebrowser/filebrowser.json
             - name: server
               mountPath: /srv/server
             - name: data
