@@ -89,13 +89,10 @@ jobs:
           sudo mv kubectl /usr/local/bin/kubectl
           curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
           sudo mv kustomize /usr/local/bin/kustomize
-          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | sudo bash
-          helm repo add traefik https://helm.traefik.io/traefik
-          helm repo add grafana https://grafana.github.io/helm-charts
           mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
           chmod 0600 ~/.kube/config
       - name: Deploy server
         working-directory: k8s
         run: |
-          kustomize build --enable-alpha-plugins | kubectl apply -f - --prune -l prune=true
+          kustomize build | kubectl apply -f - --prune -l prune=true

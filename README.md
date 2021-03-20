@@ -110,6 +110,6 @@ microk8s enable metrics-server
 The server is automatically deployed by CI. Manual deployment can be done with the following commands.
 
 ```bash
-kustomize build --enable_alpha_plugins | microk8s kubectl apply -f - --prune -l prune=true --dry-run=client
-kustomize build --enable_alpha_plugins | microk8s kubectl apply -f - --prune -l prune=true
+kustomize build | microk8s kubectl apply -f - --prune -l prune=true --dry-run=client
+kustomize build | microk8s kubectl apply -f - --prune -l prune=true
 ```

@@ -4,11 +4,15 @@ resources:
   - middleware.yaml
   - sealed-secret.yaml
   - service.yaml
-generators:
-  - chart-inflator.yaml
 commonLabels:
   app: traefik
 configMapGenerator:
-- name: traefik-forward-auth
-  files:
-    - traefik-forward-auth.ini
+  - name: traefik-forward-auth
+    files:
+      - traefik-forward-auth.ini
+helmChartInflationGenerator:
+  - chartName: traefik
+    chartRepoUrl: https://helm.traefik.io/traefik
+    releaseName: traefik
+    releaseNamespace: server
+    values: values.yaml

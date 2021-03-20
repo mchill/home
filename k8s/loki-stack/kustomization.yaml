@@ -2,5 +2,9 @@ namespace: server
 resources:
   - ingress.yaml
   - sealed-secret.yaml
-generators:
-  - chart-inflator.yaml
+helmChartInflationGenerator:
+  - chartName: loki-stack
+    chartRepoUrl: https://grafana.github.io/helm-charts
+    releaseName: loki
+    releaseNamespace: server
+    values: values.yaml
