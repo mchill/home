@@ -19,8 +19,7 @@ spec:
       hostNetwork: true
       containers:
         - name: homeassistant
-          image: homeassistant/home-assistant:stable
-          imagePullPolicy: Always
+          image: homeassistant/home-assistant:2021.3.4
           ports:
             - name: http
               containerPort: 8123
@@ -31,6 +30,11 @@ spec:
             - name: server
               mountPath: /config
               subPath: homeassistant
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 256Mi
       volumes:
         - name: server
           persistentVolumeClaim:

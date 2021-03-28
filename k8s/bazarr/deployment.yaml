@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: bazarr
-          image: ghcr.io/linuxserver/bazarr
+          image: ghcr.io/linuxserver/bazarr:development-version-v0.9.3
           ports:
             - name: bazarr
               containerPort: 6767

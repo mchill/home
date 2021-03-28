@@ -12,6 +12,7 @@ configMapGenerator:
       - traefik-forward-auth.ini
 helmChartInflationGenerator:
   - chartName: traefik
+    chartVersion: v9.18.0
     chartRepoUrl: https://helm.traefik.io/traefik
     releaseName: traefik
     releaseNamespace: server

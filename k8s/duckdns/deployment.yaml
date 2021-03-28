@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: duckdns
-          image: linuxserver/duckdns
+          image: linuxserver/duckdns:version-3a3f0388
           env:
             - name: TZ
               value: America/New_York

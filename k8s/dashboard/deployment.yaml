@@ -3,14 +3,14 @@ kind: Deployment
 metadata:
   name: dashboard
 spec:
-  replicas: 1
+  replicas: 2
   template:
     spec:
       imagePullSecrets:
         - name: ghcr
       containers:
         - name: dashboard
-          image: ghcr.io/mchill/home/dashboard
+          image: ghcr.io/mchill/home/dashboard:latest
           ports:
             - name: http
               containerPort: 80

@@ -1,9 +1,7 @@
-image:
-  tag: v2.3
 deployment:
   additionalContainers:
     - name: traefik-forward-auth
-      image: thomseddon/traefik-forward-auth:2
+      image: thomseddon/traefik-forward-auth:2.2.0
       ports:
         - name: auth
           containerPort: 4181

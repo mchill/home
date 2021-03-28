@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: minecraft-hogwarts
-          image: itzg/minecraft-server
+          image: itzg/minecraft-server:2021.6.0
           ports:
             - name: minecraft
               containerPort: 25565
