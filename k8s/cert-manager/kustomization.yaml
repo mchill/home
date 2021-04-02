@@ -3,6 +3,7 @@ resources:
   - certificate.yaml
   - sealed-secret.yaml
 # Uncomment when https://github.com/ebrianne/cert-manager-webhook-duckdns/pull/8 is merged.
+# Workaround: run `helm install cert-manager-webhook-duckdns --namespace cert-manager -f values.yaml ebrianne.github.io/cert-manager-webhook-duckdns`
 # helmChartInflationGenerator:
 #   - chartName: cert-manager-webhook-duckdns
 #     chartVersion: v1.2.2
