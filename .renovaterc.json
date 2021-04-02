@@ -1,0 +1,56 @@
+{
+  "extends": [
+    ":ignoreUnstable",
+    ":prImmediately",
+    ":updateNotScheduled",
+    ":automergeDisabled",
+    ":ignoreModulesAndTests",
+    ":pinVersions",
+    ":prHourlyLimit4",
+    ":prConcurrentLimit10",
+    "group:all",
+    "helpers:disableTypesNodeMajor",
+    "workarounds:all"
+  ],
+  "docker": {
+    "pinDigests": true
+  },
+  "kubernetes": {
+    "fileMatch": ["^k8s/.*\\.yaml$"]
+  },
+  "packageRules": [
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/linuxserver/bazarr"],
+      "versioning": "regex:^development-version-v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/linuxserver/jackett"],
+      "versioning": "regex:^version-v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": [
+        "ghcr.io/linuxserver/radarr",
+        "linuxserver/sonarr"
+      ],
+      "versioning": "regex:^version-3\\.(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["instrumentisto/rsync-ssh"],
+      "versioning": "regex:^alpine(?<major>\\d+)\\.(?<minor>\\d+)$"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": [
+        "jitsi/jicofo",
+        "jitsi/jvb",
+        "jitsi/prosody",
+        "jitsi/web"
+      ],
+      "versioning": "regex:^stable-(?<major>\\d+)-(?<minor>\\d+)$"
+    }
+  ]
+}
