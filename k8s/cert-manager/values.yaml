@@ -1,0 +1,41 @@
+groupName: mchill.duckdns.org
+
+logLevel: 2
+
+certManager:
+  namespace: cert-manager
+  serviceAccountName: cert-manager
+
+duckdns:
+  token: ""
+
+secret:
+  existingSecret: true
+  existingSecretName: cert-manager-webhook-duckdns
+
+clusterIssuer:
+  email: matthewchill7@gmail.com
+  staging:
+    create: false
+  production:
+    create: true
+
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: ebrianne/cert-manager-webhook-duckdns
+  tag: v1.2.2
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 443
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

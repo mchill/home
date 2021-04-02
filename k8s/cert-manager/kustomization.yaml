@@ -1,0 +1,12 @@
+resources:
+  - https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yaml
+  - certificate.yaml
+  - sealed-secret.yaml
+# Uncomment when https://github.com/ebrianne/cert-manager-webhook-duckdns/pull/8 is merged.
+# helmChartInflationGenerator:
+#   - chartName: cert-manager-webhook-duckdns
+#     chartVersion: v1.2.2
+#     chartRepoUrl: https://ebrianne.github.io/helm-charts
+#     releaseName: cert-manager-webhook-duckdns
+#     releaseNamespace: cert-manager
+#     values: values.yaml

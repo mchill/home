@@ -1,4 +1,5 @@
 deployment:
+  replicas: 2
   additionalContainers:
     - name: traefik-forward-auth
       image: thomseddon/traefik-forward-auth:2.2.0
@@ -48,20 +49,12 @@ additionalArguments:
   - --pilot.token=$(PILOT_TOKEN)
   - --metrics.prometheus
   - --entrypoints.websecure.http.middlewares=server-auth@kubernetescrd
-  - --certificatesresolvers.letsencrypt.acme.email=matthewchill7@gmail.com
-  - --certificatesresolvers.letsencrypt.acme.dnschallenge.provider=duckdns
-  - --certificatesresolvers.letsencrypt.acme.storage=/data/acme.json
 env:
   - name: PILOT_TOKEN
     valueFrom:
       secretKeyRef:
         name: traefik
         key: PILOT_TOKEN
-  - name: DUCKDNS_TOKEN
-    valueFrom:
-      secretKeyRef:
-        name: traefik
-        key: DUCKDNS_TOKEN
 ports:
   web:
     port: 8000
@@ -72,14 +65,5 @@ ports:
     nodePort: 8443
     tls:
       enabled: true
-      certResolver: letsencrypt
-      domains:
-        - main: mchill.duckdns.org
-          sans:
-            - "*.mchill.duckdns.org"
 service:
   type: NodePort
-persistence:
-  enabled: true
-  existingClaim: server
-  subPath: traefik
