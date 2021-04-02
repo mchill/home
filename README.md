@@ -4,30 +4,9 @@ This is the configuration for my home server running in Kubernetes.
 
 ![Home Server](https://github.com/mchill/home/workflows/Home%20Server/badge.svg)
 
+[App Dashboard](https://mchill.duckdns.org)
+
 [Trello Board](https://trello.com/b/XNVnSBvI/home-server)
-
-## Applications
-
-Application          | URL
----                  | ---
-Bazarr               | https://bazarr.mchill.duckdns.org
-Dashboard            | https://mchill.duckdns.org
-File Browser         | https://files.mchill.duckdns.org
-Grafana              | https://grafana.mchill.duckdns.org
-Home Assistant       | https://home.mchill.duckdns.org
-Jackett              | https://jackett.mchill.duckdns.org
-Jitsi                | https://jitsi.mchill.duckdns.org
-Kubernetes Dashboard | https://k8s.mchill.duckdns.org
-Minecraft            | mchill.duckdns.org:25565
-Minecraft (Hogwarts) | mchill.duckdns.org:25566
-Pi-hole              | https://pihole.mchill.duckdns.org
-Plex                 | https://plex.mchill.duckdns.org
-Prometheus           | https://prometheus.mchill.duckdns.org
-Radarr               | https://radarr.mchill.duckdns.org
-Sonarr               | https://sonarr.mchill.duckdns.org
-Synology DSM         | https://nas.mchill.duckdns.org
-Traefik Dashboard    | https://traefik.mchill.duckdns.org
-Transmission         | https://transmission.mchill.duckdns.org
 
 ## Configuration
 
