@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: pihole
-          image: pihole/pihole:v5.7
+          image: pihole/pihole:v5.7@sha256:3a39992f3e0879a4705d87d0b059513af0749e6ea2579744653fe54ceae360a0
           ports:
             - name: http
               containerPort: 80
