@@ -1,2 +1,2 @@
-FROM nginx:1.19.8@sha256:b0ea179ab61c789ce759dbe491cc534e293428ad232d00df83ce44bf86261179
+FROM nginx:1.19.9@sha256:bae781e7f518e0fb02245140c97e6ddc9f5fcf6aecc043dd9d17e33aec81c832
 COPY build /usr/share/nginx/html
