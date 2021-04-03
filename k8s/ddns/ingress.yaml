@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ddns
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("ddns.mchill.duckdns.org")
+      kind: Rule
+      services:
+        - name: ddns
+          port: 8000

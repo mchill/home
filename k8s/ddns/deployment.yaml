@@ -1,0 +1,30 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ddns
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: ddns
+          image: qmcgaw/ddns-updater:v2.2.0@sha256:b1586a46ecdb4fc517c4b9b8d61305fa8200d6f038a2dddf9d33f3f814b29f5e
+          ports:
+            - name: http
+              containerPort: 8000
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: CONFIG
+              valueFrom:
+                secretKeyRef:
+                  name: ddns
+                  key: config.json
+          volumeMounts:
+            - name: server
+              mountPath: /updater/data
+              subPath: ddns
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server
