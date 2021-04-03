@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: jicofo
-          image: jitsi/jicofo:stable-5390-3
+          image: jitsi/jicofo:stable-5390-3@sha256:cf0d686a0f0f88361ec94576480f2d35b973d24383527715f6da2c7812790885
           envFrom:
             - configMapRef:
                 name: jitsi
@@ -26,7 +26,7 @@ spec:
               mountPath: /config
               subPath: jitsi/jicofo
         - name: prosody
-          image: jitsi/prosody:stable-5390-3
+          image: jitsi/prosody:stable-5390-3@sha256:fe12d7c610f890d1050c9c41e7a5316a26182d59336b69162aae8ac8a61c1770
           envFrom:
             - configMapRef:
                 name: jitsi
@@ -40,7 +40,7 @@ spec:
               mountPath: /prosody-plugins-custom
               subPath: jitsi/prosody/prosody-plugins-custom
         - name: web
-          image: jitsi/web:stable-5390-3
+          image: jitsi/web:stable-5390-3@sha256:018f7407c2514b5eeb27f4bc4d887ae4cd38d8446a0958c5ca9cee3fa811f575
           ports:
             - name: jitsi
               containerPort: 80
@@ -52,7 +52,7 @@ spec:
               mountPath: /config
               subPath: jitsi/web
         - name: jvb
-          image: jitsi/jvb:stable-5390-3
+          image: jitsi/jvb:stable-5390-3@sha256:7be4149dc43463bf7be85259ebfa3f5504eaf2ff508a566a2552936c29df5d00
           ports:
             - name: jvb
               containerPort: 10000
