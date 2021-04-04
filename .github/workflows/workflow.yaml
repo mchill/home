@@ -95,6 +95,7 @@ jobs:
       - name: Deploy server
         working-directory: k8s
         run: |
+          kubectl rollout restart deployment dashboard -n server
           kustomize build crds | kubectl apply -f -
           sleep 5
           kustomize build server | kubectl apply -f -

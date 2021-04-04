@@ -3,7 +3,8 @@ resources:
   - https://raw.githubusercontent.com/snowdrop/godaddy-webhook/0dd48e5a1e47ab8f3f9f3d8d89d0481395ef83b4/deploy/webhook-all.yml
   - certificate.yaml
   - cluster-issuer.yaml
-  - sealed-secret.yaml
+  - sealed-secret-godaddy.yaml
+  - sealed-secret-duckdns.yaml
 # Uncomment when https://github.com/ebrianne/cert-manager-webhook-duckdns/pull/8 is merged.
 # Workaround: run `helm install cert-manager-webhook-duckdns --namespace cert-manager -f values.yaml ebrianne.github.io/cert-manager-webhook-duckdns`
 # helmChartInflationGenerator:

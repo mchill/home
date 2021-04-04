@@ -1,12 +1,8 @@
 namespace: server
 resources:
-  - endpoint.yaml
-  - ingress.yaml
   - limit-range.yaml
-  - middleware.yaml
   - namespace.yaml
   - resource-quota.yaml
   - pv.yaml
   - pvc.yaml
   - sealed-secret.yaml
-  - service.yaml

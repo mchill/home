@@ -1,0 +1,6 @@
+namespace: server
+resources:
+  - endpoint.yaml
+  - ingress.yaml
+  - middleware.yaml
+  - service.yaml
