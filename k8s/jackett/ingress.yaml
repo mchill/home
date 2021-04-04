@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("jackett.mchill.duckdns.org")
+    - match: Host("jackett.mchill.io")
       kind: Rule
       services:
         - name: jackett

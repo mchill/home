@@ -10,9 +10,9 @@ deployment:
         - name: CONFIG
           value: /config
         - name: COOKIE_DOMAIN
-          value: mchill.duckdns.org
+          value: mchill.io
         - name: AUTH_HOST
-          value: auth.mchill.duckdns.org
+          value: auth.mchill.io
         - name: WHITELIST
           value: matthewchill7@gmail.com
         - name: SECRET

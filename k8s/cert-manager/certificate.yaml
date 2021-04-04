@@ -1,14 +1,14 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
-  name: mchill-duckdns-org
+  name: mchill-io
   namespace: server
 spec:
-  commonName: mchill.duckdns.org
-  secretName: mchill-duckdns-org-tls
+  commonName: mchill.io
+  secretName: mchill-io-tls
   dnsNames:
-    - mchill.duckdns.org
-    - "*.mchill.duckdns.org"
+    - mchill.io
+    - "*.mchill.io"
   issuerRef:
-    name: cert-manager-webhook-duckdns-production
+    name: letsencrypt-prod
     kind: ClusterIssuer

@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("ddns.mchill.duckdns.org")
+    - match: Host("ddns.mchill.io")
       kind: Rule
       services:
         - name: ddns

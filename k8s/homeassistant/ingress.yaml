@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("home.mchill.duckdns.org")
+    - match: Host("home.mchill.io")
       kind: Rule
       services:
         - name: homeassistant

@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("static.mchill.duckdns.org")
+    - match: Host("static.mchill.io")
       kind: Rule
       services:
         - name: static

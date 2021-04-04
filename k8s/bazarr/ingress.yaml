@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("bazarr.mchill.duckdns.org")
+    - match: Host("bazarr.mchill.io")
       kind: Rule
       services:
         - name: bazarr

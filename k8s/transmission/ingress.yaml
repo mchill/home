@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("transmission.mchill.duckdns.org")
+    - match: Host("transmission.mchill.io")
       kind: Rule
       services:
         - name: transmission

@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("sonarr.mchill.duckdns.org")
+    - match: Host("sonarr.mchill.io")
       kind: Rule
       services:
         - name: sonarr

@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("grafana.mchill.duckdns.org")
+    - match: Host("grafana.mchill.io")
       kind: Rule
       services:
         - name: loki-grafana
@@ -20,7 +20,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("prometheus.mchill.duckdns.org")
+    - match: Host("prometheus.mchill.io")
       kind: Rule
       services:
         - name: loki-prometheus-server

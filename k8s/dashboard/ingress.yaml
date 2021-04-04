@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("mchill.duckdns.org")
+    - match: Host("mchill.io")
       kind: Rule
       services:
         - name: dashboard

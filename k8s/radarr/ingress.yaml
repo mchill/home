@@ -6,7 +6,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("radarr.mchill.duckdns.org")
+    - match: Host("radarr.mchill.io")
       kind: Rule
       services:
         - name: radarr

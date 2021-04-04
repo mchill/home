@@ -4,4 +4,4 @@ metadata:
   name: default
 spec:
   defaultCertificate:
-    secretName: mchill-duckdns-org-tls
+    secretName: mchill-io-tls

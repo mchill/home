@@ -20,7 +20,7 @@ grafana:
     GF_AUTH_ANONYMOUS_ENABLED: "true"
     GF_SMTP_ENABLED: "true"
     GF_SMTP_HOST: smtp.gmail.com:587
-    GF_SMTP_FROM_ADDRESS: grafana@mchill.duckdns.org
+    GF_SMTP_FROM_ADDRESS: grafana@mchill.io
 prometheus:
   enabled: true
   alertmanager:

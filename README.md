@@ -4,7 +4,7 @@ This is the configuration for my home server running in Kubernetes.
 
 ![Home Server](https://github.com/mchill/home/workflows/Home%20Server/badge.svg)
 
-[App Dashboard](https://mchill.duckdns.org)
+[App Dashboard](https://mchill.io)
 
 [Trello Board](https://trello.com/b/XNVnSBvI/home-server)
 

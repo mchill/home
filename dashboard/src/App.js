@@ -127,7 +127,7 @@ function App() {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    <ListItem button component="a" href="https://auth.mchill.duckdns.org/_oauth/logout">
+                    <ListItem button component="a" href="https://auth.mchill.io/_oauth/logout">
                         <ListItemIcon>
                             <ExitToApp />
                         </ListItemIcon>
@@ -138,7 +138,7 @@ function App() {
             <AppList>
                 {apps.map((app) => (
                 <AppCard key={app.name}>
-                    <AppAction onClick={() => window.location.assign("https://" + app.subdomain + ".mchill.duckdns.org" + (app.path || ""))}>
+                    <AppAction onClick={() => window.location.assign("https://" + app.subdomain + ".mchill.io" + (app.path || ""))}>
                         <AppImage image={app.logo} />
                         <CardContent>
                             <AppName variant="body1" align="center">

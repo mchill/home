@@ -1,13 +1,6 @@
 resources:
   - https://github.com/jetstack/cert-manager/releases/download/v1.2.0/cert-manager.yaml
+  - https://raw.githubusercontent.com/snowdrop/godaddy-webhook/0dd48e5a1e47ab8f3f9f3d8d89d0481395ef83b4/deploy/webhook-all.yml
   - certificate.yaml
+  - cluster-issuer.yaml
   - sealed-secret.yaml
-# Uncomment when https://github.com/ebrianne/cert-manager-webhook-duckdns/pull/8 is merged.
-# Workaround: run `helm install cert-manager-webhook-duckdns --namespace cert-manager -f values.yaml ebrianne.github.io/cert-manager-webhook-duckdns`
-# helmChartInflationGenerator:
-#   - chartName: cert-manager-webhook-duckdns
-#     chartVersion: v1.2.2
-#     chartRepoUrl: https://ebrianne.github.io/helm-charts
-#     releaseName: cert-manager-webhook-duckdns
-#     releaseNamespace: cert-manager
-#     values: values.yaml
