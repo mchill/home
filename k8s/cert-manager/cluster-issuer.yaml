@@ -17,7 +17,7 @@ spec:
           webhook:
             config:
               apiKeySecretRef:
-                name: godaddy-api-key
+                name: godaddy
                 key: token
               production: true
               ttl: 600

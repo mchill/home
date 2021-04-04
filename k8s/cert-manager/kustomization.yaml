@@ -5,12 +5,29 @@ resources:
   - cluster-issuer.yaml
   - sealed-secret-godaddy.yaml
   - sealed-secret-duckdns.yaml
-# Uncomment when https://github.com/ebrianne/cert-manager-webhook-duckdns/pull/8 is merged.
-# Workaround: run `helm install cert-manager-webhook-duckdns --namespace cert-manager -f values.yaml ebrianne.github.io/cert-manager-webhook-duckdns`
-# helmChartInflationGenerator:
-#   - chartName: cert-manager-webhook-duckdns
-#     chartVersion: v1.2.2
-#     chartRepoUrl: https://ebrianne.github.io/helm-charts
-#     releaseName: cert-manager-webhook-duckdns
-#     releaseNamespace: cert-manager
-#     values: values.yaml
+helmChartInflationGenerator:
+  - chartName: cert-manager-webhook-duckdns
+    chartVersion: v1.2.2
+    chartRepoUrl: https://ebrianne.github.io/helm-charts
+    releaseName: cert-manager-webhook-duckdns
+    releaseNamespace: cert-manager
+    values: values.yaml
+patchesJson6902:
+  - path: patch.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: cert-manager-webhook-duckdns
+  - path: patch.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Service
+      name: cert-manager-webhook-duckdns
+  - path: patch.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Secret
+      name: cert-manager-webhook-duckdns
