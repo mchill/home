@@ -1,0 +1,9 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: duckdns
+spec:
+  redirectRegex:
+    regex: ^https://(.*)mchill.duckdns.org/(.*)
+    replacement: https://${1}mchill.io/${2}
+    permanent: true

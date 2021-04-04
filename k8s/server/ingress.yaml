@@ -1,0 +1,21 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: duckdns
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: mchill-duckdns-org-tls
+    domains:
+      - main: mchill.duckdns.org
+        sans:
+          - "*.mchill.duckdns.org"
+  routes:
+    - match: HostRegexp(`mchill.duckdns.org`, `{subdomain:[a-z]+}.mchill.duckdns.org`)
+      kind: Rule
+      services:
+        - name: duckdns
+          port: 1
+      middlewares:
+        - name: duckdns

@@ -12,3 +12,18 @@ spec:
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: mchill-duckdns-org
+  namespace: server
+spec:
+  commonName: mchill.duckdns.org
+  secretName: mchill-duckdns-org-tls
+  dnsNames:
+    - mchill.duckdns.org
+    - "*.mchill.duckdns.org"
+  issuerRef:
+    name: cert-manager-webhook-duckdns-production
+    kind: ClusterIssuer

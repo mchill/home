@@ -7,6 +7,7 @@ import { ChevronLeft, ExitToApp, Menu } from '@material-ui/icons';
 import styled from 'styled-components';
 
 import bazarr from './logos/bazarr.png';
+import ddns from './logos/ddns.svg';
 import filebrowser from './logos/filebrowser.png';
 import grafana from './logos/grafana.png';
 import homeassistant from './logos/homeassistant.png';
@@ -79,6 +80,7 @@ const AppName = styled(Typography)`
 
 const apps = [
     { name: "Bazarr", subdomain: "bazarr", logo: bazarr },
+    { name: "DDNS Updater", subdomain: "ddns", logo: ddns },
     { name: "File Browser", subdomain: "files", logo: filebrowser },
     { name: "Grafana", subdomain: "grafana", logo: grafana },
     { name: "Home Assistant", subdomain: "home", logo: homeassistant },
