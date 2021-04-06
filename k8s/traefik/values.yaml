@@ -67,3 +67,5 @@ ports:
       enabled: true
 service:
   type: NodePort
+  # annotations:
+  #   metallb.universe.tf/allow-shared-ip: external

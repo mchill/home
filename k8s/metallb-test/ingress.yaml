@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: metallb-test
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("metallb.mchill.io")
+      kind: Rule
+      services:
+        - name: metallb-test
+          port: 80
