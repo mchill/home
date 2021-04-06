@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: jackett
-          image: ghcr.io/linuxserver/jackett:version-v0.17.830@sha256:bd73268948594f99fd7923dc8f8fe97c20f08c71385a78afc71d0bd8636b9dbb
+          image: ghcr.io/linuxserver/jackett:version-v0.17.855@sha256:193fbb4143665ccf4fbfae42269d9cc66123b9185a7c04a1ee6c0f301de5b77a
           ports:
             - name: jackett
               containerPort: 9117
