@@ -3,11 +3,11 @@ resources:
   - ./backup
   - ./bazarr
   - ./cert-manager
-  - ./dashboard
   - ./ddns
   - ./errors
   - ./filebrowser
   - ./homeassistant
+  - ./homer
   - ./jackett
   - ./jitsi
   - ./kubernetes-dashboard

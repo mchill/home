@@ -4,4 +4,8 @@ resources:
   - ingress.yaml
   - service.yaml
 commonLabels:
-  app: dashboard
+  app: homer
+configMapGenerator:
+  - name: homer
+    files:
+      - config.yaml

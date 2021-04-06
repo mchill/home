@@ -1,7 +1,7 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: dashboard
+  name: homer
 spec:
   entryPoints:
     - websecure
@@ -9,5 +9,5 @@ spec:
     - match: Host("mchill.io")
       kind: Rule
       services:
-        - name: dashboard
-          port: 80
+        - name: homer
+          port: 8080
