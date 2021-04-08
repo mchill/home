@@ -49,6 +49,8 @@ additionalArguments:
   - --pilot.token=$(PILOT_TOKEN)
   - --metrics.prometheus
   - --entrypoints.websecure.http.middlewares=server-auth@kubernetescrd
+  - --entrypoints.web.http.redirections.entryPoint.to=:443
+  - --entrypoints.web.http.redirections.entryPoint.scheme=https
 env:
   - name: PILOT_TOKEN
     valueFrom:
@@ -59,7 +61,6 @@ ports:
   web:
     port: 8000
     exposedPort: 8000
-    redirectTo: websecure
   websecure:
     port: 8443
     exposedPort: 8443
