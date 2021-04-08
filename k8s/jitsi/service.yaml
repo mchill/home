@@ -13,11 +13,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: jvb
+  annotations:
+    metallb.universe.tf/allow-shared-ip: external
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - name: jvb
       port: 10000
       targetPort: jvb
-      nodePort: 10000
       protocol: UDP

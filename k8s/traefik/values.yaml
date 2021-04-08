@@ -58,14 +58,13 @@ env:
 ports:
   web:
     port: 8000
-    nodePort: 8000
+    exposedPort: 8000
     redirectTo: websecure
   websecure:
     port: 8443
-    nodePort: 8443
+    exposedPort: 8443
     tls:
       enabled: true
 service:
-  type: NodePort
-  # annotations:
-  #   metallb.universe.tf/allow-shared-ip: external
+  annotations:
+    metallb.universe.tf/allow-shared-ip: external

@@ -2,3 +2,4 @@ namespace: server
 resources:
   - ingress.yaml
   - service.yaml
+  - endpoint.yaml

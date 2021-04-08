@@ -12,11 +12,21 @@ This is the configuration for my home server running in Kubernetes.
 
 ### Network
 
-All HTTP traffic is routed through Traefik, but TCP and UDP connections are directly exposed to the host via NodePort services. Although additional entrypoints could be configured to proxy these connections, it adds no benefit other than load balancing due to the lack of host or path matching.
+All HTTP traffic is routed through Traefik, but TCP and UDP connections are exposed separately. Although additional entrypoints could be configured to proxy these connections, it adds no benefit other than load balancing due to the lack of host or path matching.
+
+MetalLB has been configured with a pool containing a single IP address to make port forwarding on the router easier.
 
 HTTPS traffic is secured behind Google forward authentication by default. Some exceptions are made for applications that don't work behind an additional layer of authentication (e.g., Plex and Home Assistant).
 
-The following ports need to be fowarded by your router.
+The following DHCP reservations should be made.
+
+Device | IP Address
+---    | ---
+Server | 192.168.1.2
+NAS    | 192.168.1.3
+Phone  | 192.168.1.4
+
+The following ports need to be fowarded to 192.168.1.9.
 
 External  | Internal  | Service
 ---       | ---       | ---
@@ -76,8 +86,6 @@ If the cluster ever needs to be completely reset, this can be easily done with s
 ```bash
 sudo snap remove microk8s
 sudo snap install microk8s --classic
-echo "--service-node-port-range=0-65535" >> /var/snap/microk8s/current/args/kube-apiserver
-sudo systemctl restart snap.microk8s.daemon-apiserver
 microk8s enable storage
 microk8s enable rbac
 microk8s enable dns

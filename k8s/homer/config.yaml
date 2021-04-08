@@ -45,8 +45,8 @@ services:
         logo: assets/logos/transmission.png
         url: https://transmission.mchill.io
 
-  - name: Monitoring
-    icon: fas fa-heartbeat
+  - name: Management
+    icon: fas fa-tasks
     items:
       - name: K8s Dashboard
         subtitle: Cluster configuration
@@ -56,14 +56,22 @@ services:
         subtitle: Proxy configuration
         logo: assets/logos/traefik.png
         url: https://traefik.mchill.io
-      - name: Grafana
-        subtitle: Server monitoring
-        logo: assets/logos/grafana.png
-        url: https://grafana.mchill.io
-      - name: Prometheus
-        subtitle: Server metrics
-        logo: assets/logos/prometheus.png
-        url: https://prometheus.mchill.io
+      - name: DDNS Monitor
+        subtitle: Domain management
+        logo: assets/logos/ddns.svg
+        url: https://ddns.mchill.io
+      - name: Pi-hole
+        subtitle: DNS sinkhole
+        logo: assets/logos/pihole.png
+        url: https://pihole.mchill.io
+      - name: Synology DSM
+        subtitle: NAS web UI
+        logo: assets/logos/nas.png
+        url: https://nas.mchill.io
+      - name: Router
+        subtitle: Router web UI
+        logo: assets/logos/router.png
+        url: https://router.mchill.io
 
   - name: More
     icon: fas fa-folder-open
@@ -72,23 +80,19 @@ services:
         subtitle: Home automation
         logo: assets/logos/homeassistant.png
         url: https://home.mchill.io
+      - name: Grafana
+        subtitle: Server monitoring
+        logo: assets/logos/grafana.png
+        url: https://grafana.mchill.io
+      - name: Prometheus
+        subtitle: Server metrics
+        logo: assets/logos/prometheus.png
+        url: https://prometheus.mchill.io
       - name: File Browser
         subtitle: Browse files
         logo: assets/logos/filebrowser.png
         url: https://files.mchill.io
-      - name: Synology DSM
-        subtitle: NAS web UI
-        logo: assets/logos/nas.png
-        url: https://nas.mchill.io
-      - name: Pi-hole
-        subtitle: DNS sinkhole
-        logo: assets/logos/pihole.png
-        url: https://pihole.mchill.io
       - name: Jitsi
         subtitle: Video conferencing
         logo: assets/logos/jitsi.png
         url: https://jitsi.mchill.io
-      - name: DDNS Monitor
-        subtitle: Domain management
-        logo: assets/logos/ddns.svg
-        url: https://ddns.mchill.io
