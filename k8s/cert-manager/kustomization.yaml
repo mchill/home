@@ -21,7 +21,6 @@ patchesJson6902:
       name: cert-manager-webhook-duckdns
   - path: patch.yaml
     target:
-      group: apps
       version: v1
       kind: Service
       name: cert-manager-webhook-duckdns

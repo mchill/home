@@ -9,8 +9,10 @@
     ":prHourlyLimit4",
     ":prConcurrentLimit10",
     "group:all",
-    "helpers:disableTypesNodeMajor",
     "workarounds:all"
+  ],
+  "schedule": [
+    "before 3am on Saturday"
   ],
   "docker": {
     "pinDigests": true

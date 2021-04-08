@@ -21,27 +21,27 @@ services:
     icon: fas fa-compact-disc
     items:
       - name: Plex
-        subtitle: Watch media
+        subtitle: Media server
         logo: assets/logos/plex.png
         url: https://plex.mchill.io
       - name: Radarr
-        subtitle: Organize movies
+        subtitle: Movies
         logo: assets/logos/radarr.png
         url: https://radarr.mchill.io
       - name: Sonarr
-        subtitle: Organize TV shows
+        subtitle: TV shows
         logo: assets/logos/sonarr.png
         url: https://sonarr.mchill.io
       - name: Bazarr
-        subtitle: Find subtitles
+        subtitle: Subtitles
         logo: assets/logos/bazarr.png
         url: https://bazarr.mchill.io
       - name: Jackett
-        subtitle: Aggregate indexers
+        subtitle: Indexer aggregator
         logo: assets/logos/jackett.png
         url: https://jackett.mchill.io
       - name: Transmission
-        subtitle: Download media
+        subtitle: BitTorrent client
         logo: assets/logos/transmission.png
         url: https://transmission.mchill.io
 
@@ -77,7 +77,7 @@ services:
         logo: assets/logos/filebrowser.png
         url: https://files.mchill.io
       - name: Synology DSM
-        subtitle: Manage NAS
+        subtitle: NAS web UI
         logo: assets/logos/nas.png
         url: https://nas.mchill.io
       - name: Pi-hole
@@ -85,10 +85,10 @@ services:
         logo: assets/logos/pihole.png
         url: https://pihole.mchill.io
       - name: Jitsi
-        subtitle: Video conference
+        subtitle: Video conferencing
         logo: assets/logos/jitsi.png
         url: https://jitsi.mchill.io
       - name: DDNS Monitor
-        subtitle: Domain names
+        subtitle: Domain management
         logo: assets/logos/ddns.svg
         url: https://ddns.mchill.io
