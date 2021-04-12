@@ -9,7 +9,7 @@ spec:
     - match: Host("pihole.mchill.io")
       kind: Rule
       services:
-        - name: pihole
+        - name: pihole-tcp
           port: 80
       middlewares:
         - name: pihole

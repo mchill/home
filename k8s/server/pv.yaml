@@ -46,5 +46,6 @@ spec:
   claimRef:
     namespace: server
     name: media
-  hostPath:
-    path: /nfs/media
+  nfs:
+    path: /volume1/Media
+    server: 192.168.1.3

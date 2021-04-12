@@ -9,5 +9,5 @@ spec:
     - match: Host("plex.mchill.io")
       kind: Rule
       services:
-        - name: plex
+        - name: plex-tcp
           port: 32400

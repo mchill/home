@@ -2,6 +2,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: server
+  namespace: server
 spec:
   accessModes:
     - ReadWriteOnce
@@ -15,6 +16,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: data
+  namespace: server
 spec:
   accessModes:
     - ReadWriteOnce
@@ -28,6 +30,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: media
+  namespace: server
 spec:
   accessModes:
     - ReadWriteOnce
