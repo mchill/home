@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: ddns
-          image: qmcgaw/ddns-updater:latest@sha256:780e2ad6cf5d40e025f68fe92d721d3ea3715d7fcaefc84370cfa676df63476f
+          image: qmcgaw/ddns-updater:latest@sha256:67115964a5e2ff58834ca6f0d93a44110fc8cd5937d8243bf6e9bb16d8b7fee4
           ports:
             - name: http
               containerPort: 8000

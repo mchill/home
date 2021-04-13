@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: radarr
-          image: ghcr.io/linuxserver/radarr:version-3.0.2.4552@sha256:d3f735c5f89b897ac986768b112e1e61b2875e39cd05465bb3d79c3399f725b1
+          image: ghcr.io/linuxserver/radarr:version-3.0.2.4552@sha256:7a884b6325b931dd702df6bf5a53ff08ef83dca14cd4d0e3489e79efea85b0b4
           ports:
             - name: radarr
               containerPort: 7878
