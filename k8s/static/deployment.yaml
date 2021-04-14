@@ -19,6 +19,9 @@ spec:
             - name: media
               mountPath: /usr/share/nginx/html/podcasts
               subPath: Podcasts
+            - name: media
+              mountPath: /usr/share/nginx/html/audiobooks
+              subPath: Audiobooks
       volumes:
         - name: media
           persistentVolumeClaim:
