@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: sonarr
-          image: linuxserver/sonarr:version-3.0.6.1196@sha256:4b81ea3cf7e927f6a07a2b4bead60ce19113281a105e98c5a66ff52e8f806a0a
+          image: linuxserver/sonarr:version-3.0.6.1196@sha256:5bdf9911452371649586067b141975c60e0d439bb42a4785ebbd8a238084ceac
           ports:
             - name: sonarr
               containerPort: 8989
