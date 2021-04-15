@@ -25,8 +25,4 @@ jobs:
       - name: Deploy server
         working-directory: k8s
         run: |
-          kustomize build crds | kubectl apply -f -
-          sleep 5
-          kustomize build server | kubectl apply -f -
-          sleep 5
-          kustomize build | kubectl apply -f - --prune -l prune=true
+          kustomize build applications | kubectl apply -f -

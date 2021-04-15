@@ -1,7 +1,6 @@
 resources:
   - ./backup
   - ./bazarr
-  - ./cert-manager
   - ./ddns
   - ./errors
   - ./filebrowser
@@ -11,11 +10,9 @@ resources:
   - ./jitsi
   - ./kubernetes-dashboard
   - ./loki-stack
-  - ./metallb
   - ./minecraft-hogwarts
   - ./minecraft-mattcraft
   - ./nas
-  - ./openebs
   - ./pihole
   - ./plex
   - ./radarr
@@ -23,7 +20,4 @@ resources:
   - ./router
   - ./sonarr
   - ./static
-  - ./traefik
   - ./transmission
-transformers:
-  - label-transformer.yaml

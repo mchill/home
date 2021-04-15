@@ -95,7 +95,7 @@ microk8s enable metrics-server
 OpenEBS creates a new subdirectory for every persistent volume. Data will need to be copied from the old volume to the new volume.
 
 ```bash
-OLD_VOLUME_NAME=pvc-<uuid> envsubst < k8s/openebs/restore.yaml | kubectl apply -f -
+OLD_VOLUME_NAME=pvc-<uuid> envsubst < k8s/infrastructure/openebs/restore.yaml | kubectl apply -f -
 ```
 
 ### Deploy
@@ -104,6 +104,6 @@ The server is automatically deployed by CI. Manual deployment can be done with t
 
 ```bash
 kustomize build crds | kubectl apply -f -
-kustomize build server | kubectl apply -f -
-kustomize build | microk8s kubectl apply -f - --prune -l prune=true
+kustomize build infrastructure | kubectl apply -f -
+kustomize build applications | kubectl apply -f -
 ```

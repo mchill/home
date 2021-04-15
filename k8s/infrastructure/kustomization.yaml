@@ -1,0 +1,5 @@
+resources:
+  - ./cert-manager
+  - ./metallb
+  - ./openebs
+  - ./traefik

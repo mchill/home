@@ -30,9 +30,6 @@ spec:
               mountPath: /srv/server
             - name: media
               mountPath: /srv/media
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
       volumes:
         - name: server
           persistentVolumeClaim:
