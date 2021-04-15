@@ -28,8 +28,6 @@ spec:
               subPath: filebrowser/filebrowser.json
             - name: server
               mountPath: /srv/server
-            - name: data
-              mountPath: /srv/data
             - name: media
               mountPath: /srv/media
       securityContext:
@@ -39,9 +37,6 @@ spec:
         - name: server
           persistentVolumeClaim:
             claimName: server
-        - name: data
-          persistentVolumeClaim:
-            claimName: data
         - name: media
           persistentVolumeClaim:
             claimName: media

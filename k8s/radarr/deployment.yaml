@@ -26,9 +26,9 @@ spec:
             - name: media
               mountPath: /movies
               subPath: Movies
-            - name: data
+            - name: media
               mountPath: /data
-              subPath: transmission
+              subPath: Transmission
           resources:
             limits:
               memory: 512Mi
@@ -38,9 +38,6 @@ spec:
         - name: server
           persistentVolumeClaim:
             claimName: server
-        - name: data
-          persistentVolumeClaim:
-            claimName: data
         - name: media
           persistentVolumeClaim:
             claimName: media

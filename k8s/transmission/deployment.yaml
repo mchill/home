@@ -35,9 +35,12 @@ spec:
             - secretRef:
                 name: transmission
           volumeMounts:
-            - name: data
-              mountPath: /data
+            - name: server
+              mountPath: /data/transmission-home
               subPath: transmission
+            - name: media
+              mountPath: /data
+              subPath: Transmission
           resources:
             limits:
               cpu: 0.5
@@ -46,6 +49,9 @@ spec:
               cpu: 0.25
               memory: 512Mi
       volumes:
-        - name: data
+        - name: server
           persistentVolumeClaim:
-            claimName: data
+            claimName: server
+        - name: media
+          persistentVolumeClaim:
+            claimName: media

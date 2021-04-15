@@ -4,27 +4,12 @@ metadata:
   name: server
   namespace: server
 spec:
+  storageClassName: openebs-jiva
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 250Gi
-  storageClassName: microk8s-hostpath
-  volumeName: server
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: data
-  namespace: server
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1000Gi
-  storageClassName: microk8s-hostpath
-  volumeName: data
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -37,5 +22,5 @@ spec:
   resources:
     requests:
       storage: 1000Gi
-  storageClassName: microk8s-hostpath
+  storageClassName: default
   volumeName: media

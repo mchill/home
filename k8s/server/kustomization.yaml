@@ -2,6 +2,7 @@ resources:
   - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.15.0/controller.yaml
   - limit-range.yaml
   - namespace.yaml
-  - resource-quota.yaml
   - pv.yaml
   - pvc.yaml
+  - resource-quota.yaml
+  - storage-class.yaml

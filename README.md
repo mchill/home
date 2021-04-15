@@ -40,11 +40,10 @@ External  | Internal  | Service
 
 ### Filesystem
 
-Persistent storage is split into three volumes. The first volume is backed up nightly to local and cloud storage.
+Persistent storage is split into two volumes.
 
-* /server - Application configuration and state. Exists on the boot SSD.
-* /data - Larger short-term storage used for torrents. Mounted from an internal HDD.
-* /nfs/media - Larger long-term media storage used for Plex library. Mounted from my NAS.
+* server - Application configuration and state. Uses an OpenEBS Jiva volume replicated across all my nodes.
+* media - Larger long-term media storage. Mounted from my NAS as an NFS volume.
 
 ### Sealed Secrets
 
@@ -86,10 +85,17 @@ If the cluster ever needs to be completely reset, this can be easily done with s
 ```bash
 sudo snap remove microk8s
 sudo snap install microk8s --classic
-microk8s enable storage
 microk8s enable rbac
 microk8s enable dns
 microk8s enable metrics-server
+```
+
+### Restore Storage
+
+OpenEBS creates a new subdirectory for every persistent volume. Data will need to be copied from the old volume to the new volume.
+
+```bash
+OLD_VOLUME_NAME=pvc-<uuid> envsubst < k8s/openebs/restore.yaml | kubectl apply -f -
 ```
 
 ### Deploy
