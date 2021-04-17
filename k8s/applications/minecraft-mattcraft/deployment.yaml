@@ -10,7 +10,7 @@ spec:
     spec:
       initContainers:
         - name: mods
-          image: bash:5.1.4@sha256:c523c636b722339f41b6a431b44588ab2f762c5de5ec3bd7964420ff982fb1d9
+          image: bash:5.1.4
           args:
             - -c
             - |
@@ -38,7 +38,7 @@ spec:
               mountPath: /mods
       containers:
         - name: minecraft-mattcraft
-          image: itzg/minecraft-server:2021.9.0@sha256:778d5477027cae14fda65d86ad7120023d55d5bf2391611ef8ceebaec217d785
+          image: itzg/minecraft-server:2021.9.0
           ports:
             - name: minecraft
               containerPort: 25565

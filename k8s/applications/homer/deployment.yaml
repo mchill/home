@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: homer
-          image: b4bz/homer:21.03.2@sha256:0d7d7a054b19007293998fadba2f098e47d620f5d06fefb2ea853147bab61f1d
+          image: b4bz/homer:21.03.2
           ports:
             - name: http
               containerPort: 8080

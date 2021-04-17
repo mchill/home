@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: transmission
-          image: haugene/transmission-openvpn:3.6@sha256:56a7c4d9c47bd635576a6bca951cecf2b35aae39d490e8dec01d678e1316e92f
+          image: haugene/transmission-openvpn:3.6
           securityContext:
             capabilities:
               add:

@@ -10,7 +10,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: restore
-        image: alpine
+        image: alpine:3.13.5
         securityContext:
           privileged: true
         args:

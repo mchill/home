@@ -14,7 +14,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: backup
-              image: instrumentisto/rsync-ssh:alpine3.13@sha256:6a7e2fa501b2a5cbe9f33ce0180a1d94a5f28e777bd12bf765714e17677c122f
+              image: instrumentisto/rsync-ssh:alpine3.13
               args:
                 - /bin/sh
                 - -cex
