@@ -1,4 +1,4 @@
-namespace: server
+namespace: traefik
 resources:
   - endpoint.yaml
   - ingress.yaml

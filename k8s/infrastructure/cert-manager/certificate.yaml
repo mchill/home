@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: mchill-io
-  namespace: server
+  namespace: traefik
 spec:
   commonName: mchill.io
   secretName: mchill-io-tls
@@ -17,7 +17,7 @@ apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
   name: mchill-duckdns-org
-  namespace: server
+  namespace: traefik
 spec:
   commonName: mchill.duckdns.org
   secretName: mchill-duckdns-org-tls

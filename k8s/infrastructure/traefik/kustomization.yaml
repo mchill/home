@@ -1,7 +1,8 @@
-namespace: server
+namespace: traefik
 resources:
   - ingress.yaml
   - middleware.yaml
+  - namespace.yaml
   - sealed-secret.yaml
   - service.yaml
   - tls-store.yaml
@@ -16,5 +17,5 @@ helmChartInflationGenerator:
     chartVersion: v9.18.0
     chartRepoUrl: https://helm.traefik.io/traefik
     releaseName: traefik
-    releaseNamespace: server
+    releaseNamespace: traefik
     values: values.yaml

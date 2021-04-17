@@ -48,7 +48,7 @@ globalArguments: []
 additionalArguments:
   - --pilot.token=$(PILOT_TOKEN)
   - --metrics.prometheus
-  - --entrypoints.websecure.http.middlewares=server-auth@kubernetescrd
+  - --entrypoints.websecure.http.middlewares=traefik-auth@kubernetescrd
   - --entrypoints.web.http.redirections.entryPoint.to=:443
   - --entrypoints.web.http.redirections.entryPoint.scheme=https
 env:

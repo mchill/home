@@ -16,7 +16,6 @@ resources:
   - ./pihole
   - ./plex
   - ./radarr
-  - ./redirect
   - ./router
   - ./sonarr
   - ./static

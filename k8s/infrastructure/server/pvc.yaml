@@ -2,7 +2,6 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: server
-  namespace: server
 spec:
   storageClassName: openebs-jiva
   accessModes:
@@ -15,7 +14,6 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: media
-  namespace: server
 spec:
   accessModes:
     - ReadWriteOnce
