@@ -10,7 +10,7 @@ spec:
     spec:
       initContainers:
         - name: mods
-          image: bash:5.1.4@sha256:aead4bebd5ad1ccf25a58d8fc797ee99437546dea116abfcef8435bd130218dc
+          image: bash:5.1.4@sha256:c523c636b722339f41b6a431b44588ab2f762c5de5ec3bd7964420ff982fb1d9
           args:
             - -c
             - |
