@@ -1,0 +1,29 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: tautulli
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: tautulli
+          image: tautulli/tautulli:v2.7.0
+          ports:
+            - name: tautulli
+              containerPort: 8181
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - name: server
+              mountPath: /config
+              subPath: tautulli
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server

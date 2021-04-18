@@ -44,6 +44,10 @@ services:
         subtitle: BitTorrent client
         logo: assets/logos/transmission.png
         url: https://transmission.mchill.io
+      - name: Tautulli
+        subtitle: Plex statistics
+        logo: assets/logos/tautulli.png
+        url: https://tautulli.mchill.io
 
   - name: Management
     icon: fas fa-tasks
@@ -89,7 +93,7 @@ services:
         logo: assets/logos/prometheus.png
         url: https://prometheus.mchill.io
       - name: File Browser
-        subtitle: Browse files
+        subtitle: File browser
         logo: assets/logos/filebrowser.png
         url: https://files.mchill.io
       - name: Jitsi

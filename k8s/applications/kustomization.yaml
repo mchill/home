@@ -19,4 +19,5 @@ resources:
   - ./router
   - ./sonarr
   - ./static
+  - ./tautulli
   - ./transmission
