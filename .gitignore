@@ -1,4 +1,4 @@
 node_modules/
 build/
 secret*.yaml
-k8s/ddns/config.json
+secret*.json
