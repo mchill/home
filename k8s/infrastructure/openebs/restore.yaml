@@ -19,15 +19,14 @@ spec:
           - |
             apk add rsync
             mkdir /mnt/old
-            mount -o rw -t ext4 /var/openebs/old/volume-head-000.img /mnt/old
-            rsync -ah --progress /mnt/old/ /mnt/new
+            mount -o ro -t ext4 /var/openebs/old/volume-head-000.img /mnt/old
+            cp -rp /mnt/old/. /mnt/new/
             umount /mnt/old
         env:
           - name: TZ
             value: America/New_York
         volumeMounts:
           - name: old
-            readOnly: true
             mountPath: /var/openebs/old
             subPath: $OLD_VOLUME_NAME
           - name: new
