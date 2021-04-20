@@ -4,7 +4,7 @@ metadata:
   name: homeassistant
 subsets:
   - addresses:
-      - ip: 192.168.1.2
+      - ip: 192.168.1.200
     ports:
       - name: http
         port: 8123

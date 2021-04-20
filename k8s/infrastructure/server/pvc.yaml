@@ -16,7 +16,7 @@ metadata:
   name: media
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 1000Gi

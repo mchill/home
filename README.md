@@ -20,11 +20,12 @@ HTTPS traffic is secured behind Google forward authentication by default. Some e
 
 The following DHCP reservations should be made.
 
-Device | IP Address
----    | ---
-Server | 192.168.1.2
-NAS    | 192.168.1.3
-Phone  | 192.168.1.4
+Device            | IP Address
+---               | ---
+Laptop Node       | 192.168.1.200
+Raspberry Pi Node | 192.168.1.201
+NAS               | 192.168.1.3
+Phone             | 192.168.1.4
 
 The following ports need to be fowarded to 192.168.1.9.
 

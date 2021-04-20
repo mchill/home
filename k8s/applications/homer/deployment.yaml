@@ -3,9 +3,19 @@ kind: Deployment
 metadata:
   name: homer
 spec:
-  replicas: 2
+  replicas: 1
   template:
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                      - homer
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: homer
           image: b4bz/homer:21.03.2
