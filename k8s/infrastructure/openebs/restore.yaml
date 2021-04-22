@@ -17,7 +17,6 @@ spec:
           - /bin/sh
           - -cex
           - |
-            apk add rsync
             mkdir /mnt/old
             mount -o ro -t ext4 /var/openebs/old/volume-head-000.img /mnt/old
             cp -rp /mnt/old/. /mnt/new/

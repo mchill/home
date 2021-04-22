@@ -3,9 +3,9 @@ apiVersion: v1
 metadata:
   name: server
 spec:
-  storageClassName: openebs-jiva
+  storageClassName: openebs-nfs
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 15Gi

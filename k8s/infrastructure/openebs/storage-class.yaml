@@ -6,13 +6,22 @@ metadata:
     openebs.io/cas-type: jiva
     cas.openebs.io/config: |
       - name: ReplicaCount
-        value: "1"
-      - name: StoragePool
-        value: default
+        value: "2"
       - name: RetainReplicaData
         enabled: true
       - name: DeployInOpenEBSNamespace
         enabled: "true"
 provisioner: openebs.io/provisioner-iscsi
-reclaimPolicy: Delete
-volumeBindingMode: Immediate
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: openebs-nfs
+  annotations:
+    openebs.io/cas-type: nfsrwx
+    cas.openebs.io/config: |
+      - name: NFSServerType
+        value: kernel
+      - name: BackendStorageClass
+        value: openebs-jiva
+provisioner: openebs.io/nfsrwx

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: homer
 spec:
-  replicas: 1
+  replicas: 2
   template:
     spec:
       affinity:

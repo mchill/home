@@ -1,0 +1,81 @@
+# https://raw.githubusercontent.com/openebs/dynamic-nfs-provisioner/v0.2.0/deploy/kubectl/openebs-nfs-provisioner.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openebs-nfs-provisioner
+  namespace: openebs
+  labels:
+    name: openebs-nfs-provisioner
+    openebs.io/component-name: openebs-nfs-provisioner
+    openebs.io/version: dev
+spec:
+  selector:
+    matchLabels:
+      name: openebs-nfs-provisioner
+      openebs.io/component-name: openebs-nfs-provisioner
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: openebs-nfs-provisioner
+        openebs.io/component-name: openebs-nfs-provisioner
+        openebs.io/version: dev
+    spec:
+      nodeName: matthews-laptop # Must run on amd64 architecture for now
+      serviceAccountName: openebs-maya-operator
+      containers:
+      - name: openebs-provisioner-nfs
+        imagePullPolicy: IfNotPresent
+        image: openebs/provisioner-nfs-amd64:ci
+        env:
+        # OPENEBS_IO_K8S_MASTER enables openebs provisioner to connect to K8s
+        # based on this address. This is ignored if empty.
+        # This is supported for openebs provisioner version 0.5.2 onwards
+        #- name: OPENEBS_IO_K8S_MASTER
+        #  value: "http://10.128.0.12:8080"
+        # OPENEBS_IO_KUBE_CONFIG enables openebs provisioner to connect to K8s
+        # based on this config. This is ignored if empty.
+        # This is supported for openebs provisioner version 0.5.2 onwards
+        #- name: OPENEBS_IO_KUBE_CONFIG
+        #  value: "/home/ubuntu/.kube/config"
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: OPENEBS_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        # OPENEBS_SERVICE_ACCOUNT provides the service account of this pod as
+        # environment variable
+        - name: OPENEBS_SERVICE_ACCOUNT
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.serviceAccountName
+        - name: OPENEBS_IO_ENABLE_ANALYTICS
+          value: "true"
+        - name: OPENEBS_IO_NFS_SERVER_USE_CLUSTERIP
+          value: "true"
+        - name: OPENEBS_IO_INSTALLER_TYPE
+          value: "openebs-operator-nfs"
+        # LEADER_ELECTION_ENABLED is used to enable/disable leader election. By default
+        # leader election is enabled.
+        #- name: LEADER_ELECTION_ENABLED
+        #  value: "true"
+        # Process name used for matching is limited to the 15 characters
+        # present in the pgrep output.
+        # So fullname can't be used here with pgrep (>15 chars).A regular expression
+        # that matches the entire command name has to specified.
+        # Anchor `^` : matches any string that starts with `provisioner-nfs`
+        # `.*`: matches any string that has `provisioner-loc` followed by zero or more char
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - test `pgrep -c "^provisioner-nfs.*"` = 1
+          initialDelaySeconds: 30
+          periodSeconds: 60
