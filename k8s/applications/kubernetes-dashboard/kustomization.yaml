@@ -1,4 +1,4 @@
-namespace: kubernetes-dashboard
+namespace: server
 resources:
   - https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.4/aio/deploy/alternative.yaml
   - cluster-role-binding.yaml
@@ -11,5 +11,5 @@ patchesJson6902:
       group: apps
       version: v1
       kind: Deployment
-      namespace: kubernetes-dashboard
+      namespace: server
       name: kubernetes-dashboard

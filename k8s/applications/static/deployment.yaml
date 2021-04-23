@@ -6,6 +6,16 @@ spec:
   replicas: 2
   template:
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                      - static
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: static
           image: nginx:1.19.10

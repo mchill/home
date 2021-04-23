@@ -1,8 +1,5 @@
 namespace: server
 resources:
-  - limit-range.yaml
   - namespace.yaml
   - pv.yaml
   - pvc.yaml
-  - resource-quota.yaml
-  - storage-class.yaml

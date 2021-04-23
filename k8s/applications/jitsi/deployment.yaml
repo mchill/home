@@ -16,11 +16,6 @@ spec:
                 name: jitsi
             - secretRef:
                 name: jitsi
-          resources:
-            limits:
-              memory: 512Mi
-            requests:
-              memory: 256Mi
           volumeMounts:
             - name: server
               mountPath: /config
@@ -62,11 +57,6 @@ spec:
                 name: jitsi
             - secretRef:
                 name: jitsi
-          resources:
-            limits:
-              memory: 512Mi
-            requests:
-              memory: 256Mi
           volumeMounts:
             - name: server
               mountPath: /config

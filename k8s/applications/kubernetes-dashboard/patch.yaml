@@ -1,3 +1,6 @@
+- op: replace
+  path: /spec/template/spec/containers/0/args/0
+  value: --namespace=server
 - op: add
   path: /spec/template/spec/containers/0/args/-
   value: --enable-skip-login

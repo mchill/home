@@ -18,7 +18,7 @@ spec:
           - -cex
           - |
             mkdir /mnt/old
-            mount -o ro -t ext4 /var/openebs/old/volume-head-000.img /mnt/old
+            mount -o ro -t ext4 $(find /var/openebs/old -type f -iname "volume-head-*.img") /mnt/old
             cp -rp /mnt/old/. /mnt/new/
             umount /mnt/old
         env:

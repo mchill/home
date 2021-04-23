@@ -29,11 +29,6 @@ spec:
             - name: media
               mountPath: /data
               subPath: Transmission
-          resources:
-            limits:
-              memory: 512Mi
-            requests:
-              memory: 256Mi
       volumes:
         - name: server
           persistentVolumeClaim:
