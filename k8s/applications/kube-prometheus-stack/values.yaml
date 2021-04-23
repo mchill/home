@@ -1,0 +1,26 @@
+grafana:
+  testFramework:
+    enabled: false
+  persistence:
+    enabled: true
+    existingClaim: server
+    subPath: grafana
+  adminPassword: admin
+  plugins:
+    - devopsprodigy-kubegraf-app
+  smtp:
+    existingSecret: grafana
+    userKey: GF_SMTP_USER
+    passwordKey: GF_SMTP_PASSWORD
+  env:
+    GF_AUTH_ANONYMOUS_ENABLED: "true"
+    GF_SMTP_ENABLED: "true"
+    GF_SMTP_HOST: smtp.gmail.com:587
+    GF_SMTP_FROM_ADDRESS: grafana@mchill.io
+prometheus:
+  prometheusSpec:
+    additionalScrapeConfigs:
+      - job_name: traefik
+        static_configs:
+          - targets:
+            - traefik-internal:9000
