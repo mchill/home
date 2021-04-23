@@ -24,10 +24,10 @@ Device            | IP Address
 ---               | ---
 Laptop Node       | 192.168.1.200
 Raspberry Pi Node | 192.168.1.201
-NAS               | 192.168.1.3
-Phone             | 192.168.1.4
+NAS               | 192.168.1.210
+Phone             | 192.168.1.211
 
-The following ports need to be fowarded to 192.168.1.9.
+The following ports need to be fowarded to 192.168.1.250.
 
 External  | Internal  | Service
 ---       | ---       | ---
