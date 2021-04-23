@@ -1,7 +1,4 @@
 namespace: server
-resources:
-  - ingress.yaml
-  - sealed-secret.yaml
 helmChartInflationGenerator:
   - chartName: loki-stack
     chartVersion: v2.3.1
