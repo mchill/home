@@ -38,7 +38,7 @@ spec:
               mountPath: /mods
       containers:
         - name: minecraft-mattcraft
-          image: itzg/minecraft-server:2021.9.0
+          image: itzg/minecraft-server:2021.10.0-multiarch
           ports:
             - name: minecraft
               containerPort: 25565
@@ -69,10 +69,10 @@ spec:
               mountPath: /mods
           resources:
             limits:
-              cpu: 1
+              cpu: 2
               memory: 3Gi
             requests:
-              cpu: 0.5
+              cpu: 1
               memory: 3Gi
       volumes:
         - name: server

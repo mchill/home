@@ -1,6 +1,7 @@
 namespace: server
 resources:
   - deployment.yaml
-  - endpoint.yaml
   - ingress.yaml
   - service.yaml
+commonLabels:
+  app: homeassistant

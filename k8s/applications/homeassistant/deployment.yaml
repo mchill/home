@@ -2,19 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: homeassistant
-  labels:
-    app: homeassistant
 spec:
   replicas: 1
   strategy:
     type: Recreate
-  selector:
-    matchLabels:
-      app: homeassistant
   template:
-    metadata:
-      labels:
-        app: homeassistant
     spec:
       hostNetwork: true
       containers:
