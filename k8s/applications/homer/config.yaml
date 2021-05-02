@@ -74,8 +74,12 @@ services:
         url: https://nas.mchill.io
       - name: Router
         subtitle: Router web UI
-        logo: assets/logos/router.png
+        logo: assets/logos/ubiquiti.png
         url: https://router.mchill.io
+      - name: Access Point
+        subtitle: Wireless AP UI
+        icon: fas fa-wifi
+        url: https://ap.mchill.io
 
   - name: More
     icon: fas fa-folder-open
