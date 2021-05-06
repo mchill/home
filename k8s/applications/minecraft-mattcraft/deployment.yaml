@@ -10,7 +10,7 @@ spec:
     spec:
       initContainers:
         - name: mods
-          image: bash:5.1.4
+          image: bash:5.1.8
           args:
             - -c
             - |
@@ -38,7 +38,7 @@ spec:
               mountPath: /mods
       containers:
         - name: minecraft-mattcraft
-          image: itzg/minecraft-server:2021.10.0-multiarch
+          image: itzg/minecraft-server:2021.11.0-multiarch
           ports:
             - name: minecraft
               containerPort: 25565
