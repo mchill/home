@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: jicofo
-          image: jitsi/jicofo:stable-5390-3
+          image: jitsi/jicofo:stable-5765-1
           envFrom:
             - configMapRef:
                 name: jitsi
@@ -21,7 +21,7 @@ spec:
               mountPath: /config
               subPath: jitsi/jicofo
         - name: prosody
-          image: jitsi/prosody:stable-5390-3
+          image: jitsi/prosody:stable-5765-1
           envFrom:
             - configMapRef:
                 name: jitsi
@@ -35,7 +35,7 @@ spec:
               mountPath: /prosody-plugins-custom
               subPath: jitsi/prosody/prosody-plugins-custom
         - name: web
-          image: jitsi/web:stable-5390-3
+          image: jitsi/web:stable-5765-1
           ports:
             - name: jitsi
               containerPort: 80
@@ -47,7 +47,7 @@ spec:
               mountPath: /config
               subPath: jitsi/web
         - name: jvb
-          image: jitsi/jvb:stable-5390-3
+          image: jitsi/jvb:stable-5765-1
           ports:
             - name: jvb
               containerPort: 10000
