@@ -11,17 +11,3 @@ spec:
       services:
         - name: router
           port: 443
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: access-point
-spec:
-  entryPoints:
-    - websecure
-  routes:
-    - match: Host("ap.mchill.io")
-      kind: Rule
-      services:
-        - name: access-point
-          port: 80
