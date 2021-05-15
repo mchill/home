@@ -1,14 +1,15 @@
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: server
 spec:
-  storageClassName: openebs-nfs
   accessModes:
     - ReadWriteMany
   resources:
-    requests:
-      storage: 15Gi
+     requests:
+       storage: 16Gi
+  storageClassName: ""
+  volumeName: server
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1

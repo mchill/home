@@ -1,5 +1,7 @@
 namespace: server
 resources:
+  - endpoint.yaml
   - namespace.yaml
   - pv.yaml
   - pvc.yaml
+  - service.yaml

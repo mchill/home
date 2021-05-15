@@ -1,4 +1,0 @@
-resources:
-  - https://openebs.github.io/charts/2.7.0/openebs-operator.yaml
-  - openebs-nfs-provisioner.yaml
-  - storage-class.yaml
