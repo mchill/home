@@ -38,7 +38,7 @@ spec:
               mountPath: /mods
       containers:
         - name: minecraft-mattcraft
-          image: itzg/minecraft-server:2021.11.0-multiarch
+          image: itzg/minecraft-server:2021.12.0-multiarch
           ports:
             - name: minecraft
               containerPort: 25565
