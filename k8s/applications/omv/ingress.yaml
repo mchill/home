@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: omv
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("omv.mchill.io")
+      kind: Rule
+      services:
+        - name: omv
+          port: 80

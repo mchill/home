@@ -14,6 +14,7 @@ resources:
   - ./minecraft-hogwarts
   - ./minecraft-mattcraft
   - ./nas
+  - ./omv
   - ./pihole
   - ./plex
   - ./radarr

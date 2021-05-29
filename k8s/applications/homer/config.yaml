@@ -72,6 +72,10 @@ services:
         subtitle: NAS web UI
         logo: assets/logos/nas.png
         url: https://nas.mchill.io
+      - name: OpenMediaVault
+        subtitle: OMV web UI
+        logo: assets/logos/omv.png
+        url: https://omv.mchill.io
       - name: Router
         subtitle: Router web UI
         logo: assets/logos/router.png
