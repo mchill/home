@@ -3,7 +3,7 @@ apiVersion: apps/v1
 metadata:
   name: static
 spec:
-  replicas: 2
+  replicas: 3
   template:
     spec:
       affinity:

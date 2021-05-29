@@ -3,7 +3,7 @@ apiVersion: apps/v1
 metadata:
   name: errors
 spec:
-  replicas: 2
+  replicas: 3
   template:
     spec:
       containers:

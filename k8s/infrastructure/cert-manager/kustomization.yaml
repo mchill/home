@@ -13,18 +13,24 @@ helmChartInflationGenerator:
     releaseNamespace: cert-manager
     values: values.yaml
 patchesJson6902:
-  - path: patch.yaml
+  - path: godaddy-patch.yaml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: godaddy-webhook
+  - path: duckdns-patch.yaml
     target:
       group: apps
       version: v1
       kind: Deployment
       name: cert-manager-webhook-duckdns
-  - path: patch.yaml
+  - path: duckdns-patch.yaml
     target:
       version: v1
       kind: Service
       name: cert-manager-webhook-duckdns
-  - path: patch.yaml
+  - path: duckdns-patch.yaml
     target:
       group: apps
       version: v1

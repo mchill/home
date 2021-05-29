@@ -11,3 +11,7 @@ subsets:
       - ip: 192.168.1.201
     ports:
       - port: 1
+  - addresses:
+      - ip: 192.168.1.202
+    ports:
+      - port: 1
