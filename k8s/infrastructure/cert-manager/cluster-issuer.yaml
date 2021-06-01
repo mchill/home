@@ -17,8 +17,8 @@ spec:
           webhook:
             config:
               apiKeySecretRef:
-                name: godaddy
-                key: token
+                name: cert-manager-webhook-tokens
+                key: godaddy-token
               production: true
               ttl: 600
             groupName: acme.mycompany.com

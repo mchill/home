@@ -1,7 +1,7 @@
 groupName: mchill.duckdns.org
 secret:
   existingSecret: true
-  existingSecretName: duckdns
+  existingSecretName: cert-manager-webhook-tokens
 clusterIssuer:
   email: matthewchill7@gmail.com
   staging:

@@ -24,6 +24,7 @@ Device            | IP Address
 ---               | ---
 Laptop Node       | 192.168.1.200
 Raspberry Pi Node | 192.168.1.201
+Raspberry Pi Node | 192.168.1.202
 NAS               | 192.168.1.210
 Phone             | 192.168.1.211
 
@@ -43,7 +44,7 @@ External  | Internal  | Service
 
 Persistent storage is split into two volumes.
 
-* server - Application configuration and state. Uses an OpenEBS Jiva volume replicated across all my nodes.
+* server - Application configuration and state. Uses a GlusterFS volume replicated across all my nodes.
 * media - Larger long-term media storage. Mounted from my NAS as an NFS volume.
 
 ### Sealed Secrets
@@ -81,14 +82,21 @@ To create new sealed secret, follow these steps.
 
 ### Reset Cluster
 
-If the cluster ever needs to be completely reset, this can be easily done with snap. You'll also have to regenerate all sealed secrets afterwards, since the decryption key will be different in a new cluster.
+If the cluster ever needs to be completely reset, this can be easily done with snap.
 
 ```bash
 sudo snap remove microk8s
-sudo snap install microk8s --classic
+sudo snap install microk8s --classic --channel=1.20
+microk8s status --wait-ready
+microk8s config > ~/.kube/config
 microk8s enable rbac
 microk8s enable dns
-microk8s enable metrics-server
+```
+
+You'll also have to regenerate all sealed secrets afterwards, since the decryption key will be different in a new cluster.
+
+```bash
+find . -type f -iname secret.yaml -execdir sh -c "cat {} | kubeseal -o yaml > sealed-secret.yaml" \;
 ```
 
 ### Deploy
