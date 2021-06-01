@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: plex
-          image: linuxserver/plex:version-1.22.3.4523-d0ce30438
+          image: linuxserver/plex:version-1.23.1.4602-280ab6053
           ports:
             - name: plex
               containerPort: 32400
