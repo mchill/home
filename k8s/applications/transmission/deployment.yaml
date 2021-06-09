@@ -22,9 +22,9 @@ spec:
             - name: OPENVPN_PROVIDER
               value: MULLVAD
             - name: OPENVPN_CONFIG
-              value: us_all
+              value: us_rag
             - name: TRANSMISSION_PEER_PORT
-              value: "16724"
+              value: "56002"
             - name: PUID
               value: "1000"
             - name: PGID
