@@ -23,6 +23,8 @@ spec:
               value: MULLVAD
             - name: OPENVPN_CONFIG
               value: us_rag
+            - name: OPENVPN_OPTS
+              value: --mute-replay-warnings
             - name: TRANSMISSION_PEER_PORT
               value: "56002"
             - name: PUID
