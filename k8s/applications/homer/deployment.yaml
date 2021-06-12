@@ -9,13 +9,13 @@ spec:
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
+            - topologyKey: "kubernetes.io/hostname"
+              labelSelector:
                 matchExpressions:
                   - key: "app"
                     operator: In
                     values:
                       - homer
-              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: homer
           image: b4bz/homer:21.03.2

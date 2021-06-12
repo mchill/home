@@ -1,6 +1,5 @@
 deployment:
   kind: DaemonSet
-  replicas: 3
   additionalContainers:
     - name: traefik-forward-auth
       image: r1cebank/traefik-forward-auth:multiarch

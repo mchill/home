@@ -8,6 +8,7 @@ spec:
     type: Recreate
   template:
     spec:
+      nodeName: matthews-laptop
       initContainers:
         - name: mods
           image: bash:5.1.8
