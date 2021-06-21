@@ -14,12 +14,8 @@ spec:
             - mchill.io
             - "*.mchill.io"
         dns01:
-          webhook:
-            config:
-              apiKeySecretRef:
-                name: cert-manager-webhook-tokens
-                key: godaddy-token
-              production: true
-              ttl: 600
-            groupName: acme.mycompany.com
-            solverName: godaddy
+          cloudflare:
+            email: matthewchill7@gmail.com
+            apiTokenSecretRef:
+              name: cert-manager-webhook-tokens
+              key: cloudflare-token

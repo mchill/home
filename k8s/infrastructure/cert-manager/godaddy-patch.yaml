@@ -1,3 +1,0 @@
-- op: add
-  path: "/spec/template/spec/nodeSelector/kubernetes.io~1arch"
-  value: amd64
