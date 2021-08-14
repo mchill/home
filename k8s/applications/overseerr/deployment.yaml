@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: overseerr
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: overseerr
+          image: sctx/overseerr
+          ports:
+            - name: overseerr
+              containerPort: 5055
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: server
+              mountPath: /app/config
+              subPath: overseerr
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server

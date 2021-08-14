@@ -24,6 +24,10 @@ services:
         subtitle: Media server
         logo: assets/logos/plex.png
         url: https://plex.mchill.io
+      - name: Overseerr
+        subtitle: Plex requests
+        logo: assets/logos/overseerr.png
+        url: https://overseerr.mchill.io
       - name: Radarr
         subtitle: Movies
         logo: assets/logos/radarr.png
@@ -40,10 +44,6 @@ services:
         subtitle: Indexer aggregator
         logo: assets/logos/jackett.png
         url: https://jackett.mchill.io
-      - name: Transmission
-        subtitle: BitTorrent client
-        logo: assets/logos/transmission.png
-        url: https://transmission.mchill.io
       - name: Tautulli
         subtitle: Plex statistics
         logo: assets/logos/tautulli.png
@@ -88,6 +88,10 @@ services:
         subtitle: Home automation
         logo: assets/logos/homeassistant.png
         url: https://home.mchill.io
+      - name: Transmission
+        subtitle: BitTorrent client
+        logo: assets/logos/transmission.png
+        url: https://transmission.mchill.io
       - name: Grafana
         subtitle: Server monitoring
         logo: assets/logos/grafana.png

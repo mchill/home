@@ -11,10 +11,11 @@ resources:
   - ./kube-prometheus-stack
   - ./kubernetes-dashboard
   - ./loki-stack
-  - ./minecraft-hogwarts
+#  - ./minecraft-hogwarts
   - ./minecraft-mattcraft
   - ./nas
   - ./omv
+  - ./overseerr
   - ./pihole
   - ./plex
   - ./radarr
