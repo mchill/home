@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: transmission
-          image: haugene/transmission-openvpn:3.6
+          image: haugene/transmission-openvpn:3.7
           securityContext:
             capabilities:
               add:
