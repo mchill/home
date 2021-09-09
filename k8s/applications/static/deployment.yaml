@@ -18,7 +18,7 @@ spec:
                       - static
       containers:
         - name: static
-          image: nginx:1.21.1
+          image: nginx:1.21.3
           ports:
             - name: http
               containerPort: 80
