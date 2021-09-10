@@ -7,7 +7,7 @@ header: true
 footer: false
 
 columns: "3"
-connectivityCheck: true
+connectivityCheck: false
 
 theme: default
 
