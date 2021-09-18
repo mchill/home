@@ -11,7 +11,7 @@ spec:
       hostNetwork: true
       containers:
         - name: homeassistant
-          image: homeassistant/home-assistant:2021.9.5
+          image: homeassistant/home-assistant:2021.9.7
           ports:
             - name: http
               containerPort: 8123
