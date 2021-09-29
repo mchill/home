@@ -1,21 +1,10 @@
-kind: Deployment
+kind: DaemonSet
 apiVersion: apps/v1
 metadata:
   name: static
 spec:
-  replicas: 3
   template:
     spec:
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - topologyKey: "kubernetes.io/hostname"
-              labelSelector:
-                matchExpressions:
-                  - key: "app"
-                    operator: In
-                    values:
-                      - static
       containers:
         - name: static
           image: nginx:1.21.3

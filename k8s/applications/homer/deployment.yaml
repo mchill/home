@@ -1,21 +1,10 @@
+kind: DaemonSet
 apiVersion: apps/v1
-kind: Deployment
 metadata:
   name: homer
 spec:
-  replicas: 3
   template:
     spec:
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - topologyKey: "kubernetes.io/hostname"
-              labelSelector:
-                matchExpressions:
-                  - key: "app"
-                    operator: In
-                    values:
-                      - homer
       containers:
         - name: homer
           image: b4bz/homer:21.09.2
