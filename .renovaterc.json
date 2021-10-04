@@ -17,7 +17,6 @@
   "kubernetes": {
     "fileMatch": ["^k8s/.*\\.yaml$"]
   },
-  "ignoreDeps": ["qmcgaw/ddns-updater"],
   "packageRules": [
     {
       "matchDatasources": ["docker"],
