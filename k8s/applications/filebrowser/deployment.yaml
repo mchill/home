@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: filebrowser
-          image: filebrowser/filebrowser:v2.17.2
+          image: filebrowser/filebrowser:v2.18.0
           ports:
             - name: http
               containerPort: 8080
