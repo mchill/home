@@ -4,7 +4,7 @@ metadata:
   name: omv
 subsets:
   - addresses:
-      - ip: 192.168.1.205
+      - ip: 192.168.1.212
     ports:
       - name: http
         port: 80
