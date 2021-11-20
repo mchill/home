@@ -11,7 +11,7 @@ spec:
       nodeName: matthews-laptop
       initContainers:
         - name: mods
-          image: bash:5.1.8
+          image: bash:5.1.12
           args:
             - -c
             - |
