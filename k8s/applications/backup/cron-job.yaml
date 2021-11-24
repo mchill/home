@@ -24,7 +24,7 @@ spec:
                   ssh-keyscan -H nas >> /root/.ssh/known_hosts;
                   cd /backup;
                   getfacl -R . > permissions.facl;
-                  rsync -av -e "ssh -i /root/ssh/id_rsa" --delete-before /backup rsync@nas:/volume1/ServerBackup;
+                  rsync -avz -e "ssh -i /root/ssh/id_rsa" --exclude /backup/server/loki --delete-before /backup serverbackup@nas:/volume1/ServerBackup;
               env:
                 - name: TZ
                   value: America/New_York

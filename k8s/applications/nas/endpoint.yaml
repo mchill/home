@@ -4,7 +4,7 @@ metadata:
   name: nas
 subsets:
   - addresses:
-      - ip: 192.168.1.210
+      - ip: 192.168.1.220
     ports:
       - name: http
         port: 5000

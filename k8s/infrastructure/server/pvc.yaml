@@ -20,6 +20,6 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1000Gi
+      storage: 5Ti
   storageClassName: ""
   volumeName: media

@@ -25,7 +25,7 @@ Device            | IP Address
 Laptop Node       | 192.168.1.200
 Raspberry Pi Node | 192.168.1.201
 Raspberry Pi Node | 192.168.1.202
-NAS               | 192.168.1.210
+NAS               | 192.168.1.220
 Phone             | 192.168.1.211
 
 The following ports need to be fowarded to 192.168.1.250.
@@ -37,7 +37,6 @@ External  | Internal  | Service
 22        | 22        | SSH
 16443     | 16443     | Kube API Server
 25565     | 25565     | Minecraft
-25566     | 25566     | Minecraft
 10000/udp | 10000/udp | Jitsi
 
 ### Filesystem
