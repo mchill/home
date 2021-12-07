@@ -40,14 +40,14 @@ services:
         subtitle: Subtitles
         logo: assets/logos/bazarr.png
         url: https://bazarr.mchill.io
+      - name: Audiobookshelf
+        subtitle: Books
+        logo: assets/logos/audiobookshelf.png
+        url: https://books.mchill.io
       - name: Jackett
         subtitle: Indexer aggregator
         logo: assets/logos/jackett.png
         url: https://jackett.mchill.io
-      - name: Tautulli
-        subtitle: Plex statistics
-        logo: assets/logos/tautulli.png
-        url: https://tautulli.mchill.io
 
   - name: Management
     icon: fas fa-tasks
@@ -100,6 +100,10 @@ services:
         subtitle: Server metrics
         logo: assets/logos/prometheus.png
         url: https://prometheus.mchill.io
+      - name: Tautulli
+        subtitle: Plex statistics
+        logo: assets/logos/tautulli.png
+        url: https://tautulli.mchill.io
       - name: File Browser
         subtitle: File browser
         logo: assets/logos/filebrowser.png

@@ -1,0 +1,7 @@
+namespace: server
+resources:
+  - deployment.yaml
+  - ingress.yaml
+  - service.yaml
+commonLabels:
+  app: audiobookshelf
