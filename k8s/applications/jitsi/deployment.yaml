@@ -12,7 +12,7 @@ spec:
         kubernetes.io/arch: amd64
       containers:
         - name: jicofo
-          image: jitsi/jicofo:stable-5765-1
+          image: jitsi/jicofo:stable-6726-1
           envFrom:
             - configMapRef:
                 name: jitsi
@@ -23,7 +23,7 @@ spec:
               mountPath: /config
               subPath: jitsi/jicofo
         - name: prosody
-          image: jitsi/prosody:stable-5765-1
+          image: jitsi/prosody:stable-6726-1
           envFrom:
             - configMapRef:
                 name: jitsi
@@ -37,7 +37,7 @@ spec:
               mountPath: /prosody-plugins-custom
               subPath: jitsi/prosody/prosody-plugins-custom
         - name: web
-          image: jitsi/web:stable-5765-1
+          image: jitsi/web:stable-6726-1
           ports:
             - name: jitsi
               containerPort: 80
@@ -49,7 +49,7 @@ spec:
               mountPath: /config
               subPath: jitsi/web
         - name: jvb
-          image: jitsi/jvb:stable-5765-1
+          image: jitsi/jvb:stable-6726-1
           ports:
             - name: jvb
               containerPort: 10000
