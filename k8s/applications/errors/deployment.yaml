@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: errors
-          image: nginx:1.21.5
+          image: nginx:1.21.6
           ports:
             - name: http
               containerPort: 80
