@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: readarr
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("readarr.mchill.io")
+      kind: Rule
+      services:
+        - name: readarr
+          port: 8787

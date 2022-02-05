@@ -36,12 +36,16 @@ services:
         subtitle: TV shows
         logo: assets/logos/sonarr.png
         url: https://sonarr.mchill.io
+      - name: Readarr
+        subtitle: Books
+        logo: assets/logos/readarr.png
+        url: https://readarr.mchill.io
       - name: Bazarr
         subtitle: Subtitles
         logo: assets/logos/bazarr.png
         url: https://bazarr.mchill.io
       - name: Audiobookshelf
-        subtitle: Books
+        subtitle: Audiobook player
         logo: assets/logos/audiobookshelf.png
         url: https://books.mchill.io
       - name: Jackett
