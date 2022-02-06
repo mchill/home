@@ -34,7 +34,7 @@ services:
         url: https://files.mchill.io
 
   - name: Libraries
-    icon: fas fa-folders
+    icon: fas fa-folder-open
     items:
       - name: Radarr
         subtitle: Movies
@@ -94,7 +94,7 @@ services:
         url: https://router.mchill.io
 
   - name: Monitoring
-    icon: fas fa-heart-pulse
+    icon: fas fa-heartbeat
     items:
       - name: Tautulli
         subtitle: Plex statistics
@@ -114,7 +114,7 @@ services:
         url: https://ddns.mchill.io
 
   - name: More
-    icon: fas fa-folder-open
+    icon: fas fa-plus
     items:
       - name: Home Assistant
         subtitle: Home automation
