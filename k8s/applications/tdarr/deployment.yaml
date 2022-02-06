@@ -1,0 +1,81 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: tdarr
+spec:
+  replicas: 1
+  template:
+    spec:
+      nodeName: matthews-laptop
+      containers:
+        - name: tdarr-server
+          image: haveagitgat/tdarr:2.00.13
+          ports:
+            - name: tdarr
+              containerPort: 8265
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: serverIP
+              value: 0.0.0.0
+            - name: serverPort
+              value: "8266"
+            - name: webUIPort
+              value: "8265"
+          volumeMounts:
+            - name: server
+              mountPath: /app/server
+              subPath: tdarr/server
+            - name: server
+              mountPath: /app/configs
+              subPath: tdarr/configs
+            - name: media
+              mountPath: /media/Movies
+              subPath: Movies
+            - name: media
+              mountPath: /media/TV
+              subPath: TV
+            - name: media
+              mountPath: /media/4kRemux
+              subPath: 4kRemux
+        - name: tdarr-node
+          image: haveagitgat/tdarr_node:2.00.13
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: nodeIP
+              value: 0.0.0.0
+            - name: nodePort
+              value: "8267"
+            - name: serverIP
+              value: 0.0.0.0
+            - name: serverPort
+              value: "8266"
+          volumeMounts:
+            - name: server
+              mountPath: /app/configs
+              subPath: tdarr/configs
+            - name: media
+              mountPath: /media/Movies
+              subPath: Movies
+            - name: media
+              mountPath: /media/TV
+              subPath: TV
+            - name: media
+              mountPath: /media/4kRemux
+              subPath: 4kRemux
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server
+        - name: media
+          persistentVolumeClaim:
+            claimName: media

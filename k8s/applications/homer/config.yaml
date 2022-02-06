@@ -21,13 +21,21 @@ services:
     icon: fas fa-compact-disc
     items:
       - name: Plex
-        subtitle: Media server
+        subtitle: Videos
         logo: assets/logos/plex.png
         url: https://plex.mchill.io
-      - name: Overseerr
-        subtitle: Plex requests
-        logo: assets/logos/overseerr.png
-        url: https://overseerr.mchill.io
+      - name: Audiobookshelf
+        subtitle: Audiobooks
+        logo: assets/logos/audiobookshelf.png
+        url: https://books.mchill.io
+      - name: File Browser
+        subtitle: Files
+        logo: assets/logos/filebrowser.png
+        url: https://files.mchill.io
+
+  - name: Libraries
+    icon: fas fa-folders
+    items:
       - name: Radarr
         subtitle: Movies
         logo: assets/logos/radarr.png
@@ -44,17 +52,29 @@ services:
         subtitle: Subtitles
         logo: assets/logos/bazarr.png
         url: https://bazarr.mchill.io
-      - name: Audiobookshelf
-        subtitle: Audiobook player
-        logo: assets/logos/audiobookshelf.png
-        url: https://books.mchill.io
+
+  - name: Media Mgmt
+    icon: fas fa-tasks
+    items:
+      - name: Overseerr
+        subtitle: Plex requests
+        logo: assets/logos/overseerr.png
+        url: https://overseerr.mchill.io
+      - name: Tdarr
+        subtitle: Transcoder
+        logo: assets/logos/tdarr.png
+        url: https://tdarr.mchill.io
+      - name: Transmission
+        subtitle: BitTorrent client
+        logo: assets/logos/transmission.png
+        url: https://transmission.mchill.io
       - name: Jackett
         subtitle: Indexer aggregator
         logo: assets/logos/jackett.png
         url: https://jackett.mchill.io
 
-  - name: Management
-    icon: fas fa-tasks
+  - name: Server Mgmt
+    icon: fas fa-server
     items:
       - name: K8s Dashboard
         subtitle: Cluster configuration
@@ -64,14 +84,6 @@ services:
         subtitle: Proxy configuration
         logo: assets/logos/traefik.png
         url: https://traefik.mchill.io
-      - name: DDNS Monitor
-        subtitle: Domain management
-        logo: assets/logos/ddns.svg
-        url: https://ddns.mchill.io
-      - name: Pi-hole
-        subtitle: DNS sinkhole
-        logo: assets/logos/pihole.png
-        url: https://pihole.mchill.io
       - name: Synology DSM
         subtitle: NAS web UI
         logo: assets/logos/nas.png
@@ -81,17 +93,13 @@ services:
         logo: assets/logos/router.png
         url: https://router.mchill.io
 
-  - name: More
-    icon: fas fa-folder-open
+  - name: Monitoring
+    icon: fas fa-heart-pulse
     items:
-      - name: Home Assistant
-        subtitle: Home automation
-        logo: assets/logos/homeassistant.png
-        url: https://home.mchill.io
-      - name: Transmission
-        subtitle: BitTorrent client
-        logo: assets/logos/transmission.png
-        url: https://transmission.mchill.io
+      - name: Tautulli
+        subtitle: Plex statistics
+        logo: assets/logos/tautulli.png
+        url: https://tautulli.mchill.io
       - name: Grafana
         subtitle: Server monitoring
         logo: assets/logos/grafana.png
@@ -100,14 +108,22 @@ services:
         subtitle: Server metrics
         logo: assets/logos/prometheus.png
         url: https://prometheus.mchill.io
-      - name: Tautulli
-        subtitle: Plex statistics
-        logo: assets/logos/tautulli.png
-        url: https://tautulli.mchill.io
-      - name: File Browser
-        subtitle: File browser
-        logo: assets/logos/filebrowser.png
-        url: https://files.mchill.io
+      - name: DDNS Monitor
+        subtitle: Domain management
+        logo: assets/logos/ddns.svg
+        url: https://ddns.mchill.io
+
+  - name: More
+    icon: fas fa-folder-open
+    items:
+      - name: Home Assistant
+        subtitle: Home automation
+        logo: assets/logos/homeassistant.png
+        url: https://home.mchill.io
+      - name: Pi-hole
+        subtitle: DNS sinkhole
+        logo: assets/logos/pihole.png
+        url: https://pihole.mchill.io
       - name: Jitsi
         subtitle: Video conferencing
         logo: assets/logos/jitsi.png

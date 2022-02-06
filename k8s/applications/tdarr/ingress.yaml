@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: tdarr
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("tdarr.mchill.io")
+      kind: Rule
+      services:
+        - name: tdarr
+          port: 8265
