@@ -6,6 +6,7 @@ spec:
   replicas: 1
   template:
     spec:
+      nodeName: matthews-laptop
       containers:
         - name: plex
           image: linuxserver/plex:version-1.25.4.5487-648a8f9f9
@@ -31,8 +32,8 @@ spec:
               value: http://192.168.1.250:32400,https://plex.mchill.io
           resources:
             limits:
-              cpu: 2
-              memory: 1Gi
+              cpu: 4
+              memory: 2Gi
             requests:
               cpu: 1
               memory: 512Mi
