@@ -33,9 +33,9 @@ spec:
             - name: server
               mountPath: /app/configs
               subPath: tdarr/configs
-            - name: server
+            - name: media
               mountPath: /temp
-              subPath: tdarr/cache
+              subPath: Tdarr
             - name: media
               mountPath: /media/Movies
               subPath: Movies
@@ -66,9 +66,9 @@ spec:
             - name: server
               mountPath: /app/configs
               subPath: tdarr/configs
-            - name: server
+            - name: media
               mountPath: /temp
-              subPath: tdarr/cache
+              subPath: Tdarr
             - name: media
               mountPath: /media/Movies
               subPath: Movies
