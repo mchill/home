@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: readarr
-          image: linuxserver/readarr:nightly-version-0.1.0.1248
+          image: linuxserver/readarr:nightly-version-0.1.1.1259
           ports:
             - name: readarr
               containerPort: 8787
