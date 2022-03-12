@@ -2,7 +2,7 @@ name: Home Server
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
