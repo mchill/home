@@ -9,7 +9,7 @@ spec:
       nodeName: matthews-laptop
       containers:
         - name: plex
-          image: linuxserver/plex:version-1.25.6.5577-c8bd13540
+          image: linuxserver/plex:version-1.25.7.5604-980a13e02
           ports:
             - name: plex
               containerPort: 32400
