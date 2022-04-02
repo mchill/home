@@ -1,0 +1,9 @@
+resources:
+  - namespace.yaml
+helmCharts:
+  - name: sealed-secrets
+    includeCRDs: true
+    version: 2.1.5
+    repo: https://bitnami-labs.github.io/sealed-secrets
+    releaseName: sealed-secrets-controller
+    namespace: sealed-secrets

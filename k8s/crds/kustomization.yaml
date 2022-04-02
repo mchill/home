@@ -1,5 +1,5 @@
 resources:
-  - https://raw.githubusercontent.com/bitnami-labs/sealed-secrets/v0.15.0/helm/sealed-secrets/crds/sealedsecret-crd.yaml
+  - https://raw.githubusercontent.com/bitnami-labs/sealed-secrets/v0.17.4/helm/sealed-secrets/crds/sealedsecret-crd.yaml
   - https://github.com/cert-manager/cert-manager/releases/download/v1.7.2/cert-manager.crds.yaml
   - https://raw.githubusercontent.com/traefik/traefik-helm-chart/v10.19.4/traefik/crds/ingressroute.yaml
   - https://raw.githubusercontent.com/traefik/traefik-helm-chart/v10.19.4/traefik/crds/ingressroutetcp.yaml

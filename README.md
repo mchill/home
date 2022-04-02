@@ -95,7 +95,7 @@ microk8s enable dns
 You'll also have to regenerate all sealed secrets afterwards, since the decryption key will be different in a new cluster.
 
 ```bash
-find . -type f -iname secret.yaml -execdir sh -c "cat {} | kubeseal -o yaml > sealed-secret.yaml" \;
+find . -type f -iname secret.yaml -not -path "*/charts/*" -execdir sh -c "cat {} | kubeseal --controller-namespace=sealed-secrets -o yaml > sealed-secret.yaml" \;
 ```
 
 ### Deploy
