@@ -1,6 +1,0 @@
-namespace: traefik
-resources:
-  - endpoint.yaml
-  - ingress.yaml
-  - middleware.yaml
-  - service.yaml

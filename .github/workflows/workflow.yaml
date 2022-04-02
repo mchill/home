@@ -25,4 +25,4 @@ jobs:
       - name: Deploy server
         working-directory: k8s
         run: |
-          kustomize build applications | kubectl apply -f -
+          kustomize build --enable-helm applications | kubectl apply -f -
