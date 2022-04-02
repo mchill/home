@@ -1,10 +1,11 @@
 resources:
   - ingress.yaml
   - sealed-secret.yaml
-helmChartInflationGenerator:
-  - chartName: kube-prometheus-stack
-    chartVersion: v15.1.3
-    chartRepoUrl: https://prometheus-community.github.io/helm-charts
+helmCharts:
+  - name: kube-prometheus-stack
+    includeCRDs: true
+    version: 34.7.0
+    repo: https://prometheus-community.github.io/helm-charts
     releaseName: prometheus
-    releaseNamespace: server
-    values: values.yaml
+    namespace: server
+    valuesFile: values.yaml

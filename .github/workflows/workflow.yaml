@@ -11,8 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup kubectl
-        env:
-          KUBECTL_VER: 1.19.3
         run: |
           curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"
           chmod +x kubectl

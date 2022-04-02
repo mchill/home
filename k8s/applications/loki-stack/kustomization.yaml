@@ -1,8 +1,8 @@
-namespace: server
-helmChartInflationGenerator:
-  - chartName: loki-stack
-    chartVersion: v2.3.1
-    chartRepoUrl: https://grafana.github.io/helm-charts
+helmCharts:
+  - name: loki-stack
+    includeCRDs: true
+    version: 2.6.1
+    repo: https://grafana.github.io/helm-charts
     releaseName: loki
-    releaseNamespace: server
-    values: values.yaml
+    namespace: server
+    valuesFile: values.yaml
