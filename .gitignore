@@ -2,3 +2,4 @@ node_modules/
 build/
 secret*.yaml
 secret*.json
+charts/

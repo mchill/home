@@ -12,10 +12,11 @@ configMapGenerator:
   - name: traefik-forward-auth
     files:
       - traefik-forward-auth.ini
-helmChartInflationGenerator:
-  - chartName: traefik
-    chartVersion: v9.18.0
-    chartRepoUrl: https://helm.traefik.io/traefik
+helmCharts:
+  - name: traefik
+    includeCRDs: true
+    version: v10.19.4
+    repo: https://helm.traefik.io/traefik
     releaseName: traefik
-    releaseNamespace: traefik
-    values: values.yaml
+    namespace: traefik
+    valuesFile: values.yaml
