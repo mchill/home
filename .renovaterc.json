@@ -21,32 +21,9 @@
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": [
-        "ghcr.io/linuxserver/bazarr",
-        "ghcr.io/linuxserver/jackett"
-      ],
-      "versioning": "regex:^(development-)?version-v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchPackageNames": [
-        "ghcr.io/linuxserver/radarr",
-        "linuxserver/sonarr"
-      ],
-      "versioning": "regex:^version-3\\.(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchPackageNames": [
-        "linuxserver/readarr"
+        "ghcr.io/linuxserver/readarr"
       ],
       "versioning": "regex:^nightly-version-0\\.(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchPackageNames": [
-        "linuxserver/plex"
-      ],
-      "versioning": "regex:^version-1\\.(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-.+$"
     },
     {
       "matchDatasources": ["docker"],

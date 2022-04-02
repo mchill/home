@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: sonarr
-          image: linuxserver/sonarr:version-3.0.7.1477
+          image: ghcr.io/linuxserver/sonarr:3.0.7
           ports:
             - name: sonarr
               containerPort: 8989
