@@ -14,7 +14,7 @@ This is the configuration for my home server running in Kubernetes.
 
 All HTTP traffic is routed through Traefik, but TCP and UDP connections are exposed separately. Although additional entrypoints could be configured to proxy these connections, it adds no benefit other than load balancing due to the lack of host or path matching.
 
-MetalLB has been configured with a pool containing a single IP address to make port forwarding on the router easier.
+MetalLB has been configured with a small pool to make port forwarding on the router easier.
 
 HTTPS traffic is secured behind Google forward authentication by default. Some exceptions are made for applications that don't work behind an additional layer of authentication (e.g., Plex and Home Assistant).
 
@@ -30,14 +30,14 @@ Phone             | 192.168.1.211
 
 The following ports need to be fowarded to 192.168.1.250.
 
-External  | Internal  | Service
----       | ---       | ---
-80        | 8000      | HTTP
-443       | 8443      | HTTPS
-22        | 22        | SSH
-16443     | 16443     | Kube API Server
-25565     | 25565     | Minecraft
-10000/udp | 10000/udp | Jitsi
+Port      | Service
+---       | ---
+80        | HTTP
+443       | HTTPS
+22        | SSH
+16443     | Kube API Server
+25565     | Minecraft
+10000/udp | Jitsi
 
 ### Filesystem
 

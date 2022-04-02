@@ -61,12 +61,13 @@ env:
 ports:
   web:
     port: 8000
-    exposedPort: 8000
+    exposedPort: 80
   websecure:
     port: 8443
-    exposedPort: 8443
+    exposedPort: 443
     tls:
       enabled: true
 service:
   annotations:
     metallb.universe.tf/allow-shared-ip: external
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.250
