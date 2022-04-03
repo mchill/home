@@ -9,7 +9,7 @@ resources:
   - ./homer
   - ./jackett
   - ./jitsi
-  - ./kube-prometheus-stack
+  # - ./kube-prometheus-stack
   - ./kubernetes-dashboard
   - ./loki-stack
   - ./minecraft-mattcraft
