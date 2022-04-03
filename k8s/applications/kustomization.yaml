@@ -7,7 +7,6 @@ resources:
   - ./filebrowser
   - ./homeassistant
   - ./homer
-  - ./jackett
   - ./jitsi
   # - ./kube-prometheus-stack
   - ./kubernetes-dashboard
@@ -17,6 +16,7 @@ resources:
   - ./overseerr
   - ./pihole
   - ./plex
+  - ./prowlarr
   - ./radarr
   - ./readarr
   - ./router

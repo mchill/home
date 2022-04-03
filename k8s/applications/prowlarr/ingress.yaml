@@ -1,13 +1,13 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: jackett
+  name: prowlarr
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("jackett.mchill.io")
+    - match: Host("prowlarr.mchill.io")
       kind: Rule
       services:
-        - name: jackett
-          port: 9117
+        - name: prowlarr
+          port: 9696

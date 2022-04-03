@@ -4,4 +4,4 @@ resources:
   - ingress.yaml
   - service.yaml
 commonLabels:
-  app: jackett
+  app: prowlarr

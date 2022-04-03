@@ -1,28 +1,28 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: jackett
+  name: prowlarr
 spec:
   replicas: 1
   template:
     spec:
       containers:
-        - name: jackett
-          image: ghcr.io/linuxserver/jackett:0.20.783
+        - name: prowlarr
+          image: ghcr.io/linuxserver/prowlarr:0.2.0-develop
           ports:
-            - name: jackett
-              containerPort: 9117
+            - name: prowlarr
+              containerPort: 9696
           env:
             - name: TZ
               value: America/New_York
             - name: PUID
               value: "1000"
-            - name: GUID
+            - name: PGID
               value: "1000"
           volumeMounts:
             - name: server
               mountPath: /config
-              subPath: jackett
+              subPath: prowlarr
       volumes:
         - name: server
           persistentVolumeClaim:

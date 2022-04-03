@@ -68,10 +68,10 @@ services:
         subtitle: BitTorrent client
         logo: assets/logos/transmission.png
         url: https://transmission.mchill.io
-      - name: Jackett
+      - name: Prowlarr
         subtitle: Indexer aggregator
-        logo: assets/logos/jackett.png
-        url: https://jackett.mchill.io
+        logo: assets/logos/prowlarr.png
+        url: https://prowlarr.mchill.io
 
   - name: Server Mgmt
     icon: fas fa-server
