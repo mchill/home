@@ -1,8 +1,10 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: grafana
+  name: prometheus-external
   namespace: server
+  annotations:
+    kubernetes.io/ingress.class: traefik-external
 spec:
   entryPoints:
     - websecure
@@ -12,17 +14,29 @@ spec:
       services:
         - name: prometheus-grafana
           port: 80
+    - match: Host("prometheus.mchill.io")
+      kind: Rule
+      services:
+        - name: prometheus-kube-prometheus-prometheus
+          port: 9090
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: prometheus
+  name: prometheus-internal
   namespace: server
+  annotations:
+    kubernetes.io/ingress.class: traefik-internal
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("prometheus.mchill.io")
+    - match: Host("grafana.mchill.lan")
+      kind: Rule
+      services:
+        - name: prometheus-grafana
+          port: 80
+    - match: Host("prometheus.mchill.lan")
       kind: Rule
       services:
         - name: prometheus-kube-prometheus-prometheus

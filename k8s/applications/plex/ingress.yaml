@@ -1,12 +1,30 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: plex
+  name: plex-external
+  annotations:
+    kubernetes.io/ingress.class: traefik-external
 spec:
   entryPoints:
     - websecure
   routes:
     - match: Host("plex.mchill.io")
+      kind: Rule
+      services:
+        - name: plex-tcp
+          port: 32400
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: plex-internal
+  annotations:
+    kubernetes.io/ingress.class: traefik-internal
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("plex.mchill.lan")
       kind: Rule
       services:
         - name: plex-tcp

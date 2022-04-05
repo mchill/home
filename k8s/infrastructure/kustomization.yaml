@@ -3,4 +3,5 @@ resources:
   - ./metallb
   - ./sealed-secrets
   - ./server
-  - ./traefik
+  - ./traefik-external
+  - ./traefik-internal

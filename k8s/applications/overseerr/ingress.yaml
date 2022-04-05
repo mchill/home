@@ -1,12 +1,30 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: overseerr
+  name: overseerr-external
+  annotations:
+    kubernetes.io/ingress.class: traefik-external
 spec:
   entryPoints:
     - websecure
   routes:
     - match: Host("overseerr.mchill.io")
+      kind: Rule
+      services:
+        - name: overseerr
+          port: 5055
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: overseerr-internal
+  annotations:
+    kubernetes.io/ingress.class: traefik-internal
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("overseerr.mchill.lan")
       kind: Rule
       services:
         - name: overseerr

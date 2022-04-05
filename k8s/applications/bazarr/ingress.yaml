@@ -1,12 +1,30 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: bazarr
+  name: bazarr-external
+  annotations:
+    kubernetes.io/ingress.class: traefik-external
 spec:
   entryPoints:
     - websecure
   routes:
     - match: Host("bazarr.mchill.io")
+      kind: Rule
+      services:
+        - name: bazarr
+          port: 6767
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: bazarr-internal
+  annotations:
+    kubernetes.io/ingress.class: traefik-internal
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("bazarr.mchill.lan")
       kind: Rule
       services:
         - name: bazarr

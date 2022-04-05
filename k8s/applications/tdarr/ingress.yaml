@@ -1,12 +1,30 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: tdarr
+  name: tdarr-external
+  annotations:
+    kubernetes.io/ingress.class: traefik-external
 spec:
   entryPoints:
     - websecure
   routes:
     - match: Host("tdarr.mchill.io")
+      kind: Rule
+      services:
+        - name: tdarr
+          port: 8265
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: tdarr-internal
+  annotations:
+    kubernetes.io/ingress.class: traefik-internal
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host("tdarr.mchill.lan")
       kind: Rule
       services:
         - name: tdarr

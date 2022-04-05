@@ -1,0 +1,23 @@
+namespace: traefik-external
+resources:
+  - certificate.yaml
+  - ingress.yaml
+  - middleware.yaml
+  - namespace.yaml
+  - sealed-secret.yaml
+  - service.yaml
+  - tls-store.yaml
+commonLabels:
+  app: traefik-external
+configMapGenerator:
+  - name: traefik-forward-auth
+    files:
+      - traefik-forward-auth.ini
+helmCharts:
+  - name: traefik
+    includeCRDs: false
+    version: v10.19.4
+    repo: https://helm.traefik.io/traefik
+    releaseName: traefik-external
+    namespace: traefik-external
+    valuesFile: values.yaml

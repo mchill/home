@@ -46,12 +46,13 @@ logs:
     enabled: true
 globalArguments: []
 additionalArguments:
+  - --api.insecure=true
   - --serversTransport.insecureSkipVerify=true
   - --pilot.token=$(PILOT_TOKEN)
   - --metrics.prometheus
-  - --entrypoints.websecure.http.middlewares=traefik-auth@kubernetescrd
-  - --entrypoints.web.http.redirections.entryPoint.to=:443
-  - --entrypoints.web.http.redirections.entryPoint.scheme=https
+  - --providers.kubernetesingress.ingressClass=traefik-external
+  - --providers.kubernetescrd.ingressClass=traefik-external
+  - --entrypoints.websecure.http.middlewares=traefik-external-forward-auth@kubernetescrd
 env:
   - name: PILOT_TOKEN
     valueFrom:
@@ -62,6 +63,7 @@ ports:
   web:
     port: 8000
     exposedPort: 80
+    redirectTo: websecure
   websecure:
     port: 8443
     exposedPort: 443

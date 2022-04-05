@@ -1,0 +1,29 @@
+deployment:
+  kind: DaemonSet
+ingressRoute:
+  dashboard:
+    enabled: false
+logs:
+  access:
+    enabled: true
+globalArguments: []
+additionalArguments:
+  - --api.insecure=true
+  - --serversTransport.insecureSkipVerify=true
+  - --providers.kubernetesingress.ingressClass=traefik-internal
+  - --providers.kubernetescrd.ingressClass=traefik-internal
+  - --entrypoints.websecure.http.middlewares=traefik-internal-basic-auth@kubernetescrd
+ports:
+  web:
+    port: 8000
+    exposedPort: 80
+    redirectTo: websecure
+  websecure:
+    port: 8443
+    exposedPort: 443
+    tls:
+      enabled: true
+service:
+  annotations:
+    metallb.universe.tf/allow-shared-ip: external
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.251

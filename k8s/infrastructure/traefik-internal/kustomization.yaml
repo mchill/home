@@ -1,22 +1,17 @@
-namespace: traefik
+namespace: traefik-internal
 resources:
   - ingress.yaml
   - middleware.yaml
   - namespace.yaml
   - sealed-secret.yaml
   - service.yaml
-  - tls-store.yaml
 commonLabels:
-  app: traefik
-configMapGenerator:
-  - name: traefik-forward-auth
-    files:
-      - traefik-forward-auth.ini
+  app: traefik-internal
 helmCharts:
   - name: traefik
-    includeCRDs: true
+    includeCRDs: false
     version: v10.19.4
     repo: https://helm.traefik.io/traefik
-    releaseName: traefik
-    namespace: traefik
+    releaseName: traefik-internal
+    namespace: traefik-internal
     valuesFile: values.yaml

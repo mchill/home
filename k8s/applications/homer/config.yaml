@@ -80,14 +80,14 @@ services:
         subtitle: Cluster configuration
         logo: assets/logos/kubernetes.png
         url: https://k8s.mchill.io
-      - name: Traefik
+      - name: Traefik External
         subtitle: Proxy configuration
         logo: assets/logos/traefik.png
-        url: https://traefik.mchill.io
-      - name: Synology DSM
-        subtitle: NAS web UI
-        logo: assets/logos/nas.png
-        url: https://nas.mchill.io
+        url: https://traefik-external.mchill.io
+      - name: Traefik Internal
+        subtitle: Proxy configuration
+        logo: assets/logos/traefik.png
+        url: https://traefik-internal.mchill.io
       - name: Router
         subtitle: Router web UI
         logo: assets/logos/router.png
@@ -128,3 +128,7 @@ services:
         subtitle: Video conferencing
         logo: assets/logos/jitsi.png
         url: https://jitsi.mchill.io
+      - name: Synology DSM
+        subtitle: NAS web UI
+        logo: assets/logos/nas.png
+        url: https://nas.mchill.io

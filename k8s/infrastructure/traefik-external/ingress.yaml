@@ -1,31 +1,36 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: radarr-external
+  name: traefik-external
   annotations:
     kubernetes.io/ingress.class: traefik-external
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("radarr.mchill.io")
+    - match: Host("traefik.mchill.io", "traefik-external.mchill.io")
       kind: Rule
       services:
-        - name: radarr
-          port: 7878
+        - name: api@internal
+          kind: TraefikService
+    - match: Host("auth.mchill.io")
+      kind: Rule
+      services:
+        - name: traefik-clusterip
+          port: 4181
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: radarr-internal
+  name: traefik-internal
   annotations:
     kubernetes.io/ingress.class: traefik-internal
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("radarr.mchill.lan")
+    - match: Host("traefik-external.mchill.lan")
       kind: Rule
       services:
-        - name: radarr
-          port: 7878
+        - name: traefik-clusterip
+          port: 9000

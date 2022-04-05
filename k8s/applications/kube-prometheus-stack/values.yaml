@@ -23,4 +23,4 @@ prometheus:
       - job_name: traefik
         static_configs:
           - targets:
-            - traefik-internal:9000
+            - traefik-clusterip:9000
