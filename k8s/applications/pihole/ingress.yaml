@@ -11,7 +11,7 @@ spec:
     - match: Host("pihole.mchill.io")
       kind: Rule
       services:
-        - name: pihole-tcp
+        - name: pihole
           port: 80
       middlewares:
         - name: pihole
@@ -29,7 +29,7 @@ spec:
     - match: Host("pihole.mchill.lan")
       kind: Rule
       services:
-        - name: pihole-tcp
+        - name: pihole
           port: 80
       middlewares:
         - name: pihole

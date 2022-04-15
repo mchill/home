@@ -12,9 +12,7 @@ This is the configuration for my home server running in Kubernetes.
 
 ### Network
 
-All HTTP traffic is routed through Traefik, but TCP and UDP connections are exposed separately. Although additional entrypoints could be configured to proxy these connections, it adds no benefit other than load balancing due to the lack of host or path matching.
-
-MetalLB has been configured with a small pool to make port forwarding on the router easier.
+All HTTP traffic is routed through Traefik, but UDP connections are exposed separately. Although additional entrypoints could be configured to proxy these connections, it adds no benefit other than load balancing due to the lack of host or path matching.
 
 HTTPS traffic is secured behind Google forward authentication by default. Some exceptions are made for applications that don't work behind an additional layer of authentication (e.g., Plex and Home Assistant).
 
@@ -25,19 +23,30 @@ Device            | IP Address
 Laptop Node       | 192.168.1.200
 Raspberry Pi Node | 192.168.1.201
 Raspberry Pi Node | 192.168.1.202
-NAS               | 192.168.1.220
+NAS               | 192.168.1.210
 Phone             | 192.168.1.211
 
-The following ports need to be fowarded to 192.168.1.250.
+In addition, a MetalLB pool is created to expose the following services to the local network.
 
-Port      | Service
----       | ---
-80        | HTTP
-443       | HTTPS
-22        | SSH
-16443     | Kube API Server
-25565     | Minecraft
-10000/udp | Jitsi
+Application      | IP Address    | Ports
+---              | ---           | ---
+External Traefik | 192.168.1.240 | 80, 443
+Minecraft        | 192.168.1.241 | 25565
+Jitsi            | 192.168.1.242 | 10000/udp
+Internal Traefik | 192.168.1.245 | 80, 443
+Plex             | 192.168.1.246 | 32400, 32410-32414/udp
+Pihole           | 192.168.1.249 | 80, 443, 53, 53/udp
+
+The following ports need to be fowarded to expose certain services to the internet.
+
+Port      | Destination             | Service
+---       | ---                     | ---
+80        | 192.168.1.240:83        | Traefik HTTP
+443       | 192.168.1.240:443       | Traefik HTTPS
+25565     | 192.168.1.241:25565     | Minecraft
+10000/udp | 192.168.1.242:10000/udp | Jitsi
+22        | 192.168.1.200:22        | SSH
+16443     | 192.168.1.200:16443     | Kube API Server
 
 ### Filesystem
 
@@ -64,7 +73,7 @@ To create new sealed secret, follow these steps.
     apiVersion: v1
     kind: Secret
     metadata:
-      name: jitsi
+      name: my-secret
       namespace: server
     type: Opaque
     data:
@@ -85,7 +94,9 @@ If the cluster ever needs to be completely reset, this can be easily done with s
 
 ```bash
 sudo snap remove microk8s
-sudo snap install microk8s --classic --channel=1.20
+sudo snap install microk8s --classic --channel=1.23
+sed -i 's/--feature-gates=.*/&,MixedProtocolLBService=true/g' /var/snap/microk8s/current/args/kube-apiserver
+sudo systemctl restart snap.microk8s.daemon-kubelite.service
 microk8s status --wait-ready
 microk8s config > ~/.kube/config
 microk8s enable rbac

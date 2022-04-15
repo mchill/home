@@ -1,27 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: plex-tcp
+  name: plex
   annotations:
-    metallb.universe.tf/allow-shared-ip: external
-    metallb.universe.tf/loadBalancerIPs: 192.168.1.250
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.246
 spec:
   type: LoadBalancer
   ports:
     - name: plex
       port: 32400
       targetPort: plex
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: plex-udp
-  annotations:
-    metallb.universe.tf/allow-shared-ip: external
-    metallb.universe.tf/loadBalancerIPs: 192.168.1.250
-spec:
-  type: LoadBalancer
-  ports:
     - name: gdm-1
       port: 32410
       targetPort: gdm-1

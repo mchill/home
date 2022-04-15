@@ -25,5 +25,4 @@ ports:
       enabled: true
 service:
   annotations:
-    metallb.universe.tf/allow-shared-ip: external
-    metallb.universe.tf/loadBalancerIPs: 192.168.1.251
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.245

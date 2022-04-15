@@ -14,8 +14,7 @@ kind: Service
 metadata:
   name: jvb
   annotations:
-    metallb.universe.tf/allow-shared-ip: external
-    metallb.universe.tf/loadBalancerIPs: 192.168.1.250
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.242
 spec:
   type: LoadBalancer
   ports:
