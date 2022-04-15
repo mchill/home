@@ -17,6 +17,7 @@
   "kubernetes": {
     "fileMatch": ["^k8s/.*\\.yaml$"]
   },
+  "ignoreDeps": ["kube-prometheus-stack"],
   "packageRules": [
     {
       "matchDatasources": ["docker"],
