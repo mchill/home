@@ -41,12 +41,12 @@ The following ports need to be fowarded to expose certain services to the intern
 
 Port      | Destination             | Service
 ---       | ---                     | ---
+22        | 192.168.1.200:22        | SSH
 80        | 192.168.1.240:83        | Traefik HTTP
 443       | 192.168.1.240:443       | Traefik HTTPS
 25565     | 192.168.1.241:25565     | Minecraft
 10000/udp | 192.168.1.242:10000/udp | Jitsi
-22        | 192.168.1.200:22        | SSH
-16443     | 192.168.1.200:16443     | Kube API Server
+16443     | 192.168.1.250:16443     | Kube API Server
 
 ### Filesystem
 
