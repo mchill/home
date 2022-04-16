@@ -6,8 +6,6 @@ grafana:
     existingClaim: server
     subPath: grafana
   adminPassword: admin
-  plugins:
-    - devopsprodigy-kubegraf-app
   smtp:
     existingSecret: grafana
     userKey: GF_SMTP_USER
