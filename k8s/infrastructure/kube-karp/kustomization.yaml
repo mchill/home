@@ -1,0 +1,7 @@
+namespace: kube-karp
+resources:
+  - deployment.yaml
+  - namespace.yaml
+  - sealed-secret.yaml
+commonLabels:
+  app: kube-karp
