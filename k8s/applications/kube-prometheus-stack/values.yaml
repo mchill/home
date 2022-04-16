@@ -24,3 +24,7 @@ prometheus:
         static_configs:
           - targets:
             - traefik-clusterip:9000
+prometheusOperator:
+  admissionWebhooks:
+    patch:
+      enabled: false

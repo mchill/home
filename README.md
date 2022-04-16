@@ -95,8 +95,15 @@ If the cluster ever needs to be completely reset, this can be easily done with s
 ```bash
 sudo snap remove microk8s
 sudo snap install microk8s --classic --channel=1.23
+
+# Add custom domain name to cert
+sed -i '/^DNS.5 =.*/a DNS.6 = mchill.io' /var/snap/microk8s/current/certs/csr.conf.template
+sudo microk8s refresh-certs
+
+# Enable combined tcp/udp services
 sed -i 's/--feature-gates=.*/&,MixedProtocolLBService=true/g' /var/snap/microk8s/current/args/kube-apiserver
 sudo systemctl restart snap.microk8s.daemon-kubelite.service
+
 microk8s status --wait-ready
 microk8s config > ~/.kube/config
 microk8s enable rbac
