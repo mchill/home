@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webnut
+spec:
+  type: ClusterIP
+  ports:
+    - name: webnut
+      port: 6543
+      targetPort: http

@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: webnut
+spec:
+  replicas: 1
+  template:
+    spec:
+      nodeName: matthews-laptop
+      containers:
+        - name: webnut
+          image: teknologist/webnut:0.1
+          ports:
+            - name: http
+              containerPort: 6543
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: UPS_HOST
+              value: 192.168.1.210
+            - name: UPS_PORT
+              value: "3493"
+          envFrom:
+            - secretRef:
+                name: webnut
