@@ -9,7 +9,7 @@ spec:
       nodeName: matthews-laptop
       containers:
         - name: tdarr-server
-          image: haveagitgat/tdarr:2.00.17
+          image: haveagitgat/tdarr:2.00.18
           ports:
             - name: tdarr
               containerPort: 8265
@@ -46,7 +46,7 @@ spec:
               mountPath: /media/4kRemux
               subPath: 4kRemux
         - name: tdarr-node
-          image: haveagitgat/tdarr_node:2.00.17
+          image: haveagitgat/tdarr_node:2.00.18
           env:
             - name: TZ
               value: America/New_York
