@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: tautulli
-          image: tautulli/tautulli:v2.10.0
+          image: tautulli/tautulli:v2.10.1
           ports:
             - name: tautulli
               containerPort: 8181
