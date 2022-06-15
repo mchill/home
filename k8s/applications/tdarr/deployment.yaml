@@ -40,11 +40,11 @@ spec:
               mountPath: /media/Movies
               subPath: Movies
             - name: media
+              mountPath: /media/UHD Movies
+              subPath: UHD Movies
+            - name: media
               mountPath: /media/TV
               subPath: TV
-            - name: media
-              mountPath: /media/4kRemux
-              subPath: 4kRemux
         - name: tdarr-node
           image: haveagitgat/tdarr_node:2.00.18
           env:
@@ -73,11 +73,11 @@ spec:
               mountPath: /media/Movies
               subPath: Movies
             - name: media
+              mountPath: /media/UHD Movies
+              subPath: UHD Movies
+            - name: media
               mountPath: /media/TV
               subPath: TV
-            - name: media
-              mountPath: /media/4kRemux
-              subPath: 4kRemux
       volumes:
         - name: server
           persistentVolumeClaim:

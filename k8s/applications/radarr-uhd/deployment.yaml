@@ -1,0 +1,40 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: radarr-uhd
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+        - name: radarr
+          image: ghcr.io/linuxserver/radarr:4.1.0
+          ports:
+            - name: radarr
+              containerPort: 7878
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - name: server
+              mountPath: /config
+              subPath: radarr-uhd
+            - name: media
+              mountPath: /UHD Movies
+              subPath: UHD Movies
+            - name: media
+              mountPath: /data
+              subPath: Transmission
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server
+        - name: media
+          persistentVolumeClaim:
+            claimName: media

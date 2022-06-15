@@ -40,14 +40,14 @@ services:
         subtitle: Movies
         logo: assets/logos/radarr.png
         url: https://radarr.mchill.io
+      - name: UHD Radarr
+        subtitle: UHD Movies
+        logo: assets/logos/radarr.png
+        url: https://radarr-uhd.mchill.io
       - name: Sonarr
         subtitle: TV shows
         logo: assets/logos/sonarr.png
         url: https://sonarr.mchill.io
-      - name: Readarr
-        subtitle: Books
-        logo: assets/logos/readarr.png
-        url: https://readarr.mchill.io
       - name: Bazarr
         subtitle: Subtitles
         logo: assets/logos/bazarr.png

@@ -18,7 +18,7 @@ resources:
   - ./plex
   - ./prowlarr
   - ./radarr
-  - ./readarr
+  - ./radarr-uhd
   - ./router
   - ./sonarr
   - ./static

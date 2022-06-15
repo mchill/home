@@ -31,7 +31,7 @@ spec:
             - name: TZ
               value: America/New_York
             - name: ADVERTISE_IP
-              value: http://192.168.1.250:32400,https://plex.mchill.io
+              value: http://192.168.1.246:32400,https://plex.mchill.io
           resources:
             limits:
               cpu: 4
@@ -44,7 +44,14 @@ spec:
               mountPath: /config
               subPath: plex
             - name: media
-              mountPath: /data
+              mountPath: /data/Movies
+              subPath: Movies
+            - name: media
+              mountPath: /data/UHD Movies
+              subPath: UHD Movies
+            - name: media
+              mountPath: /data/TV
+              subPath: TV
       volumes:
         - name: server
           persistentVolumeClaim:
