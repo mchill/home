@@ -1,0 +1,24 @@
+libraries:
+  Movies:
+    metadata_path:
+      - file: config/movies.yaml
+  Shared Movies:
+    metadata_path:
+      - file: config/movies.yaml
+  TV Shows:
+    metadata_path:
+      - file: config/tv.yaml
+settings:
+  asset_directory: /config/assets
+  create_asset_folders: true
+  sync_mode: sync
+  minimum_items: 2
+  default_collection_order: release
+  tvdb_language: eng
+  verify_ssl: true
+plex:
+  url: http://plex.server.svc.cluster.local.:32400
+  token: $PLEX_TOKEN
+tmdb:
+  apikey: $TMDB_API_KEY
+  language: en

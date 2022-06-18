@@ -1,0 +1,56 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: plex-meta-manager
+spec:
+  schedule: "@daily"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        spec:
+          restartPolicy: OnFailure
+          initContainers:
+            - name: render-config
+              image: bash:5.1.16
+              args:
+                - -c
+                - |
+                  apk add --no-cache gettext
+                  envsubst < /config_src/config.yaml > /config/config.yml
+              envFrom:
+                - secretRef:
+                    name: plex-meta-manager
+              volumeMounts:
+                - name: server
+                  mountPath: /config
+                  subPath: plex-meta-manager
+                - name: plex-meta-manager
+                  mountPath: /config_src/config.yaml
+                  subPath: config.yaml
+          containers:
+            - name: plex-meta-manager
+              image: meisnate12/plex-meta-manager:v1.17.0
+              args:
+                - --run
+                - --read-only-config
+              env:
+                - name: TZ
+                  value: America/New_York
+              volumeMounts:
+                - name: server
+                  mountPath: /config
+                  subPath: plex-meta-manager
+                - name: plex-meta-manager
+                  mountPath: /config/movies.yaml
+                  subPath: movies.yaml
+          volumes:
+            - name: server
+              persistentVolumeClaim:
+                claimName: server
+            - name: plex-meta-manager
+              configMap:
+                name: plex-meta-manager
