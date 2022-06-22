@@ -32,6 +32,10 @@ services:
         subtitle: Files
         logo: assets/logos/filebrowser.png
         url: https://files.mchill.io
+      - name: Synology DSM
+        subtitle: NAS
+        logo: assets/logos/nas.png
+        url: https://nas.mchill.io
 
   - name: Libraries
     icon: fas fa-folder-open
@@ -60,6 +64,10 @@ services:
         subtitle: Plex requests
         logo: assets/logos/overseerr.png
         url: https://overseerr.mchill.io
+      - name: Gaps
+        subtitle: Collection manager
+        logo: assets/logos/gaps.png
+        url: https://gaps.mchill.io
       - name: Tdarr
         subtitle: Transcoder
         logo: assets/logos/tdarr.png
@@ -92,18 +100,10 @@ services:
         subtitle: Router web UI
         logo: assets/logos/router.png
         url: https://router.mchill.io
-      - name: Synology DSM
-        subtitle: NAS web UI
-        logo: assets/logos/nas.png
-        url: https://nas.mchill.io
 
   - name: Monitoring
     icon: fas fa-heartbeat
     items:
-      - name: Tautulli
-        subtitle: Plex statistics
-        logo: assets/logos/tautulli.png
-        url: https://tautulli.mchill.io
       - name: Grafana
         subtitle: Server monitoring
         logo: assets/logos/grafana.png
@@ -132,6 +132,10 @@ services:
         subtitle: DNS sinkhole
         logo: assets/logos/pihole.png
         url: https://pihole.mchill.io
+      - name: Tautulli
+        subtitle: Plex statistics
+        logo: assets/logos/tautulli.png
+        url: https://tautulli.mchill.io
       - name: Jitsi
         subtitle: Video conferencing
         logo: assets/logos/jitsi.png

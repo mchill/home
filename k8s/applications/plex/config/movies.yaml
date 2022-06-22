@@ -73,7 +73,7 @@ collections:
     plex_search:
       type: movies
       all:
-        title: "Scooby-Doo"
+        title: "Scooby"
         title.isnot:
           - "Scooby-Doo"
           - "Scooby-Doo 2: Monsters Unleashed"

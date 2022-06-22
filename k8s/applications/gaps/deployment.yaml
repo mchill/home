@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: gaps
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: gaps
+          image: housewrecker/gaps:latest
+          ports:
+            - name: gaps
+              containerPort: 8484
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: server
+              mountPath: /usr/data
+              subPath: gaps
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server

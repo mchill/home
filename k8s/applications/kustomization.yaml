@@ -5,6 +5,7 @@ resources:
   - ./ddns
   - ./errors
   - ./filebrowser
+  - ./gaps
   - ./homeassistant
   - ./homer
   - ./jitsi

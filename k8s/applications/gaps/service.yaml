@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gaps
+spec:
+  type: ClusterIP
+  ports:
+    - name: gaps
+      port: 8484
+      targetPort: gaps
