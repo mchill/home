@@ -1,0 +1,40 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sonarr-uhd
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+        - name: sonarr
+          image: ghcr.io/linuxserver/sonarr:3.0.8
+          ports:
+            - name: sonarr
+              containerPort: 8989
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - name: server
+              mountPath: /config
+              subPath: sonarr-uhd
+            - name: media
+              mountPath: /UHD TV
+              subPath: UHD TV
+            - name: media
+              mountPath: /data
+              subPath: Transmission
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server
+        - name: media
+          persistentVolumeClaim:
+            claimName: media

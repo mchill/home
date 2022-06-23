@@ -45,6 +45,9 @@ spec:
             - name: media
               mountPath: /media/TV
               subPath: TV
+            - name: media
+              mountPath: /media/UHD TV
+              subPath: UHD TV
         - name: tdarr-node
           image: haveagitgat/tdarr_node:2.00.18
           env:
@@ -78,6 +81,9 @@ spec:
             - name: media
               mountPath: /media/TV
               subPath: TV
+            - name: media
+              mountPath: /media/UHD TV
+              subPath: UHD TV
       volumes:
         - name: server
           persistentVolumeClaim:

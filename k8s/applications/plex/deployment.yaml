@@ -52,6 +52,9 @@ spec:
             - name: media
               mountPath: /data/TV
               subPath: TV
+            - name: media
+              mountPath: /data/UHD TV
+              subPath: UHD TV
       volumes:
         - name: server
           persistentVolumeClaim:
