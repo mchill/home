@@ -26,8 +26,8 @@ spec:
               mountPath: /config
               subPath: sonarr-uhd
             - name: media
-              mountPath: /UHD TV
-              subPath: UHD TV
+              mountPath: /tv-uhd
+              subPath: TV-UHD
             - name: media
               mountPath: /data
               subPath: Transmission

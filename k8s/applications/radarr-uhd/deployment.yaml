@@ -26,8 +26,8 @@ spec:
               mountPath: /config
               subPath: radarr-uhd
             - name: media
-              mountPath: /UHD Movies
-              subPath: UHD Movies
+              mountPath: /movies-uhd
+              subPath: Movies-UHD
             - name: media
               mountPath: /data
               subPath: Transmission
