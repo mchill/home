@@ -39,7 +39,7 @@ spec:
               mountPath: /mods
       containers:
         - name: minecraft-mattcraft
-          image: itzg/minecraft-server:2022.8.0
+          image: itzg/minecraft-server:2022.9.0
           ports:
             - name: minecraft
               containerPort: 25565

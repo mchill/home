@@ -33,7 +33,7 @@ spec:
                   subPath: config.yaml
           containers:
             - name: plex-meta-manager
-              image: meisnate12/plex-meta-manager:v1.17.0
+              image: meisnate12/plex-meta-manager:v1.17.1
               args:
                 - --run
                 - --read-only-config
