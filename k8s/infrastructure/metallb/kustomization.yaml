@@ -1,5 +1,5 @@
 namespace: metallb-system
 resources:
-  - github.com/metallb/metallb//manifests?ref=v0.12.1
+  - github.com/metallb/metallb//manifests?ref=v0.13.3
   - config-map.yaml
   - sealed-secret.yaml
