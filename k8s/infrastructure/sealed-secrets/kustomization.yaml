@@ -3,7 +3,7 @@ resources:
 helmCharts:
   - name: sealed-secrets
     includeCRDs: false
-    version: 2.3.0
+    version: 2.5.2
     repo: https://bitnami-labs.github.io/sealed-secrets
     releaseName: sealed-secrets-controller
     namespace: sealed-secrets
