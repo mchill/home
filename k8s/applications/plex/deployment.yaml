@@ -11,7 +11,7 @@ spec:
       nodeName: matthews-laptop
       containers:
         - name: plex
-          image: ghcr.io/linuxserver/plex:1.28.0
+          image: ghcr.io/linuxserver/plex:1.28.1
           ports:
             - name: plex
               containerPort: 32400
