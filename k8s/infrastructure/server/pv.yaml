@@ -56,3 +56,20 @@ spec:
   nfs:
     path: /volume1/Media
     server: 192.168.1.210
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: unencryptedmedia
+spec:
+  capacity:
+    storage: 5Ti
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: server
+    name: unencryptedmedia
+  nfs:
+    path: /volume1/UnencryptedMedia
+    server: 192.168.1.210

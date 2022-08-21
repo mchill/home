@@ -28,7 +28,7 @@ spec:
             - name: media
               mountPath: /tv-uhd
               subPath: TV-UHD
-            - name: media
+            - name: unencryptedmedia
               mountPath: /data
               subPath: Transmission
       volumes:
@@ -38,3 +38,6 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media
+        - name: unencryptedmedia
+          persistentVolumeClaim:
+            claimName: unencryptedmedia

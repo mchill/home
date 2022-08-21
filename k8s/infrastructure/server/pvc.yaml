@@ -23,3 +23,16 @@ spec:
       storage: 5Ti
   storageClassName: ""
   volumeName: media
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: unencryptedmedia
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Ti
+  storageClassName: ""
+  volumeName: unencryptedmedia

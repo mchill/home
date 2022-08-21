@@ -30,6 +30,8 @@ spec:
               mountPath: /srv/server
             - name: media
               mountPath: /srv/media
+            - name: unencryptedmedia
+              mountPath: /srv/unencryptedmedia
       volumes:
         - name: server
           persistentVolumeClaim:
@@ -37,3 +39,6 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media
+        - name: unencryptedmedia
+          persistentVolumeClaim:
+            claimName: unencryptedmedia
