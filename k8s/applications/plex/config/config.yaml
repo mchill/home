@@ -1,10 +1,16 @@
 libraries:
   Movies:
     metadata_path:
-      - file: config/movies.yaml
+      - file: config/movies.yml
   Shared Movies:
     metadata_path:
-      - file: config/movies.yaml
+      - file: config/movies.yml
+  TV Shows:
+    metadata_path:
+      - file: config/tv.yml
+  Shared TV Shows:
+    metadata_path:
+      - file: config/tv.yml
 settings:
   asset_directory: /config/assets
   create_asset_folders: true

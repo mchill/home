@@ -11,4 +11,5 @@ configMapGenerator:
   - name: plex-meta-manager
     files:
       - config/config.yaml
-      - config/movies.yaml
+      - config/movies.yml
+      - config/tv.yml

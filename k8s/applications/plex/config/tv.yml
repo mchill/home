@@ -1,0 +1,54 @@
+collections:
+  Christmas Collection:
+    collection_mode: show_items
+    collection_order: release
+    builder_level: episode
+    plex_search:
+      type: episodes
+      any:
+        episode_title.is:
+          - "A Scooby-Doo! Christmas"
+          - "The Nutcracker Scoob (1)"
+          - "The Nutcracker Scoob (2)"
+          - "The Santa Experience"
+          - "Chanukah"
+          - "Let It Snow"
+          - "A Rugrats Kwanzaa"
+          - "Babies in Toyland"
+          - "The Finster Who Stole Christmas"
+          - "Christmas Everyday"
+          - "Merry Wishmas"
+          - "Holly Jolly Jimmy"
+          - "The Fright Before Christmas"
+          - "A Rocket X-Mas"
+          - "Have Yourself A Thornberry Little Christmas"
+          - "iChristmas"
+          - "A Christmas Tori"
+          - "Misfits & Magic Holiday Special"
+  Halloween Collection:
+    collection_mode: show_items
+    collection_order: release
+    builder_level: episode
+    plex_search:
+      type: episodes
+      any:
+        episode_title.is:
+          - "TP+KF"
+          - "The Headless Horseman of Halloween"
+          - "To Switch a Witch"
+          - "A Halloween Hassle at Dracula's Castle (1)"
+          - "A Halloween Hassle at Dracula's Castle (2)"
+          - "Ghost Who's Coming to Dinner?"
+          - "A Scooby-Doo Halloween"
+          - "Nightmare in Retroville"
+          - "Scaredy Pants"
+          - "Scary Godparents"
+          - "Candy Bar Creep Show"
+          - "Curse of the Werewuff"
+          - "Fright Night"
+          - "Haunted House"
+          - "iHalfoween"
+          - "iScream on Halloween"
+          - "The Night Before"
+        episode_title:
+          - "Guide to: Halloween & Vampires Werewolves Ghost and Zombies"

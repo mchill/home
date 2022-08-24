@@ -45,8 +45,11 @@ spec:
                   mountPath: /config
                   subPath: plex-meta-manager
                 - name: plex-meta-manager
-                  mountPath: /config/movies.yaml
-                  subPath: movies.yaml
+                  mountPath: /config/movies.yml
+                  subPath: movies.yml
+                - name: plex-meta-manager
+                  mountPath: /config/tv.yml
+                  subPath: tv.yml
           volumes:
             - name: server
               persistentVolumeClaim:

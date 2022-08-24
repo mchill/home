@@ -1,5 +1,7 @@
 collections:
   Marvel Collection:
+    collection_mode: default
+    collection_order: release
     plex_search:
       type: movies
       any:
@@ -38,6 +40,8 @@ collections:
           - "Guardians of the Galaxy Vol. 3"
           - "The Marvels"
   Pixar Collection:
+    collection_mode: default
+    collection_order: release
     plex_search:
       type: movies
       any:
@@ -70,6 +74,8 @@ collections:
         title:
           - "Monsters Inc."
   Scooby-Doo Animated Collection:
+    collection_mode: default
+    collection_order: release
     plex_search:
       type: movies
       all:
@@ -77,3 +83,42 @@ collections:
         title.isnot:
           - "Scooby-Doo"
           - "Scooby-Doo 2: Monsters Unleashed"
+  Christmas Collection:
+    collection_mode: default
+    collection_order: release
+    plex_search:
+      type: movies
+      any:
+        title.is:
+          - "Harry Potter and the Sorcerer's Stone"
+          - "Die Hard"
+          - "Elf"
+          - "Home Alone"
+          - "Home Alone 2: Lost in New York"
+          - "The Santa Clause"
+          - "The Santa Clause 2"
+          - "The Santa Clause 3: The Escape Clause"
+          - "Jack Frost"
+          - "Scooby-Doo! Haunted Holidays"
+          - "How the Grinch Stole Christmas!"
+          - "How the Grinch Stole Christmas"
+          - "The Polar Express"
+          - "Frosty the Snowman"
+          - "Grandma Got Run Over by a Reindeer"
+          - "Holiday in Handcuffs"
+        title:
+          - "Merry Christmas Drake & Josh"
+  Halloween Collection:
+    collection_mode: default
+    collection_order: release
+    plex_search:
+      type: movies
+      any:
+        title.is:
+          - "Harry Potter and the Sorcerer's Stone"
+          - "Halloweentown"
+          - "Halloweentown High"
+          - "Halloweentown II: Kalabar's Revenge"
+          - "Return to Halloweentown"
+        title:
+          - "Happy Halloween Scooby-Doo!"
