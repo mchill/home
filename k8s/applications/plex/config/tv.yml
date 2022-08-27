@@ -7,24 +7,37 @@ collections:
       type: episodes
       any:
         episode_title.is:
-          - "A Scooby-Doo! Christmas"
-          - "The Nutcracker Scoob (1)"
-          - "The Nutcracker Scoob (2)"
-          - "The Santa Experience"
-          - "Chanukah"
-          - "Let It Snow"
-          - "A Rugrats Kwanzaa"
-          - "Babies in Toyland"
-          - "The Finster Who Stole Christmas"
-          - "Christmas Everyday"
-          - "Merry Wishmas"
-          - "Holly Jolly Jimmy"
-          - "The Fright Before Christmas"
-          - "A Rocket X-Mas"
-          - "Have Yourself A Thornberry Little Christmas"
-          - "iChristmas"
-          - "A Christmas Tori"
-          - "Misfits & Magic Holiday Special"
+          - "Holly Jolly Jimmy" # The Adventures of Jimmy Neutron
+          - "The Finster Who Stole Christmas" # All Grown Up!
+          - "An Even Steven Holiday Special" # As Told By Ginger
+          - "A Very CatDog Christmas" # CatDog
+          - "When Santas Collide" # ChalkZone
+          - "Chapter Eleven: A Midwinter's Tale" # Chilling Adventures of Sabrina
+          - "The Fright Before Christmas" # Danny Phantom
+          - "Misfits & Magic Holiday Special" # Dimension 20
+          - "Christmas Everyday" # Fairly OddParents
+          - "Merry Wishmas" # Fairly OddParents
+          - "Arnold's Christmas" # Hey Arnold!
+          - "iChristmas" # iCarly
+          - "A Rocket X-Mas" # Rocket Power
+          - "The Santa Experience" # Rugrats
+          - "Chanukah" # Rugrats
+          - "Let It Snow" # Rugrats
+          - "A Rugrats Kwanzaa" # Rugrats
+          - "Babies in Toyland" # Rugrats
+          - "A Girl and Her Cat" # Sabrina, The Teenage Witch
+          - "Sabrina Claus" # Sabrina, The Teenage Witch
+          - "Christmas Amnesia" # Sabrina, The Teenage Witch
+          - "Sabrina's Perfect Christmas" # Sabrina, The Teenage Witch
+          - "The Nutcracker Scoob (1)" # Scooby-Doo and Scrappy-Doo
+          - "The Nutcracker Scoob (2)" # Scooby-Doo and Scrappy-Doo
+          - "Christmas Who?" # SpongeBob SquarePants
+          - "A Christmas Tori" # Victorious
+          - "A Scooby-Doo! Christmas" # What's New Scooby-Doo?
+          - "Have Yourself A Thornberry Little Christmas" # The Wild Thornberrys
+        episode_title:
+          - "Sabrina Nipping at Your Nose" # Sabrina, The Teenage Witch
+          - "It's a Hot Hot Hot Hot Christmas" # Sabrina, The Teenage Witch
   Halloween Collection:
     collection_mode: show_items
     collection_order: release
@@ -33,22 +46,35 @@ collections:
       type: episodes
       any:
         episode_title.is:
-          - "TP+KF"
-          - "The Headless Horseman of Halloween"
-          - "To Switch a Witch"
-          - "A Halloween Hassle at Dracula's Castle (1)"
-          - "A Halloween Hassle at Dracula's Castle (2)"
-          - "Ghost Who's Coming to Dinner?"
-          - "A Scooby-Doo Halloween"
-          - "Nightmare in Retroville"
-          - "Scaredy Pants"
-          - "Scary Godparents"
-          - "Candy Bar Creep Show"
-          - "Curse of the Werewuff"
-          - "Fright Night"
-          - "Haunted House"
-          - "iHalfoween"
-          - "iScream on Halloween"
-          - "The Night Before"
+          - "Nightmare in Retroville" # The Adventures of Jimmy Neutron
+          - "TP+KF" # All Grown Up!
+          - "I Spy a Witch" # As Told By Ginger
+          - "Catdogula" # CatDog
+          - "Pumpkin Love" # ChalkZone
+          - "Fright Night" # Danny Phantom
+          - "Scary Godparents" # Fairly OddParents
+          - "Arnold's Halloween" # Hey Arnold!
+          - "iHalfoween" # iCarly
+          - "iScream on Halloween" # iCarly
+          - "Ghost Who's Coming to Dinner?" # A Pup Named Scooby-Doo
+          - "The Night Before" # Rocket Power
+          - "Candy Bar Creep Show" # Rugrats
+          - "Curse of the Werewuff" # Rugrats
+          - "A Halloween Story" # Sabrina, The Teenage Witch
+          - "A River of Candy Corn Runs Through It" # Sabrina, The Teenage Witch
+          - "Good Will Haunting" # Sabrina, The Teenage Witch
+          - "Episode LXXXI: The Phantom Menace" # Sabrina, The Teenage Witch
+          - "The Halloween Scene" # Sabrina, The Teenage Witch
+          - "Murder on the Halloween Express" # Sabrina, The Teenage Witch
+          - "#DollSitting" # Sam & Cat
+          - "A Halloween Hassle at Dracula's Castle (1)" # Scooby-Doo and Scrappy-Doo
+          - "A Halloween Hassle at Dracula's Castle (2)" # Scooby-Doo and Scrappy-Doo
+          - "The Headless Horseman of Halloween" # The Scooby-Doo Show
+          - "To Switch a Witch" # Scooby-Doo, Where Are You!
+          - "Scaredy Pants" # SpongeBob SquarePants
+          - "The Legend of Boo-Kini Bottom" # SpongeBob SquarePants
+          - "All-New Halloween Spooktacular!" # WandaVision
+          - "A Scooby-Doo Halloween" # What's New Scooby-Doo?
+          - "Haunted House" # Zoey 101
         episode_title:
-          - "Guide to: Halloween & Vampires Werewolves Ghost and Zombies"
+          - "Guide to: Halloween & Vampires Werewolves Ghost and Zombies" # Ned's Declassified School Survival Guide
