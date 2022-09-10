@@ -1,0 +1,484 @@
+metadata:
+  Harry Potter and the Philosopher's Stone:
+    originally_available: 2001-01-01
+    seasons:
+      0:
+        title: Trailers
+        episodes:
+          1:
+            title: Teaser
+          2:
+            title: Trailer
+          3:
+            title: Trailer (Fullscreen)
+          4:
+            title: International Trailer
+      1:
+        title: Deleted Scenes
+        episodes:
+          1:
+            title: Deleted Scenes
+      2:
+        title: Behind the Scenes
+        episodes:
+          1.title: Creating the World of Harry Potter - Introduction by Daniel Radcliffe
+          2:
+            title: Creating the World of Harry Potter Part 1 - The Magic Begins
+          3:
+            title: A Glimpse into the World of Harry Potter
+          4:
+            title: Capturing the Stone - A Conversation with the Filmmakers
+      3:
+        title: Other
+        episodes:
+          1:
+            title: Around the World Multilanguage Clip
+          2:
+            title: Quidditch Lesson
+          3:
+            title: Ghosts of Hogwarts
+          4:
+            title: Dragon Egg Lesson
+          5:
+            title: Yearbook Character Clips
+          6:
+            title: Interactive Tour - Gryffindor Tower
+          7:
+            title: Interactive Tour - Great Hall
+          8:
+            title: Interactive Tour - Hagrid's Hut
+          9:
+            title: Interactive Tour - Diagon Alley
+          10:
+            title: Interactive Tour - Philosopher's Stone
+  Harry Potter and the Chamber of Secrets:
+    originally_available: 2002-01-01
+    seasons:
+      0:
+        title: Trailers
+        episodes:
+          1:
+            title: Teaser
+          2:
+            title: Trailer
+          3:
+            title: International Trailer
+      1:
+        title: Deleted Scenes
+        episodes:
+          1:
+            title: Deleted Scenes
+      2:
+        title: Behind the Scenes
+        episodes:
+          1:
+            title: Creating the World of Harry Potter Part 2 - Characters
+          2:
+            title: Building a Scene
+          3:
+            title: Harry Potter and the Chamber of Secrets Revealed
+          4:
+            title: A Conversation with J.K. Rowling and Steve Kloves
+          5:
+            title: Interviews with Professors & More
+          6:
+            title: Interviews with Students & More
+          7:
+            title: Screen Tests
+      3:
+        title: Other
+        episodes:
+          1:
+            title: Year One at Hogwarts
+          2:
+            title: Interactive Tour - Dumbledore's Office
+          3:
+            title: Interactive Tour - Chamber of Secrets
+          4:
+            title: Interactive Tour - Diagon Alley
+          5:
+            title: Interactive Tour - Lockhart's Classroom
+  Harry Potter and the Prisoner of Azkaban:
+    originally_available: 2004-01-01
+    seasons:
+      0:
+        title: Trailers
+        episodes:
+          1:
+            title: Teaser
+          2:
+            title: Trailer 1
+          3:
+            title: Trailer 2
+          4:
+            title: International Trailer
+      1:
+        title: Deleted Scenes
+        episodes:
+          1:
+            title: Deleted Scenes
+      2:
+        title: Behind the Scenes
+        episodes:
+          1:
+            title: Creating the World of Harry Potter Part 3 - Creatures
+          2:
+            title: Conjuring a Scene
+          3:
+            title: Inside the Creature Shop
+          4:
+            title: Something Wicked This Way Comes
+          5:
+            title: Creating the Vision
+          6:
+            title: The Magic Touch of Harry Potter
+          7:
+            title: The Making of Harry Potter and the Prisoner of Azkaban
+          8:
+            title: Care of Magical Creatures
+          9:
+            title: Interview with Alfonso Cuaron
+          10:
+            title: Head to Shrunken Head
+          11:
+            title: VFX Breakdown
+      3:
+        title: Other
+        episodes:
+          1:
+            title: Choir Practice
+          2:
+            title: Hogwarts Portrait Gallery
+          3:
+            title: Catch Scabbers!
+          4:
+            title: Sir Cadogan's Journey
+          5:
+            title: Interactive Tour - Lupin's Classroom
+          6:
+            title: Interactive Tour - Honeydukes
+  Harry Potter and the Goblet of Fire:
+    originally_available: 2005-01-01
+    seasons:
+      0:
+        title: Trailers
+        episodes:
+          1:
+            title: Teaser
+          2:
+            title: Trailer
+          3:
+            title: International Trailer
+      1:
+        title: Deleted Scenes
+        episodes:
+          1:
+            title: Deleted Scenes
+      2:
+        title: Behind the Scenes
+        episodes:
+          1:
+            title: Creating the World of Harry Potter Part 4 - Sound and Music
+          2:
+            title: Behind the Magic
+          3:
+            title: The Adventures Continues
+          4:
+            title: Reflections on the Fourth Film
+          5:
+            title: Inside Harry Potter and the Goblet of Fire
+          6:
+            title: Harry vs. the Horntail - The First Task
+          7:
+            title: In Too Deep - The Second Task
+          8:
+            title: The Maze - The Third Task
+          9:
+            title: Some Animal Magic
+          10:
+            title: Preparing for the Yule Ball
+          11:
+            title: Dark Matters, New Masters
+          12:
+            title: He Who Must Not Be Named
+          13:
+            title: Meet the Champions
+          14:
+            title: Conversations with the Cast
+          15:
+            title: VFX Breakdown Part 1
+          16:
+            title: VFX Breakdown Part 2
+  Harry Potter and the Order of the Phoenix:
+    originally_available: 2007-01-01
+    seasons:
+      0:
+        title: Trailers
+        episodes:
+          1:
+            title: Teaser
+          2:
+            title: Trailer
+          3:
+            title: International Trailer
+      1:
+        title: Deleted Scenes
+        episodes:
+          1:
+            title: Deleted Scenes
+      2:
+        title: Behind the Scenes
+        episodes:
+          1:
+            title: Creating the World of Harry Potter Part 5 - Evolution
+          2:
+            title: Behind the Magic
+          3:
+            title: Focus Points
+          4:
+            title: Trailing Tonks
+          5:
+            title: The Hidden Secrets of Harry Potter
+          6:
+            title: Building the Magic
+          7:
+            title: The Rebellion Begins
+          8:
+            title: Fulfilling a Prophecy
+          9:
+            title: The Magic of Editing
+      3:
+        title: Other
+        episodes:
+          1:
+            title: The Queen's Handbag
+  Harry Potter and the Half Blood Prince:
+    originally_available: 2009-01-01
+    seasons:
+      0:
+        title: Trailers
+        episodes:
+          1:
+            title: Teaser 1
+          2:
+            title: Teaser 2
+          3:
+            title: Trailer
+          4:
+            title: Trailer (Censored)
+          5:
+            title: International Trailer
+      1:
+        title: Deleted Scenes
+        episodes:
+          1:
+            title: Deleted Scenes
+      2:
+        title: Behind the Scenes
+        episodes:
+          1:
+            title: Creating the World of Harry Potter Part 6 - Magical Effects
+          2:
+            title: Behind the Magic
+          3:
+            title: Focus Points
+          4:
+            title: Close-up with the Cast of Harry Potter
+          5:
+            title: J.K. Rowling - A Year in the Life
+          6:
+            title: Interstitials
+          7:
+            title: One Minute Drills
+          8:
+            title: What's On Your Mind
+          9:
+            title: VFX Breakdown
+          10:
+            title: First Footage from The Deathly Hallows
+      3:
+        title: Other
+        episodes:
+          1:
+            title: The Wizarding World of Harry Potter
+  Harry Potter and the Deathly Hallows Part 1:
+    originally_available: 2010-01-01
+    seasons:
+      0:
+        title: Trailers
+        episodes:
+          1:
+            title: Teaser
+          2:
+            title: Trailer
+          3:
+            title: International Trailer
+      1:
+        title: Deleted Scenes
+        episodes:
+          1:
+            title: Deleted Scenes
+      2:
+        title: Behind the Scenes
+        episodes:
+          1:
+            title: Creating the World of Harry Potter Part 7 - Story
+          2:
+            title: Behind the Magic
+          3:
+            title: Focus Points
+          4:
+            title: Harry Potter on the Road
+          5:
+            title: The Seven Harrys
+          6:
+            title: Behind the Soundtrack
+          7:
+            title: On the Green
+          8:
+            title: One Book, Two Movies
+          9:
+            title: The Wizarding Prop Shop
+          10:
+            title: The Weasleys
+          11:
+            title: The State of Evil
+          12:
+            title: The New Guys
+          13:
+            title: The Return of the Order
+          14:
+            title: The Look of Bill Weasley
+          15:
+            title: Scabior and Greyback
+          16:
+            title: Dobby's Farewell
+          17:
+            title: VFX Breakdown
+          18:
+            title: First Footage from The Deathly Hallows Part 2
+      3:
+        title: Other
+        episodes:
+          1:
+            title: The Wizarding World of Harry Potter Grand Opening
+  Harry Potter and the Deathly Hallows Part 2:
+    originally_available: 2011-01-01
+    seasons:
+      0:
+        title: Trailers
+        episodes:
+          1:
+            title: Teaser
+          2:
+            title: Trailer
+          3:
+            title: Trailer (Alternative)
+          4:
+            title: International Trailer
+      1:
+        title: Deleted Scenes
+        episodes:
+          1:
+            title: Deleted Scenes
+      2:
+        title: Behind the Scenes
+        episodes:
+          1:
+            title: Creating the World of Harry Potter Part 8 - Growing Up
+          2:
+            title: Behind the Magic
+          3:
+            title: Focus Points
+          4:
+            title: Hogwarts' Last Stand
+          5:
+            title: Designing the World of Harry Potter
+          6:
+            title: The Quest
+          7:
+            title: The Women of Harry Potter
+          8:
+            title: A Conversation with J.K. Rowling and Daniel Radcliffe
+          9:
+            title: The Goblins of Gringotts
+          10:
+            title: Secrets Revealed! Hagrid
+          11:
+            title: Secrets Revealed! Quidditch
+          12:
+            title: The Harry Potters You Never Met
+          13:
+            title: The Gringotts Disguises
+          14:
+            title: Neville's Battle Makeup
+          15:
+            title: Harry's Death
+          16:
+            title: The Great Hall of Hogwarts
+          17:
+            title: Ron and Hermione Kiss
+          18:
+            title: That's a Wrap
+          19:
+            title: Final Farewells from Cast and Crew
+          20:
+            title: When Harry Left Hogwarts
+          21:
+            title: VFX Breakdown Part 1
+          22:
+            title: VFX Breakdown Part 2
+          23:
+            title: Secrets of the Cast Revealed
+          24:
+            title: The 50 Greatest Harry Potter Moments
+          25:
+            title: When Harry Left Hogwarts (Extended)
+  Harry Potter 20th Anniversary Return to Hogwarts:
+    originally_available: 2022-01-01
+    seasons:
+      0:
+        title: Trailers
+        episodes:
+          1:
+            title: Teaser
+          2:
+            title: First Look Teaser
+          3:
+            title: Trailer
+      1:
+        title: Behind The Scenes
+        episodes:
+          1:
+            title: Where the Magic Began
+          2:
+            title: B-roll Footage
+      2:
+        title: Interviews
+        episodes:
+          1:
+            title: Daniel Radcliffe, Emma Watson & Rupert Grint Interview
+          2:
+            title: Tom Felton, Bonnie Wright & Alfred Enoch Interview
+          3:
+            title: Evanna Lynch, Oliver and James Phelps Interview
+          4:
+            title: Matthew Lewis, Ian Hart & Robbie Coltrane Interview
+          5:
+            title: Gary Oldman, Helena Bonham Carter & Jason Isaacs Interview
+collections:
+  Harry Potter Extras:
+    collection_mode: default
+    collection_order: release
+    plex_search:
+      any:
+        title.is:
+          - "Harry Potter and the Philosopher's Stone"
+          - "Harry Potter and the Chamber of Secrets"
+          - "Harry Potter and the Prisoner of Azkaban"
+          - "Harry Potter and the Goblet of Fire"
+          - "Harry Potter and the Order of the Phoenix"
+          - "Harry Potter and the Half Blood Prince"
+          - "Harry Potter and the Deathly Hallows Part 1"
+          - "Harry Potter and the Deathly Hallows Part 2"
+          - "Harry Potter 20th Anniversary Return to Hogwarts"

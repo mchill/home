@@ -50,6 +50,9 @@ spec:
               mountPath: /data/movies-uhd
               subPath: Movies-UHD
             - name: media
+              mountPath: /data/extras
+              subPath: Extras
+            - name: media
               mountPath: /data/tv
               subPath: TV
             - name: media

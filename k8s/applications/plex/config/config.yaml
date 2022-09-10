@@ -5,6 +5,9 @@ libraries:
   Shared Movies:
     metadata_path:
       - file: config/movies.yml
+  Movie Extras:
+    metadata_path:
+      - file: config/extras.yml
   TV Shows:
     metadata_path:
       - file: config/tv.yml

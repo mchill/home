@@ -12,4 +12,5 @@ configMapGenerator:
     files:
       - config/config.yaml
       - config/movies.yml
+      - config/extras.yml
       - config/tv.yml
