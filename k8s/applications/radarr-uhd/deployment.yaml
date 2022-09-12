@@ -27,10 +27,10 @@ spec:
               subPath: radarr-uhd
             - name: media
               mountPath: /movies-uhd
-              subPath: Movies-UHD
+              subPath: movies-uhd
             - name: unencryptedmedia
               mountPath: /data
-              subPath: Transmission
+              subPath: transmission
       volumes:
         - name: server
           persistentVolumeClaim:

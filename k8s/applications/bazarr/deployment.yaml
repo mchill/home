@@ -25,10 +25,10 @@ spec:
               subPath: bazarr
             - name: media
               mountPath: /tv
-              subPath: TV
+              subPath: tv
             - name: media
               mountPath: /movies
-              subPath: Movies
+              subPath: movies
       volumes:
         - name: server
           persistentVolumeClaim:

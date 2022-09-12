@@ -24,7 +24,7 @@ spec:
               subPath: audiobookshelf/config
             - name: media
               mountPath: /audiobooks
-              subPath: Audiobooks
+              subPath: audiobooks
       volumes:
         - name: server
           persistentVolumeClaim:

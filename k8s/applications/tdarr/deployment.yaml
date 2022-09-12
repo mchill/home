@@ -35,19 +35,19 @@ spec:
               subPath: tdarr/configs
             - name: media
               mountPath: /temp
-              subPath: Tdarr
+              subPath: tdarr
             - name: media
               mountPath: /media/movies
-              subPath: Movies
+              subPath: movies
             - name: media
               mountPath: /media/movies-uhd
-              subPath: Movies-UHD
+              subPath: movies-uhd
             - name: media
               mountPath: /media/tv
-              subPath: TV
+              subPath: tv
             - name: media
               mountPath: /media/tv-uhd
-              subPath: TV-UHD
+              subPath: tv-uhd
         - name: tdarr-node
           image: haveagitgat/tdarr_node:2.00.18
           env:
@@ -71,19 +71,19 @@ spec:
               subPath: tdarr/configs
             - name: media
               mountPath: /temp
-              subPath: Tdarr
+              subPath: tdarr
             - name: media
               mountPath: /media/movies
-              subPath: Movies
+              subPath: movies
             - name: media
               mountPath: /media/movies-uhd
-              subPath: Movies-UHD
+              subPath: movies-uhd
             - name: media
               mountPath: /media/tv
-              subPath: TV
+              subPath: tv
             - name: media
               mountPath: /media/tv-uhd
-              subPath: TV-UHD
+              subPath: tv-uhd
       volumes:
         - name: server
           persistentVolumeClaim:

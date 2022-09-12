@@ -45,19 +45,19 @@ spec:
               subPath: plex
             - name: media
               mountPath: /data/movies
-              subPath: Movies
+              subPath: movies
             - name: media
               mountPath: /data/movies-uhd
-              subPath: Movies-UHD
+              subPath: movies-uhd
             - name: media
               mountPath: /data/extras
-              subPath: Extras
+              subPath: extras
             - name: media
               mountPath: /data/tv
-              subPath: TV
+              subPath: tv
             - name: media
               mountPath: /data/tv-uhd
-              subPath: TV-UHD
+              subPath: tv-uhd
       volumes:
         - name: server
           persistentVolumeClaim:

@@ -42,7 +42,7 @@ spec:
               subPath: transmission
             - name: unencryptedmedia
               mountPath: /data
-              subPath: Transmission
+              subPath: transmission
           resources:
             limits:
               cpu: 1

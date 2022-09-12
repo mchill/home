@@ -27,10 +27,10 @@ spec:
               subPath: sonarr-uhd
             - name: media
               mountPath: /tv-uhd
-              subPath: TV-UHD
+              subPath: tv-uhd
             - name: unencryptedmedia
               mountPath: /data
-              subPath: Transmission
+              subPath: transmission
       volumes:
         - name: server
           persistentVolumeClaim:

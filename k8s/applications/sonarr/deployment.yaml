@@ -27,10 +27,10 @@ spec:
               subPath: sonarr
             - name: media
               mountPath: /tv
-              subPath: TV
+              subPath: tv
             - name: unencryptedmedia
               mountPath: /data
-              subPath: Transmission
+              subPath: transmission
       volumes:
         - name: server
           persistentVolumeClaim:
