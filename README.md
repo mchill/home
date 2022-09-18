@@ -66,20 +66,15 @@ If the cluster ever needs to be completely reset, this can be easily done with s
 
 ```bash
 sudo snap remove microk8s
-sudo snap install microk8s --classic --channel=1.23
+sudo snap install microk8s --classic --channel=1.25
 
 # Add custom domain name to cert
 sed -i '/^DNS.5 =.*/a DNS.6 = mchill.io' /var/snap/microk8s/current/certs/csr.conf.template
-sudo microk8s refresh-certs
-
-# Enable combined tcp/udp services
-sed -i 's/--feature-gates=.*/&,MixedProtocolLBService=true/g' /var/snap/microk8s/current/args/kube-apiserver
-sudo systemctl restart snap.microk8s.daemon-kubelite.service
+sudo microk8s refresh-certs --cert ca.crt
 
 microk8s status --wait-ready
 microk8s config > ~/.kube/config
-microk8s enable rbac
-microk8s enable dns
+microk8s enable rbac dns
 ```
 
 You'll also have to regenerate all sealed secrets afterwards, since the decryption key will be different in a new cluster.
@@ -93,7 +88,7 @@ find . -type f -iname secret.yaml -not -path "*/charts/*" -execdir sh -c "cat {}
 The server is automatically deployed by CI. Manual deployment can be done with the following commands.
 
 ```bash
-kustomize build crds | kubectl apply -f -
-kustomize build infrastructure | kubectl apply -f -
-kustomize build applications | kubectl apply -f -
+kustomize build crds | kubectl apply --server-side -f -
+kustomize build infrastructure | kubectl apply --server-side -f -
+kustomize build applications | kubectl apply --server-side -f -
 ```

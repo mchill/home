@@ -1,6 +1,6 @@
 namespace: server
 resources:
-  - deployment.yaml
+  - daemon-set.yaml
   - ingress.yaml
   - middleware.yaml
   - sealed-secret.yaml

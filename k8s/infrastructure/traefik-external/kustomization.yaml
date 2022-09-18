@@ -15,7 +15,7 @@ configMapGenerator:
       - traefik-forward-auth.ini
 helmCharts:
   - name: traefik
-    includeCRDs: false
+    includeCRDs: true
     version: 10.24.3
     repo: https://helm.traefik.io/traefik
     releaseName: traefik-external

@@ -12,10 +12,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: Setup kubectl
         run: |
-          curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.23.5/bin/linux/amd64/kubectl"
+          curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.25.0/bin/linux/amd64/kubectl"
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/kubectl
-          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash -s 4.5.4
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash -s 4.5.7
           sudo mv kustomize /usr/local/bin/kustomize
           mkdir -p ~/.kube
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
@@ -23,4 +23,4 @@ jobs:
       - name: Deploy server
         working-directory: k8s
         run: |
-          kustomize build --enable-helm applications | kubectl apply -f -
+          kustomize build --enable-helm applications | kubectl apply --server-side -f -

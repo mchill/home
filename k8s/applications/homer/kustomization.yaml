@@ -1,6 +1,6 @@
 namespace: server
 resources:
-  - deployment.yaml
+  - daemon-set.yaml
   - ingress.yaml
   - service.yaml
 commonLabels:

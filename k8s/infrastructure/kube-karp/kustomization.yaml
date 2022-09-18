@@ -1,6 +1,6 @@
 namespace: kube-karp
 resources:
-  - deployment.yaml
+  - daemon-set.yaml
   - namespace.yaml
   - sealed-secret.yaml
 commonLabels:

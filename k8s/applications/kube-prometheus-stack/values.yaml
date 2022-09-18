@@ -21,8 +21,4 @@ prometheus:
       - job_name: traefik
         static_configs:
           - targets:
-            - traefik-clusterip:9000
-prometheusOperator:
-  admissionWebhooks:
-    patch:
-      enabled: false
+            - traefik-clusterip.traefik-external.svc.cluster.local.:9000

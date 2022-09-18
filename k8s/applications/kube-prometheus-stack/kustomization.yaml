@@ -3,7 +3,7 @@ resources:
   - sealed-secret.yaml
 helmCharts:
   - name: kube-prometheus-stack
-    includeCRDs: false
+    includeCRDs: true
     version: 40.0.2
     repo: https://prometheus-community.github.io/helm-charts
     releaseName: prometheus
