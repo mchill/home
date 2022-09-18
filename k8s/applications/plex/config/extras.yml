@@ -263,10 +263,12 @@ metadata:
           2:
             title: Teaser 2
           3:
-            title: Trailer
+            title: Teaser 3
           4:
-            title: Trailer (Censored)
+            title: Trailer
           5:
+            title: Trailer (Censored)
+          6:
             title: International Trailer
       1:
         title: Deleted Scenes
