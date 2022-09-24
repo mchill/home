@@ -9,3 +9,9 @@ helmCharts:
     releaseName: prometheus
     namespace: server
     valuesFile: values.yaml
+patches:
+  - path: patch.yaml
+    target:
+      group: batch
+      version: v1
+      kind: Job
