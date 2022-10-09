@@ -11,7 +11,7 @@ spec:
       nodeName: matthews-laptop
       initContainers:
         - name: mods
-          image: bash:5.1.16
+          image: bash:5.2.2
           args:
             - -c
             - |
@@ -39,7 +39,7 @@ spec:
               mountPath: /mods
       containers:
         - name: minecraft-mattcraft
-          image: itzg/minecraft-server:2022.11.0
+          image: itzg/minecraft-server:2022.12.0
           ports:
             - name: minecraft
               containerPort: 25565
