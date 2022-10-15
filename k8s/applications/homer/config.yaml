@@ -28,6 +28,10 @@ services:
         subtitle: Audiobooks
         logo: assets/logos/audiobookshelf.png
         url: https://books.mchill.io
+      - name: Mealie
+        subtitle: Recipes
+        logo: assets/logos/mealie.png
+        url: https://recipes.mchill.io
       - name: File Browser
         subtitle: Files
         logo: assets/logos/filebrowser.png

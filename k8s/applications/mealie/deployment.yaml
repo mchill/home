@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mealie
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: frontend
+          image: hkotel/mealie:frontend-v1.0.0beta-4
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: API_URL
+              value: http://localhost:9000
+          volumeMounts:
+            - name: server
+              mountPath: /app/data
+              subPath: mealie
+            - name: mealie
+              mountPath: /app/run.sh
+              subPath: run.sh
+            - name: mealie
+              mountPath: /app/assets/custom.css
+              subPath: custom.css
+        - name: api
+          image: hkotel/mealie:api-v1.0.0beta-4
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: BASE_URL
+              value: https://mealie.mchill.io
+          volumeMounts:
+            - name: server
+              mountPath: /app/data
+              subPath: mealie
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server
+        - name: mealie
+          configMap:
+            name: mealie
+            defaultMode: 0744
