@@ -16,7 +16,7 @@ configMapGenerator:
 helmCharts:
   - name: traefik
     includeCRDs: true
-    version: 12.0.2
+    version: 15.3.1
     repo: https://helm.traefik.io/traefik
     releaseName: traefik-external
     namespace: traefik-external
