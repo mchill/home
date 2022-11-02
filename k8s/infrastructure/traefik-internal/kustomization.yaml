@@ -10,7 +10,7 @@ commonLabels:
 helmCharts:
   - name: traefik
     includeCRDs: false
-    version: 15.3.1
+    version: 19.0.0
     repo: https://helm.traefik.io/traefik
     releaseName: traefik-internal
     namespace: traefik-internal
