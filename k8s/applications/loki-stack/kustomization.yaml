@@ -1,7 +1,7 @@
 helmCharts:
   - name: loki-stack
     includeCRDs: true
-    version: 2.8.3
+    version: 2.8.4
     repo: https://grafana.github.io/helm-charts
     releaseName: loki
     namespace: server

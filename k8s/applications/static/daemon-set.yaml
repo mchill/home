@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: static
-          image: nginx:1.23.1
+          image: nginx:1.23.2
           ports:
             - name: http
               containerPort: 80
