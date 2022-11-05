@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tinymediamanager
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: tinymediamanager
+          image: tinymediamanager/tinymediamanager:latest
+          ports:
+            - name: http
+              containerPort: 4000
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: server
+              mountPath: /data
+              subPath: tinymediamanager
+            - name: media
+              mountPath: /media/movies
+              subPath: movies
+            - name: media
+              mountPath: /media/tvshows
+              subPath: tv
+      volumes:
+        - name: server
+          persistentVolumeClaim:
+            claimName: server
+        - name: media
+          persistentVolumeClaim:
+            claimName: media

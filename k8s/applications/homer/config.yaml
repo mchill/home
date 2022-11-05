@@ -72,10 +72,10 @@ services:
         subtitle: Plex requests
         logo: assets/logos/overseerr.png
         url: https://overseerr.mchill.io
-      - name: Gaps
-        subtitle: Collection manager
-        logo: assets/logos/gaps.png
-        url: https://gaps.mchill.io
+      - name: tinyMediaManager
+        subtitle: Media metadata
+        logo: assets/logos/tinymediamanager.png
+        url: https://tiny.mchill.io
       - name: Tdarr
         subtitle: Transcoder
         logo: assets/logos/tdarr.png
