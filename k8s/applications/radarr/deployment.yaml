@@ -28,7 +28,7 @@ spec:
             - name: media
               mountPath: /movies
               subPath: movies
-            - name: unencryptedmedia
+            - name: media
               mountPath: /data
               subPath: transmission
       volumes:
@@ -38,6 +38,3 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media
-        - name: unencryptedmedia
-          persistentVolumeClaim:
-            claimName: unencryptedmedia

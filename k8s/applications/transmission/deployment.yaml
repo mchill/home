@@ -40,7 +40,7 @@ spec:
             - name: server
               mountPath: /data/transmission-home
               subPath: transmission
-            - name: unencryptedmedia
+            - name: media
               mountPath: /data
               subPath: transmission
           resources:
@@ -54,6 +54,6 @@ spec:
         - name: server
           persistentVolumeClaim:
             claimName: server
-        - name: unencryptedmedia
+        - name: media
           persistentVolumeClaim:
-            claimName: unencryptedmedia
+            claimName: media
