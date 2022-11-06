@@ -29,6 +29,9 @@ spec:
               mountPath: /movies-uhd
               subPath: movies-uhd
             - name: media
+              mountPath: /trash
+              subPath: trash
+            - name: media
               mountPath: /data
               subPath: transmission
       volumes:

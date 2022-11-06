@@ -29,6 +29,9 @@ spec:
               mountPath: /tv
               subPath: tv
             - name: media
+              mountPath: /trash
+              subPath: trash
+            - name: media
               mountPath: /data
               subPath: transmission
       volumes:
