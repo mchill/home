@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: tinymediamanager
-          image: tinymediamanager/tinymediamanager:latest
+          image: tinymediamanager/tinymediamanager:4.3.5
           ports:
             - name: http
               containerPort: 4000

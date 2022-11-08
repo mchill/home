@@ -21,13 +21,6 @@
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": [
-        "ghcr.io/linuxserver/readarr"
-      ],
-      "versioning": "regex:^nightly-version-0\\.(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchPackageNames": [
         "ghcr.io/linuxserver/prowlarr"
       ],
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-develop$"
@@ -45,7 +38,12 @@
         "jitsi/prosody",
         "jitsi/web"
       ],
-      "versioning": "regex:^stable-(?<major>\\d+)-(?<minor>\\d+)$"
+      "versioning": "regex:^stable-(?<minor>\\d+)$"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["hkotel/mealie"],
+      "versioning": "regex:^(frontend|api)-v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)beta-(?<build>\\d+)$"
     }
   ]
 }
