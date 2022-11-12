@@ -15,7 +15,7 @@ spec:
           restartPolicy: OnFailure
           initContainers:
             - name: render-config
-              image: bash:5.2.2
+              image: bash:5.2.9
               args:
                 - -c
                 - |
@@ -49,7 +49,7 @@ spec:
                   subPath: sync.sh
           containers:
             - name: plex-meta-manager
-              image: meisnate12/plex-meta-manager:v1.17.3
+              image: meisnate12/plex-meta-manager:v1.18.0
               args:
                 - --run
                 - --read-only-config
