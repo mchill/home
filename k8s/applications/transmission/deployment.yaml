@@ -38,7 +38,7 @@ spec:
                 name: transmission
           volumeMounts:
             - name: server
-              mountPath: /data/transmission-home
+              mountPath: /config/transmission-home
               subPath: transmission
             - name: media
               mountPath: /data
