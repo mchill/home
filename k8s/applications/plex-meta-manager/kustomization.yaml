@@ -1,0 +1,14 @@
+namespace: server
+resources:
+  - cron-job.yaml
+  - sealed-secret.yaml
+commonLabels:
+  app: plex-meta-manager
+configMapGenerator:
+  - name: plex-meta-manager
+    files:
+      - config/sync.sh
+      - config/config.yaml
+      - config/movies.yml
+      - config/extras.yml
+      - config/tv.yml

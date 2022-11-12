@@ -1,16 +1,7 @@
 namespace: server
 resources:
-  - cron-job.yaml
   - deployment.yaml
   - ingress.yaml
-  - sealed-secret.yaml
   - service.yaml
 commonLabels:
   app: plex
-configMapGenerator:
-  - name: plex-meta-manager
-    files:
-      - config/config.yaml
-      - config/movies.yml
-      - config/extras.yml
-      - config/tv.yml

@@ -1,0 +1,49 @@
+libraries:
+  Movies:
+    metadata_path:
+      - file: config/movies.yml
+        asset_directory: /data/assets/movies
+    operations:
+      mass_poster_update: unlock
+      mass_background_update: unlock
+  Shared Movies:
+    metadata_path:
+      - file: config/movies.yml
+        asset_directory: /data/assets/movies
+    operations:
+      mass_poster_update: unlock
+      mass_background_update: unlock
+  Movie Extras:
+    metadata_path:
+      - file: config/extras.yml
+        asset_directory: /data/assets/extras
+    operations:
+      mass_poster_update: unlock
+      mass_background_update: unlock
+  TV Shows:
+    metadata_path:
+      - file: config/tv.yml
+        asset_directory: /data/assets/tv
+    operations:
+      mass_poster_update: unlock
+      mass_background_update: unlock
+  Shared TV Shows:
+    metadata_path:
+      - file: config/tv.yml
+        asset_directory: /data/assets/tv
+    operations:
+      mass_poster_update: unlock
+      mass_background_update: unlock
+settings:
+  create_asset_folders: true
+  sync_mode: sync
+  minimum_items: 2
+  default_collection_order: release
+  tvdb_language: eng
+  verify_ssl: true
+plex:
+  url: http://plex.server.svc.cluster.local.:32400
+  token: $PLEX_TOKEN
+tmdb:
+  apikey: $TMDB_API_KEY
+  language: en
