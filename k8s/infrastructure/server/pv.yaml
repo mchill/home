@@ -22,7 +22,7 @@ metadata:
   name: server
 spec:
   capacity:
-    storage: 16Gi
+    storage: 32Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -46,7 +46,7 @@ metadata:
   name: media
 spec:
   capacity:
-    storage: 5Ti
+    storage: 20Ti
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain

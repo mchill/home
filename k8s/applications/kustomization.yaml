@@ -11,6 +11,7 @@ resources:
   - ./kube-prometheus-stack
   - ./kubernetes-dashboard
   - ./loki-stack
+  - ./mealie
   - ./minecraft-mattcraft
   - ./nas
   - ./overseerr

@@ -7,7 +7,7 @@ spec:
     - ReadWriteOnce
   resources:
      requests:
-       storage: 16Gi
+       storage: 32Gi
   storageClassName: ""
   volumeName: server
 ---
@@ -20,6 +20,6 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 5Ti
+      storage: 20Ti
   storageClassName: ""
   volumeName: media
