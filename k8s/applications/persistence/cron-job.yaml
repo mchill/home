@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: $(APP)-backup
+spec:
+  schedule: "@daily"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: backup
+              image: instrumentisto/rsync-ssh:alpine3.16
+              args:
+                - /bin/sh
+                - -cex
+                - |
+                  command -v getfacl || apk add acl;
+                  mkdir -p /root/.ssh;
+                  ssh-keyscan -H nas >> /root/.ssh/known_hosts;
+                  cd /backup;
+                  getfacl -R . > ${APP}.facl;
+                  rsync -avz -e "ssh -i /root/ssh/id_rsa" --delete-before /backup/data/ serverbackup@nas:/volume1/ServerBackup/${APP};
+              env:
+                - name: TZ
+                  value: America/New_York
+                - name: APP
+                  value: $(APP)
+              volumeMounts:
+                - name: ssh
+                  mountPath: /root/ssh
+                - name: data
+                  readOnly: true
+                  mountPath: /backup/data
+          volumes:
+            - name: ssh
+              secret:
+                secretName: backup
+                defaultMode: 384
+            - name: data
+              persistentVolumeClaim:
+                claimName: $(APP)

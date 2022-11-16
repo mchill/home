@@ -1,6 +1,5 @@
 resources:
   - ./audiobookshelf
-  - ./backup
   - ./bazarr
   - ./ddns
   - ./errors

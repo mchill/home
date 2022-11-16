@@ -1,0 +1,15 @@
+namespace: server
+resources:
+  - cron-job.yaml
+  - pv.yaml
+  - pvc.yaml
+configurations:
+  - configurations.yaml
+vars:
+  - name: APP
+    objref:
+      apiVersion: v1
+      kind: PersistentVolume
+      name: $(APP)
+    fieldref:
+      fieldpath: metadata.labels.app
