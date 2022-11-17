@@ -1,6 +1,5 @@
 namespace: server
 resources:
-  - ../persistence
   - daemon-set.yaml
   - ingress.yaml
   - service.yaml
@@ -10,20 +9,3 @@ configMapGenerator:
   - name: homer
     files:
       - config.yaml
-patchesStrategicMerge:
-  - |-
-    apiVersion: v1
-    kind: PersistentVolume
-    metadata:
-      name: $(APP)
-    spec:
-      accessModes:
-        - ReadWriteMany
-  - |-
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    metadata:
-      name: $(APP)
-    spec:
-      accessModes:
-        - ReadWriteMany

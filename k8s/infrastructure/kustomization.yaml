@@ -1,9 +1,0 @@
-resources:
-  - ./cert-manager
-  - ./kube-karp
-  - ./longhorn
-  - ./metallb
-  - ./sealed-secrets
-  - ./server
-  - ./traefik-external
-  - ./traefik-internal

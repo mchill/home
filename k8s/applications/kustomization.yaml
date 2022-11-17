@@ -1,5 +1,6 @@
 resources:
   - ./audiobookshelf
+  - ./backup
   - ./bazarr
   - ./ddns
   - ./errors
@@ -7,9 +8,7 @@ resources:
   - ./homeassistant
   - ./homer
   - ./jitsi
-  - ./kube-prometheus-stack
   - ./kubernetes-dashboard
-  - ./loki-stack
   - ./mealie
   - ./minecraft-mattcraft
   - ./nas

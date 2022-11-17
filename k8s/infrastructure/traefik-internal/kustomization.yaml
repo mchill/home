@@ -1,17 +1,9 @@
 namespace: traefik-internal
 resources:
+  - helm.yaml
   - ingress.yaml
   - middleware.yaml
   - namespace.yaml
-  - sealed-secret.yaml
   - service.yaml
 commonLabels:
   app: traefik-internal
-helmCharts:
-  - name: traefik
-    includeCRDs: false
-    version: 20.1.1
-    repo: https://helm.traefik.io/traefik
-    releaseName: traefik-internal
-    namespace: traefik-internal
-    valuesFile: values.yaml

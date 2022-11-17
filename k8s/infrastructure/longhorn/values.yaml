@@ -1,0 +1,16 @@
+persistence:
+  defaultClass: true
+  defaultFsType: ext4
+  defaultClassReplicaCount: 3
+  defaultDataLocality: best-effort
+  reclaimPolicy: Retain
+csi:
+  kubeletRootDir: /var/snap/microk8s/common/var/lib/kubelet
+defaultSettings:
+  backupTarget: nfs://192.168.1.210:/volume1/Media/longhorn
+  defaultDataPath: /mnt/longhorn
+  defaultDataLocality: best-effort
+  defaultReplicaCount: 3
+  replicaAutoBalance: best-effort
+  storageOverProvisioningPercentage: 200
+  nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod

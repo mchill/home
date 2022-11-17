@@ -1,13 +1,4 @@
 resources:
+  - https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.yaml
   - cluster-issuer.yaml
-  - namespace.yaml
   - sealed-secret.yaml
-helmCharts:
-  - name: cert-manager
-    includeCRDs: true
-    version: v1.10.0
-    repo: https://charts.jetstack.io
-    releaseName: cert-manager
-    namespace: cert-manager
-    valuesInline:
-      installCRDs: true

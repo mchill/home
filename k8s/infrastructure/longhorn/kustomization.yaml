@@ -1,19 +1,5 @@
 namespace: longhorn-system
 resources:
-  - https://raw.githubusercontent.com/longhorn/longhorn/v1.3.2/deploy/longhorn.yaml
+  - helm.yaml
   - ingress.yaml
-patchesStrategicMerge:
-  - |-
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: longhorn-driver-deployer
-      namespace: longhorn-system
-    spec:
-      template:
-        spec:
-          containers:
-            - name: longhorn-driver-deployer
-              env:
-                - name: KUBELET_ROOT_DIR
-                  value: /var/snap/microk8s/common/var/lib/kubelet
+  - recurring-job.yaml

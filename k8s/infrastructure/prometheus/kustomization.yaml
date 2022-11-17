@@ -1,0 +1,11 @@
+namespace: monitoring
+resources:
+  - helm.yaml
+  - ingress.yaml
+  - sealed-secret.yaml
+patches:
+  - path: patch.yaml
+    target:
+      group: batch
+      version: v1
+      kind: Job

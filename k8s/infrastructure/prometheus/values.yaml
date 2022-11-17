@@ -2,7 +2,7 @@ grafana:
   testFramework:
     enabled: false
   persistence:
-    enabled: true
+    enabled: false
     existingClaim: server
     subPath: grafana
   adminPassword: admin
