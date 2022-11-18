@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: minecraft-mattcraft
+  name: minecraft
 spec:
   replicas: 1
   strategy:
@@ -38,7 +38,7 @@ spec:
             - name: mods
               mountPath: /mods
       containers:
-        - name: minecraft-mattcraft
+        - name: minecraft
           image: itzg/minecraft-server:2022.14.0
           ports:
             - name: minecraft
@@ -59,11 +59,11 @@ spec:
           volumeMounts:
             - name: server
               mountPath: /data
-              subPath: minecraft-mattcraft
-            - name: minecraft-mattcraft
+              subPath: minecraft
+            - name: minecraft
               mountPath: /data/ops.json
               subPath: ops.json
-            - name: minecraft-mattcraft
+            - name: minecraft
               mountPath: /data/whitelist.json
               subPath: whitelist.json
             - name: mods
@@ -79,8 +79,8 @@ spec:
         - name: server
           persistentVolumeClaim:
             claimName: server
-        - name: minecraft-mattcraft
+        - name: minecraft
           configMap:
-            name: minecraft-mattcraft
+            name: minecraft
         - name: mods
           emptyDir: {}

@@ -4,6 +4,7 @@ commonLabels:
   subdomain: pihole
 resources:
   - ../../overlays/ingress
+  - ../../overlays/persistence
   - deployment.yaml
   - middleware.yaml
   - service.yaml

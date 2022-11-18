@@ -104,6 +104,10 @@ services:
         subtitle: Proxy configuration
         logo: assets/logos/traefik.png
         url: https://traefik-internal.mchill.io
+      - name: Longhorn
+        subtitle: Persistent storage
+        logo: assets/logos/longhorn.png
+        url: https://longhorn.mchill.io
       - name: Router
         subtitle: Router web UI
         logo: assets/logos/router.png
@@ -120,6 +124,10 @@ services:
         subtitle: Server metrics
         logo: assets/logos/prometheus.png
         url: https://prometheus.mchill.io
+      - name: Tautulli
+        subtitle: Plex statistics
+        logo: assets/logos/tautulli.png
+        url: https://tautulli.mchill.io
       - name: webNUT
         subtitle: UPS metrics
         logo: assets/logos/webnut.png
@@ -140,10 +148,6 @@ services:
         subtitle: DNS sinkhole
         logo: assets/logos/pihole.png
         url: https://pihole.mchill.io
-      - name: Tautulli
-        subtitle: Plex statistics
-        logo: assets/logos/tautulli.png
-        url: https://tautulli.mchill.io
       - name: Jitsi
         subtitle: Video conferencing
         logo: assets/logos/jitsi.png

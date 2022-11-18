@@ -4,4 +4,5 @@ commonLabels:
   subdomain: bazarr
 resources:
   - ../../overlays/ingress
+  - ../../overlays/persistence
   - deployment.yaml

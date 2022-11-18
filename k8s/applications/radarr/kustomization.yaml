@@ -4,4 +4,5 @@ commonLabels:
   subdomain: radarr
 resources:
   - ../../overlays/ingress
+  - ../../overlays/persistence
   - deployment.yaml

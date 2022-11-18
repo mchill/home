@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: $(APP)-backup
+  name: $(VOLUME)-backup
 spec:
   schedule: "@daily"
   concurrencyPolicy: Forbid
@@ -24,13 +24,13 @@ spec:
                   mkdir -p /root/.ssh;
                   ssh-keyscan -H nas >> /root/.ssh/known_hosts;
                   cd /backup;
-                  getfacl -R . > ${APP}.facl;
-                  rsync -avz -e "ssh -i /root/ssh/id_rsa" --delete-before /backup/data/ serverbackup@nas:/volume1/ServerBackup/${APP};
+                  getfacl -R . > ${VOLUME}.facl;
+                  rsync -avz -e "ssh -i /root/ssh/id_rsa" --delete-before /backup/data/ serverbackup@nas:/volume1/ServerBackup/${VOLUME};
               env:
                 - name: TZ
                   value: America/New_York
-                - name: APP
-                  value: $(APP)
+                - name: VOLUME
+                  value: $(VOLUME)
               volumeMounts:
                 - name: ssh
                   mountPath: /root/ssh
@@ -44,4 +44,4 @@ spec:
                 defaultMode: 384
             - name: data
               persistentVolumeClaim:
-                claimName: $(APP)
+                claimName: $(VOLUME)

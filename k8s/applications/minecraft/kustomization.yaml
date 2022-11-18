@@ -1,11 +1,12 @@
 namespace: server
 commonLabels:
-  app: minecraft-mattcraft
+  app: minecraft
 resources:
+  - ../../overlays/persistence
   - deployment.yaml
   - service.yaml
 configMapGenerator:
-- name: minecraft-mattcraft
+- name: minecraft
   files:
     - ops.json
     - whitelist.json

@@ -4,6 +4,7 @@ commonLabels:
   subdomain: jitsi
 resources:
   - ../../overlays/ingress
+  - ../../overlays/persistence
   - config-map.yaml
   - deployment.yaml
   - sealed-secret.yaml

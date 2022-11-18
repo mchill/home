@@ -4,6 +4,7 @@ commonLabels:
   subdomain: recipes
 resources:
   - ../../overlays/ingress
+  - ../../overlays/persistence
   - deployment.yaml
 configMapGenerator:
   - name: mealie

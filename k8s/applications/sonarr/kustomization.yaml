@@ -4,4 +4,5 @@ commonLabels:
   subdomain: sonarr
 resources:
   - ../../overlays/ingress
+  - ../../overlays/persistence
   - deployment.yaml

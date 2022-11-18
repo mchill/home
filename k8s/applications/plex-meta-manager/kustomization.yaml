@@ -2,6 +2,7 @@ namespace: server
 commonLabels:
   app: plex-meta-manager
 resources:
+  - ../../overlays/persistence
   - cron-job.yaml
   - sealed-secret.yaml
 configMapGenerator:
