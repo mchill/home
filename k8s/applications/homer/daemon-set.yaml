@@ -5,6 +5,8 @@ metadata:
 spec:
   template:
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: homer
           image: b4bz/homer:v22.11.1
@@ -22,13 +24,13 @@ spec:
             - name: server
               mountPath: /www/assets
               subPath: homer
-            - name: homer
+            - name: config
               mountPath: /www/assets/config.yml
               subPath: config.yaml
       volumes:
         - name: server
           persistentVolumeClaim:
             claimName: server
-        - name: homer
+        - name: config
           configMap:
             name: homer

@@ -23,3 +23,16 @@ spec:
       storage: 20Ti
   storageClassName: ""
   volumeName: media
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: backup
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Ti
+  storageClassName: ""
+  volumeName: backup

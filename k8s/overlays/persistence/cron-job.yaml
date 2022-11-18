@@ -24,8 +24,8 @@ spec:
                   mkdir -p /root/.ssh;
                   ssh-keyscan -H nas >> /root/.ssh/known_hosts;
                   cd /backup;
-                  getfacl -R . > ${VOLUME}.facl;
-                  rsync -avz -e "ssh -i /root/ssh/id_rsa" --delete-before /backup/data/ serverbackup@nas:/volume1/ServerBackup/${VOLUME};
+                  getfacl -R ${VOLUME} > ${VOLUME}.facl;
+                  rsync -avz -e "ssh -i /root/ssh/id_rsa" --delete-before /backup/ serverbackup@nas:/volume1/ServerBackup/volumes;
               env:
                 - name: TZ
                   value: America/New_York
@@ -36,7 +36,7 @@ spec:
                   mountPath: /root/ssh
                 - name: data
                   readOnly: true
-                  mountPath: /backup/data
+                  mountPath: /backup/$(VOLUME)
           volumes:
             - name: ssh
               secret:

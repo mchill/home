@@ -1,6 +1,6 @@
 namespace: server
 resources:
-  # - cron-job.yaml
+  - cron-job.yaml
   - pv.yaml
   - pvc.yaml
 configurations:

@@ -1,0 +1,142 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: debug
+spec:
+  nodeName: matthews-laptop
+  containers:
+    - name: debug
+      image: ubuntu:latest
+      command:
+        - /bin/bash
+        - -c
+        - --
+      args:
+        - while true; do sleep 30; done;
+      volumeMounts:
+        - name: server
+          mountPath: /server
+        - name: audiobookshelf
+          mountPath: /mnt/audiobookshelf
+        - name: bazarr
+          mountPath: /mnt/bazarr
+        - name: ddns
+          mountPath: /mnt/ddns
+        - name: filebrowser
+          mountPath: /mnt/filebrowser
+        # - name: grafana
+        #   mountPath: /mnt/grafana
+        - name: homeassistant
+          mountPath: /mnt/homeassistant
+        - name: homer
+          mountPath: /mnt/homer
+        - name: jitsi
+          mountPath: /mnt/jitsi
+        # - name: loki
+        #   mountPath: /mnt/loki
+        - name: mealie
+          mountPath: /mnt/mealie
+        - name: minecraft
+          mountPath: /mnt/minecraft
+        - name: overseerr
+          mountPath: /mnt/overseerr
+        - name: pihole
+          mountPath: /mnt/pihole
+        - name: plex
+          mountPath: /mnt/plex
+        - name: plex-meta-manager
+          mountPath: /mnt/plex-meta-manager
+        - name: prowlarr
+          mountPath: /mnt/prowlarr
+        - name: radarr
+          mountPath: /mnt/radarr
+        - name: radarr-uhd
+          mountPath: /mnt/radarr-uhd
+        - name: sonarr
+          mountPath: /mnt/sonarr
+        - name: sonarr-uhd
+          mountPath: /mnt/sonarr-uhd
+        - name: tautulli
+          mountPath: /mnt/tautulli
+        - name: tdarr
+          mountPath: /mnt/tdarr
+        - name: tinymediamanager
+          mountPath: /mnt/tinymediamanager
+        - name: transmission
+          mountPath: /mnt/transmission
+  volumes:
+    - name: server
+      persistentVolumeClaim:
+        claimName: server
+    - name: audiobookshelf
+      persistentVolumeClaim:
+        claimName: audiobookshelf
+    - name: bazarr
+      persistentVolumeClaim:
+        claimName: bazarr
+    - name: ddns
+      persistentVolumeClaim:
+        claimName: ddns
+    - name: filebrowser
+      persistentVolumeClaim:
+        claimName: filebrowser
+    # - name: grafana
+    #   persistentVolumeClaim:
+    #     claimName: grafana
+    - name: homeassistant
+      persistentVolumeClaim:
+        claimName: homeassistant
+    - name: homer
+      persistentVolumeClaim:
+        claimName: homer
+    - name: jitsi
+      persistentVolumeClaim:
+        claimName: jitsi
+    # - name: loki
+    #   persistentVolumeClaim:
+    #     claimName: loki
+    - name: mealie
+      persistentVolumeClaim:
+        claimName: mealie
+    - name: minecraft
+      persistentVolumeClaim:
+        claimName: minecraft
+    - name: overseerr
+      persistentVolumeClaim:
+        claimName: overseerr
+    - name: pihole
+      persistentVolumeClaim:
+        claimName: pihole
+    - name: plex
+      persistentVolumeClaim:
+        claimName: plex
+    - name: plex-meta-manager
+      persistentVolumeClaim:
+        claimName: plex-meta-manager
+    - name: prowlarr
+      persistentVolumeClaim:
+        claimName: prowlarr
+    - name: radarr
+      persistentVolumeClaim:
+        claimName: radarr
+    - name: radarr-uhd
+      persistentVolumeClaim:
+        claimName: radarr-uhd
+    - name: sonarr
+      persistentVolumeClaim:
+        claimName: sonarr
+    - name: sonarr-uhd
+      persistentVolumeClaim:
+        claimName: sonarr-uhd
+    - name: tautulli
+      persistentVolumeClaim:
+        claimName: tautulli
+    - name: tdarr
+      persistentVolumeClaim:
+        claimName: tdarr
+    - name: tinymediamanager
+      persistentVolumeClaim:
+        claimName: tinymediamanager
+    - name: transmission
+      persistentVolumeClaim:
+        claimName: transmission

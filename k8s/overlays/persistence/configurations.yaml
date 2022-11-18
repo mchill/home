@@ -2,6 +2,8 @@ varReference:
   - kind: CronJob
     path: metadata/name
   - kind: CronJob
+    path: spec/jobTemplate/spec/template/spec/containers[]/volumeMounts[]/mountPath
+  - kind: CronJob
     path: spec/jobTemplate/spec/template/spec/volumes[]/persistentVolumeClaim/claimName
   - kind: PersistentVolume
     path: metadata/name

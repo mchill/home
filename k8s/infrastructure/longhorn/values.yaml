@@ -7,7 +7,8 @@ persistence:
 csi:
   kubeletRootDir: /var/snap/microk8s/common/var/lib/kubelet
 defaultSettings:
-  backupTarget: nfs://192.168.1.210:/volume1/Media/longhorn
+  backupTarget: nfs://192.168.1.210:/volume1/ServerBackup/longhorn
+  allowRecurringJobWhileVolumeDetached: true
   defaultDataPath: /mnt/longhorn
   defaultDataLocality: best-effort
   defaultReplicaCount: 3
