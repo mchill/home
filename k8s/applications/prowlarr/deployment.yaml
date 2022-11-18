@@ -12,7 +12,7 @@ spec:
         - name: prowlarr
           image: ghcr.io/linuxserver/prowlarr:0.4.8-develop
           ports:
-            - name: prowlarr
+            - name: ingress
               containerPort: 9696
           env:
             - name: TZ

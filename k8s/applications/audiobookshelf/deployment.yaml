@@ -10,7 +10,7 @@ spec:
         - name: audiobookshelf
           image: advplyr/audiobookshelf:2.2.2
           ports:
-            - name: http
+            - name: ingress
               containerPort: 80
           env:
             - name: TZ

@@ -10,7 +10,7 @@ spec:
         - name: filebrowser
           image: filebrowser/filebrowser:v2.23.0
           ports:
-            - name: http
+            - name: ingress
               containerPort: 8080
           env:
             - name: TZ

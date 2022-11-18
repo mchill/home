@@ -89,5 +89,5 @@ The server is automatically deployed by CI. Manual deployment can be done with t
 
 ```bash
 ./infrastructure/apply.sh
-kustomize build applications | kubectl apply --server-side -f -
+./applications/build.sh | kubectl apply --server-side --force-conflicts -f -
 ```

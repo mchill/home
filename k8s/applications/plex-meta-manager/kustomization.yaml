@@ -1,9 +1,9 @@
 namespace: server
+commonLabels:
+  app: plex-meta-manager
 resources:
   - cron-job.yaml
   - sealed-secret.yaml
-commonLabels:
-  app: plex-meta-manager
 configMapGenerator:
   - name: plex-meta-manager
     files:

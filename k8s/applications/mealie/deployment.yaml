@@ -10,7 +10,7 @@ spec:
         - name: frontend
           image: hkotel/mealie:frontend-v1.0.0beta-5
           ports:
-            - name: http
+            - name: ingress
               containerPort: 3000
           env:
             - name: TZ

@@ -1,0 +1,23 @@
+namespace: server
+resources:
+  - ingress.yaml
+  - service.yaml
+configurations:
+  - configurations.yaml
+vars:
+  - name: APP
+    objref:
+      group: traefik.containo.us
+      apiVersion: v1alpha1
+      kind: IngressRoute
+      name: $(APP)-external
+    fieldref:
+      fieldpath: metadata.labels.app
+  - name: SUBDOMAIN
+    objref:
+      group: traefik.containo.us
+      apiVersion: v1alpha1
+      kind: IngressRoute
+      name: $(APP)-external
+    fieldref:
+      fieldpath: metadata.labels.subdomain

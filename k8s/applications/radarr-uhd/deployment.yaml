@@ -12,7 +12,7 @@ spec:
         - name: radarr
           image: ghcr.io/linuxserver/radarr:4.2.4
           ports:
-            - name: radarr
+            - name: ingress
               containerPort: 7878
           env:
             - name: TZ

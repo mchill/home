@@ -1,7 +1,7 @@
 namespace: server
-resources:
-  - deployment.yaml
-  - ingress.yaml
-  - service.yaml
 commonLabels:
   app: tautulli
+  subdomain: tautulli
+resources:
+  - ../../overlays/ingress
+  - deployment.yaml

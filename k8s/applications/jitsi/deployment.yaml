@@ -39,7 +39,7 @@ spec:
         - name: web
           image: jitsi/web:stable-7882
           ports:
-            - name: jitsi
+            - name: ingress
               containerPort: 80
           envFrom:
             - configMapRef:

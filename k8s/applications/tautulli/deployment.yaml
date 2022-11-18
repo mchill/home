@@ -10,7 +10,7 @@ spec:
         - name: tautulli
           image: tautulli/tautulli:v2.10.5
           ports:
-            - name: tautulli
+            - name: ingress
               containerPort: 8181
           env:
             - name: TZ

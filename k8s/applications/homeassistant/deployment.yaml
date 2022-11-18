@@ -13,7 +13,7 @@ spec:
         - name: homeassistant
           image: homeassistant/home-assistant:2022.11.2
           ports:
-            - name: http
+            - name: ingress
               containerPort: 8123
           env:
             - name: TZ

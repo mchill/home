@@ -10,7 +10,7 @@ spec:
         - name: bazarr
           image: ghcr.io/linuxserver/bazarr:1.1.2
           ports:
-            - name: bazarr
+            - name: ingress
               containerPort: 6767
           env:
             - name: TZ

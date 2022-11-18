@@ -1,10 +1,10 @@
 namespace: server
-resources:
-  - deployment.yaml
-  - ingress.yaml
-  - service.yaml
 commonLabels:
   app: mealie
+  subdomain: recipes
+resources:
+  - ../../overlays/ingress
+  - deployment.yaml
 configMapGenerator:
   - name: mealie
     files:

@@ -1,0 +1,9 @@
+varReference:
+  - kind: IngressRoute
+    path: metadata/name
+  - kind: IngressRoute
+    path: spec/routes[]/match
+  - kind: IngressRoute
+    path: spec/routes[]/services[]/name
+  - kind: Service
+    path: metadata/name

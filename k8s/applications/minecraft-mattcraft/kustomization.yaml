@@ -1,9 +1,9 @@
 namespace: server
+commonLabels:
+  app: minecraft-mattcraft
 resources:
   - deployment.yaml
   - service.yaml
-commonLabels:
-  app: minecraft-mattcraft
 configMapGenerator:
 - name: minecraft-mattcraft
   files:

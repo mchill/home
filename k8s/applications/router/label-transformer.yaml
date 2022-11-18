@@ -1,0 +1,10 @@
+kind: LabelTransformer
+apiVersion: builtin
+metadata:
+  name: router
+labels:
+  app: router
+  subdomain: router
+fieldSpecs:
+  - path: metadata/labels
+    create: true

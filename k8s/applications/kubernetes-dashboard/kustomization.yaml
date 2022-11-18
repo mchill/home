@@ -1,10 +1,11 @@
 namespace: server
-resources:
-  - https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/alternative.yaml
-  - cluster-role-binding.yaml
-  - ingress.yaml
 commonLabels:
   app: kubernetes-dashboard
+  subdomain: k8s
+resources:
+  - ../../overlays/ingress
+  - https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/alternative.yaml
+  - cluster-role-binding.yaml
 patchesStrategicMerge:
   - |-
     $patch: delete
@@ -12,6 +13,12 @@ patchesStrategicMerge:
     kind: Namespace
     metadata:
       name: kubernetes-dashboard
+  - |-
+    $patch: delete
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: $(APP)
   - |-
     apiVersion: apps/v1
     kind: Deployment

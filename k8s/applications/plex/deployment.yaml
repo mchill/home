@@ -13,7 +13,7 @@ spec:
         - name: plex
           image: ghcr.io/linuxserver/plex:1.29.2
           ports:
-            - name: plex
+            - name: ingress
               containerPort: 32400
             - name: gdm-1
               containerPort: 32410

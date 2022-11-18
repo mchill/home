@@ -1,8 +1,17 @@
 namespace: server
-resources:
-  - deployment.yaml
-  - ingress.yaml
-  - middleware.yaml
-  - service.yaml
 commonLabels:
   app: pihole
+  subdomain: pihole
+resources:
+  - ../../overlays/ingress
+  - deployment.yaml
+  - middleware.yaml
+  - service.yaml
+patches:
+  - target:
+      kind: IngressRoute
+    patch: |-
+      - op: add
+        path: /spec/routes/0/middlewares
+        value:
+          - name: pihole

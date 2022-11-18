@@ -1,5 +1,15 @@
 namespace: server
+transformers:
+  - label-transformer.yaml
 resources:
-  - ingress.yaml
-  - service.yaml
+  - ../../overlays/ingress
   - endpoint.yaml
+patches:
+  - target:
+      kind: Service
+    patch: |-
+      - op: add
+        path: /spec/ports/-
+        value:
+          name: ssh
+          port: 22

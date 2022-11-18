@@ -3,7 +3,7 @@ resources:
   - helm.yaml
   - ingress.yaml
   - middleware.yaml
-  - namespace.yaml
+  - sealed-secret.yaml
   - service.yaml
 commonLabels:
   app: traefik-internal

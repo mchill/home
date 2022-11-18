@@ -12,7 +12,7 @@ spec:
         - name: sonarr
           image: ghcr.io/linuxserver/sonarr:3.0.9
           ports:
-            - name: sonarr
+            - name: ingress
               containerPort: 8989
           env:
             - name: TZ

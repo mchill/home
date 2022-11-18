@@ -1,7 +1,8 @@
 namespace: server
-resources:
-  - deployment.yaml
-  - ingress.yaml
-  - service.yaml
 commonLabels:
   app: plex
+  subdomain: plex
+resources:
+  - ../../overlays/ingress
+  - deployment.yaml
+  - service.yaml

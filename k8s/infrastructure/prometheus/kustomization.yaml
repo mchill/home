@@ -4,8 +4,11 @@ resources:
   - ingress.yaml
   - sealed-secret.yaml
 patches:
-  - path: patch.yaml
-    target:
+  - target:
       group: batch
       version: v1
       kind: Job
+    patch: |-
+      - op: add
+        path: /spec/ttlSecondsAfterFinished
+        value: 0

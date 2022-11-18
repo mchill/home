@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: pihole
+  name: pihole-lb
   annotations:
     metallb.universe.tf/loadBalancerIPs: 192.168.1.249
 spec:
   type: LoadBalancer
   ports:
-    - name: http
+    - name: ingress
       port: 80
-      targetPort: http
+      targetPort: ingress
     - name: https
       port: 443
       targetPort: https

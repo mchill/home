@@ -10,7 +10,7 @@ spec:
         - name: ddns
           image: qmcgaw/ddns-updater:v2.4.1
           ports:
-            - name: http
+            - name: ingress
               containerPort: 8000
           env:
             - name: TZ

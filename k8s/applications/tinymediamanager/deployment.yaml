@@ -10,7 +10,7 @@ spec:
         - name: tinymediamanager
           image: tinymediamanager/tinymediamanager:4.3.5
           ports:
-            - name: http
+            - name: ingress
               containerPort: 4000
           env:
             - name: TZ

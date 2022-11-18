@@ -14,7 +14,7 @@ spec:
               add:
                 - NET_ADMIN
           ports:
-            - name: http
+            - name: ingress
               containerPort: 9091
           env:
             - name: TZ

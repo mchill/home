@@ -12,7 +12,7 @@ spec:
         - name: webnut
           image: teknologist/webnut:0.1
           ports:
-            - name: http
+            - name: ingress
               containerPort: 6543
           env:
             - name: TZ

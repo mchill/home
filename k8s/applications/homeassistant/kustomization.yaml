@@ -1,7 +1,7 @@
 namespace: server
-resources:
-  - deployment.yaml
-  - ingress.yaml
-  - service.yaml
 commonLabels:
   app: homeassistant
+  subdomain: home
+resources:
+  - ../../overlays/ingress
+  - deployment.yaml

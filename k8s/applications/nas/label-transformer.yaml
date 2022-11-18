@@ -1,0 +1,10 @@
+kind: LabelTransformer
+apiVersion: builtin
+metadata:
+  name: nas
+labels:
+  app: nas
+  subdomain: nas
+fieldSpecs:
+  - path: metadata/labels
+    create: true

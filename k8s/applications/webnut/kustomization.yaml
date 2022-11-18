@@ -1,8 +1,8 @@
 namespace: server
-resources:
-  - deployment.yaml
-  - ingress.yaml
-  - sealed-secret.yaml
-  - service.yaml
 commonLabels:
   app: webnut
+  subdomain: nut
+resources:
+  - ../../overlays/ingress
+  - deployment.yaml
+  - sealed-secret.yaml

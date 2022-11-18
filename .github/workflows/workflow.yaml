@@ -23,4 +23,4 @@ jobs:
       - name: Deploy server
         working-directory: k8s
         run: |
-          kustomize build | kubectl apply --server-side -f -
+          ./applications/build.sh | kubectl apply --server-side --force-conflicts -f -
