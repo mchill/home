@@ -1,7 +1,6 @@
 #!/bin/bash
 
 kustomize build audiobookshelf && echo "---"
-kustomize build backup && echo "---"
 kustomize build bazarr && echo "---"
 kustomize build ddns && echo "---"
 kustomize build errors && echo "---"
@@ -28,4 +27,4 @@ kustomize build tautulli && echo "---"
 kustomize build tdarr && echo "---"
 kustomize build tinymediamanager && echo "---"
 kustomize build transmission && echo "---"
-kustomize build webnut
+kustomize build webnut && echo "---"

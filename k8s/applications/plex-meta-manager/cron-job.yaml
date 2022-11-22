@@ -12,6 +12,8 @@ spec:
       backoffLimit: 0
       template:
         spec:
+          securityContext:
+            fsGroup: 1000
           restartPolicy: OnFailure
           initContainers:
             - name: render-config
@@ -26,9 +28,8 @@ spec:
                 - secretRef:
                     name: plex-meta-manager
               volumeMounts:
-                - name: server
+                - name: plex-meta-manager
                   mountPath: /config
-                  subPath: plex-meta-manager
                 - name: media
                   mountPath: /data/assets
                   subPath: assets
@@ -41,10 +42,10 @@ spec:
                 - name: media
                   mountPath: /data/tv
                   subPath: tv
-                - name: plex-meta-manager
+                - name: config
                   mountPath: /config_src/config.yaml
                   subPath: config.yaml
-                - name: plex-meta-manager
+                - name: config
                   mountPath: /config/sync.sh
                   subPath: sync.sh
           containers:
@@ -57,28 +58,27 @@ spec:
                 - name: TZ
                   value: America/New_York
               volumeMounts:
-                - name: server
+                - name: plex-meta-manager
                   mountPath: /config
-                  subPath: plex-meta-manager
                 - name: media
                   mountPath: /data/assets
                   subPath: assets
-                - name: plex-meta-manager
+                - name: config
                   mountPath: /config/movies.yml
                   subPath: movies.yml
-                - name: plex-meta-manager
+                - name: config
                   mountPath: /config/extras.yml
                   subPath: extras.yml
-                - name: plex-meta-manager
+                - name: config
                   mountPath: /config/tv.yml
                   subPath: tv.yml
           volumes:
-            - name: server
+            - name: plex-meta-manager
               persistentVolumeClaim:
-                claimName: server
+                claimName: plex-meta-manager
             - name: media
               persistentVolumeClaim:
                 claimName: media
-            - name: plex-meta-manager
+            - name: config
               configMap:
                 name: plex-meta-manager

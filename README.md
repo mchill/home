@@ -75,6 +75,9 @@ sudo microk8s refresh-certs --cert ca.crt
 microk8s status --wait-ready
 microk8s config > ~/.kube/config
 microk8s enable rbac dns
+
+kubectl label nodes --all --overwrite node.longhorn.io/create-default-disk=config
+kubectl annotate nodes --all --overwrite node.longhorn.io/default-disks-config='[{"path":"/mnt/longhorn","allowScheduling":true,"storageReserved":0}]'
 ```
 
 You'll also have to regenerate all sealed secrets afterwards, since the decryption key will be different in a new cluster.

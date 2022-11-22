@@ -8,6 +8,8 @@ spec:
     type: Recreate
   template:
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: radarr
           image: ghcr.io/linuxserver/radarr:4.2.4
@@ -22,9 +24,8 @@ spec:
             - name: PGID
               value: "1000"
           volumeMounts:
-            - name: server
+            - name: radarr-uhd
               mountPath: /config
-              subPath: radarr-uhd
             - name: media
               mountPath: /movies-uhd
               subPath: movies-uhd
@@ -35,9 +36,9 @@ spec:
               mountPath: /data
               subPath: transmission
       volumes:
-        - name: server
+        - name: radarr-uhd
           persistentVolumeClaim:
-            claimName: server
+            claimName: radarr-uhd
         - name: media
           persistentVolumeClaim:
             claimName: media

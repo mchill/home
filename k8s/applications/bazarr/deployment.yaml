@@ -6,6 +6,8 @@ spec:
   replicas: 1
   template:
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: bazarr
           image: ghcr.io/linuxserver/bazarr:1.1.2
@@ -20,9 +22,8 @@ spec:
             - name: PGID
               value: "1000"
           volumeMounts:
-            - name: server
+            - name: bazarr
               mountPath: /config
-              subPath: bazarr
             - name: media
               mountPath: /tv
               subPath: tv
@@ -30,9 +31,9 @@ spec:
               mountPath: /movies
               subPath: movies
       volumes:
-        - name: server
+        - name: bazarr
           persistentVolumeClaim:
-            claimName: server
+            claimName: bazarr
         - name: media
           persistentVolumeClaim:
             claimName: media

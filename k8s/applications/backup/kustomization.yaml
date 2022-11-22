@@ -1,5 +1,0 @@
-namespace: server
-resources:
-  - cron-job.yaml
-commonLabels:
-  app: backup

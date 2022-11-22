@@ -6,6 +6,8 @@ spec:
   replicas: 1
   template:
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: audiobookshelf
           image: advplyr/audiobookshelf:2.2.2
@@ -16,19 +18,19 @@ spec:
             - name: TZ
               value: America/New_York
           volumeMounts:
-            - name: server
+            - name: audiobookshelf
               mountPath: /metadata
-              subPath: audiobookshelf/metadata
-            - name: server
+              subPath: metadata
+            - name: audiobookshelf
               mountPath: /config
-              subPath: audiobookshelf/config
+              subPath: config
             - name: media
               mountPath: /audiobooks
               subPath: audiobooks
       volumes:
-        - name: server
+        - name: audiobookshelf
           persistentVolumeClaim:
-            claimName: server
+            claimName: audiobookshelf
         - name: media
           persistentVolumeClaim:
             claimName: media

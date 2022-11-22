@@ -9,6 +9,8 @@ spec:
   template:
     spec:
       nodeName: matthews-laptop
+      securityContext:
+        fsGroup: 1000
       initContainers:
         - name: mods
           image: bash:5.2.9
@@ -57,13 +59,12 @@ spec:
             - name: REMOVE_OLD_MODS
               value: "TRUE"
           volumeMounts:
-            - name: server
-              mountPath: /data
-              subPath: minecraft
             - name: minecraft
+              mountPath: /data
+            - name: config
               mountPath: /data/ops.json
               subPath: ops.json
-            - name: minecraft
+            - name: config
               mountPath: /data/whitelist.json
               subPath: whitelist.json
             - name: mods
@@ -76,10 +77,10 @@ spec:
               cpu: 1
               memory: 3Gi
       volumes:
-        - name: server
-          persistentVolumeClaim:
-            claimName: server
         - name: minecraft
+          persistentVolumeClaim:
+            claimName: minecraft
+        - name: config
           configMap:
             name: minecraft
         - name: mods

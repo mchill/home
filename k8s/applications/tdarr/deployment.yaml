@@ -7,6 +7,8 @@ spec:
   template:
     spec:
       nodeName: matthews-laptop
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: tdarr-server
           image: haveagitgat/tdarr:2.00.18
@@ -27,12 +29,12 @@ spec:
             - name: webUIPort
               value: "8265"
           volumeMounts:
-            - name: server
+            - name: tdarr
               mountPath: /app/server
-              subPath: tdarr/server
-            - name: server
+              subPath: server
+            - name: tdarr
               mountPath: /app/configs
-              subPath: tdarr/configs
+              subPath: configs
             - name: media
               mountPath: /temp
               subPath: tdarr
@@ -66,9 +68,9 @@ spec:
             - name: serverPort
               value: "8266"
           volumeMounts:
-            - name: server
+            - name: tdarr
               mountPath: /app/configs
-              subPath: tdarr/configs
+              subPath: configs
             - name: media
               mountPath: /temp
               subPath: tdarr
@@ -85,9 +87,9 @@ spec:
               mountPath: /media/tv-uhd
               subPath: tv-uhd
       volumes:
-        - name: server
+        - name: tdarr
           persistentVolumeClaim:
-            claimName: server
+            claimName: tdarr
         - name: media
           persistentVolumeClaim:
             claimName: media

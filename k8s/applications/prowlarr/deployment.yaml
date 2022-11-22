@@ -8,6 +8,8 @@ spec:
     type: Recreate
   template:
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: prowlarr
           image: ghcr.io/linuxserver/prowlarr:0.4.8-develop
@@ -22,10 +24,9 @@ spec:
             - name: PGID
               value: "1000"
           volumeMounts:
-            - name: server
+            - name: prowlarr
               mountPath: /config
-              subPath: prowlarr
       volumes:
-        - name: server
+        - name: prowlarr
           persistentVolumeClaim:
-            claimName: server
+            claimName: prowlarr

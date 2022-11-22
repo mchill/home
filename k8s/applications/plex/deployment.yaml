@@ -9,6 +9,8 @@ spec:
   template:
     spec:
       nodeName: matthews-laptop
+      securityContext:
+        fsGroup: 911
       containers:
         - name: plex
           image: ghcr.io/linuxserver/plex:1.29.2
@@ -40,9 +42,8 @@ spec:
               cpu: 1
               memory: 512Mi
           volumeMounts:
-            - name: server
+            - name: plex
               mountPath: /config
-              subPath: plex
             - name: media
               mountPath: /data/movies
               subPath: movies
@@ -59,9 +60,9 @@ spec:
               mountPath: /data/tv-uhd
               subPath: tv-uhd
       volumes:
-        - name: server
+        - name: plex
           persistentVolumeClaim:
-            claimName: server
+            claimName: plex
         - name: media
           persistentVolumeClaim:
             claimName: media

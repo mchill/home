@@ -6,6 +6,8 @@ spec:
   replicas: 1
   template:
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: filebrowser
           image: filebrowser/filebrowser:v2.23.0
@@ -20,20 +22,23 @@ spec:
             - name: FB_NOAUTH
               value: "true"
           volumeMounts:
-            - name: server
+            - name: filebrowser
               mountPath: /database.db
-              subPath: filebrowser/filebrowser.db
-            - name: server
+              subPath: filebrowser.db
+            - name: filebrowser
               mountPath: /filebrowser.json
-              subPath: filebrowser/filebrowser.json
-            - name: server
-              mountPath: /srv/server
+              subPath: filebrowser.json
+            - name: backup
+              mountPath: /srv/backup
             - name: media
               mountPath: /srv/media
       volumes:
-        - name: server
+        - name: filebrowser
           persistentVolumeClaim:
-            claimName: server
+            claimName: filebrowser
+        - name: backup
+          persistentVolumeClaim:
+            claimName: backup
         - name: media
           persistentVolumeClaim:
             claimName: media

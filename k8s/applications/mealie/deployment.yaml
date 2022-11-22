@@ -6,6 +6,8 @@ spec:
   replicas: 1
   template:
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: frontend
           image: hkotel/mealie:frontend-v1.0.0beta-5
@@ -18,13 +20,12 @@ spec:
             - name: API_URL
               value: http://localhost:9000
           volumeMounts:
-            - name: server
-              mountPath: /app/data
-              subPath: mealie
             - name: mealie
+              mountPath: /app/data
+            - name: config
               mountPath: /app/run.sh
               subPath: run.sh
-            - name: mealie
+            - name: config
               mountPath: /app/assets/custom.css
               subPath: custom.css
         - name: api
@@ -39,14 +40,13 @@ spec:
             - name: BASE_URL
               value: https://mealie.mchill.io
           volumeMounts:
-            - name: server
+            - name: mealie
               mountPath: /app/data
-              subPath: mealie
       volumes:
-        - name: server
-          persistentVolumeClaim:
-            claimName: server
         - name: mealie
+          persistentVolumeClaim:
+            claimName: mealie
+        - name: config
           configMap:
             name: mealie
             defaultMode: 0744

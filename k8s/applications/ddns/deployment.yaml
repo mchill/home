@@ -6,6 +6,8 @@ spec:
   replicas: 1
   template:
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: ddns
           image: qmcgaw/ddns-updater:v2.4.1
@@ -21,10 +23,9 @@ spec:
                   name: ddns
                   key: config.json
           volumeMounts:
-            - name: server
+            - name: ddns
               mountPath: /updater/data
-              subPath: ddns
       volumes:
-        - name: server
+        - name: ddns
           persistentVolumeClaim:
-            claimName: server
+            claimName: ddns

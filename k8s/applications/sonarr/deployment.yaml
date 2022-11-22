@@ -8,6 +8,8 @@ spec:
     type: Recreate
   template:
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: sonarr
           image: ghcr.io/linuxserver/sonarr:3.0.9
@@ -22,9 +24,8 @@ spec:
             - name: PGID
               value: "1000"
           volumeMounts:
-            - name: server
+            - name: sonarr
               mountPath: /config
-              subPath: sonarr
             - name: media
               mountPath: /tv
               subPath: tv
@@ -35,9 +36,9 @@ spec:
               mountPath: /data
               subPath: transmission
       volumes:
-        - name: server
+        - name: sonarr
           persistentVolumeClaim:
-            claimName: server
+            claimName: sonarr
         - name: media
           persistentVolumeClaim:
             claimName: media

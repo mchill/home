@@ -6,6 +6,8 @@ spec:
   replicas: 1
   template:
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: pihole
           image: pihole/pihole:2022.09.4
@@ -25,13 +27,13 @@ spec:
             - name: WEBPASSWORD
               value: ""
           volumeMounts:
-            - name: server
+            - name: pihole
               mountPath: /etc/pihole
-              subPath: pihole/pihole
-            - name: server
+              subPath: pihole
+            - name: pihole
               mountPath: /etc/dnsmasq.d
-              subPath: pihole/dnsmasq
+              subPath: dnsmasq
       volumes:
-        - name: server
+        - name: pihole
           persistentVolumeClaim:
-            claimName: server
+            claimName: pihole

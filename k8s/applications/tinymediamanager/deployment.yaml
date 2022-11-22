@@ -6,6 +6,8 @@ spec:
   replicas: 1
   template:
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: tinymediamanager
           image: tinymediamanager/tinymediamanager:4.3.5
@@ -16,9 +18,8 @@ spec:
             - name: TZ
               value: America/New_York
           volumeMounts:
-            - name: server
+            - name: tinymediamanager
               mountPath: /data
-              subPath: tinymediamanager
             - name: media
               mountPath: /media/movies
               subPath: movies
@@ -26,9 +27,9 @@ spec:
               mountPath: /media/tvshows
               subPath: tv
       volumes:
-        - name: server
+        - name: tinymediamanager
           persistentVolumeClaim:
-            claimName: server
+            claimName: tinymediamanager
         - name: media
           persistentVolumeClaim:
             claimName: media

@@ -6,6 +6,8 @@ spec:
   replicas: 1
   template:
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: tautulli
           image: tautulli/tautulli:v2.10.5
@@ -20,10 +22,9 @@ spec:
             - name: PGID
               value: "1000"
           volumeMounts:
-            - name: server
+            - name: tautulli
               mountPath: /config
-              subPath: tautulli
       volumes:
-        - name: server
+        - name: tautulli
           persistentVolumeClaim:
-            claimName: server
+            claimName: tautulli

@@ -6,6 +6,8 @@ spec:
   replicas: 1
   template:
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: transmission
           image: haugene/transmission-openvpn:4.2
@@ -37,9 +39,8 @@ spec:
             - secretRef:
                 name: transmission
           volumeMounts:
-            - name: server
+            - name: transmission
               mountPath: /config/transmission-home
-              subPath: transmission
             - name: media
               mountPath: /data
               subPath: transmission
@@ -51,9 +52,9 @@ spec:
               cpu: 0.5
               memory: 512Mi
       volumes:
-        - name: server
+        - name: transmission
           persistentVolumeClaim:
-            claimName: server
+            claimName: transmission
         - name: media
           persistentVolumeClaim:
             claimName: media

@@ -9,6 +9,8 @@ spec:
   template:
     spec:
       hostNetwork: true
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: homeassistant
           image: homeassistant/home-assistant:2022.11.2
@@ -19,10 +21,9 @@ spec:
             - name: TZ
               value: America/New_York
           volumeMounts:
-            - name: server
+            - name: homeassistant
               mountPath: /config
-              subPath: homeassistant
       volumes:
-        - name: server
+        - name: homeassistant
           persistentVolumeClaim:
-            claimName: server
+            claimName: homeassistant

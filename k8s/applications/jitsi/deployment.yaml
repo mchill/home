@@ -10,6 +10,8 @@ spec:
     spec:
       nodeSelector:
         kubernetes.io/arch: amd64
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: jicofo
           image: jitsi/jicofo:stable-7882
@@ -19,9 +21,9 @@ spec:
             - secretRef:
                 name: jitsi
           volumeMounts:
-            - name: server
+            - name: jitsi
               mountPath: /config
-              subPath: jitsi/jicofo
+              subPath: jicofo
         - name: prosody
           image: jitsi/prosody:stable-7882
           envFrom:
@@ -30,12 +32,12 @@ spec:
             - secretRef:
                 name: jitsi
           volumeMounts:
-            - name: server
+            - name: jitsi
               mountPath: /config
-              subPath: jitsi/prosody/config
-            - name: server
+              subPath: prosody/config
+            - name: jitsi
               mountPath: /prosody-plugins-custom
-              subPath: jitsi/prosody/prosody-plugins-custom
+              subPath: prosody/prosody-plugins-custom
         - name: web
           image: jitsi/web:stable-7882
           ports:
@@ -45,9 +47,9 @@ spec:
             - configMapRef:
                 name: jitsi
           volumeMounts:
-            - name: server
+            - name: jitsi
               mountPath: /config
-              subPath: jitsi/web
+              subPath: web
         - name: jvb
           image: jitsi/jvb:stable-7882
           ports:
@@ -60,10 +62,10 @@ spec:
             - secretRef:
                 name: jitsi
           volumeMounts:
-            - name: server
+            - name: jitsi
               mountPath: /config
-              subPath: jitsi/jvb
+              subPath: jvb
       volumes:
-        - name: server
+        - name: jitsi
           persistentVolumeClaim:
-            claimName: server
+            claimName: jitsi
