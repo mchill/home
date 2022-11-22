@@ -10,7 +10,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: audiobookshelf
-          image: advplyr/audiobookshelf:2.2.2
+          image: advplyr/audiobookshelf:2.2.5
           ports:
             - name: ingress
               containerPort: 80
