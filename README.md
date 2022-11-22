@@ -91,6 +91,6 @@ find . -type f -iname secret.yaml -not -path "*/charts/*" -execdir sh -c "cat {}
 The server is automatically deployed by CI. Manual deployment can be done with the following commands.
 
 ```bash
-./infrastructure/apply.sh
-./applications/build.sh | kubectl apply --server-side --force-conflicts -f -
+pushd infrastructure && ./apply.sh && popd
+pushd applications && ./build.sh | kubectl apply --server-side --force-conflicts -f - && popd
 ```

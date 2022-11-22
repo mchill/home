@@ -21,6 +21,6 @@ jobs:
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
           chmod 0600 ~/.kube/config
       - name: Deploy server
-        working-directory: k8s
+        working-directory: k8s/applications
         run: |
-          ./applications/build.sh | kubectl apply --server-side --force-conflicts -f -
+          ./build.sh | kubectl apply --server-side --force-conflicts -f -
