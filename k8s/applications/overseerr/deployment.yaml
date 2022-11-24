@@ -4,6 +4,8 @@ metadata:
   name: overseerr
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     spec:
       securityContext:

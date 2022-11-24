@@ -4,6 +4,8 @@ metadata:
   name: tdarr
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     spec:
       nodeName: matthews-laptop

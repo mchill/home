@@ -4,6 +4,8 @@ metadata:
   name: tautulli
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     spec:
       securityContext:
