@@ -13,6 +13,16 @@ spec:
       template:
         spec:
           restartPolicy: OnFailure
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: "kubernetes.io/hostname"
+                  labelSelector:
+                    matchExpressions:
+                      - key: app
+                        operator: In
+                        values:
+                          - $(VOLUME)
           containers:
             - name: backup
               image: instrumentisto/rsync-ssh:alpine3.16
@@ -25,7 +35,8 @@ spec:
                   ssh-keyscan -H nas >> /root/.ssh/known_hosts;
                   cd /backup;
                   getfacl -R ${VOLUME} > ${VOLUME}.facl;
-                  rsync -avz -e "ssh -i /root/ssh/id_rsa" --delete-before /backup/ serverbackup@nas:/volume1/ServerBackup/volumes;
+                  rsync -avz -e "ssh -i /root/ssh/id_rsa" --delete-before /backup/${VOLUME}.facl serverbackup@nas:/volume1/ServerBackup/volumes/${VOLUME}.facl;
+                  rsync -avz -e "ssh -i /root/ssh/id_rsa" --delete-before /backup/${VOLUME} serverbackup@nas:/volume1/ServerBackup/volumes/${VOLUME};
               env:
                 - name: TZ
                   value: America/New_York
