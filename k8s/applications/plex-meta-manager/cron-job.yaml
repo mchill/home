@@ -17,7 +17,7 @@ spec:
           restartPolicy: OnFailure
           initContainers:
             - name: render-config
-              image: bash:5.2.9
+              image: bash:5.2.12
               args:
                 - -c
                 - |
