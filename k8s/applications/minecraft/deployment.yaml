@@ -13,7 +13,7 @@ spec:
         fsGroup: 1000
       initContainers:
         - name: mods
-          image: bash:5.2.9
+          image: bash:5.2.12
           args:
             - -c
             - |
