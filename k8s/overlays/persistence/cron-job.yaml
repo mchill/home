@@ -36,7 +36,7 @@ spec:
                   cd /backup;
                   getfacl -R ${VOLUME} > ${VOLUME}.facl;
                   rsync -avz -e "ssh -i /root/ssh/id_rsa" --delete-before /backup/${VOLUME}.facl serverbackup@nas:/volume1/ServerBackup/volumes/${VOLUME}.facl;
-                  rsync -avz -e "ssh -i /root/ssh/id_rsa" --delete-before /backup/${VOLUME} serverbackup@nas:/volume1/ServerBackup/volumes/${VOLUME};
+                  rsync -avz -e "ssh -i /root/ssh/id_rsa" --delete-before /backup/${VOLUME} serverbackup@nas:/volume1/ServerBackup/volumes;
               env:
                 - name: TZ
                   value: America/New_York
