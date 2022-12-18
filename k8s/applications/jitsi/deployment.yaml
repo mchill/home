@@ -14,7 +14,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: jicofo
-          image: jitsi/jicofo:stable-8044
+          image: jitsi/jicofo:stable-8138
           envFrom:
             - configMapRef:
                 name: jitsi
@@ -25,7 +25,7 @@ spec:
               mountPath: /config
               subPath: jicofo
         - name: prosody
-          image: jitsi/prosody:stable-8044
+          image: jitsi/prosody:stable-8138
           envFrom:
             - configMapRef:
                 name: jitsi
@@ -39,7 +39,7 @@ spec:
               mountPath: /prosody-plugins-custom
               subPath: prosody/prosody-plugins-custom
         - name: web
-          image: jitsi/web:stable-8044
+          image: jitsi/web:stable-8138
           ports:
             - name: ingress
               containerPort: 80
@@ -51,7 +51,7 @@ spec:
               mountPath: /config
               subPath: web
         - name: jvb
-          image: jitsi/jvb:stable-8044
+          image: jitsi/jvb:stable-8138
           ports:
             - name: jvb
               containerPort: 10000
