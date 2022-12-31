@@ -46,6 +46,9 @@ spec:
             - name: media
               mountPath: /data
               subPath: transmission
+            - name: config
+              mountPath: /scripts/openvpn-post-config.sh
+              subPath: openvpn-post-config.sh
           resources:
             limits:
               cpu: 1
@@ -60,3 +63,7 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media
+        - name: config
+          configMap:
+            name: transmission
+            defaultMode: 0744

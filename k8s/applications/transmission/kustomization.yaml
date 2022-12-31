@@ -7,3 +7,7 @@ resources:
   - ../../overlays/persistence
   - deployment.yaml
   - sealed-secret.yaml
+configMapGenerator:
+  - name: transmission
+    files:
+      - openvpn-post-config.sh
