@@ -1,5 +1,5 @@
 #!/bin/bash
 
 cat <&0 > helm.yaml
-kustomize build .
+kubectl kustomize
 rm helm.yaml

@@ -22,10 +22,7 @@ Load balancing is acheived using MetalLB for all services running inside of Kube
 
 ### Filesystem
 
-Persistent storage is split into two volumes.
-
-* server - Application configuration and state. Uses a GlusterFS volume replicated across all of my nodes.
-* media - Larger long-term media storage. Mounted from my NAS as an NFS volume.
+Persistent storage is achieved using NFS and [Longhorn](https://longhorn.io/) volumes.
 
 ### Sealed Secrets
 
@@ -66,7 +63,7 @@ If the cluster ever needs to be completely reset, this can be easily done with s
 
 ```bash
 sudo snap remove microk8s
-sudo snap install microk8s --classic --channel=1.24
+sudo snap install microk8s --classic --channel=1.25
 
 # Add custom domain name to cert
 sed -i '/^DNS.5 =.*/a DNS.6 = mchill.io' /var/snap/microk8s/current/certs/csr.conf.template
