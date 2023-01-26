@@ -1,0 +1,17 @@
+laptops:
+  hosts:
+    laptop:
+      ansible_host: 192.168.1.200
+      ansible_user: mchill
+  vars:
+    longhorn_partition: /dev/sda1
+rpis:
+  hosts:
+    raspberrypi-1:
+      ansible_host: 192.168.1.201
+      ansible_user: mchill
+    raspberrypi-2:
+      ansible_host: 192.168.1.202
+      ansible_user: mchill
+  vars:
+    longhorn_partition: /dev/sda3

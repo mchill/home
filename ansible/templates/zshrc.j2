@@ -1,0 +1,20 @@
+# zsh config
+export ZSH="/{{ ansible_env.HOME }}/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+plugins=(git)
+source $ZSH/oh-my-zsh.sh
+
+# Paths
+export PATH=$PATH:/snap/bin
+
+# Aliases
+killnamespace() {
+    NAMESPACE=$1
+    kubectl proxy &
+    kubectl get namespace $NAMESPACE -o json |jq '.spec = {"finalizers":[]}' >temp.json
+    curl -k -H "Content-Type: application/json" -X PUT --data-binary @temp.json 127.0.0.1:8001/api/v1/namespaces/$NAMESPACE/finalize
+    rm temp.json
+}
+
+alias clera="clear"
+alias kubectl='microk8s kubectl'
