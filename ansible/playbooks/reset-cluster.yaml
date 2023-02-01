@@ -2,42 +2,37 @@
   hosts: all
   tasks:
     - name: Uninstall microk8s
+      become: true
       community.general.snap:
           name: microk8s
           state: absent
-          options:
-            -- purge
 
     - name: Install microk8s
-      register: microk8s
+      become: true
       community.general.snap:
           name: microk8s
           classic: true
           channel: 1.25
 
     - name: Wait for microk8s to be ready
-      when: microk8s.snaps_installed is defined and microk8s.snaps_installed|length>0
-      ansible.builtin.shell: microk8s status --wait-ready
+      ansible.builtin.shell: /snap/bin/microk8s status --wait-ready
 
     - name: Enable addons
-      ansible.builtin.shell: microk8s enable rbac dns
+      ansible.builtin.shell: /snap/bin/microk8s enable rbac dns
 
     - name: Set kube context
-      ansible.builtin.shell: kubectl config set-context --current --namespace=server
-
-    - name: Write kubeconfig
-      ansible.builtin.shell: |
-        microk8s config > ~/.kube/config
-        chmod 0600 ~/.kube/config
-        sed -i '/certificate-authority-data:/s/.*/    insecure-skip-tls-verify: true/' ~/.kube/config
-        sed -i '/server:/s/.*/    server: https:\/\/mchill.io:16443/' ~/.kube/config
+      ansible.builtin.shell: /snap/bin/microk8s kubectl config set-context --current --namespace=server
 
     - name: Update GitHub secret
+      run_once: true
       environment:
         GITHUB_TOKEN: "{{ GITHUB_TOKEN }}"
-      ansible.builtin.shell: gh secret -R mchill/home set KUBECONFIG --body "$(base64 ~/.kube/config)"
+      ansible.builtin.shell: |
+        sed '/certificate-authority-data:/s/.*/    insecure-skip-tls-verify: true/' ~/.kube/config | tee ~/.kube/config.ext
+        sed -i '/server:/s/.*/    server: https:\/\/mchill.io:16443/' ~/.kube/config.ext
+        gh secret -R mchill/home set KUBECONFIG --body "$(base64 ~/.kube/config.ext)"
 
     - name: Label nodes
       ansible.builtin.shell: |
-        kubectl label nodes {{ inventory_hostname }} --overwrite node.longhorn.io/create-default-disk=config
-        kubectl annotate nodes {{ inventory_hostname }} --overwrite node.longhorn.io/default-disks-config='[{"path":"/mnt/longhorn","allowScheduling":true,"storageReserved":0}]'
+        /snap/bin/microk8s kubectl label nodes {{ inventory_hostname }} --overwrite node.longhorn.io/create-default-disk=config
+        /snap/bin/microk8s kubectl annotate nodes {{ inventory_hostname }} --overwrite node.longhorn.io/default-disks-config='[{"path":"/mnt/longhorn","allowScheduling":true,"storageReserved":0}]'

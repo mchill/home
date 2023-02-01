@@ -9,18 +9,6 @@
             update_cache: true
             upgrade: true
 
-        - name: Install kubernetes apt source
-          block:
-            - name: Install kubernetes apt key
-              ansible.builtin.get_url:
-                url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-                dest: /etc/apt/trusted.gpg.d/kubernetes-archive-keyring.gpg
-
-            - name: Install kubernetes apt repository
-              ansible.builtin.apt_repository:
-                repo: "deb [signed-by=/etc/apt/trusted.gpg.d/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"
-                update_cache: true
-
         - name: Install helm apt source
           block:
             - name: Install helm apt key
@@ -54,7 +42,6 @@
               - gh
               - git
               - helm
-              - kubectl
               - nfs-common
               - openssh-server
               - open-iscsi
@@ -104,7 +91,6 @@
             src: ../templates/zshrc.j2
             dest: ~/.zshrc
             mode: "0644"
-            force: no
 
         - name: Check for existing oh-my-zsh installation
           register: oh_my_zsh
@@ -188,4 +174,5 @@
   serial: 1
   tasks:
     - name: Reboot for changes to take effect
+      become: true
       ansible.builtin.reboot:

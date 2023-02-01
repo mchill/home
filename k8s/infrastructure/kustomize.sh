@@ -1,5 +1,5 @@
 #!/bin/bash
 
 cat <&0 > helm.yaml
-kubectl kustomize
+microk8s kubectl kustomize
 rm helm.yaml
