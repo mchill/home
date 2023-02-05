@@ -17,7 +17,7 @@ spec:
           volumeMounts:
             - name: media
               mountPath: /usr/share/nginx/html/podcasts
-              subPath: podcasts
+              subPath: libraries/podcasts
       volumes:
         - name: media
           persistentVolumeClaim:

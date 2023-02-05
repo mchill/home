@@ -28,7 +28,7 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /tv-uhd
-              subPath: tv-uhd
+              subPath: libraries/tv/uhd
             - name: media
               mountPath: /trash
               subPath: trash

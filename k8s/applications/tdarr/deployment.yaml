@@ -42,16 +42,22 @@ spec:
               subPath: tdarr
             - name: media
               mountPath: /media/movies
-              subPath: movies
+              subPath: libraries/movies/sd
             - name: media
               mountPath: /media/movies-uhd
-              subPath: movies-uhd
+              subPath: libraries/movies/uhd
+            - name: media
+              mountPath: /media/movies-requested
+              subPath: libraries/movies/requested
             - name: media
               mountPath: /media/tv
-              subPath: tv
+              subPath: libraries/tv/sd
             - name: media
               mountPath: /media/tv-uhd
-              subPath: tv-uhd
+              subPath: libraries/tv/uhd
+            - name: media
+              mountPath: /media/tv-requested
+              subPath: libraries/tv/requested
         - name: tdarr-node
           image: haveagitgat/tdarr_node:2.00.18
           env:
@@ -78,16 +84,22 @@ spec:
               subPath: tdarr
             - name: media
               mountPath: /media/movies
-              subPath: movies
+              subPath: libraries/movies/sd
             - name: media
               mountPath: /media/movies-uhd
-              subPath: movies-uhd
+              subPath: libraries/movies/uhd
+            - name: media
+              mountPath: /media/movies-requested
+              subPath: libraries/movies/requested
             - name: media
               mountPath: /media/tv
-              subPath: tv
+              subPath: libraries/tv/sd
             - name: media
               mountPath: /media/tv-uhd
-              subPath: tv-uhd
+              subPath: libraries/tv/uhd
+            - name: media
+              mountPath: /media/tv-requested
+              subPath: libraries/tv/requested
       volumes:
         - name: tdarr
           persistentVolumeClaim:

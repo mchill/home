@@ -28,7 +28,10 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /tv
-              subPath: tv
+              subPath: libraries/tv/sd
+            - name: media
+              mountPath: /tv-requested
+              subPath: libraries/tv/requested
             - name: media
               mountPath: /trash
               subPath: trash

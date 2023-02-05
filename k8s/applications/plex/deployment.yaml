@@ -46,19 +46,25 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /data/movies
-              subPath: movies
+              subPath: libraries/movies/sd
             - name: media
               mountPath: /data/movies-uhd
-              subPath: movies-uhd
+              subPath: libraries/movies/uhd
+            - name: media
+              mountPath: /data/movies-requested
+              subPath: libraries/movies/requested
             - name: media
               mountPath: /data/extras
-              subPath: extras
+              subPath: libraries/extras
             - name: media
               mountPath: /data/tv
-              subPath: tv
+              subPath: libraries/tv/sd
             - name: media
               mountPath: /data/tv-uhd
-              subPath: tv-uhd
+              subPath: libraries/tv/uhd
+            - name: media
+              mountPath: /data/tv-requested
+              subPath: libraries/tv/requested
       volumes:
         - name: plex
           persistentVolumeClaim:

@@ -28,10 +28,10 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /tv
-              subPath: tv
+              subPath: libraries/tv/sd
             - name: media
               mountPath: /movies
-              subPath: movies
+              subPath: libraries/movies/sd
       volumes:
         - name: bazarr
           persistentVolumeClaim:

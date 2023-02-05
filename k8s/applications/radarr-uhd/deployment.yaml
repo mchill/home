@@ -28,7 +28,7 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /movies-uhd
-              subPath: movies-uhd
+              subPath: libraries/movies/uhd
             - name: media
               mountPath: /trash
               subPath: trash

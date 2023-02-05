@@ -35,13 +35,13 @@ spec:
                   subPath: assets
                 - name: media
                   mountPath: /data/movies
-                  subPath: movies
+                  subPath: libraries/movies/sd
                 - name: media
                   mountPath: /data/extras
-                  subPath: extras
+                  subPath: libraries/extras
                 - name: media
                   mountPath: /data/tv
-                  subPath: tv
+                  subPath: libraries/tv/sd
                 - name: config
                   mountPath: /config_src/config.yaml
                   subPath: config.yaml

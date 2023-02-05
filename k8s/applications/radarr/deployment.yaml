@@ -28,7 +28,10 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /movies
-              subPath: movies
+              subPath: libraries/movies/sd
+            - name: media
+              mountPath: /movies-requested
+              subPath: libraries/movies/requested
             - name: media
               mountPath: /trash
               subPath: trash

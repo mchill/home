@@ -26,10 +26,10 @@ spec:
               mountPath: /data
             - name: media
               mountPath: /media/movies
-              subPath: movies
+              subPath: libraries/movies/sd
             - name: media
               mountPath: /media/tvshows
-              subPath: tv
+              subPath: libraries/tv/sd
       volumes:
         - name: tinymediamanager
           persistentVolumeClaim:
