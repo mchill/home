@@ -80,23 +80,19 @@ After following the above steps for each node, they can be provisioned with an a
 ansible-playbook playbooks/configure-nodes.yaml -i inventory.yaml
 ```
 
-### Reset Cluster
+### Create/Reset Cluster
 
 If the cluster ever needs to be completely reset, this can be done with an ansible playbook.
 
 ```bash
-ansible-playbook playbooks/reset-cluster.yaml -i inventory.yaml --extra-vars "GITHUB_TOKEN=$GITHUB_TOKEN"
-
-# For each node:
-microk8s add-node # run on the primary node
-microk8s join ... # run on an additional node
+ansible-playbook playbooks/reset-cluster.yaml -i inventory.yaml --extra-vars "K3S_TOKEN=$K3S_TOKEN GITHUB_TOKEN=$GITHUB_TOKEN"
 ```
 
-### Deploy
+### Deploy Workloads
 
 Applications are automatically deployed by CI. Manual deployment can be done with the following commands.
 
 ```bash
-pushd infrastructure && ./apply.sh && popd
-pushd applications && ./build.sh | kubectl apply --server-side --force-conflicts -f - && popd
+pushd k8s/infrastructure && ./apply.sh && popd
+pushd k8s/applications && ./build.sh | kubectl apply --server-side --force-conflicts -f - && popd
 ```

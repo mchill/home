@@ -1,38 +1,50 @@
-- name: Configure k8s cluster
+- name: Uninstall k3s
   hosts: all
   tasks:
-    - name: Uninstall microk8s
+    - name: Modify killall script
       become: true
-      community.general.snap:
-          name: microk8s
-          state: absent
+      ansible.builtin.replace:
+        path: /usr/local/bin/k3s-killall.sh
+        regexp: 'umount "'
+        replace: 'umount -l "'
 
-    - name: Install microk8s
+    - name: Kill services
+      ansible.builtin.shell: k3s-killall.sh
+
+    - name: Uninstall k3s
+      ansible.builtin.shell: k3s-uninstall.sh
+
+    - name: Reboot to prune all orphaned processes
       become: true
-      community.general.snap:
-          name: microk8s
-          classic: true
-          channel: 1.25
+      ansible.builtin.reboot:
 
-    - name: Wait for microk8s to be ready
-      ansible.builtin.shell: /snap/bin/microk8s status --wait-ready
+- name: Configure master
+  hosts: laptops
+  tasks:
+    - name: Copy config file
+      become: true
+      ansible.builtin.template:
+        src: ../templates/k3s-config.j2
+        dest: /etc/rancher/k3s/config.yaml
+        mode: "0644"
 
-    - name: Enable addons
-      ansible.builtin.shell: /snap/bin/microk8s enable rbac dns
+    - name: Install k3s
+      ansible.builtin.shell: curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.25 sh -s -
 
     - name: Set kube context
-      ansible.builtin.shell: /snap/bin/microk8s kubectl config set-context --current --namespace=server
+      become: true
+      ansible.builtin.shell: kubectl config set-context --current --namespace=server
 
     - name: Update GitHub secret
       run_once: true
       environment:
         GITHUB_TOKEN: "{{ GITHUB_TOKEN }}"
       ansible.builtin.shell: |
-        sed '/certificate-authority-data:/s/.*/    insecure-skip-tls-verify: true/' ~/.kube/config | tee ~/.kube/config.ext
-        sed -i '/server:/s/.*/    server: https:\/\/mchill.io:16443/' ~/.kube/config.ext
+        sed '/server:/s/.*/    server: https:\/\/mchill.io:6443/' ~/.kube/config | tee ~/.kube/config.ext
         gh secret -R mchill/home set KUBECONFIG --body "$(base64 ~/.kube/config.ext)"
 
-    - name: Label nodes
-      ansible.builtin.shell: |
-        /snap/bin/microk8s kubectl label nodes {{ inventory_hostname }} --overwrite node.longhorn.io/create-default-disk=config
-        /snap/bin/microk8s kubectl annotate nodes {{ inventory_hostname }} --overwrite node.longhorn.io/default-disks-config='[{"path":"/mnt/longhorn","allowScheduling":true,"storageReserved":0}]'
+- name: Configure agents
+  hosts: rpis
+  tasks:
+    - name: Install k3s
+      ansible.builtin.shell: curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.25 K3S_URL=https://{{ hostvars["laptop"].ansible_host }}:6443 K3S_TOKEN={{ K3S_TOKEN }} sh -s - --node-label node.longhorn.io/create-default-disk=config

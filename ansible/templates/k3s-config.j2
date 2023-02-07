@@ -1,0 +1,13 @@
+token: {{ K3S_TOKEN }}
+write-kubeconfig: /home/mchill/.kube/config
+write-kubeconfig-mode: 644
+tls-san:
+  - mchill.io
+disable:
+  - local-storage
+  - metrics-server
+  - servicelb
+  - traefik
+node-label:
+  - node.longhorn.io/create-default-disk=config
+  - node.longhorn.io/default-node-tags='["laptop"]'

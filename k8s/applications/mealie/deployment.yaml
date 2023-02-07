@@ -24,9 +24,9 @@ spec:
           volumeMounts:
             - name: mealie
               mountPath: /app/data
-            - name: config
-              mountPath: /app/run.sh
-              subPath: run.sh
+            # - name: config
+            #   mountPath: /app/run.sh
+            #   subPath: run.sh
             - name: config
               mountPath: /app/assets/custom.css
               subPath: custom.css

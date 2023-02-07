@@ -4,8 +4,6 @@ persistence:
   defaultClassReplicaCount: 3
   defaultDataLocality: best-effort
   reclaimPolicy: Retain
-csi:
-  kubeletRootDir: /var/snap/microk8s/common/var/lib/kubelet
 defaultSettings:
   backupTarget: nfs://192.168.1.210:/volume1/ServerBackup/longhorn
   allowRecurringJobWhileVolumeDetached: true
