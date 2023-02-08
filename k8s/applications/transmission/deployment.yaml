@@ -40,15 +40,18 @@ spec:
           envFrom:
             - secretRef:
                 name: transmission
+          livenessProbe:
+            httpGet:
+              path: /transmission/web/
+              port: ingress
+            initialDelaySeconds: 60
+            periodSeconds: 60
           volumeMounts:
             - name: transmission
               mountPath: /config/transmission-home
             - name: media
               mountPath: /data
               subPath: transmission
-            - name: config
-              mountPath: /scripts/openvpn-post-config.sh
-              subPath: openvpn-post-config.sh
           resources:
             limits:
               cpu: 1
@@ -63,7 +66,3 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media
-        - name: config
-          configMap:
-            name: transmission
-            defaultMode: 0744
