@@ -1,0 +1,19 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nut-exporter
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+        - name: nut-exporter
+          image: hon95/prometheus-nut-exporter:1.2.1
+          ports:
+            - name: nut-exporter
+              containerPort: 9995
+          env:
+            - name: TZ
+              value: America/New_York

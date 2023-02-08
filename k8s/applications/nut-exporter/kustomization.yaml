@@ -1,7 +1,6 @@
 namespace: server
 commonLabels:
-  app: webnut
-  subdomain: nut
+  app: nut-exporter
 resources:
-  - ../../overlays/ingress
   - deployment.yaml
+  - service.yaml
