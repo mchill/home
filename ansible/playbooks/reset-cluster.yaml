@@ -12,7 +12,7 @@
       ansible.builtin.shell: k3s-killall.sh
 
     - name: Uninstall k3s
-      ansible.builtin.shell: k3s-uninstall.sh
+      ansible.builtin.shell: k3s-uninstall.sh || k3s-agent-uninstall.sh
 
     - name: Reboot to prune all orphaned processes
       become: true
@@ -21,6 +21,13 @@
 - name: Configure master
   hosts: laptops
   tasks:
+    - name: Create k3s directory
+      become: true
+      ansible.builtin.file:
+        path: /etc/rancher/k3s
+        state: directory
+        recurse: true
+
     - name: Copy config file
       become: true
       ansible.builtin.template:
@@ -42,6 +49,10 @@
       ansible.builtin.shell: |
         sed '/server:/s/.*/    server: https:\/\/mchill.io:6443/' ~/.kube/config | tee ~/.kube/config.ext
         gh secret -R mchill/home set KUBECONFIG --body "$(base64 ~/.kube/config.ext)"
+
+    - name: Annotate node
+      become: true
+      ansible.builtin.shell: kubectl annotate node laptop node.longhorn.io/default-node-tags='["laptop"]'
 
 - name: Configure agents
   hosts: rpis

@@ -2,4 +2,3 @@ namespace: longhorn-system
 resources:
   - helm.yaml
   - ingress.yaml
-  - recurring-job.yaml
