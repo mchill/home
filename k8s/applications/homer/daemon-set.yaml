@@ -9,7 +9,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: homer
-          image: b4bz/homer:v23.02.2
+          image: b4bz/homer:v23.05.1
           ports:
             - name: ingress
               containerPort: 8080
