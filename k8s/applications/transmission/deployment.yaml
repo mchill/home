@@ -24,13 +24,13 @@ spec:
             - name: TZ
               value: America/New_York
             - name: OPENVPN_PROVIDER
-              value: MULLVAD
+              value: custom
             - name: OPENVPN_CONFIG
-              value: us_rag
+              value: AirVPN_United-States_UDP-443-Entry3
             - name: OPENVPN_OPTS
               value: --mute-replay-warnings
             - name: TRANSMISSION_PEER_PORT
-              value: "56002"
+              value: "21630"
             - name: PUID
               value: "1000"
             - name: PGID
@@ -49,6 +49,10 @@ spec:
           volumeMounts:
             - name: transmission
               mountPath: /config/transmission-home
+              subPath: config
+            - name: transmission
+              mountPath: /etc/openvpn/custom
+              subPath: openvpn
             - name: media
               mountPath: /data
               subPath: transmission
