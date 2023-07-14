@@ -14,7 +14,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: tinymediamanager
-          image: tinymediamanager/tinymediamanager:4.3.11
+          image: tinymediamanager/tinymediamanager:4.3.12
           ports:
             - name: ingress
               containerPort: 4000
