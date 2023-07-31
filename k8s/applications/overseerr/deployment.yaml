@@ -12,7 +12,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: overseerr
-          image: sctx/overseerr:1.33.0
+          image: sctx/overseerr:1.33.2
           ports:
             - name: ingress
               containerPort: 5055
