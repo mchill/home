@@ -44,6 +44,11 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["hkotel/mealie"],
       "versioning": "regex:^(frontend|api)-v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)beta-(?<build>\\d+)$"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["cr.hotio.dev/hotio/qbittorrent"],
+      "versioning": "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
     }
   ]
 }

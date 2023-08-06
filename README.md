@@ -88,6 +88,12 @@ If the cluster ever needs to be completely reset, this can be done with an ansib
 ansible-playbook playbooks/reset-cluster.yaml -i inventory.yaml --extra-vars "K3S_TOKEN=$K3S_TOKEN GITHUB_TOKEN=$GITHUB_TOKEN"
 ```
 
+Edit `/etc/systemd/system/k3s.service` and add the required arguments to `ExecStart`.
+
+```bash
+ExecStart=/usr/local/bin/k3s server '--kubelet-arg=allowed-unsafe-sysctls=net.*'
+```
+
 ### Deploy Workloads
 
 Applications are automatically deployed by CI. Manual deployment can be done with the following commands.

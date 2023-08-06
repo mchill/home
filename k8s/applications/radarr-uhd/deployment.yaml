@@ -34,7 +34,7 @@ spec:
               subPath: trash
             - name: media
               mountPath: /data
-              subPath: transmission
+              subPath: qbittorrent
       volumes:
         - name: radarr-uhd
           persistentVolumeClaim:

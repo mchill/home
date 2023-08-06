@@ -1,0 +1,9 @@
+namespace: server
+commonLabels:
+  app: qbittorrent
+  subdomain: qbittorrent
+resources:
+  - ../../overlays/ingress
+  - ../../overlays/persistence
+  - deployment.yaml
+  - sealed-secret.yaml

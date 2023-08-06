@@ -68,10 +68,6 @@ services:
   - name: Media Mgmt
     icon: fas fa-tasks
     items:
-      - name: Overseerr
-        subtitle: Plex requests
-        logo: assets/logos/overseerr.png
-        url: https://overseerr.mchill.io
       - name: tinyMediaManager
         subtitle: Media metadata
         logo: assets/logos/tinymediamanager.png
@@ -80,6 +76,10 @@ services:
         subtitle: Transcoder
         logo: assets/logos/tdarr.png
         url: https://tdarr.mchill.io
+      - name: qBittorrent
+        subtitle: BitTorrent client
+        logo: assets/logos/qbittorrent.png
+        url: https://qbittorrent.mchill.io
       - name: Transmission
         subtitle: BitTorrent client
         logo: assets/logos/transmission.png
@@ -148,6 +148,10 @@ services:
         subtitle: DNS sinkhole
         logo: assets/logos/pihole.png
         url: https://pihole.mchill.io
+      - name: Overseerr
+        subtitle: Plex requests
+        logo: assets/logos/overseerr.png
+        url: https://overseerr.mchill.io
       - name: Jitsi
         subtitle: Video conferencing
         logo: assets/logos/jitsi.png
