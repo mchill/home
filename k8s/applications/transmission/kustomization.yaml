@@ -1,9 +1,0 @@
-namespace: server
-commonLabels:
-  app: transmission
-  subdomain: transmission
-resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
-  - deployment.yaml
-  - sealed-secret.yaml
