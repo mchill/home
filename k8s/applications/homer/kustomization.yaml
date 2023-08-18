@@ -5,7 +5,7 @@ commonLabels:
 resources:
   - ../../overlays/ingress
   - ../../overlays/persistence
-  - daemon-set.yaml
+  - deployment.yaml
 configMapGenerator:
   - name: homer
     files:
@@ -17,15 +17,3 @@ patches:
       - op: replace
         path: /spec/routes/0/match
         value: Host("mchill.io")
-  - target:
-      kind: PersistentVolume
-    patch: |-
-      - op: replace
-        path: /spec/accessModes/0
-        value: ReadWriteMany
-  - target:
-      kind: PersistentVolumeClaim
-    patch: |-
-      - op: replace
-        path: /spec/accessModes/0
-        value: ReadWriteMany
