@@ -41,7 +41,7 @@ spec:
               mountPath: /mods
       containers:
         - name: minecraft
-          image: itzg/minecraft-server:2023.8.3
+          image: itzg/minecraft-server:2023.9.1
           ports:
             - name: minecraft
               containerPort: 25565
