@@ -13,7 +13,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: homeassistant
-          image: homeassistant/home-assistant:2023.8.4
+          image: homeassistant/home-assistant:2023.9.2
           ports:
             - name: ingress
               containerPort: 8123

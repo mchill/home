@@ -50,7 +50,7 @@ spec:
                   subPath: sync.sh
           containers:
             - name: plex-meta-manager
-              image: meisnate12/plex-meta-manager:v1.19.0
+              image: meisnate12/plex-meta-manager:v1.19.1
               args:
                 - --run
                 - --read-only-config
