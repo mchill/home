@@ -55,7 +55,7 @@ spec:
               subPath: libraries/movies/requested
             - name: media
               mountPath: /data/extras
-              subPath: libraries/extras
+              subPath: libraries/extras/sd
             - name: media
               mountPath: /data/tv
               subPath: libraries/tv/sd

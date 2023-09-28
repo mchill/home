@@ -31,17 +31,8 @@ spec:
                 - name: plex-meta-manager
                   mountPath: /config
                 - name: media
-                  mountPath: /data/assets
-                  subPath: assets
-                - name: media
-                  mountPath: /data/movies
-                  subPath: libraries/movies/sd
-                - name: media
-                  mountPath: /data/extras
-                  subPath: libraries/extras
-                - name: media
-                  mountPath: /data/tv
-                  subPath: libraries/tv/sd
+                  mountPath: /data
+                  subPath: libraries
                 - name: config
                   mountPath: /config_src/config.yaml
                   subPath: config.yaml
@@ -61,8 +52,8 @@ spec:
                 - name: plex-meta-manager
                   mountPath: /config
                 - name: media
-                  mountPath: /data/assets
-                  subPath: assets
+                  mountPath: /data
+                  subPath: libraries
                 - name: config
                   mountPath: /config/movies.yml
                   subPath: movies.yml
