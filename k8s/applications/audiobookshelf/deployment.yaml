@@ -29,6 +29,9 @@ spec:
             - name: media
               mountPath: /audiobooks
               subPath: libraries/audiobooks
+            - name: media
+              mountPath: /podcasts
+              subPath: libraries/podcasts
       volumes:
         - name: audiobookshelf
           persistentVolumeClaim:

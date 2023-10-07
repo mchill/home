@@ -65,6 +65,9 @@ spec:
             - name: media
               mountPath: /data/tv-requested
               subPath: libraries/tv/requested
+            - name: media
+              mountPath: /data/music
+              subPath: libraries/music
       volumes:
         - name: plex
           persistentVolumeClaim:

@@ -12,7 +12,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: frontend
-          image: hkotel/mealie:frontend-v1.0.0beta-5
+          image: hkotel/mealie:frontend-nightly
           ports:
             - name: ingress
               containerPort: 3000
@@ -31,7 +31,7 @@ spec:
               mountPath: /app/assets/custom.css
               subPath: custom.css
         - name: api
-          image: hkotel/mealie:api-v1.0.0beta-5
+          image: hkotel/mealie:api-nightly
           env:
             - name: TZ
               value: America/New_York

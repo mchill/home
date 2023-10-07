@@ -1,0 +1,48 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: podcast-dl
+spec:
+  schedule: "@hourly"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        spec:
+          nodeName: laptop
+          securityContext:
+            fsGroup: 1000
+          restartPolicy: OnFailure
+          containers:
+            - name: podcast-dl
+              image: node:14
+              command:
+                - /bin/bash
+                - -c
+                - |
+                  apt update
+                  apt install -y ffmpeg
+                  git clone https://github.com/lightpohl/podcast-dl.git
+                  cd podcast-dl
+                  npm install
+                  npm run build
+                  for d in /podcasts/*/; do
+                    [ -f "${d}rss.txt" ] || continue
+                    ./binaries/podcast-dl-9.0.2-linux-x64 --url $(cat "${d}rss.txt") \
+                      --out-dir "$d" --episode-template "{{guid}}" \
+                      --include-meta --include-episode-meta --include-episode-images --add-mp3-metadata
+                  done
+              env:
+                - name: TZ
+                  value: America/New_York
+              volumeMounts:
+                - name: media
+                  mountPath: /podcasts
+                  subPath: libraries/podcasts
+          volumes:
+            - name: media
+              persistentVolumeClaim:
+                claimName: media

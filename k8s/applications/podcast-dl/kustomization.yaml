@@ -1,0 +1,5 @@
+namespace: server
+commonLabels:
+  app: podcast-dl
+resources:
+  - cron-job.yaml
