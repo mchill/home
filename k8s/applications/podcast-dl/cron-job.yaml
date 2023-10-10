@@ -27,17 +27,20 @@ spec:
                   apt install -y ffmpeg
                   git clone https://github.com/lightpohl/podcast-dl.git
                   cd podcast-dl
-                  npm install
-                  npm run build
+                  npm install -g podcast-dl@9.1.0
                   for d in /podcasts/*/; do
                     [ -f "${d}rss.txt" ] || continue
-                    ./binaries/podcast-dl-9.0.2-linux-x64 --url $(cat "${d}rss.txt") \
+                    podcast-dl --url $(cat "${d}rss.txt") \
                       --out-dir "$d" --episode-template "{{guid}}" \
                       --include-meta --include-episode-meta --include-episode-images --add-mp3-metadata
                   done
               env:
                 - name: TZ
                   value: America/New_York
+                - name: UID
+                  value: "1000"
+                - name: GID
+                  value: "1000"
               volumeMounts:
                 - name: media
                   mountPath: /podcasts
