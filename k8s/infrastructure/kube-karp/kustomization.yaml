@@ -1,7 +1,0 @@
-namespace: kube-karp
-resources:
-  - daemon-set.yaml
-  - namespace.yaml
-  - sealed-secret.yaml
-commonLabels:
-  app: kube-karp

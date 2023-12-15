@@ -16,7 +16,7 @@ All HTTP traffic is routed through Traefik, but TCP and UDP connections are expo
 
 HTTPS traffic is secured behind Google forward authentication by default. Some exceptions are made for applications that don't work behind an additional layer of authentication (e.g., Plex and Home Assistant).
 
-Load balancing is acheived using MetalLB for all services running inside of Kubernetes, and Kube Karp for the Kube API server.
+Load balancing is acheived using MetalLB for all services running inside of Kubernetes.
 
 ![Network](docs/images/network.drawio.svg)
 
