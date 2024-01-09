@@ -1,0 +1,28 @@
+libraries:
+  Shared Movies:
+    metadata_path:
+      - file: config/movies.yml
+  Shared TV Shows:
+    metadata_path:
+      - file: config/tv.yml
+settings:
+  sync_mode: sync
+  tvdb_language: eng
+  verify_ssl: true
+plex:
+  url: http://plex.server.svc.cluster.local.:80
+  token: $PLEX_TOKEN
+radarr:
+  url: http://radarr.server.svc.cluster.local.:80
+  token: $RADARR_TOKEN
+  root_folder_path: /movies
+  quality_profile: Any
+sonarr:
+  url: http://sonarr.server.svc.cluster.local.:80
+  token: $SONARR_TOKEN
+  root_folder_path: /tv
+  quality_profile: Any
+  language_profile: English
+tmdb:
+  apikey: $TMDB_API_KEY
+  language: en

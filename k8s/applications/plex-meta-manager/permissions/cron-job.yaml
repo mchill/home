@@ -1,9 +1,9 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: plex-meta-manager
+  name: plex-meta-manager-permissions
 spec:
-  schedule: "@daily"
+  schedule: '@hourly'
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 0
@@ -21,27 +21,23 @@ spec:
               args:
                 - -c
                 - |
-                  apk add --no-cache gettext rsync
+                  apk add --no-cache curl gettext
                   envsubst < /config_src/config.yaml > /config/config.yml
-                  bash /config/sync.sh
+                  curl -X PUT "http://plex.server.svc.cluster.local.:80/library/sections/1/all?type=18&label%5B0%5D.tag.tag=Matthew&X-Plex-Token=$PLEX_TOKEN"
+                  curl -X PUT "http://plex.server.svc.cluster.local.:80/library/sections/2/all?type=18&label%5B0%5D.tag.tag=Matthew&X-Plex-Token=$PLEX_TOKEN"
               envFrom:
                 - secretRef:
                     name: plex-meta-manager
               volumeMounts:
                 - name: plex-meta-manager
                   mountPath: /config
-                - name: media
-                  mountPath: /data
-                  subPath: libraries
+                  subPath: permissions
                 - name: config
                   mountPath: /config_src/config.yaml
                   subPath: config.yaml
-                - name: config
-                  mountPath: /config/sync.sh
-                  subPath: sync.sh
           containers:
             - name: plex-meta-manager
-              image: meisnate12/plex-meta-manager:v1.19.1
+              image: meisnate12/plex-meta-manager:v1.20.0
               args:
                 - --run
                 - --read-only-config
@@ -51,9 +47,7 @@ spec:
               volumeMounts:
                 - name: plex-meta-manager
                   mountPath: /config
-                - name: media
-                  mountPath: /data
-                  subPath: libraries
+                  subPath: permissions
                 - name: config
                   mountPath: /config/movies.yml
                   subPath: movies.yml
@@ -67,9 +61,6 @@ spec:
             - name: plex-meta-manager
               persistentVolumeClaim:
                 claimName: plex-meta-manager
-            - name: media
-              persistentVolumeClaim:
-                claimName: media
             - name: config
               configMap:
-                name: plex-meta-manager
+                name: plex-meta-manager-permissions

@@ -42,7 +42,7 @@ settings:
   tvdb_language: eng
   verify_ssl: true
 plex:
-  url: http://plex.server.svc.cluster.local.:32400
+  url: http://plex.server.svc.cluster.local.:80
   token: $PLEX_TOKEN
 tmdb:
   apikey: $TMDB_API_KEY

@@ -1,0 +1,11 @@
+namespace: server
+commonLabels:
+  app: plex-meta-manager
+resources:
+  - cron-job.yaml
+configMapGenerator:
+  - name: plex-meta-manager-permissions
+    files:
+      - config/config.yaml
+      - config/movies.yml
+      - config/tv.yml

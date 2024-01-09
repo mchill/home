@@ -3,13 +3,6 @@ commonLabels:
   app: plex-meta-manager
 resources:
   - ../../overlays/persistence
-  - cron-job.yaml
   - sealed-secret.yaml
-configMapGenerator:
-  - name: plex-meta-manager
-    files:
-      - config/sync.sh
-      - config/config.yaml
-      - config/movies.yml
-      - config/extras.yml
-      - config/tv.yml
+  - permissions
+  - posters

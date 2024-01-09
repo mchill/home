@@ -1,0 +1,16 @@
+collections:
+  Matthew:
+    radarr_taglist: trakt
+    smart_label:
+      all:
+        label: <<smart_label>>
+  Mom:
+    radarr_taglist: 3 - shil771
+    smart_label:
+      all:
+        label: <<smart_label>>
+  Kamaria:
+    radarr_taglist: 4 - kamaria.
+    smart_label:
+      all:
+        label: <<smart_label>>
