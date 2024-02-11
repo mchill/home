@@ -12,7 +12,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: filebrowser
-          image: filebrowser/filebrowser:v2.26.0
+          image: filebrowser/filebrowser:v2.27.0
           ports:
             - name: ingress
               containerPort: 8080
