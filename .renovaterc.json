@@ -47,7 +47,7 @@
     },
     {
       "matchDatasources": ["docker"],
-      "matchPackageNames": ["cr.hotio.dev/hotio/qbittorrent"],
+      "matchPackageNames": ["hotio/qbittorrent"],
       "versioning": "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
     }
   ]
