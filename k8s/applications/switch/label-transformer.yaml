@@ -1,0 +1,10 @@
+kind: LabelTransformer
+apiVersion: builtin
+metadata:
+  name: switch
+labels:
+  app: switch
+  subdomain: switch
+fieldSpecs:
+  - path: metadata/labels
+    create: true
