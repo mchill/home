@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: flaresolverr
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: flaresolverr
+          image: ghcr.io/flaresolverr/flaresolverr:v3.3.16
+          ports:
+            - name: ingress
+              containerPort: 8191
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: flaresolverr
+              mountPath: /config
+      volumes:
+        - name: flaresolverr
+          persistentVolumeClaim:
+            claimName: flaresolverr

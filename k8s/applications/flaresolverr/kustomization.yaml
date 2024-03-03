@@ -1,0 +1,8 @@
+namespace: server
+commonLabels:
+  app: flaresolverr
+  subdomain: flaresolverr
+resources:
+  - ../../overlays/ingress
+  - ../../overlays/persistence
+  - deployment.yaml
