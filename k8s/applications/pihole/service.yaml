@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: pihole-lb
   annotations:
-    metallb.universe.tf/loadBalancerIPs: 192.168.1.249
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.231
 spec:
   type: LoadBalancer
   ports:

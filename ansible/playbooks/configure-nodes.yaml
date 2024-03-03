@@ -18,7 +18,7 @@
 
             - name: Install helm apt repository
               ansible.builtin.apt_repository:
-                repo: "deb [signed-by=/etc/apt/trusted.gpg.d/helm.asc] https://baltocdn.com/helm/stable/debian/ all main"
+                repo: 'deb [signed-by=/etc/apt/trusted.gpg.d/helm.asc] https://baltocdn.com/helm/stable/debian/ all main'
                 update_cache: true
 
         - name: Install github apt source
@@ -30,7 +30,7 @@
 
             - name: Install github apt repository
               ansible.builtin.apt_repository:
-                repo: "deb [signed-by=/etc/apt/trusted.gpg.d/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"
+                repo: 'deb [signed-by=/etc/apt/trusted.gpg.d/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main'
                 update_cache: true
 
         - name: Install packages
@@ -59,15 +59,16 @@
           PermitRootLogin no
 
     - name: Set hostname
+      become: true
       ansible.builtin.hostname:
-        name: "{{ inventory_hostname }}"
+        name: '{{ inventory_hostname }}'
 
     - name: Copy hosts file
       become: true
       ansible.builtin.template:
         src: ../templates/hosts.j2
         dest: /etc/hosts
-        mode: "0644"
+        mode: '0644'
 
     - name: Increase max file handlers
       become: true
@@ -90,7 +91,7 @@
           ansible.builtin.template:
             src: ../templates/zshrc.j2
             dest: ~/.zshrc
-            mode: "0644"
+            mode: '0644'
 
         - name: Check for existing oh-my-zsh installation
           register: oh_my_zsh
@@ -107,14 +108,14 @@
         - name: Mount longhorn
           ansible.posix.mount:
             path: /mnt/longhorn
-            src: "{{ longhorn_partition }}"
+            src: '{{ longhorn_partition }}'
             fstype: ext4
             opts: defaults
             state: mounted
 
         - name: Mount media
           ansible.posix.mount:
-            src: 192.168.1.210:/volume1/Media
+            src: 192.168.1.202:/volume1/Media
             path: /mnt/media
             fstype: nfs
             opts: user,nofail,noatime,nolock,intr,tcp,actimeo=1800
@@ -123,7 +124,7 @@
 
         - name: Mount backup
           ansible.posix.mount:
-            src: 192.168.1.210:/volume1/ServerBackup
+            src: 192.168.1.202:/volume1/ServerBackup
             path: /mnt/backup
             fstype: nfs
             opts: user,nofail,noatime,nolock,intr,tcp,actimeo=1800

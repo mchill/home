@@ -19,7 +19,7 @@
       ansible.builtin.reboot:
 
 - name: Configure master
-  hosts: laptops
+  hosts: master
   tasks:
     - name: Create k3s directory
       become: true
@@ -33,10 +33,10 @@
       ansible.builtin.template:
         src: ../templates/k3s-config.j2
         dest: /etc/rancher/k3s/config.yaml
-        mode: "0644"
+        mode: '0644'
 
     - name: Install k3s
-      ansible.builtin.shell: curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.25 sh -s -
+      ansible.builtin.shell: curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.28 sh -s -
 
     - name: Set kube context
       become: true
@@ -45,17 +45,31 @@
     - name: Update GitHub secret
       run_once: true
       environment:
-        GITHUB_TOKEN: "{{ GITHUB_TOKEN }}"
+        GITHUB_TOKEN: '{{ GITHUB_TOKEN }}'
       ansible.builtin.shell: |
         sed '/server:/s/.*/    server: https:\/\/mchill.io:6443/' ~/.kube/config | tee ~/.kube/config.ext
         gh secret -R mchill/home set KUBECONFIG --body "$(base64 ~/.kube/config.ext)"
 
-    - name: Annotate node
+    - name: Taint node
       become: true
-      ansible.builtin.shell: kubectl annotate node laptop node.longhorn.io/default-node-tags='["laptop"]'
+      ansible.builtin.shell: kubectl taint nodes raspberrypi-1 node-role.kubernetes.io/master=true:NoSchedule
 
 - name: Configure agents
-  hosts: rpis
+  hosts: all:!master
   tasks:
+    - name: Create k3s directory
+      become: true
+      ansible.builtin.file:
+        path: /etc/rancher/k3s
+        state: directory
+        recurse: true
+
+    - name: Copy config file
+      become: true
+      ansible.builtin.template:
+        src: ../templates/k3s-agent-config.j2
+        dest: /etc/rancher/k3s/config.yaml
+        mode: '0644'
+
     - name: Install k3s
-      ansible.builtin.shell: curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.25 K3S_URL=https://{{ hostvars["laptop"].ansible_host }}:6443 K3S_TOKEN={{ K3S_TOKEN }} sh -s - --node-label node.longhorn.io/create-default-disk=config
+      ansible.builtin.shell: curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.28 K3S_URL=https://{{ hostvars["raspberrypi-1"].ansible_host }}:6443 sh -

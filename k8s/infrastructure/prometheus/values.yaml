@@ -64,7 +64,7 @@ prometheus:
       - job_name: nut
         static_configs:
           - targets:
-              - 192.168.1.210:3493
+              - 192.168.1.202:3493
         metrics_path: /nut
         relabel_configs:
           - source_labels: [__address__]

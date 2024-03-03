@@ -33,7 +33,7 @@ spec:
             - name: TZ
               value: America/New_York
             - name: ADVERTISE_IP
-              value: http://192.168.1.246:32400,https://plex.mchill.io
+              value: http://192.168.1.232:32400,https://plex.mchill.io
           resources:
             limits:
               cpu: 4

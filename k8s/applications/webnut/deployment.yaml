@@ -20,6 +20,6 @@ spec:
             - name: TZ
               value: America/New_York
             - name: UPS_HOST
-              value: 192.168.1.210
+              value: 192.168.1.202
             - name: UPS_PORT
               value: "3493"
