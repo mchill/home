@@ -1,0 +1,16 @@
+namespace: server
+commonLabels:
+  app: unifi
+  subdomain: unifi
+resources:
+  - ../../overlays/ingress
+  - ../../overlays/persistence
+  - deployment.yaml
+  - service.yaml
+patches:
+  - target:
+      kind: IngressRoute
+    patch: |-
+      - op: replace
+        path: /spec/routes/0/services/0/scheme
+        value: https

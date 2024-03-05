@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: unifi-lb
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.234
+spec:
+  type: LoadBalancer
+  ports:
+    - name: stun
+      port: 3478
+      targetPort: stun
+      protocol: UDP
+    - name: discovery
+      port: 10001
+      targetPort: discovery
+      protocol: UDP
+    - name: comm
+      port: 8080
+      targetPort: comm

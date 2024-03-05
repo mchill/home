@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unifi
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: unifi
+          image: lscr.io/linuxserver/unifi-controller:8.0.24
+          ports:
+            - name: ingress
+              containerPort: 8443
+            - name: stun
+              containerPort: 3478
+              protocol: UDP
+            - name: discovery
+              containerPort: 10001
+              protocol: UDP
+            - name: comm
+              containerPort: 8080
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - name: unifi
+              mountPath: /config
+      volumes:
+        - name: unifi
+          persistentVolumeClaim:
+            claimName: unifi
