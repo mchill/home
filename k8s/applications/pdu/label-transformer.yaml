@@ -1,0 +1,10 @@
+kind: LabelTransformer
+apiVersion: builtin
+metadata:
+  name: pdu
+labels:
+  app: pdu
+  subdomain: pdu
+fieldSpecs:
+  - path: metadata/labels
+    create: true

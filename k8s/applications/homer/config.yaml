@@ -40,6 +40,38 @@ services:
         subtitle: Video conferencing
         logo: assets/logos/jitsi.png
         url: https://jitsi.mchill.io
+      - name: Synology DSM
+        subtitle: NAS
+        logo: assets/logos/nas.png
+        url: https://nas.mchill.io
+
+  - name: Media Mgmt
+    icon: fas fa-tasks
+    items:
+      - name: Overseerr
+        subtitle: Plex requests
+        logo: assets/logos/overseerr.png
+        url: https://overseerr.mchill.io
+      - name: tinyMediaManager
+        subtitle: Media metadata
+        logo: assets/logos/tinymediamanager.png
+        url: https://tiny.mchill.io
+      - name: Tdarr
+        subtitle: Transcoder
+        logo: assets/logos/tdarr.png
+        url: https://tdarr.mchill.io
+      - name: qBittorrent
+        subtitle: BitTorrent client
+        logo: assets/logos/qbittorrent.png
+        url: https://qbittorrent.mchill.io
+      - name: Prowlarr
+        subtitle: Indexer aggregator
+        logo: assets/logos/prowlarr.png
+        url: https://prowlarr.mchill.io
+      - name: Tautulli
+        subtitle: Plex statistics
+        logo: assets/logos/tautulli.png
+        url: https://tautulli.mchill.io
 
   - name: Libraries
     icon: fas fa-folder-open
@@ -65,30 +97,6 @@ services:
         logo: assets/logos/bazarr.png
         url: https://bazarr.mchill.io
 
-  - name: Media Mgmt
-    icon: fas fa-tasks
-    items:
-      - name: Overseerr
-        subtitle: Plex requests
-        logo: assets/logos/overseerr.png
-        url: https://overseerr.mchill.io
-      - name: tinyMediaManager
-        subtitle: Media metadata
-        logo: assets/logos/tinymediamanager.png
-        url: https://tiny.mchill.io
-      - name: Tdarr
-        subtitle: Transcoder
-        logo: assets/logos/tdarr.png
-        url: https://tdarr.mchill.io
-      - name: qBittorrent
-        subtitle: BitTorrent client
-        logo: assets/logos/qbittorrent.png
-        url: https://qbittorrent.mchill.io
-      - name: Prowlarr
-        subtitle: Indexer aggregator
-        logo: assets/logos/prowlarr.png
-        url: https://prowlarr.mchill.io
-
   - name: Server Mgmt
     icon: fas fa-server
     items:
@@ -108,17 +116,17 @@ services:
         subtitle: Persistent storage
         logo: assets/logos/longhorn.png
         url: https://longhorn.mchill.io
-      - name: Synology DSM
-        subtitle: NAS
-        logo: assets/logos/nas.png
-        url: https://nas.mchill.io
+      - name: PDU
+        subtitle: Power management
+        logo: assets/logos/cyberpower.png
+        url: https://pdu.mchill.io
 
   - name: Network
     icon: fas fa-wifi
     items:
       - name: Router
         subtitle: Router web UI
-        logo: assets/logos/router.png
+        logo: assets/logos/ubiquiti.png
         url: https://router.mchill.io
       - name: Switch
         subtitle: Switch web UI
@@ -126,7 +134,7 @@ services:
         url: https://switch.mchill.io
       - name: Unifi
         subtitle: Network controller
-        logo: assets/logos/ubiquiti.png
+        logo: assets/logos/unifi.png
         url: https://unifi.mchill.io
       - name: Pi-hole
         subtitle: DNS sinkhole
@@ -152,10 +160,6 @@ services:
         subtitle: Server metrics
         logo: assets/logos/prometheus.png
         url: https://prometheus.mchill.io
-      - name: Tautulli
-        subtitle: Plex statistics
-        logo: assets/logos/tautulli.png
-        url: https://tautulli.mchill.io
       - name: webNUT
         subtitle: UPS metrics
         logo: assets/logos/webnut.png
