@@ -22,7 +22,7 @@ spec:
           - 1.1.1.1
       containers:
         - name: qbittorrent
-          image: hotio/qbittorrent:release-4.6.3
+          image: hotio/qbittorrent:release-4.6.4
           securityContext:
             capabilities:
               add:
