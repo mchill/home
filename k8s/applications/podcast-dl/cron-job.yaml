@@ -18,7 +18,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: podcast-dl
-              image: node:21.6.1
+              image: node:21.7.1
               command:
                 - /bin/bash
                 - -c
