@@ -1,0 +1,10 @@
+kind: LabelTransformer
+apiVersion: builtin
+metadata:
+  name: kvm
+labels:
+  app: kvm
+  subdomain: kvm
+fieldSpecs:
+  - path: metadata/labels
+    create: true
