@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:2023.10.0
+    dns:
+      - 8.8.8.8
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 8080:80/tcp
+    environment:
+      TZ: America/Chicago
+      WEBPASSWORD: ""
+      FTLCONF_RATE_LIMIT: 0/0
+    volumes:
+      - /mnt/sda1/pihole/etc-pihole:/etc/pihole
+      - /mnt/sda1/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+    restart: always

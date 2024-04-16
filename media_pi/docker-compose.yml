@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto:2.0.16
+    ports:
+      - 1883:1883/tcp
+      - 9001:9001/tcp
+    environment:
+      TZ: America/Chicago
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+    restart: always
+
+  keyboard2mqtt:
+    container_name: keyboard2mqtt
+    build:
+      context: ./keyboard2mqtt
+    devices:
+      - /dev/input/by-id/usb-flirc.tv_flirc_38E36E5950523939352E314AFF061A37-if01-event-kbd
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      TZ: America/Chicago
+    volumes:
+      - ./keyboard2mqtt/main.py:/keyboard2mqtt.py
+    restart: always
