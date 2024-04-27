@@ -1,0 +1,61 @@
+kvmd:
+    gpio:
+        drivers:
+            set_input_1:
+                type: cmd
+                cmd: [/usr/bin/sudo, /usr/bin/python, /root/main.py, 1]
+            set_input_2:
+                type: cmd
+                cmd: [/usr/bin/sudo, /usr/bin/python, /root/main.py, 2]
+            set_input_3:
+                type: cmd
+                cmd: [/usr/bin/sudo, /usr/bin/python, /root/main.py, 3]
+            set_input_4:
+                type: cmd
+                cmd: [/usr/bin/sudo, /usr/bin/python, /root/main.py, 4]
+            set_input_5:
+                type: cmd
+                cmd: [/usr/bin/sudo, /usr/bin/python, /root/main.py, 5]
+            set_input_6:
+                type: cmd
+                cmd: [/usr/bin/sudo, /usr/bin/python, /root/main.py, 6]
+        scheme:
+            input_1_button:
+                driver: set_input_1
+                pin: 0
+                mode: output
+                switch: false
+            input_2_button:
+                driver: set_input_2
+                pin: 0
+                mode: output
+                switch: false
+            input_3_button:
+                driver: set_input_3
+                pin: 0
+                mode: output
+                switch: false
+            input_4_button:
+                driver: set_input_4
+                pin: 0
+                mode: output
+                switch: false
+            input_5_button:
+                driver: set_input_5
+                pin: 0
+                mode: output
+                switch: false
+            input_6_button:
+                driver: set_input_6
+                pin: 0
+                mode: output
+                switch: false
+        view:
+            table:
+                - ["#Input"]
+                - - "input_1_button|Pi 1"
+                  - "input_2_button|Pi 2"
+                  - "input_5_button|Server"
+                - - "input_3_button|Pi 3"
+                  - "input_4_button|Pi 4"
+                  - "input_6_button|Laptop"
