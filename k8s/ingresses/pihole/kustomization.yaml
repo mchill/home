@@ -1,13 +1,10 @@
 namespace: server
-commonLabels:
-  app: pihole
-  subdomain: pihole
+transformers:
+  - label-transformer.yaml
 resources:
   - ../../overlays/ingress
-  - ../../overlays/persistence
-  - deployment.yaml
+  - endpoint.yaml
   - middleware.yaml
-  - service.yaml
 patches:
   - target:
       kind: IngressRoute

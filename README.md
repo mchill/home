@@ -100,5 +100,6 @@ Applications are automatically deployed by CI. Manual deployment can be done wit
 
 ```bash
 pushd k8s/infrastructure && ./apply.sh && popd
+pushd k8s/ingresses && ./build.sh | kubectl apply --server-side --force-conflicts -f - && popd
 pushd k8s/applications && ./build.sh | kubectl apply --server-side --force-conflicts -f - && popd
 ```

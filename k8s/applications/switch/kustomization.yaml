@@ -1,6 +1,0 @@
-namespace: server
-transformers:
-  - label-transformer.yaml
-resources:
-  - ../../overlays/ingress
-  - endpoint.yaml

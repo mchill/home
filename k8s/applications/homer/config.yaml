@@ -100,18 +100,18 @@ services:
   - name: Server Mgmt
     icon: fas fa-server
     items:
+      - name: Home Assistant
+        subtitle: Home automation
+        logo: assets/logos/homeassistant.png
+        url: https://home.mchill.io
       - name: PiKVM
         subtitle: KVM over IP
         logo: assets/logos/pikvm.png
         url: https://kvm.mchill.io
-      - name: Traefik External
-        subtitle: Proxy configuration
-        logo: assets/logos/traefik.png
-        url: https://traefik-external.mchill.io
-      - name: Traefik Internal
-        subtitle: Proxy configuration
-        logo: assets/logos/traefik.png
-        url: https://traefik-internal.mchill.io
+      - name: K8s Dashboard
+        subtitle: Cluster configuration
+        logo: assets/logos/kubernetes.png
+        url: https://k8s.mchill.io
       - name: Longhorn
         subtitle: Persistent storage
         logo: assets/logos/longhorn.png
@@ -121,41 +121,17 @@ services:
         logo: assets/logos/cyberpower.png
         url: https://pdu.mchill.io
 
-  - name: Network
-    icon: fas fa-wifi
-    items:
-      - name: Router
-        subtitle: Router web UI
-        logo: assets/logos/ubiquiti.png
-        url: https://router.mchill.io
-      - name: Switch
-        subtitle: Switch web UI
-        logo: assets/logos/switch.png
-        url: https://switch.mchill.io
-      - name: Unifi
-        subtitle: Network controller
-        logo: assets/logos/unifi.png
-        url: https://unifi.mchill.io
-      - name: Pi-hole
-        subtitle: DNS sinkhole
-        logo: assets/logos/pihole.png
-        url: https://pihole.mchill.io
-      - name: DDNS Monitor
-        subtitle: Domain management
-        logo: assets/logos/ddns.svg
-        url: https://ddns.mchill.io
-
-  - name: More
+  - name: Monitoring
     icon: fas fa-plus
     items:
-      - name: K8s Dashboard
-        subtitle: Cluster configuration
-        logo: assets/logos/kubernetes.png
-        url: https://k8s.mchill.io
-      - name: Home Assistant
-        subtitle: Home automation
-        logo: assets/logos/homeassistant.png
-        url: https://home.mchill.io
+      - name: Traefik External
+        subtitle: Proxy configuration
+        logo: assets/logos/traefik.png
+        url: https://traefik-external.mchill.io
+      - name: Traefik Internal
+        subtitle: Proxy configuration
+        logo: assets/logos/traefik.png
+        url: https://traefik-internal.mchill.io
       - name: Grafana
         subtitle: Server monitoring
         logo: assets/logos/grafana.png
@@ -168,3 +144,23 @@ services:
         subtitle: UPS metrics
         logo: assets/logos/webnut.png
         url: https://nut.mchill.io
+
+  - name: Network
+    icon: fas fa-wifi
+    items:
+      - name: Router
+        subtitle: Router web UI
+        logo: assets/logos/ubiquiti.png
+        url: https://router.mchill.io
+      - name: Unifi
+        subtitle: Network controller
+        logo: assets/logos/unifi.png
+        url: https://unifi.mchill.io
+      - name: Pi-hole
+        subtitle: DNS sinkhole
+        logo: assets/logos/pihole.png
+        url: https://pihole.mchill.io
+      - name: DDNS Monitor
+        subtitle: Domain management
+        logo: assets/logos/ddns.svg
+        url: https://ddns.mchill.io
