@@ -7,6 +7,10 @@ resources:
   - ../../overlays/persistence
   - deployment.yaml
   - service.yaml
+configMapGenerator:
+  - name: unifi
+    files:
+      - init-mongo.js
 patches:
   - target:
       kind: IngressRoute
