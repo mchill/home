@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: homeassistant-lb
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.235
+spec:
+  type: LoadBalancer
+  ports:
+    - name: ingress
+      port: 8123
+      targetPort: ingress
