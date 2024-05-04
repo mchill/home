@@ -60,6 +60,21 @@ spec:
             - name: config
               mountPath: /docker-entrypoint-initdb.d/init-mongo.js
               subPath: init-mongo.js
+        - name: proxy
+          image: node:22.1.0-alpine
+          command: [node, /app/proxy.js]
+          ports:
+            - name: proxy
+              containerPort: 3000
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: NODE_TLS_REJECT_UNAUTHORIZED
+              value: "0"
+          volumeMounts:
+            - name: config
+              mountPath: /app/proxy.js
+              subPath: proxy.js
       volumes:
         - name: unifi
           persistentVolumeClaim:

@@ -11,6 +11,7 @@ configMapGenerator:
   - name: unifi
     files:
       - init-mongo.js
+      - proxy.js
 patches:
   - target:
       kind: IngressRoute
@@ -18,3 +19,20 @@ patches:
       - op: replace
         path: /spec/routes/0/services/0/scheme
         value: https
+      - op: add
+        path: /spec/routes/-
+        value:
+          match: Host("$(SUBDOMAIN).mchill.io") && Path("/v2/api/site/default/topology")
+          kind: Rule
+          services:
+            - name: $(APP)
+              port: 3000
+  - target:
+      kind: Service
+    patch: |-
+      - op: add
+        path: /spec/ports/-
+        value:
+          name: proxy
+          port: 3000
+          targetPort: proxy
