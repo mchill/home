@@ -1,16 +1,14 @@
 namespace: server
-commonLabels:
-  app: unifi
-  subdomain: unifi
+transformers:
+  - label-transformer.yaml
 resources:
   - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
+  - endpoint.yaml
   - service.yaml
 configMapGenerator:
   - name: unifi
     files:
-      - init-mongo.js
       - proxy.js
 patches:
   - target:
@@ -22,17 +20,8 @@ patches:
       - op: add
         path: /spec/routes/-
         value:
-          match: Host("$(SUBDOMAIN).mchill.io") && Path("/v2/api/site/default/topology")
+          match: Host("$(SUBDOMAIN).mchill.io") && Path("/proxy/network/v2/api/site/default/topology")
           kind: Rule
           services:
-            - name: $(APP)
+            - name: unifi-proxy
               port: 3000
-  - target:
-      kind: Service
-    patch: |-
-      - op: add
-        path: /spec/ports/-
-        value:
-          name: proxy
-          port: 3000
-          targetPort: proxy

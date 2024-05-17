@@ -148,10 +148,6 @@ services:
   - name: Network
     icon: fas fa-wifi
     items:
-      - name: Router
-        subtitle: Router web UI
-        logo: assets/logos/ubiquiti.png
-        url: https://router.mchill.io
       - name: Unifi
         subtitle: Network controller
         logo: assets/logos/unifi.png

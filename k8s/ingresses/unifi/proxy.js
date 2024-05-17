@@ -5,11 +5,11 @@ http.createServer((req, res) => {
     const headers = req.headers;
     delete headers['accept-encoding'];
 
-    https.get('https://unifi.server.svc.cluster.local:80/v2/api/site/default/topology', { headers }, (response) => {
+    https.get('https://unifi.server.svc.cluster.local:80/proxy/network/v2/api/site/default/topology', { headers }, (response) => {
         let output = '';
         response.setEncoding('utf8');
 
-        response.on('data',  (chunk) => {
+        response.on('data', (chunk) => {
             output += chunk;
         });
 

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unifi-proxy
+spec:
+  selector:
+    matchLabels:
+      app: unifi
+      subdomain: unifi
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: unifi
+        subdomain: unifi
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: proxy
+          image: node:22.1.0-alpine
+          command: [node, /app/proxy.js]
+          ports:
+            - name: proxy
+              containerPort: 3000
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: NODE_TLS_REJECT_UNAUTHORIZED
+              value: "0"
+          volumeMounts:
+            - name: config
+              mountPath: /app/proxy.js
+              subPath: proxy.js
+      volumes:
+        - name: config
+          configMap:
+            name: unifi
