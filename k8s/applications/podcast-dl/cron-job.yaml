@@ -12,7 +12,6 @@ spec:
       backoffLimit: 0
       template:
         spec:
-          nodeName: laptop
           securityContext:
             fsGroup: 1000
           restartPolicy: OnFailure

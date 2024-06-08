@@ -51,7 +51,7 @@ spec:
           volumes:
             - name: ssh
               secret:
-                secretName: backup
+                secretName: ssh
                 defaultMode: 384
             - name: data
               persistentVolumeClaim:
