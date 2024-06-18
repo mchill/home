@@ -1,9 +1,9 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: plex-meta-manager-posters
+  name: kometa-permissions
 spec:
-  schedule: '@daily'
+  schedule: '@hourly'
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 0
@@ -21,28 +21,23 @@ spec:
               args:
                 - -c
                 - |
-                  apk add --no-cache gettext rsync
-                  envsubst < /config_src/config.yaml > /posters/config/config.yml
-                  bash /config/sync.sh
+                  apk add --no-cache curl gettext
+                  envsubst < /config_src/config.yaml > /config/config.yml
+                  curl -X PUT "http://plex.server.svc.cluster.local.:80/library/sections/1/all?type=18&label%5B0%5D.tag.tag=Matthew&X-Plex-Token=$PLEX_TOKEN"
+                  curl -X PUT "http://plex.server.svc.cluster.local.:80/library/sections/2/all?type=18&label%5B0%5D.tag.tag=Matthew&X-Plex-Token=$PLEX_TOKEN"
               envFrom:
                 - secretRef:
-                    name: plex-meta-manager
+                    name: kometa
               volumeMounts:
-                - name: plex-meta-manager
+                - name: kometa
                   mountPath: /config
-                  subPath: posters
-                - name: media
-                  mountPath: /data
-                  subPath: libraries
+                  subPath: permissions
                 - name: config
                   mountPath: /config_src/config.yaml
                   subPath: config.yaml
-                - name: config
-                  mountPath: /config/sync.sh
-                  subPath: sync.sh
           containers:
-            - name: plex-meta-manager
-              image: meisnate12/plex-meta-manager:v1.21.0
+            - name: kometa
+              image: kometateam/kometa:v2.0.2
               args:
                 - --run
                 - --read-only-config
@@ -50,12 +45,9 @@ spec:
                 - name: TZ
                   value: America/New_York
               volumeMounts:
-                - name: plex-meta-manager
+                - name: kometa
                   mountPath: /config
-                  subPath: posters
-                - name: media
-                  mountPath: /data
-                  subPath: libraries
+                  subPath: permissions
                 - name: config
                   mountPath: /config/movies.yml
                   subPath: movies.yml
@@ -66,12 +58,9 @@ spec:
                   mountPath: /config/tv.yml
                   subPath: tv.yml
           volumes:
-            - name: plex-meta-manager
+            - name: kometa
               persistentVolumeClaim:
-                claimName: plex-meta-manager
-            - name: media
-              persistentVolumeClaim:
-                claimName: media
+                claimName: kometa
             - name: config
               configMap:
-                name: plex-meta-manager-posters
+                name: kometa-permissions

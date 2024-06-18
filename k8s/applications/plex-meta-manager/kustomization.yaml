@@ -1,8 +1,0 @@
-namespace: server
-commonLabels:
-  app: plex-meta-manager
-resources:
-  - ../../overlays/persistence
-  - sealed-secret.yaml
-  - permissions
-  - posters

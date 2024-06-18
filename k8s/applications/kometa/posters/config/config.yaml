@@ -1,36 +1,43 @@
 libraries:
   Movies:
-    metadata_path:
+    collection_files:
       - file: config/movies.yml
-        asset_directory: /data/movies/assets
+    settings:
+      asset_directory: /data/movies/assets
     operations:
       mass_poster_update: unlock
       mass_background_update: unlock
   Shared Movies:
-    metadata_path:
+    collection_files:
       - file: config/movies.yml
-        asset_directory: /data/movies/assets
+    settings:
+      asset_directory: /data/movies/assets
     operations:
       mass_poster_update: unlock
       mass_background_update: unlock
   Movie Extras:
-    metadata_path:
+    collection_files:
       - file: config/extras.yml
-        asset_directory: /data/extras/assets
+    metadata_files:
+      - file: config/extras.yml
+    settings:
+      asset_directory: /data/extras/assets
     operations:
       mass_poster_update: unlock
       mass_background_update: unlock
   TV Shows:
-    metadata_path:
+    collection_files:
       - file: config/tv.yml
-        asset_directory: /data/tv/assets
+    settings:
+      asset_directory: /data/tv/assets
     operations:
       mass_poster_update: unlock
       mass_background_update: unlock
   Shared TV Shows:
-    metadata_path:
+    collection_files:
       - file: config/tv.yml
-        asset_directory: /data/tv/assets
+    settings:
+      asset_directory: /data/tv/assets
     operations:
       mass_poster_update: unlock
       mass_background_update: unlock

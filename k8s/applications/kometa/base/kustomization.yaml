@@ -1,0 +1,6 @@
+namespace: server
+commonLabels:
+  app: kometa
+resources:
+  - ../../../overlays/persistence
+  - sealed-secret.yaml

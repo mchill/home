@@ -1,9 +1,9 @@
 libraries:
   Shared Movies:
-    metadata_path:
+    collection_files:
       - file: config/movies.yml
   Shared TV Shows:
-    metadata_path:
+    collection_files:
       - file: config/tv.yml
 settings:
   sync_mode: sync

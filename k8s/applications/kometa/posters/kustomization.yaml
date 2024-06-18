@@ -1,11 +1,13 @@
 namespace: server
 commonLabels:
-  app: plex-meta-manager
+  app: kometa-posters
 resources:
   - cron-job.yaml
 configMapGenerator:
-  - name: plex-meta-manager-permissions
+  - name: kometa-posters
     files:
+      - config/sync.sh
       - config/config.yaml
       - config/movies.yml
+      - config/extras.yml
       - config/tv.yml
