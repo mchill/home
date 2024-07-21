@@ -12,7 +12,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: tautulli
-          image: tautulli/tautulli:v2.14.2
+          image: tautulli/tautulli:v2.14.3
           ports:
             - name: ingress
               containerPort: 8181
