@@ -39,7 +39,7 @@ spec:
               subPath: configs
             - name: media
               mountPath: /temp
-              subPath: tdarr
+              subPath: transcode/tdarr
             - name: media
               mountPath: /media/movies
               subPath: libraries/movies/sd
