@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: errors
-          image: nginx:1.27.0
+          image: nginx:1.27.1
           ports:
             - name: ingress
               containerPort: 80
