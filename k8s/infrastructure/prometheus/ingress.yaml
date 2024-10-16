@@ -14,11 +14,17 @@ spec:
       services:
         - name: prometheus-grafana
           port: 80
+      middlewares:
+        - name: forward-auth
+          namespace: traefik-external
     - match: Host("prometheus.mchill.io")
       kind: Rule
       services:
         - name: prometheus-kube-prometheus-prometheus
           port: 9090
+      middlewares:
+        - name: forward-auth
+          namespace: traefik-external
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -36,8 +42,14 @@ spec:
       services:
         - name: prometheus-grafana
           port: 80
+      middlewares:
+        - name: basic-auth
+          namespace: traefik-internal
     - match: Host("prometheus.mchill.lan")
       kind: Rule
       services:
         - name: prometheus-kube-prometheus-prometheus
           port: 9090
+      middlewares:
+        - name: basic-auth
+          namespace: traefik-internal

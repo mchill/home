@@ -52,7 +52,7 @@ additionalArguments:
   - --metrics.prometheus
   - --providers.kubernetesingress.ingressClass=traefik-external
   - --providers.kubernetescrd.ingressClass=traefik-external
-  - --entrypoints.websecure.http.middlewares=traefik-external-forward-auth@kubernetescrd
+  - --providers.kubernetescrd.allowCrossNamespace=true
 env:
   - name: PILOT_TOKEN
     valueFrom:

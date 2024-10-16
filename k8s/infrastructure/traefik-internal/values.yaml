@@ -12,7 +12,7 @@ additionalArguments:
   - --serversTransport.insecureSkipVerify=true
   - --providers.kubernetesingress.ingressClass=traefik-internal
   - --providers.kubernetescrd.ingressClass=traefik-internal
-  - --entrypoints.websecure.http.middlewares=traefik-internal-basic-auth@kubernetescrd
+  - --providers.kubernetescrd.allowCrossNamespace=true
 ports:
   web:
     port: 8000

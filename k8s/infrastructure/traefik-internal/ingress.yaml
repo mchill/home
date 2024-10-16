@@ -13,6 +13,9 @@ spec:
       services:
         - name: traefik-clusterip
           port: 9000
+      middlewares:
+        - name: forward-auth
+          namespace: traefik-external
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -29,3 +32,6 @@ spec:
       services:
         - name: api@internal
           kind: TraefikService
+      middlewares:
+        - name: basic-auth
+          namespace: traefik-internal

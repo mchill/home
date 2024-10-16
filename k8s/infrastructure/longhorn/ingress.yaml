@@ -13,6 +13,9 @@ spec:
       services:
         - name: longhorn-frontend
           port: 80
+      middlewares:
+        - name: forward-auth
+          namespace: traefik-external
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
@@ -29,3 +32,6 @@ spec:
       services:
         - name: longhorn-frontend
           port: 80
+      middlewares:
+        - name: basic-auth
+          namespace: traefik-internal
