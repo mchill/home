@@ -42,7 +42,7 @@ spec:
                   subPath: sync.sh
           containers:
             - name: kometa
-              image: kometateam/kometa:v2.0.2
+              image: kometateam/kometa:v2.1.0
               args:
                 - --run
                 - --read-only-config
