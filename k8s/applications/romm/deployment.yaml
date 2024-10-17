@@ -1,0 +1,65 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: romm
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: romm
+          image: rommapp/romm:3.5.1
+          ports:
+            - name: ingress
+              containerPort: 8080
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: DB_NAME
+              value: romm
+            - name: DB_USER
+              value: romm-user
+          envFrom:
+            - secretRef:
+                name: qbittorrent
+          volumeMounts:
+            - name: romm
+              mountPath: /romm/config
+              subPath: config
+            - name: romm
+              mountPath: /redis-data
+              subPath: redis
+            - name: media
+              mountPath: /romm/library
+              subPath: libraries/games
+            - name: media
+              mountPath: /romm/assets
+              subPath: libraries/games/assets
+            - name: media
+              mountPath: /romm/resources
+              subPath: libraries/games/resources
+        - name: db
+          image: mariadb:11.5.2
+          env:
+            - name: MYSQL_DATABASE
+              value: romm
+            - name: MYSQL_USER
+              value: romm-user
+          envFrom:
+            - secretRef:
+                name: qbittorrent
+          volumeMounts:
+            - name: romm
+              mountPath: /var/lib/mysql
+              subPath: mysql
+      volumes:
+        - name: romm
+          persistentVolumeClaim:
+            claimName: romm
+        - name: media
+          persistentVolumeClaim:
+            claimName: media

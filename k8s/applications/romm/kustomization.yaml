@@ -1,0 +1,21 @@
+namespace: server
+commonLabels:
+  app: romm
+  subdomain: romm
+resources:
+  - ../../overlays/ingress
+  - ../../overlays/persistence
+  - deployment.yaml
+  - sealed-secret.yaml
+patches:
+  - target:
+      kind: IngressRoute
+    patch: |-
+      - op: add
+        path: /spec/routes/-
+        value:
+          match: Host("$(SUBDOMAIN).mchill.io") && PathPrefix("/api")
+          kind: Rule
+          services:
+            - name: $(APP)
+              port: 80
