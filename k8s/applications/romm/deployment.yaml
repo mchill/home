@@ -25,7 +25,7 @@ spec:
               value: romm-user
           envFrom:
             - secretRef:
-                name: qbittorrent
+                name: romm
           volumeMounts:
             - name: romm
               mountPath: /romm/config
@@ -51,7 +51,7 @@ spec:
               value: romm-user
           envFrom:
             - secretRef:
-                name: qbittorrent
+                name: romm
           volumeMounts:
             - name: romm
               mountPath: /var/lib/mysql
