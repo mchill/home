@@ -1,21 +1,15 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    ":ignoreUnstable",
-    ":prImmediately",
-    ":updateNotScheduled",
-    ":automergeDisabled",
+    ":dependencyDashboard",
     ":ignoreModulesAndTests",
-    ":pinVersions",
-    ":prHourlyLimit4",
-    ":prConcurrentLimit10",
     ":separateMultipleMajorReleases",
-    "group:all",
+    "group:allNonMajor",
     "workarounds:all"
   ],
   "schedule": [
     "before 3am on Saturday"
   ],
-  "dependencyDashboard": true,
   "includePaths": [
     "k8s/**"
   ],
