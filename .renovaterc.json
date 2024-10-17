@@ -8,6 +8,7 @@
     ":pinVersions",
     ":prHourlyLimit4",
     ":prConcurrentLimit10",
+    ":separateMultipleMajorReleases",
     "group:all",
     "workarounds:all"
   ],
