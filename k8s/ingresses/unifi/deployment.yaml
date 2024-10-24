@@ -20,7 +20,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: proxy
-          image: node:22.9.0-alpine
+          image: node:22.10.0-alpine
           command: [node, /app/proxy.js]
           ports:
             - name: proxy
