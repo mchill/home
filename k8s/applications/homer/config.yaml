@@ -96,6 +96,10 @@ services:
         subtitle: Subtitles
         logo: assets/logos/bazarr.png
         url: https://bazarr.mchill.io
+      - name: RomM
+        subtitle: Games
+        logo: assets/logos/romm.png
+        url: https://romm.mchill.io
 
   - name: Server Mgmt
     icon: fas fa-server
