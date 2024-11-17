@@ -11,7 +11,7 @@ spec:
       hostNetwork: true
       containers:
         - name: homeassistant
-          image: homeassistant/home-assistant:2024.10.4
+          image: homeassistant/home-assistant:2024.11.2
           ports:
             - name: ingress
               containerPort: 8123
