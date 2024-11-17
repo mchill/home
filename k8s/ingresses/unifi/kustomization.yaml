@@ -27,4 +27,4 @@ patches:
               port: 3000
           middlewares:
             - name: forward-auth
-              namespace: traefik-internal
+              namespace: traefik-external

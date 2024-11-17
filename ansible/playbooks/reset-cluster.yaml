@@ -36,7 +36,7 @@
         mode: '0644'
 
     - name: Install k3s
-      ansible.builtin.shell: curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.28 sh -s -
+      ansible.builtin.shell: curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.31 sh -s -
 
     - name: Set kube context
       become: true
@@ -72,4 +72,4 @@
         mode: '0644'
 
     - name: Install k3s
-      ansible.builtin.shell: curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.28 K3S_URL=https://{{ hostvars["raspberrypi-1"].ansible_host }}:6443 sh -
+      ansible.builtin.shell: curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.31 K3S_URL=https://{{ hostvars["raspberrypi-1"].ansible_host }}:6443 sh -

@@ -88,10 +88,17 @@ If the cluster ever needs to be completely reset, this can be done with an ansib
 ansible-playbook playbooks/reset-cluster.yaml -i inventory.yaml --extra-vars "K3S_TOKEN=$K3S_TOKEN GITHUB_TOKEN=$GITHUB_TOKEN"
 ```
 
-Edit `/etc/systemd/system/k3s.service` and add the required arguments to `ExecStart`.
+On the node that runs qbittorrent, edit `/etc/systemd/system/k3s.service` and add the required arguments to `ExecStart`.
 
 ```bash
-ExecStart=/usr/local/bin/k3s server '--kubelet-arg=allowed-unsafe-sysctls=net.*'
+ExecStart=/usr/local/bin/k3s agent '--kubelet-arg=allowed-unsafe-sysctls=net.*'
+```
+
+Then restart k3s.
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart k3s-agent
 ```
 
 ### Deploy Workloads

@@ -14,9 +14,9 @@ kubectl apply --server-side -k cert-manager
 kubectl apply --server-side -k metallb
 kubectl apply --server-side -k server
 
-pushd traefik-external && helm upgrade --install --create-namespace -n traefik-external --version 20.8.0 --values values.yaml --post-renderer ../kustomize.sh traefik-external traefik/traefik && popd
-pushd traefik-internal && helm upgrade --install --create-namespace -n traefik-internal --version 20.8.0 --values values.yaml --post-renderer ../kustomize.sh traefik-internal traefik/traefik && popd
-pushd longhorn && helm upgrade --install --create-namespace -n longhorn-system --version 1.5.3 --values values.yaml --post-renderer ../kustomize.sh longhorn longhorn/longhorn && popd
+pushd traefik-external && helm upgrade --install --create-namespace -n traefik-external --version 27.0.2 --values values.yaml --post-renderer ../kustomize.sh traefik-external traefik/traefik && popd
+pushd traefik-internal && helm upgrade --install --create-namespace -n traefik-internal --version 27.0.2 --values values.yaml --post-renderer ../kustomize.sh traefik-internal traefik/traefik && popd
+pushd longhorn && helm upgrade --install --create-namespace -n longhorn-system --version 1.7.2 --values values.yaml --post-renderer ../kustomize.sh longhorn longhorn/longhorn && popd
 kubectl apply -n longhorn-system -f longhorn/recurring-job.yaml
-pushd prometheus && helm upgrade --install --create-namespace -n monitoring --version 44.3.0 --values values.yaml --post-renderer ../kustomize.sh prometheus prometheus/kube-prometheus-stack && popd
-pushd loki && helm upgrade --install -n monitoring --create-namespace --version 2.8.9 --values values.yaml --post-renderer ../kustomize.sh loki grafana/loki-stack && popd
+pushd prometheus && helm upgrade --install --create-namespace -n monitoring --version 66.2.1 --values values.yaml --post-renderer ../kustomize.sh prometheus prometheus/kube-prometheus-stack && popd
+pushd loki && helm upgrade --install -n monitoring --create-namespace --version 2.10.2 --values values.yaml --post-renderer ../kustomize.sh loki grafana/loki-stack && popd

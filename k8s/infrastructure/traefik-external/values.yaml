@@ -63,7 +63,8 @@ ports:
   web:
     port: 8000
     exposedPort: 80
-    redirectTo: websecure
+    redirectTo:
+      port: websecure
   websecure:
     port: 8443
     exposedPort: 443
