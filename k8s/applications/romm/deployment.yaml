@@ -12,7 +12,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: romm
-          image: rommapp/romm:3.5.1
+          image: rommapp/romm:3.6.0
           ports:
             - name: ingress
               containerPort: 8080
@@ -43,7 +43,7 @@ spec:
               mountPath: /romm/resources
               subPath: libraries/games/resources
         - name: db
-          image: mariadb:11.5.2
+          image: mariadb:11.6.2
           env:
             - name: MYSQL_DATABASE
               value: romm
