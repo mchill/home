@@ -160,6 +160,10 @@ services:
         subtitle: DNS sinkhole
         logo: assets/logos/pihole.png
         url: https://pihole.mchill.io
+      - name: Syncthing
+        subtitle: File synchronization
+        logo: assets/logos/syncthing.png
+        url: https://syncthing.mchill.io
       - name: DDNS Monitor
         subtitle: Domain management
         logo: assets/logos/ddns.svg

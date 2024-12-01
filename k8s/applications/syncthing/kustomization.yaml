@@ -1,0 +1,8 @@
+namespace: server
+commonLabels:
+  app: syncthing
+  subdomain: syncthing
+resources:
+  - ../../overlays/ingress
+  - ../../overlays/persistence
+  - deployment.yaml

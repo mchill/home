@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: syncthing
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      hostNetwork: true
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: syncthing
+          image: syncthing/syncthing:1.28.0
+          ports:
+            - name: ingress
+              containerPort: 8384
+            - name: discovery
+              containerPort: 21027
+              protocol: UDP
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - name: syncthing
+              mountPath: /var/syncthing
+            - name: googledrive
+              mountPath: /data/obsidian
+              subPath: obsidian
+      volumes:
+        - name: syncthing
+          persistentVolumeClaim:
+            claimName: syncthing
+        - name: googledrive
+          persistentVolumeClaim:
+            claimName: googledrive

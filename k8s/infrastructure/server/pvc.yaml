@@ -23,3 +23,16 @@ spec:
       storage: 20Ti
   storageClassName: ""
   volumeName: backup
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: googledrive
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: ""
+  volumeName: googledrive
