@@ -1,0 +1,53 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: rclone
+spec:
+  schedule: "@daily"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 0
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        spec:
+          restartPolicy: OnFailure
+          securityContext:
+            fsGroup: 1000
+          containers:
+            - name: rclone
+              image: rclone/rclone:1.68.2
+              args:
+                - sync
+                - --check-first
+                - --fast-list
+                - -v
+                - "gdrive:"
+                - /data
+              env:
+                - name: TZ
+                  value: America/New_York
+                - name: PUID
+                  value: "1000"
+                - name: PGID
+                  value: "1000"
+                - name: RCLONE_CONFIG_GDRIVE_TYPE
+                  value: drive
+                - name: RCLONE_CONFIG_GDRIVE_SCOPE
+                  value: drive
+              envFrom:
+                - secretRef:
+                    name: rclone
+              volumeMounts:
+                - name: rclone
+                  mountPath: /config/rclone
+                - name: googledrive
+                  mountPath: /data
+          volumes:
+            - name: rclone
+              persistentVolumeClaim:
+                claimName: rclone
+            - name: googledrive
+              persistentVolumeClaim:
+                claimName: googledrive

@@ -1,0 +1,7 @@
+namespace: server
+commonLabels:
+  app: rclone
+resources:
+  - ../../overlays/persistence
+  - deployment.yaml
+  - sealed-secret.yaml
