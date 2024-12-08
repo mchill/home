@@ -25,7 +25,7 @@ spec:
                           - $(VOLUME)
           containers:
             - name: backup
-              image: instrumentisto/rsync-ssh:alpine3.20
+              image: instrumentisto/rsync-ssh:alpine3.21
               args:
                 - /bin/sh
                 - -cex
