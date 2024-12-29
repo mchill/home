@@ -10,7 +10,7 @@ spec:
     spec:
       hostNetwork: true
       securityContext:
-        fsGroup: 1000
+        fsGroup: 1026
       containers:
         - name: syncthing
           image: syncthing/syncthing:1.28.0
@@ -24,15 +24,18 @@ spec:
             - name: TZ
               value: America/New_York
             - name: PUID
-              value: "1000"
+              value: "1026"
             - name: PGID
-              value: "1000"
+              value: "1026"
           volumeMounts:
             - name: syncthing
               mountPath: /var/syncthing
             - name: googledrive
-              mountPath: /data/obsidian
-              subPath: obsidian
+              mountPath: /data/obsidian/Personal Notes
+              subPath: Personal/Notes/Personal Notes
+            - name: googledrive
+              mountPath: /data/obsidian/Work Notes
+              subPath: Work/Voith/Notes/Work Notes
       volumes:
         - name: syncthing
           persistentVolumeClaim:
