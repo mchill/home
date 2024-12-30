@@ -22,6 +22,7 @@ spec:
                 - sync
                 - --check-first
                 - --fast-list
+                - --drive-acknowledge-abuse
                 - -v
                 - "gdrive:"
                 - /data
