@@ -1,0 +1,23 @@
+namespace: server
+commonLabels:
+  app: ombi
+  subdomain: ombi
+resources:
+  - ../../overlays/ingress
+  - ../../overlays/persistence
+  - deployment.yaml
+patches:
+  - target:
+      kind: IngressRoute
+    patch: |-
+      - op: add
+        path: /spec/routes/-
+        value:
+          match: Host("overseerr.mchill.io")
+          kind: Rule
+          services:
+            - name: $(APP)
+              port: 80
+          middlewares:
+            - name: forward-auth
+              namespace: traefik-external

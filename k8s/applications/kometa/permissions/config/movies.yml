@@ -5,12 +5,12 @@ collections:
       all:
         label: <<smart_label>>
   Mom:
-    radarr_taglist: 3 - shil771
+    radarr_taglist: shil771
     smart_label:
       all:
         label: <<smart_label>>
   Kamaria:
-    radarr_taglist: 4 - kamaria.
+    radarr_taglist: kamaria.
     smart_label:
       all:
         label: <<smart_label>>

@@ -6,3 +6,4 @@ resources:
   - ../../overlays/ingress
   - ../../overlays/persistence
   - deployment.yaml
+  - service.yaml

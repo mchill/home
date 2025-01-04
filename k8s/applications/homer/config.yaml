@@ -48,10 +48,10 @@ services:
   - name: Media Mgmt
     icon: fas fa-tasks
     items:
-      - name: Overseerr
+      - name: Ombi
         subtitle: Plex requests
-        logo: assets/logos/overseerr.png
-        url: https://overseerr.mchill.io
+        logo: assets/logos/ombi.png
+        url: https://ombi.mchill.io
       - name: tinyMediaManager
         subtitle: Media metadata
         logo: assets/logos/tinymediamanager.png

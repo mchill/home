@@ -1,7 +1,7 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: overseerr
+  name: ombi
 spec:
   replicas: 1
   strategy:
@@ -11,18 +11,22 @@ spec:
       securityContext:
         fsGroup: 1000
       containers:
-        - name: overseerr
-          image: sctx/overseerr:1.33.2
+        - name: ombi
+          image: linuxserver/ombi:4.44.1
           ports:
             - name: ingress
-              containerPort: 5055
+              containerPort: 3579
           env:
             - name: TZ
               value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
           volumeMounts:
-            - name: overseerr
-              mountPath: /app/config
+            - name: ombi
+              mountPath: /config
       volumes:
-        - name: overseerr
+        - name: ombi
           persistentVolumeClaim:
-            claimName: overseerr
+            claimName: ombi
