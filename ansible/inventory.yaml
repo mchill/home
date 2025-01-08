@@ -1,25 +1,40 @@
-master:
+all:
   hosts:
+    pikvm:
+      ansible_host: 192.168.1.205
+      ansible_user: root
     raspberrypi-1:
       ansible_host: 192.168.1.210
       ansible_user: mchill
-laptops:
-  hosts:
-    laptop:
-      ansible_host: 192.168.1.215
-      ansible_user: mchill
-  vars:
-    longhorn_partition: /dev/sda1
-rpis:
-  hosts:
-    raspberrypi-1:
-      ansible_host: 192.168.1.210
-      ansible_user: mchill
+      longhorn_partition: /dev/sda3
     raspberrypi-2:
       ansible_host: 192.168.1.211
       ansible_user: mchill
+      longhorn_partition: /dev/sda3
     raspberrypi-3:
       ansible_host: 192.168.1.212
       ansible_user: mchill
-  vars:
-    longhorn_partition: /dev/sda3
+      longhorn_partition: /dev/sda3
+    laptop:
+      ansible_host: 192.168.1.215
+      ansible_user: mchill
+      longhorn_partition: /dev/sda1
+    media-center:
+      ansible_host: 192.168.1.220
+      ansible_user: mchill
+    beelink:
+      ansible_host: 192.168.0.210
+      ansible_user: mchill
+
+k8s:
+  hosts:
+    raspberrypi-1:
+    raspberrypi-2:
+    raspberrypi-3:
+    laptop:
+
+k8s-agents:
+  hosts:
+    raspberrypi-2:
+    raspberrypi-3:
+    laptop:

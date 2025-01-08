@@ -9,12 +9,12 @@ services:
     ports:
       - 53:53/tcp
       - 53:53/udp
-      - 8080:80/tcp
+      - 80:80/tcp
     environment:
       TZ: America/Chicago
       WEBPASSWORD: ""
       FTLCONF_RATE_LIMIT: 0/0
     volumes:
-      - /mnt/sda1/pihole/etc-pihole:/etc/pihole
-      - /mnt/sda1/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+      - ./pihole/etc-pihole:/etc/pihole
+      - ./pihole/etc-dnsmasq.d:/etc/dnsmasq.d
     restart: always

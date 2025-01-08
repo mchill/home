@@ -1,5 +1,5 @@
 - name: Configure all nodes
-  hosts: all
+  hosts: k8s
   tasks:
     - name: Install and upgrade packages
       become: true
@@ -132,7 +132,7 @@
             state: mounted
 
 - name: Configure laptop
-  hosts: laptops
+  hosts: laptop
   tasks:
     - name: Configure lid switch behavior
       become: true
@@ -145,7 +145,7 @@
           HandleLidSwitchDocked=ignore
 
 - name: Configure raspberry pis
-  hosts: rpis
+  hosts: raspberrypi-1,raspberrypi-2,raspberrypi-3
   tasks:
     - name: Install packages
       ansible.builtin.apt:
@@ -171,7 +171,7 @@
           over_voltage=6
 
 - name: Reboot
-  hosts: all
+  hosts: k8s
   serial: 1
   tasks:
     - name: Reboot for changes to take effect

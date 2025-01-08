@@ -1,5 +1,5 @@
 - name: Uninstall k3s
-  hosts: all
+  hosts: k8s
   tasks:
     - name: Modify killall script
       become: true
@@ -19,7 +19,7 @@
       ansible.builtin.reboot:
 
 - name: Configure master
-  hosts: master
+  hosts: raspberrypi-1
   tasks:
     - name: Create k3s directory
       become: true
@@ -55,7 +55,7 @@
       ansible.builtin.shell: kubectl taint nodes raspberrypi-1 node-role.kubernetes.io/master=true:NoSchedule
 
 - name: Configure agents
-  hosts: all:!master
+  hosts: k8s-agents
   tasks:
     - name: Create k3s directory
       become: true
@@ -73,3 +73,20 @@
 
     - name: Install k3s
       ansible.builtin.shell: curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=v1.31 K3S_URL=https://{{ hostvars["raspberrypi-1"].ansible_host }}:6443 sh -
+
+- name: Customize k3s config
+  hosts: laptop
+  tasks:
+    - name: Allow unsafe sysctls
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/systemd/system/k3s-agent.service
+        regexp: '^ExecStart='
+        line: ExecStart=/usr/local/bin/k3s agent '--kubelet-arg=allowed-unsafe-sysctls=net.*'
+
+    - name: Restart k3s agent
+      become: true
+      ansible.builtin.systemd:
+        name: k3s-agent
+        state: restarted
+        daemon_reload: yes
