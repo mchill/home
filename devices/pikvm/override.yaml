@@ -19,6 +19,12 @@ kvmd:
             set_input_6:
                 type: cmd
                 cmd: [/usr/bin/sudo, /usr/bin/python, /root/main.py, 6]
+            set_input_7:
+                type: cmd
+                cmd: [/usr/bin/sudo, /usr/bin/python, /root/main.py, 7]
+            set_input_8:
+                type: cmd
+                cmd: [/usr/bin/sudo, /usr/bin/python, /root/main.py, 8]
         scheme:
             input_1_button:
                 driver: set_input_1
@@ -50,12 +56,24 @@ kvmd:
                 pin: 0
                 mode: output
                 switch: false
+            input_7_button:
+                driver: set_input_7
+                pin: 0
+                mode: output
+                switch: false
+            input_8_button:
+                driver: set_input_8
+                pin: 0
+                mode: output
+                switch: false
         view:
             table:
                 - ["#Input"]
-                - - "input_1_button|Pi 1"
-                  - "input_2_button|Pi 2"
-                  - "input_5_button|Server"
-                - - "input_3_button|Pi 3"
-                  - "input_4_button|Pi 4"
-                  - "input_6_button|Laptop"
+                - - "input_2_button|Pi 1"
+                  - "input_3_button|Pi 2"
+                  - "input_6_button|Beelink 1"
+                  - "input_7_button|Beelink 2"
+                - - "input_4_button|Pi 3"
+                  - "input_5_button|Pi 4"
+                  - "input_8_button|Beelink 3"
+                  - "input_1_button|Laptop"
