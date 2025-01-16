@@ -1,0 +1,10 @@
+kind: LabelTransformer
+apiVersion: builtin
+metadata:
+  name: remote-tautulli
+labels:
+  app: remote-tautulli
+  subdomain: tautulli.remote
+fieldSpecs:
+  - path: metadata/labels
+    create: true

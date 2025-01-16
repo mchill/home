@@ -1,0 +1,6 @@
+namespace: server
+commonLabels:
+  app: plex
+resources:
+  - deployment.yaml
+  - service.yaml

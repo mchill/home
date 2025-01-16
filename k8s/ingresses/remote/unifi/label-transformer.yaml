@@ -1,0 +1,10 @@
+kind: LabelTransformer
+apiVersion: builtin
+metadata:
+  name: remote-unifi
+labels:
+  app: remote-unifi
+  subdomain: unifi.remote
+fieldSpecs:
+  - path: metadata/labels
+    create: true

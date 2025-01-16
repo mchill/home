@@ -1,0 +1,10 @@
+kind: LabelTransformer
+apiVersion: builtin
+metadata:
+  name: remote-nas
+labels:
+  app: remote-nas
+  subdomain: nas.remote
+fieldSpecs:
+  - path: metadata/labels
+    create: true

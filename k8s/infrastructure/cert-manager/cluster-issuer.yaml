@@ -13,6 +13,7 @@ spec:
           dnsNames:
             - mchill.io
             - "*.mchill.io"
+            - "*.remote.mchill.io"
         dns01:
           cloudflare:
             email: matthewchill7@gmail.com

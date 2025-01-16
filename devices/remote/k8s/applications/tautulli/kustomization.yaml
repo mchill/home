@@ -1,0 +1,6 @@
+namespace: server
+commonLabels:
+  app: tautulli
+resources:
+  - deployment.yaml
+  - service.yaml

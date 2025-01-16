@@ -8,6 +8,7 @@ spec:
   dnsNames:
     - mchill.io
     - "*.mchill.io"
+    - "*.remote.mchill.io"
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer

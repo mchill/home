@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media
+  annotations:
+    pv.kubernetes.io/provisioned-by: smb.csi.k8s.io
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 10Ti
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: smb
+  mountOptions:
+    - dir_mode=0755
+    - file_mode=0644
+  csi:
+    driver: smb.csi.k8s.io
+    volumeHandle: //192.168.0.201/media##
+    volumeAttributes:
+      source: //192.168.0.201/media
+    nodeStageSecretRef:
+      name: smbcreds
+      namespace: server
