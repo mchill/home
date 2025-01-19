@@ -1,0 +1,54 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nextcloud
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      nodeName: laptop
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: nextcloud
+          image: linuxserver/nextcloud:30.0.5
+          ports:
+            - name: ingress
+              containerPort: 80
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - name: nextcloud
+              mountPath: /config
+              subPath: config
+            - name: media
+              mountPath: /data
+              subPath: nextcloud
+        - name: db
+          image: mariadb:11.6.2
+          env:
+            - name: MYSQL_DATABASE
+              value: nextcloud
+            - name: MYSQL_USER
+              value: nextcloud
+          envFrom:
+            - secretRef:
+                name: nextcloud
+          volumeMounts:
+            - name: nextcloud
+              mountPath: /var/lib/mysql
+              subPath: mysql
+      volumes:
+        - name: nextcloud
+          persistentVolumeClaim:
+            claimName: nextcloud
+        - name: media
+          persistentVolumeClaim:
+            claimName: media
