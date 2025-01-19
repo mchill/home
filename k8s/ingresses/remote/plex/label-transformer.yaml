@@ -1,0 +1,10 @@
+kind: LabelTransformer
+apiVersion: builtin
+metadata:
+  name: remote-plex
+labels:
+  app: remote-plex
+  subdomain: plex.remote
+fieldSpecs:
+  - path: metadata/labels
+    create: true

@@ -180,6 +180,10 @@ services:
   - name: Remote
     icon: fas fa-globe
     items:
+      - name: Unifi
+        subtitle: Network controller
+        logo: assets/logos/unifi.png
+        url: https://unifi.remote.mchill.io
       - name: Synology DSM
         subtitle: NAS
         logo: assets/logos/nas.png

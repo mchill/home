@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: remote-plex
+subsets:
+  - addresses:
+      - ip: 192.168.0.210
+    ports:
+      - name: ingress
+        port: 32400
