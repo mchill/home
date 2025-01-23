@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: photon
+spec:
+  type: ClusterIP
+  ports:
+    - name: ingress
+      port: 80
+      targetPort: ingress

@@ -1,0 +1,7 @@
+namespace: server
+commonLabels:
+  app: photon
+resources:
+  - ../../overlays/persistence
+  - deployment.yaml
+  - service.yaml

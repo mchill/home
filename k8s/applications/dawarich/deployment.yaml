@@ -1,0 +1,122 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: dawarich
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      nodeName: laptop
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: dawarich
+          image: freikin/dawarich:0.22.4
+          command:
+            - web-entrypoint.sh
+          args:
+            - bin/rails
+            - server
+            - -p
+            - "3000"
+            - -b
+            - "::"
+          ports:
+            - name: ingress
+              containerPort: 3000
+          env:
+            - name: TIME_ZONE
+              value: America/New_York
+            - name: APPLICATION_HOSTS
+              value: dawarich.mchill.io,dawarich.server.svc.cluster.local
+            - name: DISTANCE_UNIT
+              value: mi
+            - name: REDIS_URL
+              value: redis://localhost:6379/0
+            - name: DATABASE_HOST
+              value: localhost
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_NAME
+              value: dawarich
+            - name: DATABASE_USERNAME
+              value: postgres
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dawarich
+                  key: POSTGRES_PASSWORD
+            - name: PHOTON_API_USE_HTTPS
+              value: "false"
+            - name: PHOTON_API_HOST
+              value: photon.server.svc.cluster.local
+          volumeMounts:
+            - name: dawarich
+              mountPath: /var/app/public
+              subPath: public
+            - name: dawarich
+              mountPath: /var/app/tmp/imports/watched
+              subPath: watched
+        - name: db
+          image: postgres:14.15-alpine
+          env:
+            - name: POSTGRES_PASSWORD
+              value: password
+          volumeMounts:
+            - name: dawarich
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+            - name: dawarich
+              mountPath: /var/shared
+              subPath: shared
+        - name: redis
+          image: redis:7.4.2-alpine
+          volumeMounts:
+            - name: dawarich
+              mountPath: /data
+              subPath: shared
+        - name: sidekiq
+          image: freikin/dawarich:0.22.4
+          command:
+            - sidekiq-entrypoint.sh
+          args:
+            - sidekiq
+          env:
+            - name: TIME_ZONE
+              value: America/New_York
+            - name: APPLICATION_HOSTS
+              value: dawarich.mchill.io,dawarich.server.svc.cluster.local
+            - name: DISTANCE_UNIT
+              value: mi
+            - name: REDIS_URL
+              value: redis://localhost:6379/0
+            - name: DATABASE_HOST
+              value: localhost
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_NAME
+              value: dawarich
+            - name: DATABASE_USERNAME
+              value: postgres
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dawarich
+                  key: POSTGRES_PASSWORD
+            - name: PHOTON_API_USE_HTTPS
+              value: "false"
+            - name: PHOTON_API_HOST
+              value: photon.server.svc.cluster.local
+          volumeMounts:
+            - name: dawarich
+              mountPath: /var/app/public
+              subPath: public
+            - name: dawarich
+              mountPath: /var/app/tmp/imports/watched
+              subPath: watched
+      volumes:
+        - name: dawarich
+          persistentVolumeClaim:
+            claimName: dawarich
