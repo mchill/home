@@ -10,6 +10,6 @@ patches:
       kind: IngressRoute
     patch: |-
       - op: add
-        path: /spec/routes/0/middlewares
+        path: /spec/routes/0/middlewares/-
         value:
-          - name: pihole
+          name: pihole
