@@ -30,7 +30,7 @@ spec:
               subPath: config
             - name: media
               mountPath: /data
-              subPath: nextcloud
+              subPath: apps/nextcloud
         - name: db
           image: mariadb:11.6.2
           env:

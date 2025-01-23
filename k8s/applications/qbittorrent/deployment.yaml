@@ -56,7 +56,7 @@ spec:
               subPath: config
             - name: media
               mountPath: /data
-              subPath: qbittorrent
+              subPath: apps/qbittorrent
           resources:
             limits:
               cpu: 1

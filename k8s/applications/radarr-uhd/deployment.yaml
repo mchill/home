@@ -31,10 +31,10 @@ spec:
               subPath: libraries/movies/uhd
             - name: media
               mountPath: /trash
-              subPath: trash
+              subPath: apps/trash
             - name: media
               mountPath: /data
-              subPath: qbittorrent
+              subPath: apps/qbittorrent
       volumes:
         - name: radarr-uhd
           persistentVolumeClaim:

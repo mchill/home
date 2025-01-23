@@ -29,7 +29,7 @@ spec:
           volumeMounts:
             - name: media
               mountPath: /photon/photon_data
-              subPath: photon
+              subPath: apps/photon
       volumes:
         - name: media
           persistentVolumeClaim:

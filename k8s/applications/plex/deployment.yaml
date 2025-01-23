@@ -46,7 +46,7 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /transcode
-              subPath: transcode/plex
+              subPath: apps/plex
             - name: media
               mountPath: /data/movies
               subPath: libraries/movies/sd
