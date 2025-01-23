@@ -48,17 +48,10 @@ globalArguments: []
 additionalArguments:
   - --api.insecure=true
   - --serversTransport.insecureSkipVerify=true
-  - --pilot.token=$(PILOT_TOKEN)
   - --metrics.prometheus
   - --providers.kubernetesingress.ingressClass=traefik-external
   - --providers.kubernetescrd.ingressClass=traefik-external
   - --providers.kubernetescrd.allowCrossNamespace=true
-env:
-  - name: PILOT_TOKEN
-    valueFrom:
-      secretKeyRef:
-        name: traefik
-        key: PILOT_TOKEN
 ports:
   web:
     port: 8000
