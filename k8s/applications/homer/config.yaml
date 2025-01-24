@@ -28,6 +28,10 @@ services:
         subtitle: Audiobooks
         logo: assets/logos/audiobookshelf.png
         url: https://books.mchill.io
+      - name: PhotoPrism
+        subtitle: Photos
+        logo: assets/logos/photoprism.png
+        url: https://photoprism.mchill.io
       - name: Mealie
         subtitle: Recipes
         logo: assets/logos/mealie.png
@@ -56,6 +60,34 @@ services:
         subtitle: Media metadata
         logo: assets/logos/tinymediamanager.png
         url: https://tiny.mchill.io
+      - name: qBittorrent
+        subtitle: BitTorrent client
+        logo: assets/logos/qbittorrent.png
+        url: https://qbittorrent.mchill.io
+
+  - name: Files
+    icon: fas fa-folder-open
+    items:
+      - name: File Browser
+        subtitle: Files
+        logo: assets/logos/filebrowser.png
+        url: https://files.mchill.io
+      - name: Nextcloud
+        subtitle: Cloud
+        logo: assets/logos/nextcloud.png
+        url: https://nextcloud.mchill.io
+      - name: Synology DSM
+        subtitle: NAS
+        logo: assets/logos/nas.png
+        url: https://nas.mchill.io
+      - name: Syncthing
+        subtitle: File synchronization
+        logo: assets/logos/syncthing.png
+        url: https://syncthing.mchill.io
+      - name: Longhorn
+        subtitle: Persistent storage
+        logo: assets/logos/longhorn.png
+        url: https://longhorn.mchill.io
 
   - name: Libraries
     icon: fas fa-book
@@ -76,26 +108,6 @@ services:
         subtitle: UHD TV shows
         logo: assets/logos/sonarr.png
         url: https://sonarr-uhd.mchill.io
-
-  - name: Files
-    icon: fas fa-folder-open
-    items:
-      - name: File Browser
-        subtitle: Files
-        logo: assets/logos/filebrowser.png
-        url: https://files.mchill.io
-      - name: Synology DSM
-        subtitle: NAS
-        logo: assets/logos/nas.png
-        url: https://nas.mchill.io
-      - name: Syncthing
-        subtitle: File synchronization
-        logo: assets/logos/syncthing.png
-        url: https://syncthing.mchill.io
-      - name: Longhorn
-        subtitle: Persistent storage
-        logo: assets/logos/longhorn.png
-        url: https://longhorn.mchill.io
 
   - name: Network
     icon: fas fa-wifi
@@ -164,10 +176,10 @@ services:
         subtitle: Plex requests
         logo: assets/logos/ombi.png
         url: https://ombi.mchill.io
-      - name: qBittorrent
-        subtitle: BitTorrent client
-        logo: assets/logos/qbittorrent.png
-        url: https://qbittorrent.mchill.io
+      - name: Dawarich
+        subtitle: Timeline
+        logo: assets/logos/dawarich.png
+        url: https://dawarich.mchill.io
       - name: Jitsi
         subtitle: Video conferencing
         logo: assets/logos/jitsi.png
