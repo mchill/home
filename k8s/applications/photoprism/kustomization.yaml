@@ -1,0 +1,9 @@
+namespace: server
+commonLabels:
+  app: photoprism
+  subdomain: photoprism
+resources:
+  - ../../overlays/ingress
+  - ../../overlays/persistence
+  - deployment.yaml
+  - sealed-secret.yaml

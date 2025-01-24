@@ -1,0 +1,66 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: photoprism
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: photoprism
+          image: photoprism/photoprism:240915
+          ports:
+            - name: ingress
+              containerPort: 2342
+          env:
+            - name: TIME_ZONE
+              value: America/New_York
+            - name: PHOTOPRISM_UID
+              value: "1000"
+            - name: PHOTOPRISM_GID
+              value: "1000"
+            - name: PHOTOPRISM_SITE_URL
+              value: https://photoprism.mchill.io
+            - name: PHOTOPRISM_DISABLE_TLS
+              value: "true"
+            - name: PHOTOPRISM_DATABASE_DRIVER
+              value: mysql
+            - name: PHOTOPRISM_DATABASE_SERVER
+              value: localhost:3306
+            - name: PHOTOPRISM_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: photoprism
+                  key: MARIADB_PASSWORD
+          volumeMounts:
+            - name: photoprism
+              mountPath: /photoprism/storage
+              subPath: storage
+            - name: media
+              mountPath: /photoprism/originals
+              subPath: libraries/photos
+        - name: db
+          image: mariadb:11.6.2
+          env:
+            - name: MARIADB_DATABASE
+              value: photoprism
+            - name: MARIADB_USER
+              value: photoprism
+          envFrom:
+            - secretRef:
+                name: photoprism
+          volumeMounts:
+            - name: photoprism
+              mountPath: /var/lib/mysql
+              subPath: database
+      volumes:
+        - name: photoprism
+          persistentVolumeClaim:
+            claimName: photoprism
+        - name: media
+          persistentVolumeClaim:
+            claimName: media
