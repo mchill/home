@@ -18,6 +18,3 @@ patches:
           services:
             - name: $(APP)
               port: 80
-          middlewares:
-            - name: forward-auth
-              namespace: traefik-external
