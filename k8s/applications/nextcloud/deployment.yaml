@@ -28,9 +28,9 @@ spec:
             - name: nextcloud
               mountPath: /config
               subPath: config
-            - name: media
+            - name: applications
               mountPath: /data
-              subPath: apps/nextcloud
+              subPath: nextcloud
         - name: db
           image: mariadb:11.6.2
           env:
@@ -49,6 +49,6 @@ spec:
         - name: nextcloud
           persistentVolumeClaim:
             claimName: nextcloud
-        - name: media
+        - name: applications
           persistentVolumeClaim:
-            claimName: media
+            claimName: applications

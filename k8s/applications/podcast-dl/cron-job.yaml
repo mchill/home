@@ -39,10 +39,10 @@ spec:
                 - name: GID
                   value: "1000"
               volumeMounts:
-                - name: media
+                - name: libraries
                   mountPath: /podcasts
-                  subPath: libraries/podcasts
+                  subPath: podcasts
           volumes:
-            - name: media
+            - name: libraries
               persistentVolumeClaim:
-                claimName: media
+                claimName: libraries

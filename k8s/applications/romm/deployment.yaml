@@ -33,15 +33,15 @@ spec:
             - name: romm
               mountPath: /redis-data
               subPath: redis
-            - name: media
+            - name: libraries
               mountPath: /romm/library
-              subPath: libraries/games
-            - name: media
+              subPath: games
+            - name: libraries
               mountPath: /romm/assets
-              subPath: libraries/games/assets
-            - name: media
+              subPath: games/assets
+            - name: libraries
               mountPath: /romm/resources
-              subPath: libraries/games/resources
+              subPath: games/resources
         - name: db
           image: mariadb:11.6.2
           env:
@@ -60,6 +60,6 @@ spec:
         - name: romm
           persistentVolumeClaim:
             claimName: romm
-        - name: media
+        - name: libraries
           persistentVolumeClaim:
-            claimName: media
+            claimName: libraries

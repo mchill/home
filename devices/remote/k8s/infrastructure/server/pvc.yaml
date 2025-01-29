@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: media
+  name: applications
 spec:
   accessModes:
     - ReadWriteMany
@@ -9,4 +9,17 @@ spec:
     requests:
       storage: 10Ti
   storageClassName: smb
-  volumeName: media
+  volumeName: applications
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: libraries
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Ti
+  storageClassName: smb
+  volumeName: libraries

@@ -37,27 +37,27 @@ spec:
             - name: tdarr
               mountPath: /app/configs
               subPath: configs
-            - name: media
+            - name: applications
               mountPath: /temp
-              subPath: apps/tdarr
-            - name: media
+              subPath: tdarr
+            - name: libraries
               mountPath: /media/movies
-              subPath: libraries/movies/sd
-            - name: media
+              subPath: movies/sd
+            - name: libraries
               mountPath: /media/movies-uhd
-              subPath: libraries/movies/uhd
-            - name: media
+              subPath: movies/uhd
+            - name: libraries
               mountPath: /media/movies-requested
-              subPath: libraries/movies/requested
-            - name: media
+              subPath: movies/requested
+            - name: libraries
               mountPath: /media/tv
-              subPath: libraries/tv/sd
-            - name: media
+              subPath: tv/sd
+            - name: libraries
               mountPath: /media/tv-uhd
-              subPath: libraries/tv/uhd
-            - name: media
+              subPath: tv/uhd
+            - name: libraries
               mountPath: /media/tv-requested
-              subPath: libraries/tv/requested
+              subPath: tv/requested
         - name: tdarr-node
           image: haveagitgat/tdarr_node:2.27.02
           env:
@@ -79,31 +79,34 @@ spec:
             - name: tdarr
               mountPath: /app/configs
               subPath: configs
-            - name: media
+            - name: applications
               mountPath: /temp
-              subPath: apps/tdarr
-            - name: media
+              subPath: tdarr
+            - name: libraries
               mountPath: /media/movies
-              subPath: libraries/movies/sd
-            - name: media
+              subPath: movies/sd
+            - name: libraries
               mountPath: /media/movies-uhd
-              subPath: libraries/movies/uhd
-            - name: media
+              subPath: movies/uhd
+            - name: libraries
               mountPath: /media/movies-requested
-              subPath: libraries/movies/requested
-            - name: media
+              subPath: movies/requested
+            - name: libraries
               mountPath: /media/tv
-              subPath: libraries/tv/sd
-            - name: media
+              subPath: tv/sd
+            - name: libraries
               mountPath: /media/tv-uhd
-              subPath: libraries/tv/uhd
-            - name: media
+              subPath: tv/uhd
+            - name: libraries
               mountPath: /media/tv-requested
-              subPath: libraries/tv/requested
+              subPath: tv/requested
       volumes:
         - name: tdarr
           persistentVolumeClaim:
             claimName: tdarr
-        - name: media
+        - name: applications
           persistentVolumeClaim:
-            claimName: media
+            claimName: applications
+        - name: libraries
+          persistentVolumeClaim:
+            claimName: libraries

@@ -24,16 +24,16 @@ spec:
           volumeMounts:
             - name: tinymediamanager
               mountPath: /data
-            - name: media
+            - name: libraries
               mountPath: /media/movies
-              subPath: libraries/movies/sd
-            - name: media
+              subPath: movies/sd
+            - name: libraries
               mountPath: /media/tvshows
-              subPath: libraries/tv/sd
+              subPath: tv/sd
       volumes:
         - name: tinymediamanager
           persistentVolumeClaim:
             claimName: tinymediamanager
-        - name: media
+        - name: libraries
           persistentVolumeClaim:
-            claimName: media
+            claimName: libraries

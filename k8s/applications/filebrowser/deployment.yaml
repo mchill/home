@@ -30,17 +30,17 @@ spec:
             - name: filebrowser
               mountPath: /filebrowser.json
               subPath: filebrowser.json
-            - name: backup
-              mountPath: /srv/backup
-            - name: media
-              mountPath: /srv/media
+            - name: applications
+              mountPath: /srv/applications
+            - name: libraries
+              mountPath: /srv/libraries
       volumes:
         - name: filebrowser
           persistentVolumeClaim:
             claimName: filebrowser
-        - name: backup
+        - name: applications
           persistentVolumeClaim:
-            claimName: backup
-        - name: media
+            claimName: applications
+        - name: libraries
           persistentVolumeClaim:
-            claimName: media
+            claimName: libraries

@@ -1,28 +1,28 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: media
+  name: applications
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 20Ti
+      storage: 16Ti
   storageClassName: ""
-  volumeName: media
+  volumeName: applications
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: backup
+  name: libraries
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 20Ti
+      storage: 16Ti
   storageClassName: ""
-  volumeName: backup
+  volumeName: libraries
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1

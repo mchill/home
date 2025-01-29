@@ -44,37 +44,40 @@ spec:
           volumeMounts:
             - name: plex
               mountPath: /config
-            - name: media
+            - name: applications
               mountPath: /transcode
-              subPath: apps/plex
-            - name: media
+              subPath: plex
+            - name: libraries
               mountPath: /data/movies
-              subPath: libraries/movies/sd
-            - name: media
+              subPath: movies/sd
+            - name: libraries
               mountPath: /data/movies-uhd
-              subPath: libraries/movies/uhd
-            - name: media
+              subPath: movies/uhd
+            - name: libraries
               mountPath: /data/movies-requested
-              subPath: libraries/movies/requested
-            - name: media
+              subPath: movies/requested
+            - name: libraries
               mountPath: /data/extras
-              subPath: libraries/extras/sd
-            - name: media
+              subPath: extras/sd
+            - name: libraries
               mountPath: /data/tv
-              subPath: libraries/tv/sd
-            - name: media
+              subPath: tv/sd
+            - name: libraries
               mountPath: /data/tv-uhd
-              subPath: libraries/tv/uhd
-            - name: media
+              subPath: tv/uhd
+            - name: libraries
               mountPath: /data/tv-requested
-              subPath: libraries/tv/requested
-            - name: media
+              subPath: tv/requested
+            - name: libraries
               mountPath: /data/music
-              subPath: libraries/music
+              subPath: music
       volumes:
         - name: plex
           persistentVolumeClaim:
             claimName: plex
-        - name: media
+        - name: applications
           persistentVolumeClaim:
-            claimName: media
+            claimName: applications
+        - name: libraries
+          persistentVolumeClaim:
+            claimName: libraries

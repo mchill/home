@@ -23,25 +23,30 @@ spec:
               value: "1000"
             - name: PGID
               value: "1000"
+            - name: MAX_NAME
+              value: "140"
           volumeMounts:
             - name: radarr
               mountPath: /config
-            - name: media
+            - name: libraries
               mountPath: /movies
-              subPath: libraries/movies/sd
-            - name: media
+              subPath: movies/sd
+            - name: libraries
               mountPath: /movies-requested
-              subPath: libraries/movies/requested
-            - name: media
+              subPath: movies/requested
+            - name: applications
               mountPath: /trash
-              subPath: apps/trash
-            - name: media
+              subPath: trash
+            - name: applications
               mountPath: /data
-              subPath: apps/qbittorrent
+              subPath: qbittorrent
       volumes:
         - name: radarr
           persistentVolumeClaim:
             claimName: radarr
-        - name: media
+        - name: applications
           persistentVolumeClaim:
-            claimName: media
+            claimName: applications
+        - name: libraries
+          persistentVolumeClaim:
+            claimName: libraries

@@ -54,9 +54,9 @@ spec:
             - name: qbittorrent
               mountPath: /config
               subPath: config
-            - name: media
+            - name: applications
               mountPath: /data
-              subPath: apps/qbittorrent
+              subPath: qbittorrent
           resources:
             limits:
               cpu: 1
@@ -68,6 +68,6 @@ spec:
         - name: qbittorrent
           persistentVolumeClaim:
             claimName: qbittorrent
-        - name: media
+        - name: applications
           persistentVolumeClaim:
-            claimName: media
+            claimName: applications

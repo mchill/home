@@ -25,34 +25,33 @@ spec:
                           - $(VOLUME)
           containers:
             - name: backup
-              image: instrumentisto/rsync-ssh:alpine3.21
+              image: bash:5.2.37
               args:
                 - /bin/sh
                 - -cex
                 - |
+                  apk add --no-cache rsync;
                   command -v getfacl || apk add acl;
-                  mkdir -p /root/.ssh;
-                  ssh-keyscan -H nas >> /root/.ssh/known_hosts;
                   cd /backup;
                   getfacl -R ${VOLUME} > ${VOLUME}.facl;
-                  rsync -avz -e "ssh -i /root/ssh/id_rsa" --delete-before /backup/${VOLUME}.facl serverbackup@nas:/volume1/ServerBackup/volumes/${VOLUME}.facl;
-                  rsync -avz -e "ssh -i /root/ssh/id_rsa" --delete-before /backup/${VOLUME} serverbackup@nas:/volume1/ServerBackup/volumes;
+                  rsync -avz --delete-before /backup/${VOLUME}.facl /target/${VOLUME}.facl;
+                  rsync -avz --delete-before /backup/${VOLUME} /target;
               env:
                 - name: TZ
                   value: America/New_York
                 - name: VOLUME
                   value: $(VOLUME)
               volumeMounts:
-                - name: ssh
-                  mountPath: /root/ssh
                 - name: data
                   readOnly: true
                   mountPath: /backup/$(VOLUME)
+                - name: applications
+                  mountPath: /target
+                  subPath: backup
           volumes:
-            - name: ssh
-              secret:
-                secretName: ssh
-                defaultMode: 384
             - name: data
               persistentVolumeClaim:
                 claimName: $(VOLUME)
+            - name: applications
+              persistentVolumeClaim:
+                claimName: applications

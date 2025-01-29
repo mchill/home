@@ -27,10 +27,10 @@ spec:
             - name: LOG_LEVEL
               value: INFO
           volumeMounts:
-            - name: media
+            - name: applications
               mountPath: /photon/photon_data
-              subPath: apps/photon
+              subPath: photon
       volumes:
-        - name: media
+        - name: applications
           persistentVolumeClaim:
-            claimName: media
+            claimName: applications

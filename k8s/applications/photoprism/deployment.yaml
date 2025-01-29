@@ -17,8 +17,6 @@ spec:
             - name: ingress
               containerPort: 2342
           env:
-            - name: TIME_ZONE
-              value: America/New_York
             - name: PHOTOPRISM_UID
               value: "1000"
             - name: PHOTOPRISM_GID
@@ -40,9 +38,9 @@ spec:
             - name: photoprism
               mountPath: /photoprism/storage
               subPath: storage
-            - name: media
+            - name: libraries
               mountPath: /photoprism/originals
-              subPath: libraries/photos
+              subPath: photos
         - name: db
           image: mariadb:11.6.2
           env:
@@ -61,6 +59,6 @@ spec:
         - name: photoprism
           persistentVolumeClaim:
             claimName: photoprism
-        - name: media
+        - name: libraries
           persistentVolumeClaim:
-            claimName: media
+            claimName: libraries

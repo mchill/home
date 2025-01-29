@@ -22,14 +22,7 @@ spec:
           volumeMounts:
             - name: homeassistant
               mountPath: /config
-            - name: ssh
-              mountPath: /root/.ssh/id_rsa
-              subPath: id_rsa
       volumes:
         - name: homeassistant
           persistentVolumeClaim:
             claimName: homeassistant
-        - name: ssh
-          secret:
-            secretName: ssh
-            defaultMode: 0600

@@ -26,16 +26,16 @@ spec:
           volumeMounts:
             - name: bazarr
               mountPath: /config
-            - name: media
+            - name: libraries
               mountPath: /tv
-              subPath: libraries/tv/sd
-            - name: media
+              subPath: tv/sd
+            - name: libraries
               mountPath: /movies
-              subPath: libraries/movies/sd
+              subPath: movies/sd
       volumes:
         - name: bazarr
           persistentVolumeClaim:
             claimName: bazarr
-        - name: media
+        - name: libraries
           persistentVolumeClaim:
-            claimName: media
+            claimName: libraries

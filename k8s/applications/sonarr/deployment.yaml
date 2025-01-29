@@ -23,25 +23,30 @@ spec:
               value: "1000"
             - name: PGID
               value: "1000"
+            - name: MAX_NAME
+              value: "140"
           volumeMounts:
             - name: sonarr
               mountPath: /config
-            - name: media
+            - name: libraries
               mountPath: /tv
-              subPath: libraries/tv/sd
-            - name: media
+              subPath: tv/sd
+            - name: libraries
               mountPath: /tv-requested
-              subPath: libraries/tv/requested
-            - name: media
+              subPath: tv/requested
+            - name: applications
               mountPath: /trash
-              subPath: apps/trash
-            - name: media
+              subPath: trash
+            - name: applications
               mountPath: /data
-              subPath: apps/qbittorrent
+              subPath: qbittorrent
       volumes:
         - name: sonarr
           persistentVolumeClaim:
             claimName: sonarr
-        - name: media
+        - name: applications
           persistentVolumeClaim:
-            claimName: media
+            claimName: applications
+        - name: libraries
+          persistentVolumeClaim:
+            claimName: libraries

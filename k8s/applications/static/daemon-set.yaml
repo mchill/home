@@ -15,10 +15,10 @@ spec:
             - name: TZ
               value: America/New_York
           volumeMounts:
-            - name: media
+            - name: libraries
               mountPath: /usr/share/nginx/html/podcasts
-              subPath: libraries/podcasts
+              subPath: podcasts
       volumes:
-        - name: media
+        - name: libraries
           persistentVolumeClaim:
-            claimName: media
+            claimName: libraries

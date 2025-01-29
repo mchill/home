@@ -31,9 +31,8 @@ spec:
                 - name: kometa
                   mountPath: /config
                   subPath: posters
-                - name: media
+                - name: libaries
                   mountPath: /data
-                  subPath: libraries
                 - name: config
                   mountPath: /config_src/config.yaml
                   subPath: config.yaml
@@ -53,9 +52,8 @@ spec:
                 - name: kometa
                   mountPath: /config
                   subPath: posters
-                - name: media
+                - name: libaries
                   mountPath: /data
-                  subPath: libraries
                 - name: config
                   mountPath: /config/movies.yml
                   subPath: movies.yml
@@ -69,9 +67,9 @@ spec:
             - name: kometa
               persistentVolumeClaim:
                 claimName: kometa
-            - name: media
+            - name: libaries
               persistentVolumeClaim:
-                claimName: media
+                claimName: libaries
             - name: config
               configMap:
                 name: kometa-posters

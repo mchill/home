@@ -26,16 +26,16 @@ spec:
             - name: audiobookshelf
               mountPath: /config
               subPath: config
-            - name: media
+            - name: libraries
               mountPath: /audiobooks
-              subPath: libraries/audiobooks
-            - name: media
+              subPath: audiobooks
+            - name: libraries
               mountPath: /podcasts
-              subPath: libraries/podcasts
+              subPath: podcasts
       volumes:
         - name: audiobookshelf
           persistentVolumeClaim:
             claimName: audiobookshelf
-        - name: media
+        - name: libraries
           persistentVolumeClaim:
-            claimName: media
+            claimName: libraries

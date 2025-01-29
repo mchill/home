@@ -40,26 +40,29 @@ spec:
           volumeMounts:
             - name: plex
               mountPath: /config
-            - name: media
+            - name: applications
               mountPath: /transcode
-              subPath: transcode/plex
-            - name: media
+              subPath: plex
+            - name: libraries
               mountPath: /data/movies
-              subPath: libraries/movies/sd
-            - name: media
+              subPath: movies/sd
+            - name: libraries
               mountPath: /data/movies-requested
-              subPath: libraries/movies/requested
-            - name: media
+              subPath: movies/requested
+            - name: libraries
               mountPath: /data/tv
-              subPath: libraries/tv/sd
-            - name: media
+              subPath: tv/sd
+            - name: libraries
               mountPath: /data/tv-requested
-              subPath: libraries/tv/requested
+              subPath: tv/requested
       volumes:
         - name: plex
           hostPath:
             type: Directory
             path: /home/mchill/k8s/plex
-        - name: media
+        - name: applications
           persistentVolumeClaim:
-            claimName: media
+            claimName: applications
+        - name: libraries
+          persistentVolumeClaim:
+            claimName: libraries

@@ -105,7 +105,7 @@
     - name: Mount filesystems
       become: true
       block:
-        - name: Mount longhorn
+        - name: Mount longhorn share
           ansible.posix.mount:
             path: /mnt/longhorn
             src: '{{ longhorn_partition }}'
@@ -113,19 +113,19 @@
             opts: defaults
             state: mounted
 
-        - name: Mount media
+        - name: Mount applications share
           ansible.posix.mount:
-            src: 192.168.1.202:/volume1/Media
-            path: /mnt/media
+            src: 192.168.1.202:/volume1/Applications
+            path: /mnt/applications
             fstype: nfs
             opts: user,nofail,noatime,nolock,intr,tcp,actimeo=1800
             boot: false
             state: mounted
 
-        - name: Mount backup
+        - name: Mount libraries share
           ansible.posix.mount:
-            src: 192.168.1.202:/volume1/ServerBackup
-            path: /mnt/backup
+            src: 192.168.1.202:/volume1/Libraries
+            path: /mnt/libraries
             fstype: nfs
             opts: user,nofail,noatime,nolock,intr,tcp,actimeo=1800
             boot: false
