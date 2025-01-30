@@ -10,7 +10,7 @@ spec:
     spec:
       nodeName: laptop
       securityContext:
-        fsGroup: 911
+        fsGroup: 1000
       containers:
         - name: plex
           image: ghcr.io/linuxserver/plex:1.41.3
@@ -32,6 +32,10 @@ spec:
           env:
             - name: TZ
               value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
             - name: ADVERTISE_IP
               value: http://192.168.1.232:32400,https://plex.mchill.io
           resources:

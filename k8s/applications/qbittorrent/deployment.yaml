@@ -13,9 +13,9 @@ spec:
         fsGroup: 1000
         sysctls:
           - name: net.ipv4.conf.all.src_valid_mark
-            value: '1'
+            value: "1"
           - name: net.ipv6.conf.all.disable_ipv6
-            value: '1'
+            value: "1"
       dnsPolicy: None
       dnsConfig:
         nameservers:
@@ -34,19 +34,19 @@ spec:
             - name: TZ
               value: America/New_York
             - name: VPN_ENABLED
-              value: 'true'
+              value: "true"
             - name: VPN_LAN_NETWORK
               value: 10.0.0.0/8
             - name: VPN_CONF
               value: wg0
             - name: PRIVOXY_ENABLED
-              value: 'false'
+              value: "false"
             - name: PUID
-              value: '1000'
+              value: "1000"
             - name: PGID
-              value: '1000'
+              value: "1000"
             - name: UMASK
-              value: '002'
+              value: "002"
           envFrom:
             - secretRef:
                 name: qbittorrent

@@ -2,40 +2,88 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: applications
+  annotations:
+    pv.kubernetes.io/provisioned-by: smb.csi.k8s.io
 spec:
-  capacity:
-    storage: 16Ti
   accessModes:
     - ReadWriteMany
+  capacity:
+    storage: 16Ti
   persistentVolumeReclaimPolicy: Retain
-  nfs:
-    path: /volume1/Applications
-    server: 192.168.1.202
+  mountOptions:
+    - dir_mode=0775
+    - file_mode=0664
+    - uid=1000
+    - gid=1000
+    - noperm
+    - mfsymlinks
+    - cache=strict
+    - noserverino
+  csi:
+    driver: smb.csi.k8s.io
+    volumeHandle: //192.168.1.202/Applications##
+    volumeAttributes:
+      source: //192.168.1.202/Applications
+    nodeStageSecretRef:
+      name: synology
+      namespace: server
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: libraries
+  annotations:
+    pv.kubernetes.io/provisioned-by: smb.csi.k8s.io
 spec:
-  capacity:
-    storage: 16Ti
   accessModes:
     - ReadWriteMany
+  capacity:
+    storage: 16Ti
   persistentVolumeReclaimPolicy: Retain
-  nfs:
-    path: /volume1/Libraries
-    server: 192.168.1.202
+  mountOptions:
+    - dir_mode=0775
+    - file_mode=0664
+    - uid=1000
+    - gid=1000
+    - noperm
+    - mfsymlinks
+    - cache=strict
+    - noserverino
+  csi:
+    driver: smb.csi.k8s.io
+    volumeHandle: //192.168.1.202/Libraries##
+    volumeAttributes:
+      source: //192.168.1.202/Libraries
+    nodeStageSecretRef:
+      name: synology
+      namespace: server
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: googledrive
+  annotations:
+    pv.kubernetes.io/provisioned-by: smb.csi.k8s.io
 spec:
-  capacity:
-    storage: 100Gi
   accessModes:
     - ReadWriteMany
+  capacity:
+    storage: 100Gi
   persistentVolumeReclaimPolicy: Retain
-  nfs:
-    path: /volume1/GoogleDrive
-    server: 192.168.1.202
+  mountOptions:
+    - dir_mode=0775
+    - file_mode=0664
+    - uid=1000
+    - gid=1000
+    - noperm
+    - mfsymlinks
+    - cache=strict
+    - noserverino
+  csi:
+    driver: smb.csi.k8s.io
+    volumeHandle: //192.168.1.202/GoogleDrive##
+    volumeAttributes:
+      source: //192.168.1.202/GoogleDrive
+    nodeStageSecretRef:
+      name: synology
+      namespace: server

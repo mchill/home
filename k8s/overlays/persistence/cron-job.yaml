@@ -30,28 +30,29 @@ spec:
                 - /bin/sh
                 - -cex
                 - |
-                  apk add --no-cache rsync;
+                  apk add --no-cache rsync sshpass openssh-client;
                   command -v getfacl || apk add acl;
+                  mkdir -p /root/.ssh;
+                  ssh-keyscan -H nas >> /root/.ssh/known_hosts;
                   cd /backup;
                   getfacl -R ${VOLUME} > ${VOLUME}.facl;
-                  rsync -avz --delete-before /backup/${VOLUME}.facl /target/${VOLUME}.facl;
-                  rsync -avz --delete-before /backup/${VOLUME} /target;
+                  sshpass -e rsync -avz --delete-before /backup/${VOLUME}.facl kubernetes@nas:/volume1/Applications/backup/${VOLUME}.facl;
+                  sshpass -e rsync -avz --delete-before /backup/${VOLUME} kubernetes@nas:/volume1/Applications/backup;
               env:
                 - name: TZ
                   value: America/New_York
                 - name: VOLUME
                   value: $(VOLUME)
+                - name: SSHPASS
+                  valueFrom:
+                    secretKeyRef:
+                      name: synology
+                      key: password
               volumeMounts:
                 - name: data
                   readOnly: true
                   mountPath: /backup/$(VOLUME)
-                - name: applications
-                  mountPath: /target
-                  subPath: backup
           volumes:
             - name: data
               persistentVolumeClaim:
                 claimName: $(VOLUME)
-            - name: applications
-              persistentVolumeClaim:
-                claimName: applications

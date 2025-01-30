@@ -1,5 +1,7 @@
 #!/bin/bash
 
+curl -skSL https://raw.githubusercontent.com/kubernetes-csi/csi-driver-smb/v1.16.0/deploy/install-driver.sh | bash -s v1.16.0 --
+
 helm repo add traefik https://helm.traefik.io/traefik
 helm repo add longhorn https://charts.longhorn.io
 helm repo add prometheus https://prometheus-community.github.io/helm-charts

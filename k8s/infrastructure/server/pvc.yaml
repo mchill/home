@@ -1,5 +1,5 @@
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: applications
 spec:
@@ -11,8 +11,8 @@ spec:
   storageClassName: ""
   volumeName: applications
 ---
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: libraries
 spec:
@@ -24,8 +24,8 @@ spec:
   storageClassName: ""
   volumeName: libraries
 ---
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: googledrive
 spec:

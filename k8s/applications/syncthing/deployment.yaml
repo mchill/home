@@ -10,7 +10,7 @@ spec:
     spec:
       hostNetwork: true
       securityContext:
-        fsGroup: 1026
+        fsGroup: 1000
       containers:
         - name: syncthing
           image: syncthing/syncthing:1.29.2
@@ -24,9 +24,9 @@ spec:
             - name: TZ
               value: America/New_York
             - name: PUID
-              value: "1026"
+              value: "1000"
             - name: PGID
-              value: "1026"
+              value: "1000"
           volumeMounts:
             - name: syncthing
               mountPath: /var/syncthing
