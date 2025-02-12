@@ -1,0 +1,9 @@
+namespace: server
+commonLabels:
+  app: rclone
+resources:
+  - deployment.yaml
+configMapGenerator:
+  - name: lsyncd
+    files:
+      - config.lua
