@@ -24,6 +24,10 @@ services:
         subtitle: Videos
         logo: assets/logos/plex.png
         url: https://plex.mchill.io
+      - name: Tube Archivist
+        subtitle: YouTube
+        logo: assets/logos/tubearchivist.jpg
+        url: https://tube.mchill.io
       - name: Audiobookshelf
         subtitle: Audiobooks
         logo: assets/logos/audiobookshelf.png
@@ -32,10 +36,6 @@ services:
         subtitle: Photos
         logo: assets/logos/photoprism.png
         url: https://photoprism.mchill.io
-      - name: Mealie
-        subtitle: Recipes
-        logo: assets/logos/mealie.png
-        url: https://recipes.mchill.io
       - name: RomM
         subtitle: Games
         logo: assets/logos/romm.png
@@ -149,6 +149,30 @@ services:
         logo: assets/logos/prometheus.png
         url: https://prometheus.mchill.io
 
+  - name: Tools
+    icon: fas fa-wrench
+    items:
+      - name: Mealie
+        subtitle: Recipes
+        logo: assets/logos/mealie.png
+        url: https://recipes.mchill.io
+      - name: Ombi
+        subtitle: Plex requests
+        logo: assets/logos/ombi.png
+        url: https://ombi.mchill.io
+      - name: Dawarich
+        subtitle: Timeline
+        logo: assets/logos/dawarich.png
+        url: https://dawarich.mchill.io
+      - name: Jitsi
+        subtitle: Video conferencing
+        logo: assets/logos/jitsi.png
+        url: https://jitsi.mchill.io
+      - name: Tautulli
+        subtitle: Plex statistics
+        logo: assets/logos/tautulli.png
+        url: https://tautulli.mchill.io
+
   - name: Server Mgmt
     icon: fas fa-server
     items:
@@ -168,26 +192,6 @@ services:
         subtitle: Power management
         logo: assets/logos/cyberpower.png
         url: https://pdu.mchill.io
-
-  - name: Tools
-    icon: fas fa-wrench
-    items:
-      - name: Ombi
-        subtitle: Plex requests
-        logo: assets/logos/ombi.png
-        url: https://ombi.mchill.io
-      - name: Dawarich
-        subtitle: Timeline
-        logo: assets/logos/dawarich.png
-        url: https://dawarich.mchill.io
-      - name: Jitsi
-        subtitle: Video conferencing
-        logo: assets/logos/jitsi.png
-        url: https://jitsi.mchill.io
-      - name: Tautulli
-        subtitle: Plex statistics
-        logo: assets/logos/tautulli.png
-        url: https://tautulli.mchill.io
 
   - name: Remote
     icon: fas fa-globe

@@ -75,6 +75,9 @@ spec:
             - name: libraries
               mountPath: /data/music
               subPath: music
+            - name: libraries
+              mountPath: /data/youtube
+              subPath: youtube
       volumes:
         - name: plex
           persistentVolumeClaim:

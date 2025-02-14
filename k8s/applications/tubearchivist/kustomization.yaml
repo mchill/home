@@ -1,0 +1,10 @@
+namespace: server
+commonLabels:
+  app: tubearchivist
+  subdomain: tube
+resources:
+  - ../../overlays/ingress
+  - ../../overlays/persistence
+  - cron-job.yaml
+  - deployment.yaml
+  - sealed-secret.yaml

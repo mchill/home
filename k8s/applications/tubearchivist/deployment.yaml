@@ -1,0 +1,98 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: tubearchivist
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      nodeName: laptop
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: tubearchivist
+          image: bbilly1/tubearchivist:v0.4.13
+          ports:
+            - name: ingress
+              containerPort: 8000
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: HOST_UID
+              value: "1000"
+            - name: HOST_GID
+              value: "1000"
+            - name: TA_HOST
+              value: tube.mchill.io tubearchivist.server.svc.cluster.local
+            - name: REDIS_HOST
+              value: localhost
+            - name: ES_URL
+              value: http://localhost:9200
+            - name: TA_USERNAME
+              value: mchill
+            - name: TA_PASSWORD
+              value: password
+          envFrom:
+            - secretRef:
+                name: tubearchivist
+          volumeMounts:
+            - name: tubearchivist
+              mountPath: /cache
+              subPath: cache
+            - name: applications
+              mountPath: /cache/backup
+              subPath: tubearchivist/backup
+            - name: applications
+              mountPath: /cache/channels
+              subPath: tubearchivist/channels
+            - name: applications
+              mountPath: /cache/download
+              subPath: tubearchivist/download
+            - name: applications
+              mountPath: /cache/import
+              subPath: tubearchivist/import
+            - name: applications
+              mountPath: /cache/playlists
+              subPath: tubearchivist/playlists
+            - name: applications
+              mountPath: /cache/videos
+              subPath: tubearchivist/videos
+            - name: libraries
+              mountPath: /youtube
+              subPath: youtube/tubearchivist
+        - name: redis
+          image: redis/redis-stack-server:7.2.0-v15
+          volumeMounts:
+            - name: tubearchivist
+              mountPath: /data
+              subPath: redis
+        - name: elasticsearch
+          image: elasticsearch:8.16.0
+          env:
+            - name: ES_JAVA_OPTS
+              value: -Xms512m -Xmx512m
+            - name: xpack.security.enabled
+              value: "true"
+            - name: discovery.type
+              value: single-node
+            - name: path.repo
+              value: /usr/share/elasticsearch/data/snapshot
+          envFrom:
+            - secretRef:
+                name: tubearchivist
+          volumeMounts:
+            - name: tubearchivist
+              mountPath: /usr/share/elasticsearch/data
+              subPath: elasticsearch
+      volumes:
+        - name: tubearchivist
+          persistentVolumeClaim:
+            claimName: tubearchivist
+        - name: applications
+          persistentVolumeClaim:
+            claimName: applications
+        - name: libraries
+          persistentVolumeClaim:
+            claimName: libraries
