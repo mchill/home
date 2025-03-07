@@ -42,7 +42,7 @@ spec:
               mountPath: /photoprism/originals
               subPath: photos
         - name: db
-          image: mariadb:11.6.2
+          image: mariadb:11.7.2
           env:
             - name: MARIADB_DATABASE
               value: photoprism

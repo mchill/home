@@ -69,7 +69,7 @@ spec:
               mountPath: /data
               subPath: redis
         - name: elasticsearch
-          image: elasticsearch:8.16.0
+          image: elasticsearch:8.17.3
           env:
             - name: ES_JAVA_OPTS
               value: -Xms512m -Xmx512m
