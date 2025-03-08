@@ -60,7 +60,7 @@ spec:
               mountPath: /var/app/tmp/imports/watched
               subPath: watched
         - name: db
-          image: postgres:14.17-alpine
+          image: postgres:16.8-alpine
           env:
             - name: POSTGRES_PASSWORD
               value: password
