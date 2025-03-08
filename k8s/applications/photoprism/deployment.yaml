@@ -12,7 +12,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: photoprism
-          image: photoprism/photoprism:250228
+          image: photoprism/photoprism:20220121
           ports:
             - name: ingress
               containerPort: 2342
