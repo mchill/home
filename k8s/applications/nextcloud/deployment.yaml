@@ -13,7 +13,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: nextcloud
-          image: linuxserver/nextcloud:30.0.6
+          image: linuxserver/nextcloud:31.0.0
           ports:
             - name: ingress
               containerPort: 80
