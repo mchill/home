@@ -25,9 +25,9 @@ spec:
             - name: HOST_GID
               value: "1000"
             - name: TA_HOST
-              value: tube.mchill.io tubearchivist.server.svc.cluster.local
-            - name: REDIS_HOST
-              value: localhost
+              value: https://tube.mchill.io http://tubearchivist.server.svc.cluster.local
+            - name: REDIS_CON
+              value: redis://localhost:6379
             - name: ES_URL
               value: http://localhost:9200
             - name: TA_USERNAME
@@ -63,7 +63,7 @@ spec:
               mountPath: /youtube
               subPath: youtube/tubearchivist
         - name: redis
-          image: redis/redis-stack-server:7.2.0-v15
+          image: redis:7.4.2
           volumeMounts:
             - name: tubearchivist
               mountPath: /data
