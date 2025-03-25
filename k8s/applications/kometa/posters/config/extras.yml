@@ -1,5 +1,5 @@
 metadata:
-  Harry Potter and the Philosopher's Stone:
+  Harry Potter and the Philosophers Stone:
     originally_available: 2001-01-01
     seasons:
       0:
@@ -21,7 +21,8 @@ metadata:
       2:
         title: Behind the Scenes
         episodes:
-          1.title: Creating the World of Harry Potter - Introduction by Daniel Radcliffe
+          1:
+            title: Creating the World of Harry Potter - Introduction by Daniel Radcliffe
           2:
             title: Creating the World of Harry Potter Part 1 - The Magic Begins
           3:
@@ -475,7 +476,7 @@ collections:
     plex_search:
       any:
         title.is:
-          - "Harry Potter and the Philosopher's Stone"
+          - "Harry Potter and the Philosophers Stone"
           - "Harry Potter and the Chamber of Secrets"
           - "Harry Potter and the Prisoner of Azkaban"
           - "Harry Potter and the Goblet of Fire"
