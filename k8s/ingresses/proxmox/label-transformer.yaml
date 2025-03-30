@@ -1,0 +1,10 @@
+kind: LabelTransformer
+apiVersion: builtin
+metadata:
+  name: proxmox
+labels:
+  app: proxmox
+  subdomain: proxmox
+fieldSpecs:
+  - path: metadata/labels
+    create: true

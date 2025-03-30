@@ -126,7 +126,7 @@ services:
         url: https://ddns.mchill.io
       - name: webNUT
         subtitle: UPS metrics
-        logo: assets/logos/webnut.png
+        logo: assets/logos/peanut.svg
         url: https://nut.mchill.io
 
   - name: Monitoring
@@ -176,6 +176,10 @@ services:
   - name: Server Mgmt
     icon: fas fa-server
     items:
+      - name: Proxmox
+        subtitle: Virtualization
+        logo: assets/logos/proxmox.png
+        url: https://proxmox.mchill.io
       - name: Home Assistant
         subtitle: Home automation
         logo: assets/logos/homeassistant.png
