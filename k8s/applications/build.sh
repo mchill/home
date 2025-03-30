@@ -17,6 +17,7 @@ kubectl kustomize minecraft && echo "---"
 kubectl kustomize nextcloud && echo "---"
 kubectl kustomize nut-exporter && echo "---"
 kubectl kustomize ombi && echo "---"
+kubectl kustomize peanut && echo "---"
 # kubectl kustomize photon && echo "---" # Keeps downloading huge files
 kubectl kustomize photoprism && echo "---"
 kubectl kustomize plex && echo "---"
@@ -35,4 +36,3 @@ kubectl kustomize tautulli && echo "---"
 kubectl kustomize tdarr && echo "---"
 kubectl kustomize tinymediamanager && echo "---"
 kubectl kustomize tubearchivist && echo "---"
-# kubectl kustomize webnut && echo "---" # Container won't start

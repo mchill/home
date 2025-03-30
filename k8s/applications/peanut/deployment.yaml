@@ -1,0 +1,32 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: peanut
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      containers:
+        - name: peanut
+          image: brandawg93/peanut:5.6.1
+          ports:
+            - name: ingress
+              containerPort: 8080
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: peanut
+              mountPath: /config
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 0.1
+              memory: 256Mi
+      volumes:
+        - name: peanut
+          persistentVolumeClaim:
+            claimName: peanut
