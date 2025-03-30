@@ -8,7 +8,6 @@ spec:
     type: Recreate
   template:
     spec:
-      nodeName: laptop
       securityContext:
         fsGroup: 1000
       containers:
@@ -40,11 +39,10 @@ spec:
               value: http://192.168.1.232:32400,https://plex.mchill.io
           resources:
             limits:
-              cpu: 4
               memory: 2Gi
             requests:
               cpu: 1
-              memory: 512Mi
+              memory: 2Gi
           volumeMounts:
             - name: plex
               mountPath: /config

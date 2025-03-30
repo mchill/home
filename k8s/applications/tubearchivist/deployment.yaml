@@ -8,7 +8,6 @@ spec:
     type: Recreate
   template:
     spec:
-      nodeName: laptop
       securityContext:
         fsGroup: 1000
       containers:
@@ -62,12 +61,24 @@ spec:
             - name: libraries
               mountPath: /youtube
               subPath: youtube/tubearchivist
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              cpu: 0.1
+              memory: 1Gi
         - name: redis
           image: redis:7.4.2
           volumeMounts:
             - name: tubearchivist
               mountPath: /data
               subPath: redis
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 0.1
+              memory: 128Mi
         - name: elasticsearch
           image: elasticsearch:8.17.3
           env:
@@ -86,6 +97,12 @@ spec:
             - name: tubearchivist
               mountPath: /usr/share/elasticsearch/data
               subPath: elasticsearch
+          resources:
+            limits:
+              memory: 1.5Gi
+            requests:
+              cpu: 0.1
+              memory: 1.5Gi
       volumes:
         - name: tubearchivist
           persistentVolumeClaim:

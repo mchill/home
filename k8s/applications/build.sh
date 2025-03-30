@@ -2,7 +2,7 @@
 
 kubectl kustomize audiobookshelf && echo "---"
 kubectl kustomize bazarr && echo "---"
-# kubectl kustomize dawarich && echo "---"
+# kubectl kustomize dawarich && echo "---" # Import Google Maps data
 kubectl kustomize ddns && echo "---"
 kubectl kustomize errors && echo "---"
 kubectl kustomize filebrowser && echo "---"
@@ -17,7 +17,7 @@ kubectl kustomize minecraft && echo "---"
 kubectl kustomize nextcloud && echo "---"
 kubectl kustomize nut-exporter && echo "---"
 kubectl kustomize ombi && echo "---"
-# kubectl kustomize photon && echo "---"
+# kubectl kustomize photon && echo "---" # Keeps downloading huge files
 kubectl kustomize photoprism && echo "---"
 kubectl kustomize plex && echo "---"
 kubectl kustomize podcast-dl && echo "---"
@@ -35,4 +35,4 @@ kubectl kustomize tautulli && echo "---"
 kubectl kustomize tdarr && echo "---"
 kubectl kustomize tinymediamanager && echo "---"
 kubectl kustomize tubearchivist && echo "---"
-kubectl kustomize webnut && echo "---"
+# kubectl kustomize webnut && echo "---" # Container won't start

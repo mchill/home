@@ -37,6 +37,12 @@ spec:
             - name: applications
               mountPath: /data
               subPath: qbittorrent
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 0.1
+              memory: 512Mi
       volumes:
         - name: sonarr-uhd
           persistentVolumeClaim:

@@ -34,3 +34,26 @@ patchesStrategicMerge:
                 - --namespace=server
                 - --enable-insecure-login
                 - --enable-skip-login
+              resources:
+                limits:
+                  memory: 128Mi
+                requests:
+                  cpu: 0.1
+                  memory: 128Mi
+  - |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: dashboard-metrics-scraper
+      namespace: kubernetes-dashboard
+    spec:
+      template:
+        spec:
+          containers:
+            - name: dashboard-metrics-scraper
+              resources:
+                limits:
+                  memory: 128Mi
+                requests:
+                  cpu: 0.1
+                  memory: 128Mi

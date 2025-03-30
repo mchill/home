@@ -8,7 +8,6 @@ spec:
     type: Recreate
   template:
     spec:
-      nodeName: laptop
       securityContext:
         fsGroup: 1000
       containers:

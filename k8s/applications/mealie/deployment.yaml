@@ -30,6 +30,12 @@ spec:
             - name: config
               mountPath: /app/assets/custom.css
               subPath: custom.css
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 0.1
+              memory: 512Mi
         - name: api
           image: hkotel/mealie:api-nightly
           env:
@@ -44,6 +50,12 @@ spec:
           volumeMounts:
             - name: mealie
               mountPath: /app/data
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 0.1
+              memory: 512Mi
       volumes:
         - name: mealie
           persistentVolumeClaim:

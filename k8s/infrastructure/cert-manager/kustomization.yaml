@@ -1,4 +1,4 @@
 resources:
-  - https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.yaml
+  - https://github.com/cert-manager/cert-manager/releases/download/v1.17.0/cert-manager.yaml
   - cluster-issuer.yaml
   - sealed-secret.yaml

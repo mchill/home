@@ -41,6 +41,12 @@ spec:
             - name: libraries
               mountPath: /photoprism/originals
               subPath: photos
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 0.1
+              memory: 256Mi
         - name: db
           image: mariadb:11.7.2
           env:
@@ -55,6 +61,12 @@ spec:
             - name: photoprism
               mountPath: /var/lib/mysql
               subPath: database
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 0.1
+              memory: 512Mi
       volumes:
         - name: photoprism
           persistentVolumeClaim:

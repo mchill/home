@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: kometa-permissions
 spec:
-  schedule: '@hourly'
+  schedule: "@hourly"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 0
@@ -35,6 +35,12 @@ spec:
                 - name: config
                   mountPath: /config_src/config.yaml
                   subPath: config.yaml
+              resources:
+                limits:
+                  memory: 128Mi
+                requests:
+                  cpu: 0.1
+                  memory: 128Mi
           containers:
             - name: kometa
               image: kometateam/kometa:v2.1.0
@@ -57,6 +63,12 @@ spec:
                 - name: config
                   mountPath: /config/tv.yml
                   subPath: tv.yml
+              resources:
+                limits:
+                  memory: 512Mi
+                requests:
+                  cpu: 0.5
+                  memory: 512Mi
           volumes:
             - name: kometa
               persistentVolumeClaim:

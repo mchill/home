@@ -8,7 +8,6 @@ spec:
     type: Recreate
   template:
     spec:
-      nodeName: laptop
       securityContext:
         fsGroup: 1000
       containers:
@@ -58,6 +57,12 @@ spec:
             - name: libraries
               mountPath: /media/tv-requested
               subPath: tv/requested
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              cpu: 0.1
+              memory: 1Gi
         - name: tdarr-node
           image: haveagitgat/tdarr_node:2.35.02
           env:
@@ -100,6 +105,12 @@ spec:
             - name: libraries
               mountPath: /media/tv-requested
               subPath: tv/requested
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 0.1
+              memory: 256Mi
       volumes:
         - name: tdarr
           persistentVolumeClaim:

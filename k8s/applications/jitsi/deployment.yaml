@@ -8,8 +8,6 @@ spec:
     type: Recreate
   template:
     spec:
-      nodeSelector:
-        kubernetes.io/arch: amd64
       securityContext:
         fsGroup: 1000
       containers:
@@ -24,6 +22,12 @@ spec:
             - name: jitsi
               mountPath: /config
               subPath: jicofo
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 0.1
+              memory: 256Mi
         - name: prosody
           image: jitsi/prosody:stable-10078
           envFrom:
@@ -38,6 +42,12 @@ spec:
             - name: jitsi
               mountPath: /prosody-plugins-custom
               subPath: prosody/prosody-plugins-custom
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 0.1
+              memory: 128Mi
         - name: web
           image: jitsi/web:stable-10078
           ports:
@@ -50,6 +60,12 @@ spec:
             - name: jitsi
               mountPath: /config
               subPath: web
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 0.1
+              memory: 128Mi
         - name: jvb
           image: jitsi/jvb:stable-10078
           ports:
@@ -65,6 +81,12 @@ spec:
             - name: jitsi
               mountPath: /config
               subPath: jvb
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 0.1
+              memory: 256Mi
       volumes:
         - name: jitsi
           persistentVolumeClaim:

@@ -3,5 +3,5 @@ commonLabels:
   app: rclone
 resources:
   - ../../overlays/persistence
-  - deployment.yaml
+  - cron-job.yaml
   - sealed-secret.yaml

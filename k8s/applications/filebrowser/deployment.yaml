@@ -34,6 +34,12 @@ spec:
               mountPath: /srv/applications
             - name: libraries
               mountPath: /srv/libraries
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 0.1
+              memory: 128Mi
       volumes:
         - name: filebrowser
           persistentVolumeClaim:

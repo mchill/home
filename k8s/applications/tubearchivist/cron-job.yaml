@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: tubearchivist
 spec:
-  schedule: '@daily'
+  schedule: "@daily"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 0
@@ -57,6 +57,12 @@ spec:
                 - name: libraries
                   mountPath: /youtube
                   subPath: youtube
+              resources:
+                limits:
+                  memory: 128Mi
+                requests:
+                  cpu: 0.1
+                  memory: 128Mi
           volumes:
             - name: libraries
               persistentVolumeClaim:

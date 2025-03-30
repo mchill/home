@@ -8,7 +8,6 @@ spec:
     type: Recreate
   template:
     spec:
-      nodeName: laptop
       securityContext:
         fsGroup: 1000
         sysctls:
@@ -59,7 +58,6 @@ spec:
               subPath: qbittorrent
           resources:
             limits:
-              cpu: 1
               memory: 2Gi
             requests:
               cpu: 0.5
