@@ -1,0 +1,10 @@
+kind: LabelTransformer
+apiVersion: builtin
+metadata:
+  name: rancher
+labels:
+  app: rancher
+  subdomain: rancher
+fieldSpecs:
+  - path: metadata/labels
+    create: true
