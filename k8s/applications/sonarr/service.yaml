@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: sonarr-lb
   annotations:
-    metallb.universe.tf/loadBalancerIPs: 192.168.1.237
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.85
 spec:
   type: LoadBalancer
   ports:

@@ -21,9 +21,9 @@ spec:
     - noserverino
   csi:
     driver: smb.csi.k8s.io
-    volumeHandle: //192.168.1.202/Applications##
+    volumeHandle: //192.168.1.10/Applications##
     volumeAttributes:
-      source: //192.168.1.202/Applications
+      source: //192.168.1.10/Applications
     nodeStageSecretRef:
       name: synology
       namespace: server
@@ -51,9 +51,9 @@ spec:
     - noserverino
   csi:
     driver: smb.csi.k8s.io
-    volumeHandle: //192.168.1.202/Libraries##
+    volumeHandle: //192.168.1.10/Libraries##
     volumeAttributes:
-      source: //192.168.1.202/Libraries
+      source: //192.168.1.10/Libraries
     nodeStageSecretRef:
       name: synology
       namespace: server
@@ -81,9 +81,9 @@ spec:
     - noserverino
   csi:
     driver: smb.csi.k8s.io
-    volumeHandle: //192.168.1.202/GoogleDrive##
+    volumeHandle: //192.168.1.10/GoogleDrive##
     volumeAttributes:
-      source: //192.168.1.202/GoogleDrive
+      source: //192.168.1.10/GoogleDrive
     nodeStageSecretRef:
       name: synology
       namespace: server

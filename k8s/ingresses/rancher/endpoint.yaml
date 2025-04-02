@@ -4,7 +4,7 @@ metadata:
   name: rancher
 subsets:
   - addresses:
-      - ip: 192.168.1.226
+      - ip: 192.168.1.50
     ports:
       - name: ingress
         port: 30443

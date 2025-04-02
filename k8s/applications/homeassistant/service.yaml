@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: homeassistant-lb
   annotations:
-    metallb.universe.tf/loadBalancerIPs: 192.168.1.235
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.81
 spec:
   type: LoadBalancer
   ports:

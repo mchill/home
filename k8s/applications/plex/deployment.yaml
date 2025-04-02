@@ -36,7 +36,7 @@ spec:
             - name: PGID
               value: "1000"
             - name: ADVERTISE_IP
-              value: http://192.168.1.232:32400,https://plex.mchill.io
+              value: http://192.168.1.82:32400,https://plex.mchill.io
           resources:
             limits:
               memory: 2Gi

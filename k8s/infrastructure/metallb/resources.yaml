@@ -4,7 +4,7 @@ metadata:
   name: default
 spec:
   addresses:
-    - 192.168.1.230-192.168.1.249
+    - 192.168.1.80-192.168.1.99
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement
