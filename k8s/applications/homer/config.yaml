@@ -65,17 +65,33 @@ services:
         logo: assets/logos/qbittorrent.png
         url: https://qbittorrent.mchill.io
 
+  - name: Tools
+    icon: fas fa-wrench
+    items:
+      - name: Mealie
+        subtitle: Recipes
+        logo: assets/logos/mealie.png
+        url: https://recipes.mchill.io
+      - name: Ombi
+        subtitle: Plex requests
+        logo: assets/logos/ombi.png
+        url: https://ombi.mchill.io
+      - name: Dawarich
+        subtitle: Timeline
+        logo: assets/logos/dawarich.png
+        url: https://dawarich.mchill.io
+      - name: Jitsi
+        subtitle: Video conferencing
+        logo: assets/logos/jitsi.png
+        url: https://jitsi.mchill.io
+      - name: Tautulli
+        subtitle: Plex statistics
+        logo: assets/logos/tautulli.png
+        url: https://tautulli.mchill.io
+
   - name: Files
     icon: fas fa-folder-open
     items:
-      - name: File Browser
-        subtitle: Files
-        logo: assets/logos/filebrowser.png
-        url: https://files.mchill.io
-      - name: Nextcloud
-        subtitle: Cloud
-        logo: assets/logos/nextcloud.png
-        url: https://nextcloud.mchill.io
       - name: Synology DSM
         subtitle: NAS
         logo: assets/logos/nas.png
@@ -88,6 +104,10 @@ services:
         subtitle: Persistent storage
         logo: assets/logos/longhorn.png
         url: https://longhorn.mchill.io
+      - name: Nextcloud
+        subtitle: Cloud
+        logo: assets/logos/nextcloud.png
+        url: https://nextcloud.mchill.io
 
   - name: Libraries
     icon: fas fa-book
@@ -149,30 +169,6 @@ services:
         logo: assets/logos/prometheus.png
         url: https://prometheus.mchill.io
 
-  - name: Tools
-    icon: fas fa-wrench
-    items:
-      - name: Mealie
-        subtitle: Recipes
-        logo: assets/logos/mealie.png
-        url: https://recipes.mchill.io
-      - name: Ombi
-        subtitle: Plex requests
-        logo: assets/logos/ombi.png
-        url: https://ombi.mchill.io
-      - name: Dawarich
-        subtitle: Timeline
-        logo: assets/logos/dawarich.png
-        url: https://dawarich.mchill.io
-      - name: Jitsi
-        subtitle: Video conferencing
-        logo: assets/logos/jitsi.png
-        url: https://jitsi.mchill.io
-      - name: Tautulli
-        subtitle: Plex statistics
-        logo: assets/logos/tautulli.png
-        url: https://tautulli.mchill.io
-
   - name: Server Mgmt
     icon: fas fa-server
     items:
@@ -200,6 +196,10 @@ services:
   - name: Remote
     icon: fas fa-globe
     items:
+      - name: Rancher
+        subtitle: Cluster management
+        logo: assets/logos/rancher.png
+        url: https://rancher.mchill.io
       - name: Unifi
         subtitle: Network controller
         logo: assets/logos/unifi.png

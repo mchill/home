@@ -5,7 +5,6 @@ kubectl kustomize bazarr && echo "---"
 # kubectl kustomize dawarich && echo "---" # Import Google Maps data
 kubectl kustomize ddns && echo "---"
 kubectl kustomize errors && echo "---"
-kubectl kustomize filebrowser && echo "---"
 kubectl kustomize flaresolverr && echo "---"
 kubectl kustomize homeassistant && echo "---"
 kubectl kustomize homer && echo "---"

@@ -1,8 +1,0 @@
-namespace: server
-commonLabels:
-  app: filebrowser
-  subdomain: files
-resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
-  - deployment.yaml
