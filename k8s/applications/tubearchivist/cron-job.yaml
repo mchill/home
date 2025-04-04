@@ -15,6 +15,16 @@ spec:
           securityContext:
             fsGroup: 1000
           restartPolicy: OnFailure
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: "kubernetes.io/hostname"
+                  labelSelector:
+                    matchExpressions:
+                      - key: app
+                        operator: In
+                        values:
+                          - tubearchivist
           containers:
             - name: tubearchivist
               image: python:3.13.2-alpine
