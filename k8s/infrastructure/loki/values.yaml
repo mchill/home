@@ -2,5 +2,3 @@ loki:
   isDefault: false
   persistence:
     enabled: false
-    existingClaim: server
-    subPath: loki

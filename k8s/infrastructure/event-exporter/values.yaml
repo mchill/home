@@ -1,0 +1,22 @@
+extraEnvVarsSecret: event-exporter
+config:
+  metricsNamePrefix: event_exporter_
+  receivers:
+    - name: loki
+      loki:
+        url: http://loki:3100/loki/api/v1/push
+        streamLabels:
+          source: kubernetes-event-exporter
+          container: kubernetes-event-exporter
+    - name: webhook
+      webhook:
+        endpoint: ${HOMEASSISTANT_WEBHOOK}
+  route:
+    routes:
+      - match:
+          - receiver: loki
+      - match:
+          - receiver: webhook
+            kind: Job
+            namespace: server
+            reason: BackoffLimitExceeded
