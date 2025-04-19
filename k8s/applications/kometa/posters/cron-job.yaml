@@ -47,7 +47,7 @@ spec:
                   memory: 128Mi
           containers:
             - name: kometa
-              image: kometateam/kometa:v2.1.0
+              image: kometateam/kometa:v2.2.0
               args:
                 - --run
                 - --read-only-config
