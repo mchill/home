@@ -16,6 +16,7 @@ find ../ -type f -iname secret.yaml -not -path "*/charts/*" -execdir sh -c "cat 
 kubectl apply --server-side -k cert-manager
 kubectl apply --server-side -k metallb
 kubectl apply --server-side -k server
+kubectl apply --server-side -k kube-vip
 
 pushd traefik-external && helm upgrade --install --create-namespace -n traefik-external --version 27.0.2 --values values.yaml --post-renderer ../kustomize.sh traefik-external traefik/traefik && popd
 pushd traefik-internal && helm upgrade --install --create-namespace -n traefik-internal --version 27.0.2 --values values.yaml --post-renderer ../kustomize.sh traefik-internal traefik/traefik && popd

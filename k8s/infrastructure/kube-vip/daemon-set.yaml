@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kube-vip
+spec:
+  template:
+    spec:
+      hostNetwork: true
+      serviceAccountName: kube-vip
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: Exists
+      tolerations:
+        - effect: NoSchedule
+          operator: Exists
+      containers:
+        - name: kube-vip
+          image: ghcr.io/kube-vip/kube-vip:v0.4.0
+          args:
+            - manager
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+                - NET_RAW
+                - SYS_TIME
+          env:
+            - name: vip_arp
+              value: "true"
+            - name: address
+              value: 192.168.1.91
+            - name: port
+              value: "6443"
+            - name: vip_interface
+              value: ens18
+            - name: cp_enable
+              value: "true"
+            - name: vip_leaderelection
+              value: "true"
