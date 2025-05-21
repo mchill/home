@@ -6,8 +6,3 @@ resources:
   - ../../overlays/ingress
   - ../../overlays/persistence
   - deployment.yaml
-configMapGenerator:
-  - name: mealie
-    files:
-      - run.sh
-      - custom.css

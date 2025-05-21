@@ -11,42 +11,22 @@ spec:
       securityContext:
         fsGroup: 1000
       containers:
-        - name: frontend
-          image: hkotel/mealie:frontend-nightly
+        - name: mealie
+          image: hkotel/mealie:v2.8.0
           ports:
             - name: ingress
-              containerPort: 3000
+              containerPort: 9000
           env:
             - name: TZ
               value: America/New_York
-            - name: API_URL
-              value: http://localhost:9000
-          volumeMounts:
-            - name: mealie
-              mountPath: /app/data
-            # - name: config
-            #   mountPath: /app/run.sh
-            #   subPath: run.sh
-            - name: config
-              mountPath: /app/assets/custom.css
-              subPath: custom.css
-          resources:
-            limits:
-              memory: 512Mi
-            requests:
-              cpu: 0.1
-              memory: 512Mi
-        - name: api
-          image: hkotel/mealie:api-nightly
-          env:
-            - name: TZ
-              value: America/New_York
+            - name: ALLOW_SIGNUP
+              value: "false"
             - name: PUID
               value: "1000"
             - name: PGID
               value: "1000"
             - name: BASE_URL
-              value: https://mealie.mchill.io
+              value: https://recipes.mchill.io
           volumeMounts:
             - name: mealie
               mountPath: /app/data
@@ -60,7 +40,3 @@ spec:
         - name: mealie
           persistentVolumeClaim:
             claimName: mealie
-        - name: config
-          configMap:
-            name: mealie
-            defaultMode: 0744
