@@ -71,7 +71,7 @@ spec:
               mountPath: /var/shared
               subPath: shared
         - name: redis
-          image: redis:7.4.2-alpine
+          image: redis:8.0.1-alpine
           volumeMounts:
             - name: dawarich
               mountPath: /data
