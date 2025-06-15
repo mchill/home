@@ -2,7 +2,7 @@
 
 kubectl kustomize audiobookshelf && echo "---"
 kubectl kustomize bazarr && echo "---"
-# kubectl kustomize dawarich && echo "---" # Import Google Maps data
+kubectl kustomize dawarich && echo "---"
 kubectl kustomize ddns && echo "---"
 kubectl kustomize errors && echo "---"
 kubectl kustomize flaresolverr && echo "---"
@@ -17,7 +17,7 @@ kubectl kustomize nextcloud && echo "---"
 kubectl kustomize nut-exporter && echo "---"
 kubectl kustomize ombi && echo "---"
 kubectl kustomize peanut && echo "---"
-# kubectl kustomize photon && echo "---" # Keeps downloading huge files
+# kubectl kustomize photon && echo "---"
 kubectl kustomize photoprism && echo "---"
 kubectl kustomize plex && echo "---"
 kubectl kustomize podcast-dl && echo "---"

@@ -12,7 +12,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: dawarich
-          image: freikin/dawarich:0.24.1
+          image: freikin/dawarich:0.26.6
           command:
             - web-entrypoint.sh
           args:
@@ -51,6 +51,8 @@ spec:
               value: "false"
             - name: PHOTON_API_HOST
               value: photon.server.svc.cluster.local
+            - name: SELF_HOSTED
+              value: "true"
           volumeMounts:
             - name: dawarich
               mountPath: /var/app/public
@@ -58,26 +60,11 @@ spec:
             - name: dawarich
               mountPath: /var/app/tmp/imports/watched
               subPath: watched
-        - name: db
-          image: postgres:14.17-alpine
-          env:
-            - name: POSTGRES_PASSWORD
-              value: password
-          volumeMounts:
             - name: dawarich
-              mountPath: /var/lib/postgresql/data
-              subPath: postgres
-            - name: dawarich
-              mountPath: /var/shared
-              subPath: shared
-        - name: redis
-          image: redis:7.4.2-alpine
-          volumeMounts:
-            - name: dawarich
-              mountPath: /data
-              subPath: shared
+              mountPath: /var/app/storage
+              subPath: storage
         - name: sidekiq
-          image: freikin/dawarich:0.24.1
+          image: freikin/dawarich:0.26.6
           command:
             - sidekiq-entrypoint.sh
           args:
@@ -108,6 +95,8 @@ spec:
               value: "false"
             - name: PHOTON_API_HOST
               value: photon.server.svc.cluster.local
+            - name: SELF_HOSTED
+              value: "true"
           volumeMounts:
             - name: dawarich
               mountPath: /var/app/public
@@ -115,6 +104,34 @@ spec:
             - name: dawarich
               mountPath: /var/app/tmp/imports/watched
               subPath: watched
+            - name: dawarich
+              mountPath: /var/app/storage
+              subPath: storage
+        - name: db
+          image: postgis/postgis:17-3.5-alpine
+          env:
+            - name: POSTGRES_DB
+              value: dawarich
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dawarich
+                  key: POSTGRES_PASSWORD
+          volumeMounts:
+            - name: dawarich
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+            - name: dawarich
+              mountPath: /var/shared
+              subPath: shared
+        - name: redis
+          image: redis:7.4.2-alpine
+          volumeMounts:
+            - name: dawarich
+              mountPath: /data
+              subPath: shared
       volumes:
         - name: dawarich
           persistentVolumeClaim:

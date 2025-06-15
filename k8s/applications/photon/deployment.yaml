@@ -12,7 +12,10 @@ spec:
         fsGroup: 1000
       containers:
         - name: photon
-          image: rtuszik/photon-docker:0.6.2
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "while true; do sleep 30; done;" ] 
+          image: rtuszik/photon-docker:0.6.1
+          imagePullPolicy: Always
           ports:
             - name: ingress
               containerPort: 2322
@@ -20,11 +23,13 @@ spec:
             - name: TIME_ZONE
               value: America/New_York
             - name: UPDATE_STRATEGY
-              value: PARALLEL
+              value: DISABLED
             - name: UDPATE_INTERVAL
               value: 24h
             - name: LOG_LEVEL
               value: INFO
+            - name: SKIP_MD5_CHECK
+              value: "TRUE"
           volumeMounts:
             - name: applications
               mountPath: /photon/photon_data
