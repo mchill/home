@@ -12,7 +12,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: nextcloud
-          image: linuxserver/nextcloud:31.0.1
+          image: linuxserver/nextcloud:31.0.6
           ports:
             - name: ingress
               containerPort: 80
@@ -37,7 +37,7 @@ spec:
               cpu: 0.1
               memory: 256Mi
         - name: db
-          image: mariadb:11.7.2
+          image: mariadb:11.8.2
           env:
             - name: MYSQL_DATABASE
               value: nextcloud

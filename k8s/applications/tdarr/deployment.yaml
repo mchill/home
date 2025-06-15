@@ -12,7 +12,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: tdarr-server
-          image: haveagitgat/tdarr:2.35.02
+          image: haveagitgat/tdarr:2.43.01
           ports:
             - name: ingress
               containerPort: 8265
@@ -64,7 +64,7 @@ spec:
               cpu: 0.1
               memory: 1Gi
         - name: tdarr-node
-          image: haveagitgat/tdarr_node:2.35.02
+          image: haveagitgat/tdarr_node:2.43.01
           env:
             - name: TZ
               value: America/New_York

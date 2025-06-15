@@ -12,7 +12,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: dawarich
-          image: freikin/dawarich:0.26.6
+          image: freikin/dawarich:0.28.1
           command:
             - web-entrypoint.sh
           args:
@@ -64,7 +64,7 @@ spec:
               mountPath: /var/app/storage
               subPath: storage
         - name: sidekiq
-          image: freikin/dawarich:0.26.6
+          image: freikin/dawarich:0.28.1
           command:
             - sidekiq-entrypoint.sh
           args:
@@ -127,7 +127,7 @@ spec:
               mountPath: /var/shared
               subPath: shared
         - name: redis
-          image: redis:7.4.2-alpine
+          image: redis:7.4.4-alpine
           volumeMounts:
             - name: dawarich
               mountPath: /data
