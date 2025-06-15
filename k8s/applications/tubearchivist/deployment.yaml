@@ -68,7 +68,7 @@ spec:
               cpu: 0.1
               memory: 1Gi
         - name: redis
-          image: redis:7.4.2
+          image: redis:7.4.4
           volumeMounts:
             - name: tubearchivist
               mountPath: /data
@@ -80,7 +80,7 @@ spec:
               cpu: 0.1
               memory: 128Mi
         - name: elasticsearch
-          image: elasticsearch:8.17.3
+          image: elasticsearch:8.18.2
           env:
             - name: ES_JAVA_OPTS
               value: -Xms512m -Xmx512m

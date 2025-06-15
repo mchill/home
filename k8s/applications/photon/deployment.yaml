@@ -14,7 +14,7 @@ spec:
         - name: photon
           command: [ "/bin/bash", "-c", "--" ]
           args: [ "while true; do sleep 30; done;" ] 
-          image: rtuszik/photon-docker:0.6.1
+          image: rtuszik/photon-docker:0.7.0
           imagePullPolicy: Always
           ports:
             - name: ingress
