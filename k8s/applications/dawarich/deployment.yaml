@@ -33,7 +33,7 @@ spec:
             - name: DISTANCE_UNIT
               value: mi
             - name: REDIS_URL
-              value: redis://localhost:6379/0
+              value: redis://localhost:6379
             - name: DATABASE_HOST
               value: localhost
             - name: DATABASE_PORT
@@ -77,7 +77,7 @@ spec:
             - name: DISTANCE_UNIT
               value: mi
             - name: REDIS_URL
-              value: redis://localhost:6379/0
+              value: redis://localhost:6379
             - name: DATABASE_HOST
               value: localhost
             - name: DATABASE_PORT

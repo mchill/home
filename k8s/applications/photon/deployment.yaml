@@ -12,8 +12,8 @@ spec:
         fsGroup: 1000
       containers:
         - name: photon
-          command: [ "/bin/bash", "-c", "--" ]
-          args: [ "while true; do sleep 30; done;" ] 
+          command: ["/bin/bash", "-c", "--"]
+          args: ["while true; do sleep 30; done;"]
           image: rtuszik/photon-docker:0.7.0
           imagePullPolicy: Always
           ports:
