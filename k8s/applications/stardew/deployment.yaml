@@ -1,0 +1,138 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: stardew
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      securityContext:
+        fsGroup: 1000
+      imagePullSecrets:
+        - name: ghcr
+      containers:
+        - name: stardew
+          image: ghcr.io/mchill/stardew-multiplayer-docker:latest
+          ports:
+            - name: ingress
+              containerPort: 5800
+            - name: stardew
+              containerPort: 24642
+              protocol: UDP
+          env:
+            # VNC
+            - name: VNC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: stardew
+                  key: VNC_PASSWORD
+            - name: DISPLAY_HEIGHT
+              value: "900"
+            - name: DISPLAY_WIDTH
+              value: "1200"
+            - name: X11VNC_EXTRA_OPTS
+              value: -noxdamage -reopen -forever
+
+            # Always On Server mod
+            - name: ENABLE_ALWAYSONSERVER_MOD
+              value: "true"
+            - name: ALWAYS_ON_SERVER_HOTKEY
+              value: F9
+            - name: ALWAYS_ON_SERVER_PROFIT_MARGIN
+              value: "100"
+            - name: ALWAYS_ON_SERVER_UPGRADE_HOUSE
+              value: "0"
+            - name: ALWAYS_ON_SERVER_PET_NAME
+              value: Rufus
+            - name: ALWAYS_ON_SERVER_FARM_CAVE_CHOICE_MUSHROOMS
+              value: "true"
+            - name: ALWAYS_ON_SERVER_COMMUNITY_CENTER_RUN
+              value: "true"
+            - name: ALWAYS_ON_SERVER_TIME_OF_DAY_TO_SLEEP
+              value: "2200"
+            - name: ALWAYS_ON_SERVER_LOCK_PLAYER_CHESTS
+              value: "false"
+            - name: ALWAYS_ON_SERVER_CLIENTS_CAN_PAUSE
+              value: "true"
+            - name: ALWAYS_ON_SERVER_COPY_INVITE_CODE_TO_CLIPBOARD
+              value: "false"
+
+            - name: ALWAYS_ON_SERVER_FESTIVALS_ON
+              value: "true"
+            - name: ALWAYS_ON_SERVER_EGG_HUNT_COUNT_DOWN
+              value: "600"
+            - name: ALWAYS_ON_SERVER_FLOWER_DANCE_COUNT_DOWN
+              value: "600"
+            - name: ALWAYS_ON_SERVER_LUAU_SOUP_COUNT_DOWN
+              value: "600"
+            - name: ALWAYS_ON_SERVER_JELLY_DANCE_COUNT_DOWN
+              value: "600"
+            - name: ALWAYS_ON_SERVER_GRANGE_DISPLAY_COUNT_DOWN
+              value: "600"
+            - name: ALWAYS_ON_SERVER_ICE_FISHING_COUNT_DOWN
+              value: "600"
+
+            - name: ALWAYS_ON_SERVER_END_OF_DAY_TIMEOUT
+              value: "300"
+            - name: ALWAYS_ON_SERVER_FAIR_TIMEOUT
+              value: "1200"
+            - name: ALWAYS_ON_SERVER_SPIRITS_EVE_TIMEOUT
+              value: "900"
+            - name: ALWAYS_ON_SERVER_WINTER_STAR_TIMEOUT
+              value: "900"
+
+            - name: ALWAYS_ON_SERVER_EGG_FESTIVAL_TIMEOUT
+              value: "120"
+            - name: ALWAYS_ON_SERVER_FLOWER_DANCE_TIMEOUT
+              value: "120"
+            - name: ALWAYS_ON_SERVER_LUAU_TIMEOUT
+              value: "120"
+            - name: ALWAYS_ON_SERVER_DANCE_OF_JELLIES_TIMEOUT
+              value: "120"
+            - name: ALWAYS_ON_SERVER_FESTIVAL_OF_ICE_TIMEOUT
+              value: "120"
+
+            # Auto Load Game mod
+            - name: ENABLE_AUTOLOADGAME_MOD
+              value: "true"
+            - name: AUTO_LOAD_GAME_LAST_FILE_LOADED
+              value: FreshFrom_410799859
+            - name: AUTO_LOAD_GAME_FORGET_LAST_FILE_ON_TITLE
+              value: "true"
+            - name: AUTO_LOAD_GAME_LOAD_INTO_MULTIPLAYER
+              value: "true"
+
+            # Other mods
+            - name: ENABLE_UNLIMITEDPLAYERS_MOD
+              value: "false"
+            - name: ENABLE_CHATCOMMANDS_MOD
+              value: "false"
+            - name: ENABLE_CONSOLECOMMANDS_MOD
+              value: "false"
+            - name: ENABLE_TIMESPEED_MOD
+              value: "false"
+            - name: ENABLE_CROPSANYTIMEANYWHERE_MOD
+              value: "false"
+            - name: ENABLE_FRIENDSFOREVER_MOD
+              value: "false"
+            - name: ENABLE_NOFENCEDECAY_MOD
+              value: "false"
+            - name: ENABLE_NONDESTRUCTIVENPCS_MOD
+              value: "false"
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 1
+              memory: 1Gi
+          volumeMounts:
+            - name: stardew
+              mountPath: /config/xdg/config/StardewValley/Saves
+              subPath: saves
+      volumes:
+        - name: stardew
+          persistentVolumeClaim:
+            claimName: stardew

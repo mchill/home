@@ -1,0 +1,10 @@
+namespace: server
+commonLabels:
+  app: stardew
+  subdomain: stardew
+resources:
+  - ../../overlays/ingress
+  - ../../overlays/persistence
+  - deployment.yaml
+  - sealed-secret.yaml
+  - service.yaml

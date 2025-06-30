@@ -152,6 +152,10 @@ services:
   - name: Monitoring
     icon: fas fa-plus
     items:
+      - name: K8s Dashboard
+        subtitle: Cluster configuration
+        logo: assets/logos/kubernetes.png
+        url: https://k8s.mchill.io
       - name: Traefik External
         subtitle: Proxy configuration
         logo: assets/logos/traefik.png
@@ -184,14 +188,14 @@ services:
         subtitle: KVM over IP
         logo: assets/logos/pikvm.png
         url: https://kvm.mchill.io
-      - name: K8s Dashboard
-        subtitle: Cluster configuration
-        logo: assets/logos/kubernetes.png
-        url: https://k8s.mchill.io
       - name: PDU
         subtitle: Power management
         logo: assets/logos/cyberpower.png
         url: https://pdu.mchill.io
+      - name: Stardew Valley
+        subtitle: Game server
+        logo: assets/logos/stardew.png
+        url: https://stardew.mchill.io
 
   - name: Remote
     icon: fas fa-globe
