@@ -1,0 +1,31 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: jira-slack-sync
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      securityContext:
+        fsGroup: 1000
+      imagePullSecrets:
+        - name: gitlab
+      containers:
+        - name: jira-slack-sync
+          image: registry.gitlab.com/voith/all/microservices/jira-slack-sync:v1.3.0
+          env:
+            - name: ONCUMULUS_API_GATEWAY
+              value: https://api.industrial.voith.io/api
+            - name: JIRA_CLOUD_ID
+              value: 66f18499-796f-4738-bca1-977a2482c01a
+          envFrom:
+            - secretRef:
+                name: jira-slack-sync
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 256Mi
