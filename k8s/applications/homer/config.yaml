@@ -24,6 +24,10 @@ services:
         subtitle: Videos
         logo: assets/logos/plex.png
         url: https://plex.mchill.io
+      - name: Jellyfin
+        subtitle: Videos
+        logo: assets/logos/jellyfin.png
+        url: https://jellyfin.mchill.io
       - name: Tube Archivist
         subtitle: YouTube
         logo: assets/logos/tubearchivist.jpg
@@ -36,10 +40,6 @@ services:
         subtitle: Photos
         logo: assets/logos/photoprism.png
         url: https://photoprism.mchill.io
-      - name: RomM
-        subtitle: Games
-        logo: assets/logos/romm.png
-        url: https://romm.mchill.io
 
   - name: Media Mgmt
     icon: fas fa-tasks
@@ -89,26 +89,6 @@ services:
         logo: assets/logos/tautulli.png
         url: https://tautulli.mchill.io
 
-  - name: Files
-    icon: fas fa-folder-open
-    items:
-      - name: Synology DSM
-        subtitle: NAS
-        logo: assets/logos/nas.png
-        url: https://nas.mchill.io
-      - name: Syncthing
-        subtitle: File synchronization
-        logo: assets/logos/syncthing.png
-        url: https://syncthing.mchill.io
-      - name: Longhorn
-        subtitle: Persistent storage
-        logo: assets/logos/longhorn.png
-        url: https://longhorn.mchill.io
-      - name: Nextcloud
-        subtitle: Cloud
-        logo: assets/logos/nextcloud.png
-        url: https://nextcloud.mchill.io
-
   - name: Libraries
     icon: fas fa-book
     items:
@@ -128,6 +108,10 @@ services:
         subtitle: UHD TV shows
         logo: assets/logos/sonarr.png
         url: https://sonarr-uhd.mchill.io
+      - name: RomM
+        subtitle: Games
+        logo: assets/logos/romm.png
+        url: https://romm.mchill.io
 
   - name: Network
     icon: fas fa-wifi
@@ -136,6 +120,10 @@ services:
         subtitle: Network controller
         logo: assets/logos/unifi.png
         url: https://unifi.mchill.io
+      - name: PiKVM
+        subtitle: KVM over IP
+        logo: assets/logos/pikvm.png
+        url: https://kvm.mchill.io
       - name: Pi-hole
         subtitle: DNS sinkhole
         logo: assets/logos/pihole.png
@@ -148,6 +136,26 @@ services:
         subtitle: UPS metrics
         logo: assets/logos/peanut.svg
         url: https://nut.mchill.io
+
+  - name: Files
+    icon: fas fa-folder-open
+    items:
+      - name: Synology DSM
+        subtitle: NAS
+        logo: assets/logos/nas.png
+        url: https://nas.mchill.io
+      - name: Syncthing
+        subtitle: File synchronization
+        logo: assets/logos/syncthing.png
+        url: https://syncthing.mchill.io
+      - name: Longhorn
+        subtitle: Persistent storage
+        logo: assets/logos/longhorn.png
+        url: https://longhorn.mchill.io
+      - name: Nextcloud
+        subtitle: Cloud
+        logo: assets/logos/nextcloud.png
+        url: https://nextcloud.mchill.io
 
   - name: Monitoring
     icon: fas fa-plus
@@ -176,6 +184,10 @@ services:
   - name: Server Mgmt
     icon: fas fa-server
     items:
+      - name: Rancher
+        subtitle: Cluster management
+        logo: assets/logos/rancher.png
+        url: https://rancher.mchill.io
       - name: Proxmox
         subtitle: Virtualization
         logo: assets/logos/proxmox.png
@@ -184,10 +196,6 @@ services:
         subtitle: Home automation
         logo: assets/logos/homeassistant.png
         url: https://home.mchill.io
-      - name: PiKVM
-        subtitle: KVM over IP
-        logo: assets/logos/pikvm.png
-        url: https://kvm.mchill.io
       - name: PDU
         subtitle: Power management
         logo: assets/logos/cyberpower.png
@@ -200,10 +208,6 @@ services:
   - name: Remote
     icon: fas fa-globe
     items:
-      - name: Rancher
-        subtitle: Cluster management
-        logo: assets/logos/rancher.png
-        url: https://rancher.mchill.io
       - name: Unifi
         subtitle: Network controller
         logo: assets/logos/unifi.png
