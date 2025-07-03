@@ -16,18 +16,6 @@ spec:
           ports:
             - name: ingress
               containerPort: 32400
-            - name: gdm-1
-              containerPort: 32410
-              protocol: UDP
-            - name: gdm-2
-              containerPort: 32412
-              protocol: UDP
-            - name: gdm-3
-              containerPort: 32413
-              protocol: UDP
-            - name: gdm-4
-              containerPort: 32414
-              protocol: UDP
           env:
             - name: TZ
               value: America/New_York
