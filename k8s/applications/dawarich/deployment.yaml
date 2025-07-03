@@ -63,6 +63,12 @@ spec:
             - name: dawarich
               mountPath: /var/app/storage
               subPath: storage
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              cpu: 10m
+              memory: 1Gi
         - name: sidekiq
           image: freikin/dawarich:0.28.1
           command:
@@ -107,6 +113,12 @@ spec:
             - name: dawarich
               mountPath: /var/app/storage
               subPath: storage
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              cpu: 10m
+              memory: 1Gi
         - name: db
           image: postgis/postgis:17-3.5-alpine
           env:
@@ -126,12 +138,24 @@ spec:
             - name: dawarich
               mountPath: /var/shared
               subPath: shared
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 10m
+              memory: 256Mi
         - name: redis
           image: redis:7.4.4-alpine
           volumeMounts:
             - name: dawarich
               mountPath: /data
               subPath: shared
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 10m
+              memory: 128Mi
       volumes:
         - name: dawarich
           persistentVolumeClaim:

@@ -70,9 +70,10 @@ spec:
               mountPath: /mods
           resources:
             limits:
+              cpu: 1
               memory: 3Gi
             requests:
-              cpu: 1
+              cpu: 500m
               memory: 3Gi
       volumes:
         - name: minecraft

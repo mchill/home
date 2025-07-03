@@ -44,7 +44,7 @@ spec:
             limits:
               memory: 512Mi
             requests:
-              cpu: 0.1
+              cpu: 10m
               memory: 512Mi
       volumes:
         - name: radarr

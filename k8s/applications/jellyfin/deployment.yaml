@@ -25,12 +25,6 @@ spec:
               value: "1000"
             - name: JELLYFIN_PublishedServerUrl
               value: https://jellyfin.mchill.io
-          resources:
-            limits:
-              memory: 2Gi
-            requests:
-              cpu: 1
-              memory: 2Gi
           volumeMounts:
             - name: jellyfin
               mountPath: /config
@@ -47,6 +41,13 @@ spec:
             - name: libraries
               mountPath: /data/tv/sd
               subPath: tv/sd
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+            requests:
+              cpu: 500m
+              memory: 1Gi
       volumes:
         - name: jellyfin
           persistentVolumeClaim:

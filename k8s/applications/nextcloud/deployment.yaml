@@ -34,7 +34,7 @@ spec:
             limits:
               memory: 256Mi
             requests:
-              cpu: 0.1
+              cpu: 10m
               memory: 256Mi
         - name: db
           image: mariadb:11.8.2
@@ -54,7 +54,7 @@ spec:
             limits:
               memory: 512Mi
             requests:
-              cpu: 0.1
+              cpu: 10m
               memory: 512Mi
       volumes:
         - name: nextcloud

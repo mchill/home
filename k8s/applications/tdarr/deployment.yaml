@@ -61,7 +61,7 @@ spec:
             limits:
               memory: 1Gi
             requests:
-              cpu: 0.1
+              cpu: 10m
               memory: 1Gi
         - name: tdarr-node
           image: haveagitgat/tdarr_node:2.43.01
@@ -109,7 +109,7 @@ spec:
             limits:
               memory: 256Mi
             requests:
-              cpu: 0.1
+              cpu: 10m
               memory: 256Mi
       volumes:
         - name: tdarr

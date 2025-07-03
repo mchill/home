@@ -121,6 +121,10 @@ spec:
               value: "false"
             - name: ENABLE_NONDESTRUCTIVENPCS_MOD
               value: "false"
+          volumeMounts:
+            - name: stardew
+              mountPath: /config/xdg/config/StardewValley/Saves
+              subPath: saves
           resources:
             limits:
               cpu: 1
@@ -128,10 +132,6 @@ spec:
             requests:
               cpu: 1
               memory: 1Gi
-          volumeMounts:
-            - name: stardew
-              mountPath: /config/xdg/config/StardewValley/Saves
-              subPath: saves
       volumes:
         - name: stardew
           persistentVolumeClaim:

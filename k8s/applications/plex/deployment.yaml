@@ -25,12 +25,6 @@ spec:
               value: "1000"
             - name: ADVERTISE_IP
               value: http://192.168.1.82:32400,https://plex.mchill.io
-          resources:
-            limits:
-              memory: 2Gi
-            requests:
-              cpu: 1
-              memory: 2Gi
           volumeMounts:
             - name: plex
               mountPath: /config
@@ -64,6 +58,13 @@ spec:
             - name: libraries
               mountPath: /data/youtube
               subPath: youtube
+          resources:
+            limits:
+              cpu: 1
+              memory: 2Gi
+            requests:
+              cpu: 500m
+              memory: 2Gi
       volumes:
         - name: plex
           persistentVolumeClaim:

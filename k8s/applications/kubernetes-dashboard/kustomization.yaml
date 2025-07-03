@@ -38,7 +38,7 @@ patchesStrategicMerge:
                 limits:
                   memory: 128Mi
                 requests:
-                  cpu: 0.1
+                  cpu: 10m
                   memory: 128Mi
   - |-
     apiVersion: apps/v1
@@ -55,5 +55,5 @@ patchesStrategicMerge:
                 limits:
                   memory: 128Mi
                 requests:
-                  cpu: 0.1
+                  cpu: 10m
                   memory: 128Mi

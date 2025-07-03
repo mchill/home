@@ -23,13 +23,6 @@ spec:
               value: "1000"
             - name: PGID
               value: "1000"
-          resources:
-            limits:
-              cpu: 3
-              memory: 2Gi
-            requests:
-              cpu: 1
-              memory: 512Mi
           volumeMounts:
             - name: plex
               mountPath: /config
@@ -49,6 +42,13 @@ spec:
             - name: libraries
               mountPath: /data/tv-requested
               subPath: tv/requested
+          resources:
+            limits:
+              cpu: 3
+              memory: 2Gi
+            requests:
+              cpu: 1
+              memory: 512Mi
       volumes:
         - name: plex
           hostPath:
