@@ -18,16 +18,13 @@ spec:
             - |
               mods=(
                 # https://www.curseforge.com/minecraft/mc-mods/fabric-api
-                https://media.forgecdn.net/files/3112/610/fabric-api-0.26.0%2B1.16.jar
+                https://cdn.modrinth.com/data/P7dR8mSH/versions/0.26.0%2B1.16/fabric-api-0.26.0%2B1.16.jar
 
                 # https://www.curseforge.com/minecraft/mc-mods/phosphor
-                https://media.forgecdn.net/files/2987/621/phosphor-fabric-mc1.16.1-0.6.0%2Bbuild.7.jar
+                https://cdn.modrinth.com/data/hEOCdOgW/versions/mc1.16.3-0.7.0/phosphor-fabric-mc1.16.3-0.7.0%2Bbuild.10.jar
 
                 # https://www.curseforge.com/minecraft/mc-mods/lithium
-                https://media.forgecdn.net/files/3107/909/lithium-fabric-mc1.16.4-0.6.0.jar
-
-                # https://www.curseforge.com/minecraft/mc-mods/quick-shulker
-                https://media.forgecdn.net/files/3112/642/quickshulker-1.1.11-1.16.jar
+                https://cdn.modrinth.com/data/gvQqBUqZ/versions/mc1.16.4-0.6.0/lithium-fabric-mc1.16.4-0.6.0.jar
               );
 
               apk add --no-cache wget
