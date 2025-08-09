@@ -12,7 +12,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: romm
-          image: rommapp/romm:3.10.3
+          image: rommapp/romm:4.0.1
           ports:
             - name: ingress
               containerPort: 8080
