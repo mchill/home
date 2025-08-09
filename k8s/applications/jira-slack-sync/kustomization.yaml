@@ -1,6 +1,0 @@
-namespace: server
-commonLabels:
-  app: jira-slack-sync
-resources:
-  - deployment.yaml
-  - sealed-secret.yaml

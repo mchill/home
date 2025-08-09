@@ -1,9 +1,0 @@
-namespace: server
-commonLabels:
-  app: jellyfin
-  subdomain: jellyfin
-resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
-  - deployment.yaml
-  - service.yaml

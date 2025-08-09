@@ -24,10 +24,6 @@ services:
         subtitle: Videos
         logo: assets/logos/plex.png
         url: https://plex.mchill.io
-      - name: Jellyfin
-        subtitle: Videos
-        logo: assets/logos/jellyfin.png
-        url: https://jellyfin.mchill.io
       - name: Tube Archivist
         subtitle: YouTube
         logo: assets/logos/tubearchivist.jpg
@@ -40,6 +36,10 @@ services:
         subtitle: Photos
         logo: assets/logos/photoprism.png
         url: https://photoprism.mchill.io
+      - name: RomM
+        subtitle: Games
+        logo: assets/logos/romm.png
+        url: https://romm.mchill.io
 
   - name: Media Mgmt
     icon: fas fa-tasks
@@ -89,30 +89,6 @@ services:
         logo: assets/logos/tautulli.png
         url: https://tautulli.mchill.io
 
-  - name: Libraries
-    icon: fas fa-book
-    items:
-      - name: Radarr
-        subtitle: Movies
-        logo: assets/logos/radarr.png
-        url: https://radarr.mchill.io
-      - name: UHD Radarr
-        subtitle: UHD Movies
-        logo: assets/logos/radarr.png
-        url: https://radarr-uhd.mchill.io
-      - name: Sonarr
-        subtitle: TV shows
-        logo: assets/logos/sonarr.png
-        url: https://sonarr.mchill.io
-      - name: UHD Sonarr
-        subtitle: UHD TV shows
-        logo: assets/logos/sonarr.png
-        url: https://sonarr-uhd.mchill.io
-      - name: RomM
-        subtitle: Games
-        logo: assets/logos/romm.png
-        url: https://romm.mchill.io
-
   - name: Network
     icon: fas fa-wifi
     items:
@@ -136,26 +112,6 @@ services:
         subtitle: UPS metrics
         logo: assets/logos/peanut.svg
         url: https://nut.mchill.io
-
-  - name: Files
-    icon: fas fa-folder-open
-    items:
-      - name: Synology DSM
-        subtitle: NAS
-        logo: assets/logos/nas.png
-        url: https://nas.mchill.io
-      - name: Syncthing
-        subtitle: File synchronization
-        logo: assets/logos/syncthing.png
-        url: https://syncthing.mchill.io
-      - name: Longhorn
-        subtitle: Persistent storage
-        logo: assets/logos/longhorn.png
-        url: https://longhorn.mchill.io
-      - name: Nextcloud
-        subtitle: Cloud
-        logo: assets/logos/nextcloud.png
-        url: https://nextcloud.mchill.io
 
   - name: Monitoring
     icon: fas fa-plus
@@ -204,6 +160,46 @@ services:
         subtitle: Game server
         logo: assets/logos/stardew.png
         url: https://stardew.mchill.io
+
+  - name: Libraries
+    icon: fas fa-book
+    items:
+      - name: Radarr
+        subtitle: Movies
+        logo: assets/logos/radarr.png
+        url: https://radarr.mchill.io
+      - name: UHD Radarr
+        subtitle: UHD Movies
+        logo: assets/logos/radarr.png
+        url: https://radarr-uhd.mchill.io
+      - name: Sonarr
+        subtitle: TV shows
+        logo: assets/logos/sonarr.png
+        url: https://sonarr.mchill.io
+      - name: UHD Sonarr
+        subtitle: UHD TV shows
+        logo: assets/logos/sonarr.png
+        url: https://sonarr-uhd.mchill.io
+
+  - name: Files
+    icon: fas fa-folder-open
+    items:
+      - name: Synology DSM
+        subtitle: NAS
+        logo: assets/logos/nas.png
+        url: https://nas.mchill.io
+      - name: Syncthing
+        subtitle: File synchronization
+        logo: assets/logos/syncthing.png
+        url: https://syncthing.mchill.io
+      - name: Longhorn
+        subtitle: Persistent storage
+        logo: assets/logos/longhorn.png
+        url: https://longhorn.mchill.io
+      - name: Nextcloud
+        subtitle: Cloud
+        logo: assets/logos/nextcloud.png
+        url: https://nextcloud.mchill.io
 
   - name: Remote
     icon: fas fa-globe
