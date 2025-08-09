@@ -145,7 +145,7 @@ spec:
               cpu: 10m
               memory: 256Mi
         - name: redis
-          image: redis:7.4.5-alpine
+          image: redis:8.2.0-alpine
           volumeMounts:
             - name: dawarich
               mountPath: /data
