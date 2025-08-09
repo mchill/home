@@ -12,7 +12,7 @@ spec:
         fsGroup: 1000
       initContainers:
         - name: mods
-          image: bash:5.2.37
+          image: bash:5.3.3
           args:
             - -c
             - |
@@ -37,7 +37,7 @@ spec:
               mountPath: /mods
       containers:
         - name: minecraft
-          image: itzg/minecraft-server:2025.6.0
+          image: itzg/minecraft-server:2025.8.0
           ports:
             - name: minecraft
               containerPort: 25565
