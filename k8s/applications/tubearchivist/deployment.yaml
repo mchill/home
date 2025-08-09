@@ -80,7 +80,7 @@ spec:
               cpu: 10m
               memory: 128Mi
         - name: elasticsearch
-          image: elasticsearch:8.19.0
+          image: elasticsearch:9.1.0
           env:
             - name: ES_JAVA_OPTS
               value: -Xms512m -Xmx512m
