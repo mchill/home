@@ -37,6 +37,46 @@ services:
         logo: assets/logos/romm.png
         url: https://romm.mchill.io
 
+  - name: Tools
+    icon: fas fa-wrench
+    items:
+      - name: Mealie
+        subtitle: Recipes
+        logo: assets/logos/mealie.png
+        url: https://recipes.mchill.io
+      - name: Dawarich
+        subtitle: Timeline
+        logo: assets/logos/dawarich.png
+        url: https://dawarich.mchill.io
+      - name: Home Assistant
+        subtitle: Home automation
+        logo: assets/logos/homeassistant.png
+        url: https://home.mchill.io
+      - name: Pi-hole
+        subtitle: DNS sinkhole
+        logo: assets/logos/pihole.png
+        url: https://pihole.mchill.io
+
+  - name: Collaboration
+    icon: fas fa-people-group
+    items:
+      - name: Ombi
+        subtitle: Plex requests
+        logo: assets/logos/ombi.png
+        url: https://ombi.mchill.io
+      - name: Tautulli
+        subtitle: Plex statistics
+        logo: assets/logos/tautulli.png
+        url: https://tautulli.mchill.io
+      - name: Jitsi
+        subtitle: Video conferencing
+        logo: assets/logos/jitsi.png
+        url: https://jitsi.mchill.io
+      - name: Stardew Valley
+        subtitle: Game server
+        logo: assets/logos/stardew.png
+        url: https://stardew.mchill.io
+
   - name: Media Mgmt
     icon: fas fa-tasks
     items:
@@ -56,102 +96,6 @@ services:
         subtitle: BitTorrent client
         logo: assets/logos/qbittorrent.png
         url: https://qbittorrent.mchill.io
-
-  - name: Tools
-    icon: fas fa-wrench
-    items:
-      - name: Mealie
-        subtitle: Recipes
-        logo: assets/logos/mealie.png
-        url: https://recipes.mchill.io
-      - name: Ombi
-        subtitle: Plex requests
-        logo: assets/logos/ombi.png
-        url: https://ombi.mchill.io
-      - name: Dawarich
-        subtitle: Timeline
-        logo: assets/logos/dawarich.png
-        url: https://dawarich.mchill.io
-      - name: Jitsi
-        subtitle: Video conferencing
-        logo: assets/logos/jitsi.png
-        url: https://jitsi.mchill.io
-      - name: Tautulli
-        subtitle: Plex statistics
-        logo: assets/logos/tautulli.png
-        url: https://tautulli.mchill.io
-
-  - name: Network
-    icon: fas fa-wifi
-    items:
-      - name: Unifi
-        subtitle: Network controller
-        logo: assets/logos/unifi.png
-        url: https://unifi.mchill.io
-      - name: Remote Unifi
-        subtitle: Remote network controller
-        logo: assets/logos/unifi.png
-        url: https://unifi.remote.mchill.io
-      - name: PiKVM
-        subtitle: KVM over IP
-        logo: assets/logos/pikvm.png
-        url: https://kvm.mchill.io
-      - name: Pi-hole
-        subtitle: DNS sinkhole
-        logo: assets/logos/pihole.png
-        url: https://pihole.mchill.io
-      - name: DDNS Monitor
-        subtitle: Domain management
-        logo: assets/logos/ddns.svg
-        url: https://ddns.mchill.io
-      - name: webNUT
-        subtitle: UPS metrics
-        logo: assets/logos/peanut.svg
-        url: https://nut.mchill.io
-
-  - name: Monitoring
-    icon: fas fa-plus
-    items:
-      - name: K8s Dashboard
-        subtitle: Cluster configuration
-        logo: assets/logos/kubernetes.png
-        url: https://k8s.mchill.io
-      - name: Traefik
-        subtitle: Proxy configuration
-        logo: assets/logos/traefik.png
-        url: https://traefik.mchill.io
-      - name: Grafana
-        subtitle: Server monitoring
-        logo: assets/logos/grafana.png
-        url: https://grafana.mchill.io
-      - name: Prometheus
-        subtitle: Server metrics
-        logo: assets/logos/prometheus.png
-        url: https://prometheus.mchill.io
-
-  - name: Server Mgmt
-    icon: fas fa-server
-    items:
-      - name: Rancher
-        subtitle: Cluster management
-        logo: assets/logos/rancher.png
-        url: https://rancher.mchill.io
-      - name: Proxmox
-        subtitle: Virtualization
-        logo: assets/logos/proxmox.png
-        url: https://proxmox.mchill.io
-      - name: Home Assistant
-        subtitle: Home automation
-        logo: assets/logos/homeassistant.png
-        url: https://home.mchill.io
-      - name: PDU
-        subtitle: Power management
-        logo: assets/logos/cyberpower.png
-        url: https://pdu.mchill.io
-      - name: Stardew Valley
-        subtitle: Game server
-        logo: assets/logos/stardew.png
-        url: https://stardew.mchill.io
 
   - name: Libraries
     icon: fas fa-book
@@ -192,3 +136,63 @@ services:
         subtitle: Persistent storage
         logo: assets/logos/longhorn.png
         url: https://longhorn.mchill.io
+
+  - name: Network
+    icon: fas fa-wifi
+    items:
+      - name: Unifi
+        subtitle: Network controller
+        logo: assets/logos/unifi.png
+        url: https://unifi.mchill.io
+      - name: Remote Unifi
+        subtitle: Remote network controller
+        logo: assets/logos/unifi.png
+        url: https://unifi.remote.mchill.io
+      - name: PiKVM
+        subtitle: KVM over IP
+        logo: assets/logos/pikvm.png
+        url: https://kvm.mchill.io
+      - name: DDNS Monitor
+        subtitle: Domain management
+        logo: assets/logos/ddns.svg
+        url: https://ddns.mchill.io
+
+  - name: Server Mgmt
+    icon: fas fa-server
+    items:
+      - name: Rancher
+        subtitle: Cluster management
+        logo: assets/logos/rancher.png
+        url: https://rancher.mchill.io
+      - name: Proxmox
+        subtitle: Virtualization
+        logo: assets/logos/proxmox.png
+        url: https://proxmox.mchill.io
+      - name: K8s Dashboard
+        subtitle: Cluster configuration
+        logo: assets/logos/kubernetes.png
+        url: https://k8s.mchill.io
+      - name: Traefik
+        subtitle: Proxy configuration
+        logo: assets/logos/traefik.png
+        url: https://traefik.mchill.io
+
+  - name: Monitoring
+    icon: fas fa-plus
+    items:
+      - name: Grafana
+        subtitle: Server monitoring
+        logo: assets/logos/grafana.png
+        url: https://grafana.mchill.io
+      - name: Prometheus
+        subtitle: Server metrics
+        logo: assets/logos/prometheus.png
+        url: https://prometheus.mchill.io
+      - name: PDU
+        subtitle: Power management
+        logo: assets/logos/cyberpower.png
+        url: https://pdu.mchill.io
+      - name: webNUT
+        subtitle: UPS metrics
+        logo: assets/logos/peanut.svg
+        url: https://nut.mchill.io
