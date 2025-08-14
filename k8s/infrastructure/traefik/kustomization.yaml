@@ -1,4 +1,4 @@
-namespace: traefik-external
+namespace: traefik
 resources:
   - helm.yaml
   - certificate.yaml
@@ -8,7 +8,7 @@ resources:
   - service.yaml
   - tls-store.yaml
 commonLabels:
-  app: traefik-external
+  app: traefik
 configMapGenerator:
   - name: traefik-forward-auth
     files:

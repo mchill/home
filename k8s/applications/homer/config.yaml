@@ -116,14 +116,10 @@ services:
         subtitle: Cluster configuration
         logo: assets/logos/kubernetes.png
         url: https://k8s.mchill.io
-      - name: Traefik External
+      - name: Traefik
         subtitle: Proxy configuration
         logo: assets/logos/traefik.png
-        url: https://traefik-external.mchill.io
-      - name: Traefik Internal
-        subtitle: Proxy configuration
-        logo: assets/logos/traefik.png
-        url: https://traefik-internal.mchill.io
+        url: https://traefik.mchill.io
       - name: Grafana
         subtitle: Server monitoring
         logo: assets/logos/grafana.png

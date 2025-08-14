@@ -1,9 +1,0 @@
-namespace: traefik-internal
-resources:
-  - helm.yaml
-  - ingress.yaml
-  - middleware.yaml
-  - sealed-secret.yaml
-  - service.yaml
-commonLabels:
-  app: traefik-internal

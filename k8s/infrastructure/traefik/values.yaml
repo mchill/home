@@ -49,8 +49,8 @@ additionalArguments:
   - --api.insecure=true
   - --serversTransport.insecureSkipVerify=true
   - --metrics.prometheus
-  - --providers.kubernetesingress.ingressClass=traefik-external
-  - --providers.kubernetescrd.ingressClass=traefik-external
+  - --providers.kubernetesingress.ingressClass=traefik
+  - --providers.kubernetescrd.ingressClass=traefik
   - --providers.kubernetescrd.allowCrossNamespace=true
 ports:
   web:

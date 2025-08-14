@@ -1,27 +1,26 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: prometheus
-  namespace: server
+  name: traefik
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host("grafana.mchill.io")
+    - match: Host("traefik.mchill.io")
       kind: Rule
       services:
-        - name: prometheus-grafana
-          port: 80
+        - name: api@internal
+          kind: TraefikService
       middlewares:
         - name: forward-auth
           namespace: traefik
-    - match: Host("prometheus.mchill.io")
+    - match: Host("auth.mchill.io")
       kind: Rule
       services:
-        - name: prometheus-kube-prometheus-prometheus
-          port: 9090
+        - name: traefik-clusterip
+          port: 4181
       middlewares:
         - name: forward-auth
           namespace: traefik

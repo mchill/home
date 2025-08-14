@@ -18,8 +18,7 @@ kubectl apply --server-side -k metallb
 kubectl apply --server-side -k server
 kubectl apply --server-side -k kube-vip
 
-pushd traefik-external && helm upgrade --install --create-namespace -n traefik-external --version 27.0.2 --values values.yaml --post-renderer ../kustomize.sh traefik-external traefik/traefik && popd
-pushd traefik-internal && helm upgrade --install --create-namespace -n traefik-internal --version 27.0.2 --values values.yaml --post-renderer ../kustomize.sh traefik-internal traefik/traefik && popd
+pushd traefik && helm upgrade --install --create-namespace -n traefik --version 27.0.2 --values values.yaml --post-renderer ../kustomize.sh traefik traefik/traefik && popd
 
 pushd longhorn && helm upgrade --install --create-namespace -n longhorn-system --version 1.7.2 --values values.yaml --post-renderer ../kustomize.sh longhorn longhorn/longhorn && popd
 kubectl apply -n longhorn-system -f longhorn/recurring-job.yaml

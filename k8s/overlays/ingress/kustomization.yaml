@@ -10,7 +10,7 @@ vars:
       group: traefik.containo.us
       apiVersion: v1alpha1
       kind: IngressRoute
-      name: $(APP)-external
+      name: $(APP)
     fieldref:
       fieldpath: metadata.labels.app
   - name: SUBDOMAIN
@@ -18,6 +18,6 @@ vars:
       group: traefik.containo.us
       apiVersion: v1alpha1
       kind: IngressRoute
-      name: $(APP)-external
+      name: $(APP)
     fieldref:
       fieldpath: metadata.labels.subdomain
