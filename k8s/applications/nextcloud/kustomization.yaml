@@ -1,9 +1,0 @@
-namespace: server
-commonLabels:
-  app: nextcloud
-  subdomain: nextcloud
-resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
-  - deployment.yaml
-  - sealed-secret.yaml

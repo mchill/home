@@ -9,6 +9,4 @@ kubectl kustomize rancher && echo "---"
 kubectl kustomize unifi && echo "---"
 
 kubectl kustomize remote/nas && echo "---"
-kubectl kustomize remote/plex && echo "---"
-kubectl kustomize remote/tautulli && echo "---"
 kubectl kustomize remote/unifi && echo "---"

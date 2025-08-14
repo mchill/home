@@ -32,10 +32,6 @@ services:
         subtitle: Audiobooks
         logo: assets/logos/audiobookshelf.png
         url: https://books.mchill.io
-      - name: PhotoPrism
-        subtitle: Photos
-        logo: assets/logos/photoprism.png
-        url: https://photoprism.mchill.io
       - name: RomM
         subtitle: Games
         logo: assets/logos/romm.png
@@ -56,10 +52,6 @@ services:
         subtitle: Transcoder
         logo: assets/logos/tdarr.png
         url: https://tdarr.mchill.io
-      - name: tinyMediaManager
-        subtitle: Media metadata
-        logo: assets/logos/tinymediamanager.png
-        url: https://tiny.mchill.io
       - name: qBittorrent
         subtitle: BitTorrent client
         logo: assets/logos/qbittorrent.png
@@ -96,6 +88,10 @@ services:
         subtitle: Network controller
         logo: assets/logos/unifi.png
         url: https://unifi.mchill.io
+      - name: Remote Unifi
+        subtitle: Remote network controller
+        logo: assets/logos/unifi.png
+        url: https://unifi.remote.mchill.io
       - name: PiKVM
         subtitle: KVM over IP
         logo: assets/logos/pikvm.png
@@ -188,6 +184,10 @@ services:
         subtitle: NAS
         logo: assets/logos/nas.png
         url: https://nas.mchill.io
+      - name: Remote Synology DSM
+        subtitle: Remote NAS
+        logo: assets/logos/nas.png
+        url: https://nas.remote.mchill.io
       - name: Syncthing
         subtitle: File synchronization
         logo: assets/logos/syncthing.png
@@ -196,27 +196,3 @@ services:
         subtitle: Persistent storage
         logo: assets/logos/longhorn.png
         url: https://longhorn.mchill.io
-      - name: Nextcloud
-        subtitle: Cloud
-        logo: assets/logos/nextcloud.png
-        url: https://nextcloud.mchill.io
-
-  - name: Remote
-    icon: fas fa-globe
-    items:
-      - name: Unifi
-        subtitle: Network controller
-        logo: assets/logos/unifi.png
-        url: https://unifi.remote.mchill.io
-      - name: Synology DSM
-        subtitle: NAS
-        logo: assets/logos/nas.png
-        url: https://nas.remote.mchill.io
-      - name: Plex
-        subtitle: Videos
-        logo: assets/logos/plex.png
-        url: https://plex.remote.mchill.io
-      - name: Tautulli
-        subtitle: Plex statistics
-        logo: assets/logos/tautulli.png
-        url: https://tautulli.remote.mchill.io

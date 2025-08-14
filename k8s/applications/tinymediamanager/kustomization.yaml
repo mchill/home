@@ -1,8 +1,0 @@
-namespace: server
-commonLabels:
-  app: tinymediamanager
-  subdomain: tiny
-resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
-  - deployment.yaml
