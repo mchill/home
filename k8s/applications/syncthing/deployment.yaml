@@ -36,12 +36,15 @@ spec:
             - name: googledrive
               mountPath: /data/obsidian/Work Notes
               subPath: Work/Voith/Notes/Work Notes
+            - name: googledrive
+              mountPath: /data/Apple Photos
+              subPath: Personal/Documents/Pictures/Apple Photos
           resources:
             limits:
-              memory: 128Mi
+              memory: 256Mi
             requests:
               cpu: 10m
-              memory: 128Mi
+              memory: 256Mi
       volumes:
         - name: syncthing
           persistentVolumeClaim:
