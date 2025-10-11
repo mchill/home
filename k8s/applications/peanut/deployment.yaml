@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
         - name: peanut
-          image: brandawg93/peanut:5.14.2
+          image: brandawg93/peanut:5.16.0
           ports:
             - name: ingress
               containerPort: 8080
