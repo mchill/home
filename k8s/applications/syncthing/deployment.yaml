@@ -30,15 +30,15 @@ spec:
           volumeMounts:
             - name: syncthing
               mountPath: /var/syncthing
+            - name: libraries
+              mountPath: /data/obsidian/Apple Photos
+              subPath: photos/Apple Photos
             - name: googledrive
               mountPath: /data/obsidian/Personal Notes
               subPath: Personal/Notes/Personal Notes
             - name: googledrive
               mountPath: /data/obsidian/Work Notes
               subPath: Work/Voith/Notes/Work Notes
-            - name: googledrive
-              mountPath: /data/Apple Photos
-              subPath: Personal/Documents/Pictures/Apple Photos
           resources:
             limits:
               memory: 256Mi
@@ -49,6 +49,9 @@ spec:
         - name: syncthing
           persistentVolumeClaim:
             claimName: syncthing
+        - name: libraries
+          persistentVolumeClaim:
+            claimName: libraries
         - name: googledrive
           persistentVolumeClaim:
             claimName: googledrive
