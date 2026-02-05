@@ -1,4 +1,0 @@
-namespace: sealed-secrets
-resources:
-  - https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.27.2/controller.yaml
-  - namespace.yaml

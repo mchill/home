@@ -1,6 +1,0 @@
-namespace: server
-resources:
-  - namespace.yaml
-  - pv.yaml
-  - pvc.yaml
-  - sealed-secret.yaml
