@@ -1,7 +1,7 @@
 namespace: server
 commonLabels:
   app: homer
-  subdomain:
+  subdomain: ""
 resources:
   - ../../overlays/ingress
   - ../../overlays/persistence

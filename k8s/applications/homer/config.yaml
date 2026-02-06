@@ -136,6 +136,10 @@ services:
         subtitle: Persistent storage
         logo: assets/logos/longhorn.png
         url: https://longhorn.mchill.io
+      - name: Ceph
+        subtitle: Distributed storage
+        logo: assets/logos/ceph.png
+        url: https://ceph.mchill.io
 
   - name: Network
     icon: fas fa-wifi
@@ -148,9 +152,9 @@ services:
         subtitle: Remote network controller
         logo: assets/logos/unifi.png
         url: https://unifi.remote.mchill.io
-      - name: PiKVM
+      - name: GL.iNet Comet
         subtitle: KVM over IP
-        logo: assets/logos/pikvm.png
+        logo: assets/logos/glinet.svg
         url: https://kvm.mchill.io
       - name: DDNS Monitor
         subtitle: Domain management

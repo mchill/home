@@ -13,3 +13,27 @@ spec:
     driver: driver.longhorn.io
     fsType: ext4
     volumeHandle: $(VOLUME)
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: $(VOLUME)-ceph
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 1Gi
+  storageClassName: ""
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: rbd.csi.ceph.com
+    fsType: ext4
+    volumeHandle: $(VOLUME)
+    volumeAttributes:
+      clusterID: a4ad5514-e58b-48d1-a0b4-8feef8685b43
+      pool: k8s
+      staticVolume: "true"
+      imageFeatures: deep-flatten,layering,exclusive-lock,object-map,fast-diff
+    nodeStageSecretRef:
+      name: ceph-csi-rbd-secret
+      namespace: ceph-csi-rbd
