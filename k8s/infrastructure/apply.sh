@@ -24,4 +24,4 @@ pushd longhorn && helm upgrade --install --create-namespace -n longhorn-system -
 pushd ceph && helm upgrade --install --create-namespace -n ceph-csi-rbd --version 3.16.0 --values values.yaml --post-renderer ../kustomize.sh ceph-csi-rbd ceph-csi/ceph-csi-rbd && popd
 pushd prometheus && helm upgrade --install --create-namespace -n monitoring --version 66.2.1 --values values.yaml --post-renderer ../kustomize.sh prometheus prometheus/kube-prometheus-stack && popd
 pushd loki && helm upgrade --install -n monitoring --version 2.10.2 --values values.yaml --post-renderer ../kustomize.sh loki grafana/loki-stack && popd
-push event-exporter && helm upgrade --install -n monitoring --version 3.4.5 --values values.yaml --post-renderer ../kustomize.sh event-exporter bitnami/kubernetes-event-exporter && popd
+pushd event-exporter && helm upgrade --install -n monitoring --version 3.6.3 --values values.yaml --post-renderer ../kustomize.sh event-exporter bitnami/kubernetes-event-exporter && popd

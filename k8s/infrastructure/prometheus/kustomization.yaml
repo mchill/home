@@ -1,5 +1,6 @@
 namespace: monitoring
 resources:
+  - config-map.yaml
   - helm.yaml
   - ingress.yaml
   - sealed-secret.yaml

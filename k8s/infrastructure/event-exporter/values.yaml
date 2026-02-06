@@ -1,3 +1,6 @@
+image:
+  registry: docker.io
+  repository: bitnamilegacy/kubernetes-event-exporter
 extraEnvVarsSecret: event-exporter
 config:
   metricsNamePrefix: event_exporter_
