@@ -18,7 +18,7 @@ spec:
           restartPolicy: OnFailure
           initContainers:
             - name: render-config
-              image: bash:5.3.3
+              image: bash:5.3.9
               args:
                 - -c
                 - |
@@ -48,7 +48,7 @@ spec:
                   memory: 128Mi
           containers:
             - name: kometa
-              image: kometateam/kometa:v2.2.2
+              image: kometateam/kometa:v2.3.0
               args:
                 - --run
                 - --read-only-config

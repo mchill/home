@@ -18,7 +18,7 @@ spec:
             fsGroup: 1000
           containers:
             - name: rclone
-              image: rclone/rclone:1.71.1
+              image: rclone/rclone:1.73.0
               args:
                 - sync
                 - --check-first
