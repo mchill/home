@@ -136,10 +136,6 @@ services:
         subtitle: Persistent storage
         logo: assets/logos/longhorn.png
         url: https://longhorn.mchill.io
-      - name: Ceph
-        subtitle: Distributed storage
-        logo: assets/logos/ceph.png
-        url: https://ceph.mchill.io
 
   - name: Network
     icon: fas fa-wifi
@@ -164,14 +160,14 @@ services:
   - name: Server Mgmt
     icon: fas fa-server
     items:
-      - name: Rancher
-        subtitle: Cluster management
-        logo: assets/logos/rancher.png
-        url: https://rancher.mchill.io
       - name: Proxmox
         subtitle: Virtualization
         logo: assets/logos/proxmox.png
         url: https://proxmox.mchill.io
+      - name: Ceph
+        subtitle: Distributed storage
+        logo: assets/logos/ceph.png
+        url: https://ceph.mchill.io
       - name: K8s Dashboard
         subtitle: Cluster configuration
         logo: assets/logos/kubernetes.png

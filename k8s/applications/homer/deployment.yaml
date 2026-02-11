@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 1
   strategy:
-    type: RollingUpdate
+    type: Recreate
   template:
     spec:
       securityContext:
