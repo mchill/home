@@ -41,23 +41,11 @@ spec:
               mountPath: /cache
               subPath: cache
             - name: applications
-              mountPath: /cache/backup
-              subPath: tubearchivist/backup
-            - name: applications
-              mountPath: /cache/channels
-              subPath: tubearchivist/channels
-            - name: applications
               mountPath: /cache/download
               subPath: tubearchivist/download
             - name: applications
               mountPath: /cache/import
               subPath: tubearchivist/import
-            - name: applications
-              mountPath: /cache/playlists
-              subPath: tubearchivist/playlists
-            - name: applications
-              mountPath: /cache/videos
-              subPath: tubearchivist/videos
             - name: libraries
               mountPath: /youtube
               subPath: youtube/tubearchivist
