@@ -28,7 +28,7 @@ spec:
                           - tubearchivist
           containers:
             - name: tubearchivist
-              image: python:3.14.0-alpine
+              image: python:3.14.3-alpine
               command:
                 - /bin/sh
                 - -c
