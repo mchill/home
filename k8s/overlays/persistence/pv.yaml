@@ -10,22 +10,6 @@ spec:
   storageClassName: ""
   persistentVolumeReclaimPolicy: Retain
   csi:
-    driver: driver.longhorn.io
-    fsType: ext4
-    volumeHandle: $(VOLUME)
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: $(VOLUME)-ceph
-spec:
-  accessModes:
-    - ReadWriteOnce
-  capacity:
-    storage: 1Gi
-  storageClassName: ""
-  persistentVolumeReclaimPolicy: Retain
-  csi:
     driver: rbd.csi.ceph.com
     fsType: ext4
     volumeHandle: $(VOLUME)

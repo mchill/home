@@ -6,7 +6,7 @@ resources:
   - deployment.yaml
   - service.yaml
 configMapGenerator:
-- name: minecraft
-  files:
-    - ops.json
-    - whitelist.json
+  - name: minecraft
+    files:
+      - ops.json
+      - whitelist.json

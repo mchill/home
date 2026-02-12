@@ -1,4 +1,4 @@
 namespace: ceph-csi-rbd
 resources:
   - helm.yaml
-  - secret.yaml
+  - sealed-secret.yaml

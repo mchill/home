@@ -14,45 +14,27 @@ spec:
       template:
         spec:
           restartPolicy: OnFailure
-          affinity:
-            podAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                - topologyKey: "kubernetes.io/hostname"
-                  labelSelector:
-                    matchExpressions:
-                      - key: app
-                        operator: In
-                        values:
-                          - $(VOLUME)
           containers:
             - name: backup
-              image: bash:5.3.9
-              args:
+              image: alpine:3.23
+              command:
                 - /bin/sh
                 - -cex
+              args:
                 - |
-                  apk add --no-cache rsync sshpass openssh-client;
-                  command -v getfacl || apk add acl;
-                  mkdir -p /root/.ssh;
-                  ssh-keyscan -H nas >> /root/.ssh/known_hosts;
-                  cd /backup;
-                  getfacl -R ${VOLUME} > ${VOLUME}.facl;
-                  sshpass -e rsync -avz --delete-before /backup/${VOLUME}.facl kubernetes@nas:/volume1/Applications/backup/${VOLUME}.facl;
-                  sshpass -e rsync -avz --delete-before /backup/${VOLUME} kubernetes@nas:/volume1/Applications/backup;
+                  apk add --no-cache openssh-client;
+                  ssh-keyscan -H 192.168.1.30 >> /root/.ssh/known_hosts;
+                  ssh mchill@192.168.1.30 "sudo /home/mchill/backup.sh ${VOLUME}";
               env:
                 - name: TZ
                   value: America/New_York
                 - name: VOLUME
                   value: $(VOLUME)
-                - name: SSHPASS
-                  valueFrom:
-                    secretKeyRef:
-                      name: synology
-                      key: password
               volumeMounts:
-                - name: data
+                - name: ssh
                   readOnly: true
-                  mountPath: /backup/$(VOLUME)
+                  mountPath: /root/.ssh/id_rsa
+                  subPath: id_rsa
               resources:
                 limits:
                   memory: 128Mi
@@ -60,6 +42,7 @@ spec:
                   cpu: 10m
                   memory: 128Mi
           volumes:
-            - name: data
-              persistentVolumeClaim:
-                claimName: $(VOLUME)
+            - name: ssh
+              secret:
+                secretName: beelink1
+                defaultMode: 0600
