@@ -1,15 +1,15 @@
 namespace: server
 commonLabels:
   app: errors
-  subdomain:
+  subdomain: ""
 resources:
   - ../../overlays/ingress
   - daemon-set.yaml
 configMapGenerator:
-- name: errors
-  files:
-    - index.html
-    - 401.html
+  - name: errors
+    files:
+      - index.html
+      - 401.html
 patches:
   - target:
       kind: IngressRoute

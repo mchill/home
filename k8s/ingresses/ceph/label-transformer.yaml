@@ -1,5 +1,5 @@
-kind: LabelTransformer
 apiVersion: builtin
+kind: LabelTransformer
 metadata:
   name: ceph
 labels:
