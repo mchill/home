@@ -1,0 +1,9 @@
+namespace: server
+commonLabels:
+  app: yamtrack
+  subdomain: yamtrack
+resources:
+  - ../../overlays/ingress
+  - ../../overlays/persistence
+  - deployment.yaml
+  - sealed-secret.yaml

@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yamtrack
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: yamtrack
+          image: ghcr.io/fuzzygrim/yamtrack:0.25.0
+          ports:
+            - name: ingress
+              containerPort: 8000
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: REDIS_URL
+              value: redis://localhost:6379
+            - name: REGISTRATION
+              value: "True"
+            - name: ADMIN_ENABLED
+              value: "True"
+            - name: TRACK_TIME
+              value: "False"
+            - name: TMDB_NSFW
+              value: "True"
+            - name: IGDB_NSFW
+              value: "True"
+          envFrom:
+            - secretRef:
+                name: yamtrack
+          volumeMounts:
+            - name: yamtrack
+              mountPath: /yamtrack/db
+              subPath: db
+          resources:
+            limits:
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 1Gi
+        - name: redis
+          image: redis:8.2.4-alpine
+          volumeMounts:
+            - name: yamtrack
+              mountPath: /data
+              subPath: redis
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 10m
+              memory: 128Mi
+      volumes:
+        - name: yamtrack
+          persistentVolumeClaim:
+            claimName: yamtrack
