@@ -12,7 +12,7 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
         - name: homeassistant
-          image: homeassistant/home-assistant:2026.2.1
+          image: homeassistant/home-assistant:2026.2.2
           ports:
             - name: ingress
               containerPort: 8123
