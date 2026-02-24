@@ -1,0 +1,4 @@
+namespace: inteldeviceplugins-system
+resources:
+  - gpu-device-plugin.yaml
+  - helm.yaml

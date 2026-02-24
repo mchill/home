@@ -8,6 +8,7 @@ helm repo add longhorn https://charts.longhorn.io
 helm repo add prometheus https://prometheus-community.github.io/helm-charts
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add intel https://intel.github.io/helm-charts/
 helm repo update
 
 kubectl apply --server-side -k sealed-secrets
@@ -25,3 +26,4 @@ pushd ceph && helm upgrade --install --create-namespace -n ceph-csi-rbd --versio
 pushd prometheus && helm upgrade --install --create-namespace -n monitoring --version 66.2.1 --values values.yaml --post-renderer ../kustomize.sh prometheus prometheus/kube-prometheus-stack && popd
 pushd loki && helm upgrade --install -n monitoring --version 2.10.2 --values values.yaml --post-renderer ../kustomize.sh loki grafana/loki-stack && popd
 pushd event-exporter && helm upgrade --install -n monitoring --version 3.6.3 --values values.yaml --post-renderer ../kustomize.sh event-exporter bitnami/kubernetes-event-exporter && popd
+pushd intel && helm upgrade --install --create-namespace -n inteldeviceplugins-system --version 0.35.0 --post-renderer ../kustomize.sh device-plugins-operator intel/intel-device-plugins-operator && popd
