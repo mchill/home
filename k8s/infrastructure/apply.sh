@@ -4,7 +4,6 @@ curl -skSL https://raw.githubusercontent.com/kubernetes-csi/csi-driver-smb/v1.16
 
 helm repo add ceph-csi https://ceph.github.io/csi-charts
 helm repo add traefik https://helm.traefik.io/traefik
-helm repo add longhorn https://charts.longhorn.io
 helm repo add prometheus https://prometheus-community.github.io/helm-charts
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -21,7 +20,6 @@ kubectl apply --server-side -k server
 kubectl apply --server-side -k kube-vip
 
 pushd traefik && helm upgrade --install --create-namespace -n traefik --version 27.0.2 --values values.yaml --post-renderer ../kustomize.sh traefik traefik/traefik && popd
-pushd longhorn && helm upgrade --install --create-namespace -n longhorn-system --version 1.7.2 --values values.yaml --post-renderer ../kustomize.sh longhorn longhorn/longhorn && popd
 pushd ceph && helm upgrade --install --create-namespace -n ceph-csi-rbd --version 3.16.0 --values values.yaml --post-renderer ../kustomize.sh ceph-csi-rbd ceph-csi/ceph-csi-rbd && popd
 pushd prometheus && helm upgrade --install --create-namespace -n monitoring --version 66.2.1 --values values.yaml --post-renderer ../kustomize.sh prometheus prometheus/kube-prometheus-stack && popd
 pushd loki && helm upgrade --install -n monitoring --version 2.10.2 --values values.yaml --post-renderer ../kustomize.sh loki grafana/loki-stack && popd

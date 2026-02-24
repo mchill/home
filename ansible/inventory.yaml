@@ -6,19 +6,15 @@ all:
     raspberrypi-1:
       ansible_host: 192.168.1.210
       ansible_user: mchill
-      longhorn_partition: /dev/sda3
     raspberrypi-2:
       ansible_host: 192.168.1.211
       ansible_user: mchill
-      longhorn_partition: /dev/sda3
     raspberrypi-3:
       ansible_host: 192.168.1.212
       ansible_user: mchill
-      longhorn_partition: /dev/sda3
     laptop:
       ansible_host: 192.168.1.215
       ansible_user: mchill
-      longhorn_partition: /dev/sda1
     media-center:
       ansible_host: 192.168.1.220
       ansible_user: mchill

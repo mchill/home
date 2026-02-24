@@ -22,7 +22,7 @@ Load balancing is acheived using MetalLB for all services running inside of Kube
 
 ### Filesystem
 
-Persistent storage is achieved using NFS and [Longhorn](https://longhorn.io/) volumes.
+Persistent storage is achieved using NFS and [Ceph](https://ceph.io/en/) volumes.
 
 ### Sealed Secrets
 
