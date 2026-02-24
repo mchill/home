@@ -5,26 +5,48 @@ metadata:
 spec:
   schedule: "@daily"
   concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: 0
-  failedJobsHistoryLimit: 0
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
-      backoffLimit: 0
+      backoffLimit: 2
       activeDeadlineSeconds: 3600
       template:
+        metadata:
+          labels:
+            source: cronjob
         spec:
-          restartPolicy: OnFailure
+          restartPolicy: Never
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: kubernetes.io/hostname
+                  labelSelector:
+                    matchExpressions:
+                      - key: app
+                        operator: In
+                        values:
+                          - $(VOLUME)
           containers:
             - name: backup
               image: alpine:3.23
+              securityContext:
+                privileged: true
               command:
                 - /bin/sh
                 - -cex
               args:
                 - |
-                  apk add --no-cache openssh-client;
+                  apk add --no-cache openssh-client util-linux-misc;
                   ssh-keyscan -H 192.168.1.30 >> /root/.ssh/known_hosts;
-                  ssh mchill@192.168.1.30 "sudo /home/mchill/backup.sh ${VOLUME}";
+                  ssh mchill@192.168.1.30 -o BatchMode=yes "sudo /home/mchill/backup.sh ${VOLUME}";
+                # - |
+                #   apk add --no-cache openssh-client util-linux-misc;
+                #   ssh-keyscan -H 192.168.1.30 >> /root/.ssh/known_hosts;
+                #   fsfreeze -f /backup/$(VOLUME);
+                #   ssh mchill@192.168.1.30 -o BatchMode=yes "sudo /home/mchill/trim.sh ${VOLUME}" || true;
+                #   fsfreeze -u /backup/$(VOLUME);
+                #   ssh mchill@192.168.1.30 -o BatchMode=yes "sudo /home/mchill/backup.sh ${VOLUME}";
               env:
                 - name: TZ
                   value: America/New_York
@@ -35,6 +57,9 @@ spec:
                   readOnly: true
                   mountPath: /root/.ssh/id_rsa
                   subPath: id_rsa
+                - name: data
+                  readOnly: true
+                  mountPath: /backup/$(VOLUME)
               resources:
                 limits:
                   memory: 128Mi
@@ -46,3 +71,6 @@ spec:
               secret:
                 secretName: beelink1
                 defaultMode: 0600
+            - name: data
+              persistentVolumeClaim:
+                claimName: $(VOLUME)

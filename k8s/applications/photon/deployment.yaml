@@ -12,10 +12,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: photon
-          command: ["/bin/bash", "-c", "--"]
-          args: ["while true; do sleep 30; done;"]
-          image: rtuszik/photon-docker:0.7.2
-          imagePullPolicy: Always
+          image: rtuszik/photon-docker:2.0.1
           ports:
             - name: ingress
               containerPort: 2322
@@ -24,22 +21,22 @@ spec:
               value: America/New_York
             - name: UPDATE_STRATEGY
               value: DISABLED
-            - name: UDPATE_INTERVAL
-              value: 24h
-            - name: LOG_LEVEL
-              value: INFO
+            - name: INITIAL_DOWNLOAD
+              value: "FALSE"
+            - name: DOWNLOAD_MAX_RETRIES
+              value: "10"
             - name: SKIP_MD5_CHECK
               value: "TRUE"
           volumeMounts:
             - name: applications
-              mountPath: /photon/photon_data
+              mountPath: /photon/data
               subPath: photon
           resources:
             limits:
-              memory: 256Mi
+              memory: 512Mi
             requests:
-              cpu: 10m
-              memory: 256Mi
+              cpu: 100m
+              memory: 512Mi
       volumes:
         - name: applications
           persistentVolumeClaim:

@@ -5,17 +5,20 @@ metadata:
 spec:
   schedule: "@hourly"
   concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: 0
-  failedJobsHistoryLimit: 0
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
-      backoffLimit: 0
+      backoffLimit: 2
       activeDeadlineSeconds: 3600
       template:
+        metadata:
+          labels:
+            source: cronjob
         spec:
+          restartPolicy: Never
           securityContext:
             fsGroup: 1000
-          restartPolicy: OnFailure
           initContainers:
             - name: render-config
               image: bash:5.3.9

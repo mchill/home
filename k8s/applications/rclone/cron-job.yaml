@@ -5,15 +5,18 @@ metadata:
 spec:
   schedule: "@daily"
   concurrencyPolicy: Forbid
-  successfulJobsHistoryLimit: 0
-  failedJobsHistoryLimit: 0
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
-      backoffLimit: 0
+      backoffLimit: 2
       activeDeadlineSeconds: 3600
       template:
+        metadata:
+          labels:
+            source: cronjob
         spec:
-          restartPolicy: OnFailure
+          restartPolicy: Never
           securityContext:
             fsGroup: 1000
           containers:
@@ -24,6 +27,9 @@ spec:
                 - --check-first
                 - --fast-list
                 - --drive-acknowledge-abuse
+                - --no-update-modtime
+                - --exclude
+                - /#snapshot/**
                 - -v
                 - "gdrive:"
                 - /data

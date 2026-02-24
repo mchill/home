@@ -226,7 +226,7 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"}) / sum by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"})",
+              "expr": "sort_desc(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"}) / sum by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"}))",
               "format": "time_series",
               "hide": false,
               "instant": true,

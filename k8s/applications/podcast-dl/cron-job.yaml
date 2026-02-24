@@ -9,13 +9,16 @@ spec:
   failedJobsHistoryLimit: 0
   jobTemplate:
     spec:
-      backoffLimit: 0
+      backoffLimit: 2
       activeDeadlineSeconds: 3600
       template:
+        metadata:
+          labels:
+            source: cronjob
         spec:
+          restartPolicy: Never
           securityContext:
             fsGroup: 1000
-          restartPolicy: OnFailure
           containers:
             - name: podcast-dl
               image: node:22.22.0

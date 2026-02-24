@@ -12,7 +12,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: dawarich
-          image: freikin/dawarich:0.37.3
+          image: freikin/dawarich:1.1.0
           command:
             - web-entrypoint.sh
           args:
@@ -63,6 +63,9 @@ spec:
             - name: dawarich
               mountPath: /var/app/storage
               subPath: storage
+            - name: dawarich
+              mountPath: /dawarich_db_data
+              subPath: postgres
           resources:
             limits:
               memory: 1Gi
@@ -70,7 +73,7 @@ spec:
               cpu: 10m
               memory: 1Gi
         - name: sidekiq
-          image: freikin/dawarich:0.37.3
+          image: freikin/dawarich:1.1.0
           command:
             - sidekiq-entrypoint.sh
           args:
@@ -140,10 +143,10 @@ spec:
               subPath: shared
           resources:
             limits:
-              memory: 256Mi
+              memory: 512Mi
             requests:
               cpu: 10m
-              memory: 256Mi
+              memory: 512Mi
         - name: redis
           image: redis:7.4.7-alpine
           volumeMounts:
@@ -152,10 +155,10 @@ spec:
               subPath: shared
           resources:
             limits:
-              memory: 128Mi
+              memory: 512Mi
             requests:
               cpu: 10m
-              memory: 128Mi
+              memory: 512Mi
       volumes:
         - name: dawarich
           persistentVolumeClaim:

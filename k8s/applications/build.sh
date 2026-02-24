@@ -2,7 +2,7 @@
 
 kubectl kustomize audiobookshelf && echo "---"
 kubectl kustomize bazarr && echo "---"
-# kubectl kustomize dawarich && echo "---"
+kubectl kustomize dawarich && echo "---"
 kubectl kustomize ddns && echo "---"
 kubectl kustomize errors && echo "---"
 kubectl kustomize flaresolverr && echo "---"
