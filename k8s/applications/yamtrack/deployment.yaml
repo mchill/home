@@ -42,25 +42,19 @@ spec:
             - name: yamtrack
               mountPath: /yamtrack/db
               subPath: db
-          resources:
-            limits:
-              memory: 1Gi
-            requests:
-              cpu: 100m
-              memory: 1Gi
         - name: redis
           image: redis:8.2.4-alpine
           volumeMounts:
             - name: yamtrack
               mountPath: /data
               subPath: redis
-          resources:
-            limits:
-              memory: 128Mi
-            requests:
-              cpu: 10m
-              memory: 128Mi
       volumes:
         - name: yamtrack
           persistentVolumeClaim:
             claimName: yamtrack
+      resources:
+        limits:
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 1Gi

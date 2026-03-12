@@ -52,12 +52,6 @@ spec:
                   mountPath: /config/rclone
                 - name: googledrive
                   mountPath: /data
-              resources:
-                limits:
-                  memory: 128Mi
-                requests:
-                  cpu: 10m
-                  memory: 128Mi
           volumes:
             - name: rclone
               persistentVolumeClaim:
@@ -65,3 +59,9 @@ spec:
             - name: googledrive
               persistentVolumeClaim:
                 claimName: googledrive
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 10m
+              memory: 128Mi

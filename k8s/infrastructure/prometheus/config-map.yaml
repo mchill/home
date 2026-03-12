@@ -26,7 +26,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 32,
+      "id": 31,
       "links": [],
       "panels": [
         {
@@ -55,12 +55,16 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
+                    "color": "transparent",
                     "value": null
                   },
                   {
-                    "color": "red",
+                    "color": "green",
                     "value": 1
+                  },
+                  {
+                    "color": "red",
+                    "value": 2
                   }
                 ]
               }
@@ -75,7 +79,7 @@ data:
           },
           "id": 1,
           "interval": "30s",
-          "maxDataPoints": 1000000,
+          "maxDataPoints": 10000,
           "options": {
             "alignValue": "left",
             "legend": {
@@ -85,7 +89,7 @@ data:
             },
             "mergeValues": true,
             "rowHeight": 0.9,
-            "showValue": "auto",
+            "showValue": "never",
             "tooltip": {
               "mode": "single",
               "sort": "none"
@@ -100,12 +104,13 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "sum by (cronjob, namespace) (\n\tlabel_replace(\n\t\tmax_over_time(kube_job_status_failed[11m] offset -10m) and kube_job_status_failed,\n\t\t\"cronjob\",\n\t\t\"$1\",\n\t\t\"job_name\",\n\t\t\"^(.*?)(?:-[0-9]+)?$\"\n\t)\n)",
+              "expr": "(\n  max by (namespace, cronjob) (\n    label_replace(\n      2 * (\n        (kube_job_status_failed{namespace=\"server\"} > 0)\n        and on (namespace, job_name) (kube_job_status_completion_time{namespace=\"server\"} > 0)\n        and on (namespace, job_name) (time() - kube_job_status_completion_time{namespace=\"server\"} < 60)\n      ),\n      \"cronjob\", \"$1\", \"job_name\", \"^(.*)-[0-9]+$\"\n    )\n  )\nOR\n  max by (namespace, cronjob) (\n    label_replace(\n      1 * (\n        (kube_job_status_succeeded{namespace=\"server\"} > 0)\n        and on (namespace, job_name) (kube_job_status_completion_time{namespace=\"server\"} > 0)\n        and on (namespace, job_name) (time() - kube_job_status_completion_time{namespace=\"server\"} < 60)\n      ),\n      \"cronjob\", \"$1\", \"job_name\", \"^(.*)-[0-9]+$\"\n    )\n  )\n)\nOR on (namespace, cronjob)\n(0 * max by (namespace, cronjob) (kube_cronjob_info{namespace=\"server\"}))",
+              "format": "time_series",
               "hide": false,
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "{{cronjob}}",
-              "range": false,
+              "range": true,
               "refId": "A"
             }
           ],
@@ -120,14 +125,14 @@ data:
         "list": []
       },
       "time": {
-        "from": "now-6h",
+        "from": "now-24h",
         "to": "now"
       },
       "timepicker": {},
       "timezone": "browser",
       "title": "Jobs",
       "uid": "bfcflew3gqvwgf",
-      "version": 2,
+      "version": 3,
       "weekStart": ""
     }
   volumes.json: |-

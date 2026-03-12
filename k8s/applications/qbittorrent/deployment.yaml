@@ -56,12 +56,6 @@ spec:
             - name: applications
               mountPath: /data
               subPath: qbittorrent
-          resources:
-            limits:
-              memory: 2Gi
-            requests:
-              cpu: 10m
-              memory: 2Gi
       volumes:
         - name: qbittorrent
           persistentVolumeClaim:
@@ -69,3 +63,9 @@ spec:
         - name: applications
           persistentVolumeClaim:
             claimName: applications
+      resources:
+        limits:
+          memory: 2Gi
+        requests:
+          cpu: 10m
+          memory: 2Gi

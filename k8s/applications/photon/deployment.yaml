@@ -31,13 +31,13 @@ spec:
             - name: applications
               mountPath: /photon/data
               subPath: photon
-          resources:
-            limits:
-              memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 512Mi
       volumes:
         - name: applications
           persistentVolumeClaim:
             claimName: applications
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          cpu: 100m
+          memory: 512Mi

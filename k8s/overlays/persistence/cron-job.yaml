@@ -60,12 +60,6 @@ spec:
                 - name: data
                   readOnly: true
                   mountPath: /backup/$(VOLUME)
-              resources:
-                limits:
-                  memory: 128Mi
-                requests:
-                  cpu: 10m
-                  memory: 128Mi
           volumes:
             - name: ssh
               secret:
@@ -74,3 +68,9 @@ spec:
             - name: data
               persistentVolumeClaim:
                 claimName: $(VOLUME)
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 10m
+              memory: 128Mi

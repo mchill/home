@@ -46,12 +46,6 @@ spec:
             - name: libraries
               mountPath: /romm/resources
               subPath: games/resources
-          resources:
-            limits:
-              memory: 1Gi
-            requests:
-              cpu: 10m
-              memory: 1Gi
         - name: db
           image: mariadb:11.8.6
           env:
@@ -66,12 +60,6 @@ spec:
             - name: romm
               mountPath: /var/lib/mysql
               subPath: mysql
-          resources:
-            limits:
-              memory: 512Mi
-            requests:
-              cpu: 10m
-              memory: 512Mi
       volumes:
         - name: romm
           persistentVolumeClaim:
@@ -79,3 +67,9 @@ spec:
         - name: libraries
           persistentVolumeClaim:
             claimName: libraries
+      resources:
+        limits:
+          memory: 1Gi
+        requests:
+          cpu: 10m
+          memory: 1Gi

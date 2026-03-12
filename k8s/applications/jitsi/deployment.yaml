@@ -22,12 +22,6 @@ spec:
             - name: jitsi
               mountPath: /config
               subPath: jicofo
-          resources:
-            limits:
-              memory: 256Mi
-            requests:
-              cpu: 10m
-              memory: 256Mi
         - name: prosody
           image: jitsi/prosody:stable-10741
           envFrom:
@@ -42,12 +36,6 @@ spec:
             - name: jitsi
               mountPath: /prosody-plugins-custom
               subPath: prosody/prosody-plugins-custom
-          resources:
-            limits:
-              memory: 128Mi
-            requests:
-              cpu: 10m
-              memory: 128Mi
         - name: web
           image: jitsi/web:stable-10741
           ports:
@@ -60,12 +48,6 @@ spec:
             - name: jitsi
               mountPath: /config
               subPath: web
-          resources:
-            limits:
-              memory: 128Mi
-            requests:
-              cpu: 10m
-              memory: 128Mi
         - name: jvb
           image: jitsi/jvb:stable-10741
           ports:
@@ -81,13 +63,13 @@ spec:
             - name: jitsi
               mountPath: /config
               subPath: jvb
-          resources:
-            limits:
-              memory: 256Mi
-            requests:
-              cpu: 10m
-              memory: 256Mi
       volumes:
         - name: jitsi
           persistentVolumeClaim:
             claimName: jitsi
+      resources:
+        limits:
+          memory: 1Gi
+        requests:
+          cpu: 10m
+          memory: 1Gi

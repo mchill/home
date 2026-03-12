@@ -26,13 +26,13 @@ spec:
           volumeMounts:
             - name: tautulli
               mountPath: /config
-          resources:
-            limits:
-              memory: 256Mi
-            requests:
-              cpu: 10m
-              memory: 256Mi
       volumes:
         - name: tautulli
           persistentVolumeClaim:
             claimName: tautulli
+      resources:
+        limits:
+          memory: 256Mi
+        requests:
+          cpu: 10m
+          memory: 256Mi

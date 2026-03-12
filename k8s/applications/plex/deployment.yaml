@@ -60,12 +60,8 @@ spec:
               subPath: youtube
           resources:
             limits:
-              cpu: 1
-              memory: 2Gi
               gpu.intel.com/i915: 1
             requests:
-              cpu: 500m
-              memory: 2Gi
               gpu.intel.com/i915: 1
       volumes:
         - name: plex
@@ -77,3 +73,10 @@ spec:
         - name: libraries
           persistentVolumeClaim:
             claimName: libraries
+      resources:
+        limits:
+          cpu: 1
+          memory: 2Gi
+        requests:
+          cpu: 500m
+          memory: 2Gi

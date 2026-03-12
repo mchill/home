@@ -20,13 +20,13 @@ spec:
           volumeMounts:
             - name: peanut
               mountPath: /config
-          resources:
-            limits:
-              memory: 256Mi
-            requests:
-              cpu: 10m
-              memory: 256Mi
       volumes:
         - name: peanut
           persistentVolumeClaim:
             claimName: peanut
+      resources:
+        limits:
+          memory: 256Mi
+        requests:
+          cpu: 10m
+          memory: 256Mi

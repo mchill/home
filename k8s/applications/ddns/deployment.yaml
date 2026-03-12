@@ -27,13 +27,13 @@ spec:
           volumeMounts:
             - name: ddns
               mountPath: /updater/data
-          resources:
-            limits:
-              memory: 128Mi
-            requests:
-              cpu: 10m
-              memory: 128Mi
       volumes:
         - name: ddns
           persistentVolumeClaim:
             claimName: ddns
+      resources:
+        limits:
+          memory: 128Mi
+        requests:
+          cpu: 10m
+          memory: 128Mi

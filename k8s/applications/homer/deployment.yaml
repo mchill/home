@@ -29,12 +29,6 @@ spec:
             - name: config
               mountPath: /www/assets/config.yml
               subPath: config.yaml
-          resources:
-            limits:
-              memory: 128Mi
-            requests:
-              cpu: 10m
-              memory: 128Mi
       volumes:
         - name: homer
           persistentVolumeClaim:
@@ -42,3 +36,9 @@ spec:
         - name: config
           configMap:
             name: homer
+      resources:
+        limits:
+          memory: 128Mi
+        requests:
+          cpu: 10m
+          memory: 128Mi

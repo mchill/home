@@ -32,12 +32,6 @@ spec:
             - name: libraries
               mountPath: /podcasts
               subPath: podcasts
-          resources:
-            limits:
-              memory: 1Gi
-            requests:
-              cpu: 10m
-              memory: 1Gi
       volumes:
         - name: audiobookshelf
           persistentVolumeClaim:
@@ -45,3 +39,9 @@ spec:
         - name: libraries
           persistentVolumeClaim:
             claimName: libraries
+      resources:
+        limits:
+          memory: 1Gi
+        requests:
+          cpu: 10m
+          memory: 1Gi

@@ -39,12 +39,6 @@ spec:
                 - name: config
                   mountPath: /config_src/config.yaml
                   subPath: config.yaml
-              resources:
-                limits:
-                  memory: 128Mi
-                requests:
-                  cpu: 10m
-                  memory: 128Mi
           containers:
             - name: kometa
               image: kometateam/kometa:v2.3.0
@@ -67,12 +61,6 @@ spec:
                 - name: config
                   mountPath: /config/tv.yml
                   subPath: tv.yml
-              resources:
-                limits:
-                  memory: 512Mi
-                requests:
-                  cpu: 10m
-                  memory: 512Mi
           volumes:
             - name: kometa
               persistentVolumeClaim:
@@ -80,3 +68,9 @@ spec:
             - name: config
               configMap:
                 name: kometa-permissions
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 10m
+              memory: 512Mi

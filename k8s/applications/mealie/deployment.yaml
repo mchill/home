@@ -30,13 +30,13 @@ spec:
           volumeMounts:
             - name: mealie
               mountPath: /app/data
-          resources:
-            limits:
-              memory: 512Mi
-            requests:
-              cpu: 10m
-              memory: 512Mi
       volumes:
         - name: mealie
           persistentVolumeClaim:
             claimName: mealie
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          cpu: 10m
+          memory: 512Mi

@@ -39,12 +39,6 @@ spec:
             - name: googledrive
               mountPath: /data/obsidian/Work Notes
               subPath: Work/Voith/Notes/Work Notes
-          resources:
-            limits:
-              memory: 256Mi
-            requests:
-              cpu: 10m
-              memory: 256Mi
       volumes:
         - name: syncthing
           persistentVolumeClaim:
@@ -55,3 +49,9 @@ spec:
         - name: googledrive
           persistentVolumeClaim:
             claimName: googledrive
+      resources:
+        limits:
+          memory: 256Mi
+        requests:
+          cpu: 10m
+          memory: 256Mi

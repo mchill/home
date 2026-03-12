@@ -146,14 +146,14 @@ spec:
             - name: stardew
               mountPath: /config/xdg/config/StardewValley/Saves
               subPath: saves
-          resources:
-            limits:
-              cpu: 1
-              memory: 1Gi
-            requests:
-              cpu: 1
-              memory: 1Gi
       volumes:
         - name: stardew
           persistentVolumeClaim:
             claimName: stardew
+      resources:
+        limits:
+          cpu: 1
+          memory: 1Gi
+        requests:
+          cpu: 1
+          memory: 1Gi

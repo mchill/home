@@ -34,13 +34,13 @@ spec:
             - name: config
               mountPath: /app/proxy.js
               subPath: proxy.js
-          resources:
-            limits:
-              memory: 128Mi
-            requests:
-              cpu: 10m
-              memory: 128Mi
       volumes:
         - name: config
           configMap:
             name: unifi
+      resources:
+        limits:
+          memory: 128Mi
+        requests:
+          cpu: 10m
+          memory: 128Mi

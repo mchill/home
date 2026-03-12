@@ -22,13 +22,13 @@ spec:
           volumeMounts:
             - name: flaresolverr
               mountPath: /config
-          resources:
-            limits:
-              memory: 512Mi
-            requests:
-              cpu: 10m
-              memory: 512Mi
       volumes:
         - name: flaresolverr
           persistentVolumeClaim:
             claimName: flaresolverr
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          cpu: 10m
+          memory: 512Mi

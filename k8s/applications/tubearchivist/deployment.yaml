@@ -49,24 +49,12 @@ spec:
             - name: libraries
               mountPath: /youtube
               subPath: youtube/tubearchivist
-          resources:
-            limits:
-              memory: 1Gi
-            requests:
-              cpu: 10m
-              memory: 1Gi
         - name: redis
           image: redis:7.4.7
           volumeMounts:
             - name: tubearchivist
               mountPath: /data
               subPath: redis
-          resources:
-            limits:
-              memory: 128Mi
-            requests:
-              cpu: 10m
-              memory: 128Mi
         - name: elasticsearch
           image: elasticsearch:8.19.11
           env:
@@ -85,12 +73,6 @@ spec:
             - name: tubearchivist
               mountPath: /usr/share/elasticsearch/data
               subPath: elasticsearch
-          resources:
-            limits:
-              memory: 1.5Gi
-            requests:
-              cpu: 10m
-              memory: 1.5Gi
       volumes:
         - name: tubearchivist
           persistentVolumeClaim:
@@ -101,3 +83,9 @@ spec:
         - name: libraries
           persistentVolumeClaim:
             claimName: libraries
+      resources:
+        limits:
+          memory: 3Gi
+        requests:
+          cpu: 10m
+          memory: 3Gi

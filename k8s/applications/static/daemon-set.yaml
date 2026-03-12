@@ -18,13 +18,13 @@ spec:
             - name: libraries
               mountPath: /usr/share/nginx/html/podcasts
               subPath: podcasts
-          resources:
-            limits:
-              memory: 128Mi
-            requests:
-              cpu: 10m
-              memory: 128Mi
       volumes:
         - name: libraries
           persistentVolumeClaim:
             claimName: libraries
+      resources:
+        limits:
+          memory: 128Mi
+        requests:
+          cpu: 10m
+          memory: 128Mi

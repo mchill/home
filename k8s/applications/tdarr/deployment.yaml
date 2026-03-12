@@ -57,12 +57,6 @@ spec:
             - name: libraries
               mountPath: /media/tv-requested
               subPath: tv/requested
-          resources:
-            limits:
-              memory: 1Gi
-            requests:
-              cpu: 10m
-              memory: 1Gi
         - name: tdarr-node
           image: haveagitgat/tdarr_node:2.58.02
           env:
@@ -105,12 +99,6 @@ spec:
             - name: libraries
               mountPath: /media/tv-requested
               subPath: tv/requested
-          resources:
-            limits:
-              memory: 256Mi
-            requests:
-              cpu: 10m
-              memory: 256Mi
       volumes:
         - name: tdarr
           persistentVolumeClaim:
@@ -121,3 +109,9 @@ spec:
         - name: libraries
           persistentVolumeClaim:
             claimName: libraries
+      resources:
+        limits:
+          memory: 1Gi
+        requests:
+          cpu: 10m
+          memory: 1Gi

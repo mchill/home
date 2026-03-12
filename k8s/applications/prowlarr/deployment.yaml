@@ -26,13 +26,13 @@ spec:
           volumeMounts:
             - name: prowlarr
               mountPath: /config
-          resources:
-            limits:
-              memory: 512Mi
-            requests:
-              cpu: 10m
-              memory: 512Mi
       volumes:
         - name: prowlarr
           persistentVolumeClaim:
             claimName: prowlarr
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          cpu: 10m
+          memory: 512Mi

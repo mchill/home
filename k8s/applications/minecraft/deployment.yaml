@@ -65,13 +65,6 @@ spec:
               subPath: whitelist.json
             - name: mods
               mountPath: /mods
-          resources:
-            limits:
-              cpu: 1
-              memory: 3Gi
-            requests:
-              cpu: 500m
-              memory: 3Gi
       volumes:
         - name: minecraft
           persistentVolumeClaim:
@@ -81,3 +74,10 @@ spec:
             name: minecraft
         - name: mods
           emptyDir: {}
+      resources:
+        limits:
+          cpu: 1
+          memory: 3Gi
+        requests:
+          cpu: 500m
+          memory: 3Gi
