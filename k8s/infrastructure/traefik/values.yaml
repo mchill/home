@@ -49,9 +49,6 @@ additionalArguments:
   - --api.insecure=true
   - --serversTransport.insecureSkipVerify=true
   - --metrics.prometheus
-  - --providers.kubernetesingress.ingressClass=traefik
-  - --providers.kubernetescrd.ingressClass=traefik
-  - --providers.kubernetescrd.allowCrossNamespace=true
 ports:
   web:
     port: 8000
@@ -66,3 +63,31 @@ ports:
 service:
   annotations:
     metallb.universe.tf/loadBalancerIPs: 192.168.1.90
+providers:
+  kubernetesCRD:
+    enabled: true
+    ingressClass: traefik
+    allowCrossNamespace: true
+    allowExternalNameServices: true
+  kubernetesIngress:
+    enabled: true
+    ingressClass: traefik
+  file:
+    enabled: true
+    content: |-
+      http:
+        services:
+          ceph:
+            loadBalancer:
+              sticky:
+                cookie:
+                  name: ceph
+                  secure: true
+                  httpOnly: true
+              healthCheck:
+                interval: 5s
+                timeout: 1s
+              servers:
+                - url: http://192.168.1.30:8080
+                - url: http://192.168.1.31:8080
+                - url: http://192.168.1.32:8080
