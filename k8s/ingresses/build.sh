@@ -2,6 +2,7 @@
 
 kubectl kustomize ceph && echo "---"
 kubectl kustomize kvm && echo "---"
+kubectl kustomize minio && echo "---"
 kubectl kustomize nas && echo "---"
 kubectl kustomize pdu && echo "---"
 kubectl kustomize pihole && echo "---"

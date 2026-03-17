@@ -1,0 +1,10 @@
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: minio
+labels:
+  app: minio
+  subdomain: minio
+fieldSpecs:
+  - path: metadata/labels
+    create: true

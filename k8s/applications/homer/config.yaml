@@ -132,10 +132,10 @@ services:
         subtitle: Remote NAS
         logo: assets/logos/nas.png
         url: https://nas.remote.mchill.io
-      - name: Syncthing
-        subtitle: File synchronization
-        logo: assets/logos/syncthing.png
-        url: https://syncthing.mchill.io
+      - name: MinIO
+        subtitle: Object storage
+        logo: assets/logos/minio.png
+        url: https://minio.mchill.io
 
   - name: Network
     icon: fas fa-wifi
@@ -192,3 +192,7 @@ services:
         subtitle: Proxy configuration
         logo: assets/logos/traefik.png
         url: https://traefik.mchill.io
+      - name: Syncthing
+        subtitle: File synchronization
+        logo: assets/logos/syncthing.png
+        url: https://syncthing.mchill.io
