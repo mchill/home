@@ -59,6 +59,11 @@ To create new a sealed secret, follow these steps.
 
 ### Provision Nodes
 
+```bash
+terraform apply -var="init_agent_1=true" -var="init_agent_2=true" -var="init_agent_3=true"
+terraform apply
+```
+
 To configure a node from scratch, first complete the following prerequisites:
 
 1. Install Ubuntu 22.04
