@@ -2,9 +2,8 @@ namespace: server
 transformers:
   - label-transformer.yaml
 resources:
-  - ../../overlays/ingress
+  - ../../../overlays/ingress
   - endpoint.yaml
-  - middleware.yaml
 patches:
   - target:
       kind: IngressRoute

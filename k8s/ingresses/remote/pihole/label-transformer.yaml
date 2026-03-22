@@ -1,0 +1,10 @@
+apiVersion: builtin
+kind: LabelTransformer
+metadata:
+  name: remote-pihole
+labels:
+  app: remote-pihole
+  subdomain: pihole.remote
+fieldSpecs:
+  - path: metadata/labels
+    create: true
