@@ -21,7 +21,7 @@ spec:
             fsGroup: 1000
           containers:
             - name: podcast-dl
-              image: node:22.22.0
+              image: node:22.22.1
               command:
                 - /bin/bash
                 - -c
