@@ -1,0 +1,2 @@
+- name: Configure k3s Agents
+  hosts: k3s_agents

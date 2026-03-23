@@ -27,3 +27,8 @@ provider "proxmox" {
   username = "root@pam"
   insecure = true
 }
+
+variable "initialize" {
+  type    = bool
+  default = false
+}

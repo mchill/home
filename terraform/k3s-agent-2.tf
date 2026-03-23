@@ -3,6 +3,10 @@ variable "init_agent_2" {
   default = false
 }
 
+locals {
+  init_agent_2 = var.init_agent_2 || var.initialize
+}
+
 resource "proxmox_virtual_environment_vm" "k3s-agent-2" {
   lifecycle {
     ignore_changes = [initialization]
@@ -64,11 +68,11 @@ resource "proxmox_virtual_environment_vm" "k3s-agent-2" {
   }
 
   # Boot Order
-  boot_order = var.init_agent_2 ? ["ide2", "scsi0", "net0"] : ["scsi0", "net0"]
+  boot_order = local.init_agent_2 ? ["ide2", "scsi0", "net0"] : ["scsi0", "net0"]
 
   # CD Drive
   dynamic "cdrom" {
-    for_each = var.init_agent_2 ? [1] : []
+    for_each = local.init_agent_2 ? [1] : []
     content {
       interface = "ide2"
       file_id   = "nfs:iso/ubuntu-24.04.4-live-server-amd64.iso"
@@ -77,7 +81,7 @@ resource "proxmox_virtual_environment_vm" "k3s-agent-2" {
 
   # PCI Devices
   dynamic "hostpci" {
-    for_each = var.init_agent_2 ? [] : [1]
+    for_each = local.init_agent_2 ? [] : [1]
     content {
       device = "hostpci0"
       id     = "0000:00:02"
@@ -89,7 +93,7 @@ resource "proxmox_virtual_environment_vm" "k3s-agent-2" {
 
   # Serial Devices
   dynamic "serial_device" {
-    for_each = var.init_agent_2 ? [] : [1]
+    for_each = local.init_agent_2 ? [] : [1]
     content {
       device = "socket"
     }

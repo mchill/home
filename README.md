@@ -8,94 +8,48 @@ This is the configuration for my home server running in Kubernetes.
 
 [Trello Board](https://trello.com/b/XNVnSBvI/home-server)
 
-## Configuration
-
-### Network
-
-All HTTP traffic is routed through Traefik, but TCP and UDP connections are exposed separately. Although additional entrypoints could be configured to proxy these connections, it adds no benefit other than load balancing due to the lack of host or path matching.
-
-HTTPS traffic is secured behind Google forward authentication by default. Some exceptions are made for applications that don't work behind an additional layer of authentication (e.g., Plex and Home Assistant).
-
-Load balancing is acheived using MetalLB for all services running inside of Kubernetes.
-
-![Network](docs/images/network.drawio.svg)
-
-### Filesystem
-
-Persistent storage is achieved using NFS and [Ceph](https://ceph.io/en/) volumes.
-
-### Sealed Secrets
-
-[Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) are stored securely alongside the rest of the server configuration in source control. They are decrypted by a controller running in the cluster.
-
-To create new a sealed secret, follow these steps.
-
-1. Base64 encode the secret value.
-
-   ```bash
-   echo -n "secret" | base64 -w 0
-   ```
-
-2. Create a native Secret resource with the desired key name and encoded value
-
-   ```yaml
-   apiVersion: v1
-   kind: Secret
-   metadata:
-     name: my-secret
-     namespace: server
-   type: Opaque
-   data:
-     MY_SECRET_KEY: c2VjcmV0
-   ```
-
-3. Use the kubeseal cli tool to generate a Sealed Secret. Be sure to specify the correct namespace, or else the controller won't be able to decrypt the secret.
-
-   ```bash
-   kubeseal <secret.yaml >sealed-secret.yaml --controller-namespace=sealed-secrets -o yaml
-   ```
-
 ## Setup
 
-### Provision Nodes
+### Configure Nodes
 
 ```bash
-terraform apply -var="init_agent_1=true" -var="init_agent_2=true" -var="init_agent_3=true"
-terraform apply
+ansible-playbook playbooks/configure_proxmox_hosts.yaml -i inventory.yaml
 ```
 
-To configure a node from scratch, first complete the following prerequisites:
+### Provision Virtual Machines
 
-1. Install Ubuntu 22.04
+When creating VMs for the first time, set `initialize=true` to add the bootable CD and exclude devices that interfere with the OS installation process.
 
-2. Create the user `mchill`
+```bash
+terraform apply -var="initialize=true"
+```
 
-3. Enable ssh
+### Install Operating System
+
+1. Install Ubuntu Server 24.04. Keep defaults except where noted below.
+   1. Disable "Set up this disk as an LVM group"
+   2. Enable "Install OpenSSH server"
+   3. Import SSH key from GitHub
+
+2. Enable passwordless sudo to allow Ansible to run later.
 
    ```bash
-   sudo apt install openssh-server
-   sudo systemctl enable --now ssh
+   echo "mchill ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/mchill
    ```
 
-4. Add public key to `~/.ssh/authorized_keys`
+3. Reapply terraform configuration, removing the bootable CD and adding PCI and serial devices.
 
-After following the above steps for each node, they can be provisioned with an ansible playbook.
+   ```bash
+   terraform apply
+   ```
 
-```bash
-ansible-playbook playbooks/configure-nodes.yaml -i inventory.yaml
-```
-
-### Create/Reset Cluster
-
-If the cluster ever needs to be completely reset, this can be done with an ansible playbook.
+### Configure Virtual Machines
 
 ```bash
-ansible-playbook playbooks/reset-cluster.yaml -i inventory.yaml --extra-vars "K3S_TOKEN=$K3S_TOKEN GITHUB_TOKEN=$GITHUB_TOKEN"
+ansible-playbook playbooks/configure_proxmox_vms.yaml -i inventory.yaml
 ```
 
 ### Deploy Workloads
-
-Applications are automatically deployed by CI. Manual deployment can be done with the following commands.
 
 ```bash
 pushd k8s/infrastructure && ./apply.sh && popd

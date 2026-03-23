@@ -1,0 +1,6 @@
+- name: Configure Pihole VM
+  hosts: pihole
+  roles:
+    - dns
+    - oh_my_zsh
+    - docker

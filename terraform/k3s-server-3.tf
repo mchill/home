@@ -1,3 +1,12 @@
+variable "init_server_3" {
+  type    = bool
+  default = false
+}
+
+locals {
+  init_server_3 = var.init_server_3 || var.initialize
+}
+
 resource "proxmox_virtual_environment_vm" "k3s-server-3" {
   lifecycle {
     ignore_changes = [initialization]
@@ -53,5 +62,14 @@ resource "proxmox_virtual_environment_vm" "k3s-server-3" {
   }
 
   # Boot Order
-  boot_order = ["scsi0", "net0"]
+  boot_order = local.init_server_3 ? ["ide2", "scsi0", "net0"] : ["scsi0", "net0"]
+
+  # CD Drive
+  dynamic "cdrom" {
+    for_each = local.init_server_3 ? [1] : []
+    content {
+      interface = "ide2"
+      file_id   = "nfs:iso/ubuntu-24.04.4-live-server-amd64.iso"
+    }
+  }
 }

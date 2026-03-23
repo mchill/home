@@ -1,36 +1,38 @@
 all:
-  hosts:
-    pikvm:
-      ansible_host: 192.168.1.205
-      ansible_user: root
-    raspberrypi-1:
-      ansible_host: 192.168.1.210
-      ansible_user: mchill
-    raspberrypi-2:
-      ansible_host: 192.168.1.211
-      ansible_user: mchill
-    raspberrypi-3:
-      ansible_host: 192.168.1.212
-      ansible_user: mchill
-    laptop:
-      ansible_host: 192.168.1.215
-      ansible_user: mchill
-    media-center:
-      ansible_host: 192.168.1.220
-      ansible_user: mchill
-    beelink:
-      ansible_host: 192.168.0.210
-      ansible_user: mchill
+  vars:
+    ansible_user: mchill
+    ansible_python_interpreter: auto_silent
 
-k8s:
+ungrouped:
   hosts:
-    raspberrypi-1:
-    raspberrypi-2:
-    raspberrypi-3:
-    laptop:
+    pihole:
+      ansible_host: 192.168.1.2
+    raspberrypi:
+      ansible_host: 192.168.1.5
 
-k8s-agents:
+proxmox_hosts:
   hosts:
-    raspberrypi-2:
-    raspberrypi-3:
-    laptop:
+    beelink1:
+      ansible_host: 192.168.1.30
+    beelink2:
+      ansible_host: 192.168.1.31
+    beelink3:
+      ansible_host: 192.168.1.32
+
+k3s_agents:
+  hosts:
+    k3s_agent_1:
+      ansible_host: 192.168.1.54
+    k3s_agent_2:
+      ansible_host: 192.168.1.55
+    k3s_agent_3:
+      ansible_host: 192.168.1.56
+
+k3s_servers:
+  hosts:
+    k3s_server_1:
+      ansible_host: 192.168.1.51
+    k3s_server_2:
+      ansible_host: 192.168.1.52
+    k3s_server_3:
+      ansible_host: 192.168.1.53
