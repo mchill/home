@@ -22,6 +22,12 @@ spec:
       containers:
         - name: qbittorrent
           image: ghcr.io/hotio/qbittorrent:release-5.1.4
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              POD_NET=$(hostname -i | awk -F. '{print $1"."$2"."$3".0/24"}')
+              export VPN_LAN_NETWORK=$(for i in $(seq 0 255); do echo "10.42.$i.0/24"; done | grep -v $POD_NET | tr '\n' ',' | sed 's/,$//')
+              exec /init
           securityContext:
             capabilities:
               add:
@@ -34,8 +40,6 @@ spec:
               value: America/New_York
             - name: VPN_ENABLED
               value: "true"
-            - name: VPN_LAN_NETWORK
-              value: 10.0.0.0/8
             - name: VPN_CONF
               value: wg0
             - name: PRIVOXY_ENABLED
