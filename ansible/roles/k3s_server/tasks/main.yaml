@@ -1,0 +1,27 @@
+- name: Create k3s directory
+  become: true
+  ansible.builtin.file:
+    path: /etc/rancher/k3s
+    state: directory
+    recurse: true
+
+- name: Copy config file
+  become: true
+  ansible.builtin.template:
+    src: config.yaml.j2
+    dest: /etc/rancher/k3s/config.yaml
+    mode: "0644"
+
+- name: Install k3s
+  environment:
+    INSTALL_K3S_CHANNEL: v1.35
+  ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - server
+  register: install_k3s
+  changed_when: '"No change detected so skipping service start" not in install_k3s.stdout'
+  throttle: 1
+
+- name: Taint node
+  ansible.builtin.shell: kubectl taint nodes {{ ansible_facts.hostname }} node-role.kubernetes.io/master=true:NoSchedule
+  register: taint
+  failed_when: taint.rc != 0 and "already has node-role.kubernetes.io/master taint" not in taint.stderr
+  changed_when: taint.rc == 0

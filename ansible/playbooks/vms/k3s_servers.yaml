@@ -1,2 +1,0 @@
-- name: Configure k3s Servers
-  hosts: k3s_servers

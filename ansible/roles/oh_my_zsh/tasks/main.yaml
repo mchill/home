@@ -5,7 +5,7 @@
 
 - name: Copy .zshrc file
   ansible.builtin.template:
-    src: zshrc.j2
+    src: .zshrc.j2
     dest: ~/.zshrc
     mode: "0644"
 

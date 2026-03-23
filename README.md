@@ -46,7 +46,7 @@ terraform apply -var="initialize=true"
 ### Configure Virtual Machines
 
 ```bash
-ansible-playbook playbooks/configure_proxmox_vms.yaml -i inventory.yaml
+ansible-playbook playbooks/configure_proxmox_vms.yaml -i inventory.yaml --extra-vars "k3s_token=<redacted>"
 ```
 
 ### Deploy Workloads

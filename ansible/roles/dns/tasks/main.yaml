@@ -1,0 +1,15 @@
+- name: Copy resolved.conf file
+  become: true
+  ansible.builtin.copy:
+    src: resolved.conf
+    dest: /etc/systemd/resolved.conf
+    mode: "0644"
+  register: resolved_conf
+
+- name: Restart resolved service
+  become: true
+  when: resolved_conf.changed
+  ansible.builtin.systemd:
+    name: systemd-resolved
+    state: restarted
+    daemon_reload: yes

@@ -1,0 +1,6 @@
+server: https://{{ hostvars[groups['k3s_servers'][0]]['ansible_host'] }}:6443
+token: {{ k3s_token }}
+kubelet-arg:
+  - allowed-unsafe-sysctls=net.*
+  - system-reserved=memory=1Gi
+  - kube-reserved=memory=1Gi

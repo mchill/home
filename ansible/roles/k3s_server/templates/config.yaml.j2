@@ -1,0 +1,18 @@
+{% if k3s_primary is defined and k3s_primary %}
+cluster-init: true
+{% else %}
+server: https://{{ hostvars[groups['k3s_servers'][0]]['ansible_host'] }}:6443
+{% endif %}
+token: {{ k3s_token }}
+write-kubeconfig: {{ ansible_facts.user_dir }}/.kube/config
+write-kubeconfig-mode: 644
+tls-san:
+  - mchill.io
+disable:
+  - local-storage
+  - servicelb
+  - traefik
+kubelet-arg:
+  - allowed-unsafe-sysctls=net.*
+  - system-reserved=memory=1Gi
+  - kube-reserved=memory=1Gi
