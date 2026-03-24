@@ -30,14 +30,14 @@
       changed_when: osd_create.rc == 0
 
     - name: Get existing pools
-      ansible.builtin.command: ceph osd pool ls
+      ansible.builtin.shell: ceph osd pool ls
       register: ceph_pools
       changed_when: false
       run_once: true
       delegate_to: "{{ groups['proxmox_hosts'][0] }}"
 
     - name: Create pool
-      ansible.builtin.command: pveceph pool create k8s --pg_autoscale_mode on
+      ansible.builtin.shell: pveceph pool create k8s --pg_autoscale_mode on
       when: '"k8s" not in ceph_pools.stdout_lines'
       run_once: true
       delegate_to: "{{ groups['proxmox_hosts'][0] }}"

@@ -7,8 +7,11 @@ ungrouped:
   hosts:
     pihole:
       ansible_host: 192.168.1.2
+    comet:
+      ansible_host: 192.168.1.12
+      ansible_user: root
     raspberrypi:
-      ansible_host: 192.168.1.5
+      ansible_host: 192.168.1.13
 
 proxmox_hosts:
   hosts:

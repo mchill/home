@@ -1,14 +1,14 @@
 # Kubernetes
-secret*.yaml
-secret*.json
+k8s/**/secret*.yaml
+k8s/**/secret*.json
 
 # Helm
 charts/
 
 # Terraform
-.env
-.terraform/
-terraform.tfstate
+terraform/.env
+terraform/.terraform/
+terraform/terraform.tfstate
 
 # Ansible
 ansible/variables.yaml

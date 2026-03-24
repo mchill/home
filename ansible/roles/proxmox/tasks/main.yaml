@@ -22,3 +22,10 @@
     - name: Update APT cache
       ansible.builtin.apt:
         update_cache: true
+
+    - name: Copy backup.sh file
+      become: false
+      ansible.builtin.copy:
+        src: backup.sh
+        dest: /home/mchill/backup.sh
+        mode: "0644"

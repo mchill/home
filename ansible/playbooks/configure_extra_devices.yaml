@@ -1,0 +1,29 @@
+- name: Configure Comet KVM
+  hosts: comet
+  tasks:
+    - name: Copy testmart.py file
+      ansible.builtin.copy:
+        src: ../files/tesmart.py
+        dest: /root/tesmart.py
+        mode: "0644"
+
+- name: Configure Media Center Pi
+  hosts: raspberrypi
+  tasks:
+    - name: Copy Docker Compose file
+      ansible.builtin.copy:
+        src: ../files/media_center/docker-compose.yml
+        dest: "{{ ansible_facts.user_dir }}/docker/docker-compose.yml"
+        mode: "0644"
+
+    - name: Copy keyboard2mqtt config
+      ansible.builtin.copy:
+        src: ../files/media_center/keyboard2mqtt
+        dest: "{{ ansible_facts.user_dir }}/docker/keyboard2mqtt"
+        mode: "0644"
+        directory_mode: "0755"
+
+    - name: Start Media Center Docker Compose
+      ansible.builtin.shell:
+        cmd: docker compose up -d
+        chdir: "{{ ansible_facts.user_dir }}/docker"

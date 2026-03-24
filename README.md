@@ -14,10 +14,14 @@ This is the configuration for my home server running in Kubernetes.
 
 1. Install Proxmox.
 
-2. Enable passwordless sudo to allow Ansible to run later.
+2. Create user.
 
    ```bash
-   echo "mchill ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/mchill
+   apt update
+   apt install sudo
+   useradd -m mchill
+   passwd mchill
+   echo "mchill ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers.d/mchill
    ```
 
 3. Add ssh key from GitHub.
