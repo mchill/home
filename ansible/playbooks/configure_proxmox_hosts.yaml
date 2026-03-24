@@ -1,0 +1,7 @@
+- name: Configure Proxmox Hosts
+  hosts: proxmox_hosts
+  roles:
+    - oh_my_zsh
+    - proxmox
+    - ceph
+    - gpu_passthrough

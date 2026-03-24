@@ -1,15 +1,18 @@
-- name: Copy resolved.conf file
+- name: Configure DNS
   become: true
-  ansible.builtin.copy:
-    src: resolved.conf
-    dest: /etc/systemd/resolved.conf
-    mode: "0644"
-  register: resolved_conf
+  block:
+    - name: Copy resolved.conf file
+      ansible.builtin.copy:
+        content: |
+          DNS=8.8.8.8
+          DNSStubListener=no
+        dest: /etc/systemd/resolved.conf
+        mode: "0644"
+      register: resolved_conf
 
-- name: Restart resolved service
-  become: true
-  when: resolved_conf.changed
-  ansible.builtin.systemd:
-    name: systemd-resolved
-    state: restarted
-    daemon_reload: yes
+    - name: Restart resolved service
+      when: resolved_conf.changed
+      ansible.builtin.systemd:
+        name: systemd-resolved
+        state: restarted
+        daemon_reload: yes

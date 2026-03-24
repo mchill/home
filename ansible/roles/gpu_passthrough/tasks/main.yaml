@@ -1,0 +1,39 @@
+- name: Configure GPU passthrough
+  become: true
+  block:
+    - name: Get GPU PCI ID
+      ansible.builtin.shell: lspci -nn | grep 00:02.0
+      register: lspci_output
+      changed_when: false
+      check_mode: false
+
+    - name: Parse GPU PCI ID
+      ansible.builtin.set_fact:
+        gpu_pci_id: "{{ lspci_output.stdout_lines | regex_search('\\[([0-9a-f]{4}:[0-9a-f]{4})\\]', '\\1') | first }}"
+
+    - name: Configure vfio-pci device ID
+      ansible.builtin.copy:
+        content: |
+          options vfio-pci ids={{ gpu_pci_id }}
+        dest: /etc/modprobe.d/vfio.conf
+        mode: "0644"
+      register: vfio_modprobe
+
+    - name: Configure VFIO modules to load at boot
+      ansible.builtin.copy:
+        content: |
+          vfio
+          vfio_iommu_type1
+          vfio_pci
+          vfio_virqfd
+        dest: /etc/modules-load.d/vfio.conf
+        mode: "0644"
+      register: vfio_modules
+
+    - name: Update initramfs
+      ansible.builtin.shell: update-initramfs -u -k all
+      when: vfio_modprobe.changed or vfio_modules.changed
+
+    - name: Reboot if initramfs was updated
+      ansible.builtin.reboot:
+      when: vfio_modprobe.changed or vfio_modules.changed

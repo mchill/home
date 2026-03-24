@@ -1,0 +1,40 @@
+- name: Configure GRUB
+  become: true
+  block:
+    - name: Install GPU drivers
+      ansible.builtin.apt:
+        pkg:
+          - intel-media-va-driver
+          - libva-drm2
+          - intel-gpu-tools
+        state: present
+        update_cache: true
+
+    - name: Set GRUB_CMDLINE_LINUX_DEFAULT
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        regexp: ^GRUB_CMDLINE_LINUX_DEFAULT=
+        line: 'GRUB_CMDLINE_LINUX_DEFAULT="console=tty0 console=ttyS0,115200n8"'
+      register: grub_cmdline
+
+    - name: Set GRUB_TERMINAL
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        regexp: ^GRUB_TERMINAL=
+        line: 'GRUB_TERMINAL="serial console"'
+      register: grub_terminal
+
+    - name: Set GRUB_SERIAL_COMMAND
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        regexp: ^GRUB_SERIAL_COMMAND=
+        line: 'GRUB_SERIAL_COMMAND="serial --speed=115200 --unit=0 --word=8 --parity=no --stop=1"'
+      register: grub_serial
+
+    - name: Update GRUB
+      when: grub_cmdline.changed or grub_terminal.changed or grub_serial.changed
+      ansible.builtin.shell: update-grub
+
+    - name: Reboot
+      when: grub_cmdline.changed or grub_terminal.changed or grub_serial.changed
+      ansible.builtin.reboot:

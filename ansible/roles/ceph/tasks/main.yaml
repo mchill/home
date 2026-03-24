@@ -1,0 +1,113 @@
+- name: Check mandatory variables
+  ansible.builtin.assert:
+    that:
+      - ceph_dashboard_password is defined
+
+- name: Configure Ceph
+  become: true
+  block:
+    - name: Initialize Ceph
+      ansible.builtin.shell: pveceph init --network 192.168.1.0/24
+      args:
+        creates: /etc/pve/ceph.conf
+      run_once: true
+      delegate_to: "{{ groups['proxmox_hosts'][0] }}"
+
+    - name: Create monitors
+      ansible.builtin.shell: pveceph mon create
+      args:
+        creates: /var/lib/ceph/mon/ceph-{{ ansible_facts.hostname }}
+
+    - name: Create managers
+      ansible.builtin.shell: pveceph mgr create
+      args:
+        creates: /var/lib/ceph/mgr/ceph-{{ ansible_facts.hostname }}
+
+    - name: Create OSDs
+      ansible.builtin.shell: pveceph osd create /dev/sdb
+      register: osd_create
+      failed_when: osd_create.rc != 0 and 'already in use' not in osd_create.stderr
+      changed_when: osd_create.rc == 0
+
+    - name: Get existing pools
+      ansible.builtin.command: ceph osd pool ls
+      register: ceph_pools
+      changed_when: false
+      run_once: true
+      delegate_to: "{{ groups['proxmox_hosts'][0] }}"
+
+    - name: Create pool
+      ansible.builtin.command: pveceph pool create k8s --pg_autoscale_mode on
+      when: '"k8s" not in ceph_pools.stdout_lines'
+      run_once: true
+      delegate_to: "{{ groups['proxmox_hosts'][0] }}"
+
+    - name: Create RBD user for k8s
+      ansible.builtin.shell: ceph auth get-or-create client.k8s mon 'profile rbd' osd 'profile rbd pool=k8s' mgr 'profile rbd'
+      changed_when: false
+
+- name: Configure Ceph Dashboard
+  become: true
+  block:
+    - name: Install dashboard
+      ansible.builtin.apt:
+        pkg:
+          - ceph-mgr-dashboard
+        state: present
+        update_cache: true
+
+    - name: Enable dashboard
+      ansible.builtin.shell: ceph mgr module enable dashboard
+      register: enable_dashboard
+      changed_when: '"already enabled" not in enable_dashboard.stderr'
+
+    - name: Get configuration
+      ansible.builtin.shell: ceph config dump --format json
+      register: ceph_config_dump
+      changed_when: false
+
+    - name: Configure Ceph
+      ansible.builtin.shell: "ceph config set {{ item.section }} {{ item.key }} {{ item.value }}"
+      vars:
+        config_dump: "{{ ceph_config_dump.stdout | default('[]', true) | from_json }}"
+        current_value: "{{ (config_dump | selectattr('name', 'equalto', item.key) | selectattr('section', 'equalto', item.section) | list | first | default({})).value | default('') }}"
+      loop:
+        - section: mgr
+          key: mgr/dashboard/ssl
+          value: "false"
+        - section: mgr
+          key: mgr/dashboard/standby_behaviour
+          value: error
+        - section: mgr
+          key: mgr/dashboard/standby_error_status_code
+          value: "503"
+        - section: global
+          key: bluestore_slow_ops_warn_lifetime
+          value: "300"
+        - section: global
+          key: bluestore_slow_ops_warn_threshold
+          value: "5"
+      when: current_value != item.value
+
+    - name: Create temp password file
+      ansible.builtin.copy:
+        content: "{{ ceph_dashboard_password }}"
+        dest: /tmp/ceph_dashboard_password
+        mode: "0600"
+      changed_when: false
+
+    - name: Check if dashboard user exists
+      ansible.builtin.shell: ceph dashboard ac-user-show mchill
+      register: dashboard_user_check
+      failed_when: false
+      changed_when: false
+
+    - name: Create dashboard user
+      ansible.builtin.shell: ceph dashboard ac-user-create mchill -i /tmp/ceph_dashboard_password administrator
+      when: dashboard_user_check.rc != 0
+
+    - name: Remove temp password file
+      ansible.builtin.file:
+        path: /tmp/ceph_dashboard_password
+        state: absent
+      changed_when: false

@@ -1,0 +1,24 @@
+- name: Configure Proxmox
+  become: true
+  block:
+    - name: Disable PVE enterprise repository
+      ansible.builtin.replace:
+        path: /etc/apt/sources.list.d/pve-enterprise.list
+        regexp: ^deb
+        replace: #deb
+
+    - name: Disable Ceph enterprise repository
+      ansible.builtin.replace:
+        path: /etc/apt/sources.list.d/ceph.list
+        regexp: ^deb
+        replace: #deb
+
+    - name: Add PVE no-subscription repository
+      ansible.builtin.apt_repository:
+        repo: deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription
+        state: present
+        filename: pve-no-subscription
+
+    - name: Update APT cache
+      ansible.builtin.apt:
+        update_cache: true

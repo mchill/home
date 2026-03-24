@@ -10,11 +10,39 @@ This is the configuration for my home server running in Kubernetes.
 
 ## Setup
 
-### Configure Nodes
+### Configure Hosts
 
-```bash
-ansible-playbook playbooks/configure_proxmox_hosts.yaml -i inventory.yaml
-```
+1. Install Proxmox.
+
+2. Enable passwordless sudo to allow Ansible to run later.
+
+   ```bash
+   echo "mchill ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/mchill
+   ```
+
+3. Add ssh key from GitHub.
+
+   ```bash
+   mkdir ~/.ssh
+   touch ~/.ssh/authorized_keys
+   chmod 700 ~/.ssh
+   chmod 600 ~/.ssh/authorized_keys
+   wget -O - https://github.com/mchill.keys >> ~/.ssh/authorized_keys
+   ```
+
+4. Configure the hosts with Ansible.
+
+   ```bash
+   ansible-playbook playbooks/configure_proxmox_hosts.yaml -i inventory.yaml --extra-vars "@variables.yaml"
+   ```
+
+5. If Ceph was installed for the first time, some values need to be replaced.
+   - Replace the `clusterID` with the result of `ceph fsid` in:
+     - [k8s/infrastructure/ceph/values.yaml](k8s/infrastructure/ceph/values.yaml)
+     - [k8s/overlays/persistence/pv.yaml](k8s/overlays/persistence/pv.yaml)
+
+   - Replace the `userKey` with the result of `ceph auth get-key client.k8s` in:
+     - [k8s/infrastructure/ceph/secret.yaml](k8s/infrastructure/ceph/secret.yaml)
 
 ### Provision Virtual Machines
 
@@ -46,7 +74,7 @@ terraform apply -var="initialize=true"
 ### Configure Virtual Machines
 
 ```bash
-ansible-playbook playbooks/configure_proxmox_vms.yaml -i inventory.yaml --extra-vars "k3s_token=<redacted>"
+ansible-playbook playbooks/configure_proxmox_vms.yaml -i inventory.yaml --extra-vars "@variables.yaml"
 ```
 
 ### Deploy Workloads

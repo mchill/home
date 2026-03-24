@@ -1,64 +1,26 @@
-- name: Install GPU drivers
-  become: true
-  ansible.builtin.apt:
-    pkg:
-      - intel-media-va-driver
-      - libva-drm2
-      - intel-gpu-tools
-    state: present
-    update_cache: true
+- name: Check mandatory variables
+  ansible.builtin.assert:
+    that:
+      - k3s_token is defined
 
-- name: Set GRUB_CMDLINE_LINUX_DEFAULT
+- name: Configure k3s agent
   become: true
-  ansible.builtin.lineinfile:
-    path: /etc/default/grub
-    regexp: ^GRUB_CMDLINE_LINUX_DEFAULT=
-    line: 'GRUB_CMDLINE_LINUX_DEFAULT="console=tty0 console=ttyS0,115200n8"'
-  register: grub_cmdline
+  block:
+    - name: Create k3s directory
+      ansible.builtin.file:
+        path: /etc/rancher/k3s
+        state: directory
+        recurse: true
 
-- name: Set GRUB_TERMINAL
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/default/grub
-    regexp: ^GRUB_TERMINAL=
-    line: 'GRUB_TERMINAL="serial console"'
-  register: grub_terminal
+    - name: Copy config file
+      ansible.builtin.template:
+        src: config.yaml.j2
+        dest: /etc/rancher/k3s/config.yaml
+        mode: "0644"
 
-- name: Set GRUB_SERIAL_COMMAND
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/default/grub
-    regexp: ^GRUB_SERIAL_COMMAND=
-    line: 'GRUB_SERIAL_COMMAND="serial --speed=115200 --unit=0 --word=8 --parity=no --stop=1"'
-  register: grub_serial
-
-- name: Update GRUB
-  become: true
-  when: grub_cmdline.changed or grub_terminal.changed or grub_serial.changed
-  ansible.builtin.command: update-grub
-
-- name: Reboot
-  become: true
-  when: grub_cmdline.changed or grub_terminal.changed or grub_serial.changed
-  ansible.builtin.reboot:
-
-- name: Create k3s directory
-  become: true
-  ansible.builtin.file:
-    path: /etc/rancher/k3s
-    state: directory
-    recurse: true
-
-- name: Copy config file
-  become: true
-  ansible.builtin.template:
-    src: config.yaml.j2
-    dest: /etc/rancher/k3s/config.yaml
-    mode: "0644"
-
-- name: Install k3s
-  environment:
-    INSTALL_K3S_CHANNEL: v1.35
-  ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - agent
-  register: install_k3s
-  changed_when: '"No change detected so skipping service start" not in install_k3s.stdout'
+    - name: Install k3s
+      environment:
+        INSTALL_K3S_CHANNEL: v1.35
+      ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - agent
+      register: install_k3s
+      changed_when: '"No change detected so skipping service start" not in install_k3s.stdout'

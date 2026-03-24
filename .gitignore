@@ -9,3 +9,6 @@ charts/
 .env
 .terraform/
 terraform.tfstate
+
+# Ansible
+ansible/variables.yaml

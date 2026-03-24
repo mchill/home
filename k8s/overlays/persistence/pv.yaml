@@ -14,7 +14,7 @@ spec:
     fsType: ext4
     volumeHandle: $(VOLUME)
     volumeAttributes:
-      clusterID: a4ad5514-e58b-48d1-a0b4-8feef8685b43
+      clusterID: a4ad5514-e58b-48d1-a0b4-8feef8685b43 # ceph fsid
       pool: k8s
       staticVolume: "true"
       imageFeatures: deep-flatten,layering,exclusive-lock,object-map,fast-diff
