@@ -1,3 +1,5 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 namespace: server
 resources:
   - https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/alternative.yaml
@@ -13,48 +15,48 @@ helmCharts:
           - match: Host("k8s.mchill.io")
       service:
         enabled: false
-patchesStrategicMerge:
-  - |-
-    $patch: delete
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: kubernetes-dashboard
-  - |-
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: kubernetes-dashboard
-      namespace: kubernetes-dashboard
-    spec:
-      template:
-        spec:
-          containers:
-            - name: kubernetes-dashboard
-              args:
-                - --namespace=server
-                - --enable-insecure-login
-                - --enable-skip-login
-              resources:
-                limits:
-                  memory: 128Mi
-                requests:
-                  cpu: 10m
-                  memory: 128Mi
-  - |-
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: dashboard-metrics-scraper
-      namespace: kubernetes-dashboard
-    spec:
-      template:
-        spec:
-          containers:
-            - name: dashboard-metrics-scraper
-              resources:
-                limits:
-                  memory: 128Mi
-                requests:
-                  cpu: 10m
-                  memory: 128Mi
+patches:
+  - patch: |-
+      $patch: delete
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: kubernetes-dashboard
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: kubernetes-dashboard
+        namespace: kubernetes-dashboard
+      spec:
+        template:
+          spec:
+            containers:
+              - name: kubernetes-dashboard
+                args:
+                  - --namespace=server
+                  - --enable-insecure-login
+                  - --enable-skip-login
+                resources:
+                  limits:
+                    memory: 128Mi
+                  requests:
+                    cpu: 10m
+                    memory: 128Mi
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: dashboard-metrics-scraper
+        namespace: kubernetes-dashboard
+      spec:
+        template:
+          spec:
+            containers:
+              - name: dashboard-metrics-scraper
+                resources:
+                  limits:
+                    memory: 128Mi
+                  requests:
+                    cpu: 10m
+                    memory: 128Mi
