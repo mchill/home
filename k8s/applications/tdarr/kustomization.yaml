@@ -7,8 +7,9 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: tdarr
-      routes:
-        - match: Host("tdarr.mchill.io")
+      ingress:
+        routes:
+          - match: Host("tdarr.mchill.io")
   - name: persistence
     valuesInline:
       app: tdarr

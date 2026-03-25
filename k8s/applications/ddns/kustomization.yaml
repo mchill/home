@@ -8,8 +8,9 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: ddns
-      routes:
-        - match: Host("ddns.mchill.io")
+      ingress:
+        routes:
+          - match: Host("ddns.mchill.io")
   - name: persistence
     valuesInline:
       app: ddns

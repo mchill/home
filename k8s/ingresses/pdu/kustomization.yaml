@@ -7,6 +7,8 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: pdu
-      addSelector: false
-      routes:
-        - match: Host("pdu.mchill.io")
+      service:
+        disableSelector: true
+      ingress:
+        routes:
+          - match: Host("pdu.mchill.io")

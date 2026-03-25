@@ -7,7 +7,10 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: remote-unifi
-      addSelector: false
-      routes:
-        - match: Host("unifi.remote.mchill.io")
-          scheme: https
+      service:
+        disableSelector: true
+      ingress:
+        routes:
+          - match: Host("unifi.remote.mchill.io")
+            service:
+              scheme: https

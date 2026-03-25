@@ -8,10 +8,11 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: romm
-      routes:
-        - match: Host("romm.mchill.io")
-        - match: Host("romm.mchill.io") && PathPrefix("/api")
-          disableForwardAuth: true
+      ingress:
+        routes:
+          - match: Host("romm.mchill.io")
+          - match: Host("romm.mchill.io") && PathPrefix("/api")
+            disableForwardAuth: true
   - name: persistence
     valuesInline:
       app: romm

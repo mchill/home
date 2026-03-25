@@ -13,11 +13,15 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: unifi
-      addSelector: false
-      routes:
-        - match: Host("unifi.mchill.io")
-          scheme: https
-        - match: Host("unifi.mchill.io") && Path("/proxy/network/v2/api/site/default/topology")
-          scheme: https
-          service: unifi-proxy
-          port: 3000
+      service:
+        disableSelector: true
+      ingress:
+        routes:
+          - match: Host("unifi.mchill.io")
+            service:
+              scheme: https
+          - match: Host("unifi.mchill.io") && Path("/proxy/network/v2/api/site/default/topology")
+            service:
+              name: unifi-proxy
+              scheme: https
+              port: 3000

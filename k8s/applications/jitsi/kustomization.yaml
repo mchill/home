@@ -10,9 +10,10 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: jitsi
-      routes:
-        - match: Host("jitsi.mchill.io")
-          disableForwardAuth: true
+      ingress:
+        routes:
+          - match: Host("jitsi.mchill.io")
+            disableForwardAuth: true
   - name: persistence
     valuesInline:
       app: jitsi

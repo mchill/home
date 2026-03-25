@@ -9,8 +9,9 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: static
-      routes:
-        - match: Host("static.mchill.io")
-          disableForwardAuth: true
-          middlewares:
-            - name: static
+      ingress:
+        routes:
+          - match: Host("static.mchill.io")
+            disableForwardAuth: true
+            middlewares:
+              - name: static

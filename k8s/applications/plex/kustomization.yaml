@@ -8,9 +8,10 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: plex
-      routes:
-        - match: Host("plex.mchill.io")
-          disableForwardAuth: true
+      ingress:
+        routes:
+          - match: Host("plex.mchill.io")
+            disableForwardAuth: true
   - name: persistence
     valuesInline:
       app: plex

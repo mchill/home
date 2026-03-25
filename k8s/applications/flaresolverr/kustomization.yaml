@@ -7,8 +7,9 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: flaresolverr
-      routes:
-        - match: Host("flaresolverr.mchill.io")
+      ingress:
+        routes:
+          - match: Host("flaresolverr.mchill.io")
   - name: persistence
     valuesInline:
       app: flaresolverr

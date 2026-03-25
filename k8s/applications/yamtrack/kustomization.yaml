@@ -8,8 +8,9 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: yamtrack
-      routes:
-        - match: Host("yamtrack.mchill.io")
+      ingress:
+        routes:
+          - match: Host("yamtrack.mchill.io")
   - name: persistence
     valuesInline:
       app: yamtrack

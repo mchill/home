@@ -9,9 +9,10 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: tubearchivist
-      routes:
-        - match: Host("tube.mchill.io")
-          disableForwardAuth: true
+      ingress:
+        routes:
+          - match: Host("tube.mchill.io")
+            disableForwardAuth: true
   - name: persistence
     valuesInline:
       app: tubearchivist

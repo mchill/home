@@ -1,3 +1,19 @@
-addSelector: true
-app: ""
-routes: [{}]
+app:
+
+ingress:
+  enabled: true
+  routes: []
+
+service:
+  enabled: true
+  disableSelector: false
+
+endpoint:
+  enabled: false
+  ip:
+  port:
+
+loadBalancer:
+  enabled: false
+  ip:
+  port:

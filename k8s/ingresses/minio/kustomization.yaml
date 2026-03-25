@@ -7,6 +7,8 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: minio
-      addSelector: false
-      routes:
-        - match: Host("minio.mchill.io")
+      service:
+        disableSelector: true
+      ingress:
+        routes:
+          - match: Host("minio.mchill.io")

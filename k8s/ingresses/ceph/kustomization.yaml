@@ -5,14 +5,11 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: ceph
-      routes:
-        - match: Host("ceph.mchill.io")
-patches:
-  - target:
-      kind: IngressRoute
-    patch: |-
-      - op: replace
-        path: /spec/routes/0/services
-        value:
-          - kind: TraefikService
-            name: ceph@file
+      service:
+        enabled: false
+      ingress:
+        routes:
+          - match: Host("ceph.mchill.io")
+            service:
+              kind: TraefikService
+              name: ceph@file

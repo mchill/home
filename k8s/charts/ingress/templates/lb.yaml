@@ -1,0 +1,16 @@
+{{- if .Values.loadBalancer.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app }}-lb
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancer.ip }}
+spec:
+  type: LoadBalancer
+  selector:
+    app: {{ .Values.app }}
+  ports:
+    - name: ingress
+      port: {{ .Values.loadBalancer.port }}
+      targetPort: ingress
+{{- end }}

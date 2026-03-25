@@ -7,15 +7,8 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: nas
-      addSelector: false
-      routes:
-        - match: Host("nas.mchill.io")
-patches:
-  - target:
-      kind: Service
-    patch: |-
-      - op: add
-        path: /spec/ports/-
-        value:
-          name: ssh
-          port: 22
+      service:
+        disableSelector: true
+      ingress:
+        routes:
+          - match: Host("nas.mchill.io")

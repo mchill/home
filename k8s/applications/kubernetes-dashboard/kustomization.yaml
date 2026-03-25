@@ -8,19 +8,16 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: kubernetes-dashboard
-      routes:
-        - match: Host("k8s.mchill.io")
+      ingress:
+        routes:
+          - match: Host("k8s.mchill.io")
+      service:
+        enabled: false
 patchesStrategicMerge:
   - |-
     $patch: delete
     apiVersion: v1
     kind: Namespace
-    metadata:
-      name: kubernetes-dashboard
-  - |-
-    $patch: delete
-    apiVersion: v1
-    kind: Service
     metadata:
       name: kubernetes-dashboard
   - |-

@@ -1,3 +1,4 @@
+{{- if .Values.ingress.enabled }}
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -8,13 +9,17 @@ spec:
   entryPoints:
     - websecure
   routes:
-{{- range .Values.routes }}
+{{- range .Values.ingress.routes }}
+{{- $service := default dict .service }}
     - kind: Rule
       match: {{ .match }}
       services:
-        - name: {{ default $.Values.app .service }}
-          scheme: {{ default "http" .scheme }}
-          port: {{ default 80 .port }}
+        - kind: {{ default "Service" $service.kind }}
+          name: {{ default $.Values.app $service.name }}
+{{- if ne $service.kind "TraefikService" }}
+          scheme: {{ default "http" $service.scheme }}
+          port: {{ default 80 $service.port }}
+{{- end }}
 {{- if or (not .disableForwardAuth) .middlewares }}
       middlewares:
 {{- if not .disableForwardAuth }}
@@ -28,5 +33,6 @@ spec:
 {{- end }}
 {{- if .priority }}
       priority: {{ .priority }}
+{{- end }}
 {{- end }}
 {{- end }}

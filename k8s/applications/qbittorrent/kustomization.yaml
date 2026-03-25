@@ -8,8 +8,9 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: qbittorrent
-      routes:
-        - match: Host("qbittorrent.mchill.io")
+      ingress:
+        routes:
+          - match: Host("qbittorrent.mchill.io")
   - name: persistence
     valuesInline:
       app: qbittorrent

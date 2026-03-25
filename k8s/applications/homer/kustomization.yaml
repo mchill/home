@@ -11,9 +11,10 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: homer
-      routes:
-        - match: Host("mchill.io")
-          disableForwardAuth: true
+      ingress:
+        routes:
+          - match: Host("mchill.io")
+            disableForwardAuth: true
   - name: persistence
     valuesInline:
       app: homer

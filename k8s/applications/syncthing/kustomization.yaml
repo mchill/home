@@ -7,8 +7,9 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: syncthing
-      routes:
-        - match: Host("syncthing.mchill.io")
+      ingress:
+        routes:
+          - match: Host("syncthing.mchill.io")
   - name: persistence
     valuesInline:
       app: syncthing

@@ -7,7 +7,10 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: kvm
-      addSelector: false
-      routes:
-        - match: Host("kvm.mchill.io")
-          scheme: https
+      service:
+        disableSelector: true
+      ingress:
+        routes:
+          - match: Host("kvm.mchill.io")
+            service:
+              scheme: https

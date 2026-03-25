@@ -9,9 +9,10 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: stardew
-      routes:
-        - match: Host("stardew.mchill.io")
-          disableForwardAuth: true
+      ingress:
+        routes:
+          - match: Host("stardew.mchill.io")
+            disableForwardAuth: true
   - name: persistence
     valuesInline:
       app: stardew

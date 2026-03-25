@@ -12,7 +12,8 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: errors
-      routes:
-        - match: HostRegexp(`{host:.+}`)
-          disableForwardAuth: true
-          priority: 1
+      ingress:
+        routes:
+          - match: HostRegexp(`{host:.+}`)
+            disableForwardAuth: true
+            priority: 1
