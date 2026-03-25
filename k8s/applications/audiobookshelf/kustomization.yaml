@@ -1,8 +1,16 @@
 namespace: server
-commonLabels:
-  app: audiobookshelf
-  subdomain: books
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: audiobookshelf
+      routes:
+        - match: Host("books.mchill.io")
+          disableForwardAuth: true
+  - name: persistence
+    valuesInline:
+      app: audiobookshelf
+      size: 512Mi

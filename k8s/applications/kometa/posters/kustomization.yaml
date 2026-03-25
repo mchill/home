@@ -1,6 +1,4 @@
 namespace: server
-commonLabels:
-  app: kometa-posters
 resources:
   - cron-job.yaml
 configMapGenerator:

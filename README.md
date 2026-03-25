@@ -43,7 +43,7 @@ This is the configuration for my home server running in Kubernetes.
 5. If Ceph was installed for the first time, some values need to be replaced.
    - Replace the `clusterID` with the result of `ceph fsid` in:
      - [k8s/infrastructure/ceph/values.yaml](k8s/infrastructure/ceph/values.yaml)
-     - [k8s/overlays/persistence/pv.yaml](k8s/overlays/persistence/pv.yaml)
+     - [k8s/charts/persistence/templates/pv.yaml](k8s/charts/persistence/templates/pv.yaml)
 
    - Replace the `userKey` with the result of `ceph auth get-key client.k8s` in:
      - [k8s/infrastructure/ceph/secret.yaml](k8s/infrastructure/ceph/secret.yaml)
@@ -85,6 +85,6 @@ ansible-playbook playbooks/configure_proxmox_vms.yaml -i inventory.yaml --extra-
 
 ```bash
 pushd k8s/infrastructure && ./apply.sh && popd
-pushd k8s/ingresses && ./build.sh | kubectl apply --server-side --force-conflicts -f - && popd
-pushd k8s/applications && ./build.sh | kubectl apply --server-side --force-conflicts -f - && popd
+pushd k8s/ingresses && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side --force-conflicts -f - && popd
+pushd k8s/applications && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side --force-conflicts -f - && popd
 ```

@@ -6,6 +6,8 @@ metadata:
     metallb.universe.tf/loadBalancerIPs: 192.168.1.82
 spec:
   type: LoadBalancer
+  selector:
+    app: plex
   ports:
     - name: ingress
       port: 32400

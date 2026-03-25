@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: minecraft
 spec:
+  selector:
+    matchLabels:
+      app: minecraft
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: minecraft
     spec:
       securityContext:
         fsGroup: 1000

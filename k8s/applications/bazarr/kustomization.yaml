@@ -1,8 +1,15 @@
 namespace: server
-commonLabels:
-  app: bazarr
-  subdomain: bazarr
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: bazarr
+      routes:
+        - match: Host("bazarr.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: bazarr
+      size: 128Mi

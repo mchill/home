@@ -1,8 +1,12 @@
 namespace: server
-transformers:
-  - label-transformer.yaml
-resources:
-  - ../../overlays/ingress
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: ceph
+      routes:
+        - match: Host("ceph.mchill.io")
 patches:
   - target:
       kind: IngressRoute

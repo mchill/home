@@ -6,6 +6,8 @@ metadata:
     metallb.universe.tf/loadBalancerIPs: 192.168.1.86
 spec:
   type: LoadBalancer
+  selector:
+    app: stardew
   ports:
     - name: stardew
       port: 24642

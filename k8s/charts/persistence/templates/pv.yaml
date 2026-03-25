@@ -1,18 +1,18 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: $(VOLUME)
+  name: "{{ .Values.app }}"
 spec:
   accessModes:
     - ReadWriteOnce
   capacity:
-    storage: 1Gi
+    storage: "{{ .Values.size }}"
   storageClassName: ""
   persistentVolumeReclaimPolicy: Retain
   csi:
     driver: rbd.csi.ceph.com
     fsType: ext4
-    volumeHandle: $(VOLUME)
+    volumeHandle: "{{ .Values.app }}"
     volumeAttributes:
       clusterID: a4ad5514-e58b-48d1-a0b4-8feef8685b43 # ceph fsid
       pool: k8s

@@ -4,6 +4,8 @@ metadata:
   name: traefik-clusterip
 spec:
   type: ClusterIP
+  selector:
+    app.kubernetes.io/name: traefik
   ports:
     - name: traefik
       port: 9000

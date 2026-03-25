@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: nut-exporter
 spec:
+  selector:
+    matchLabels:
+      app: nut-exporter
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: nut-exporter
     spec:
       containers:
         - name: nut-exporter

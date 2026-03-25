@@ -1,8 +1,15 @@
 namespace: server
-commonLabels:
-  app: peanut
-  subdomain: nut
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: peanut
+      routes:
+        - match: Host("peanut.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: peanut
+      size: 128Mi

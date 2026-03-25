@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: bazarr
 spec:
+  selector:
+    matchLabels:
+      app: bazarr
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: bazarr
     spec:
       securityContext:
         fsGroup: 1000

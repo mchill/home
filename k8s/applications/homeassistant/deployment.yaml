@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: homeassistant
 spec:
+  selector:
+    matchLabels:
+      app: homeassistant
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: homeassistant
     spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet

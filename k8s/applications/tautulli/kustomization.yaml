@@ -1,9 +1,16 @@
 namespace: server
-commonLabels:
-  app: tautulli
-  subdomain: tautulli
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
   - service.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: tautulli
+      routes:
+        - match: Host("tautulli.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: tautulli
+      size: 1Gi

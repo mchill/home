@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: tubearchivist
 spec:
+  selector:
+    matchLabels:
+      app: tubearchivist
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: tubearchivist
     spec:
       securityContext:
         fsGroup: 1000

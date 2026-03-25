@@ -1,17 +1,16 @@
 namespace: server
-commonLabels:
-  app: static
-  subdomain: static
 resources:
-  - ../../overlays/ingress
   - daemon-set.yaml
   - middleware.yaml
   - sealed-secret.yaml
-patches:
-  - target:
-      kind: IngressRoute
-    patch: |-
-      - op: add
-        path: /spec/routes/0/middlewares/-
-        value:
-          name: static
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: static
+      routes:
+        - match: Host("static.mchill.io")
+          disableForwardAuth: true
+          middlewares:
+            - name: static

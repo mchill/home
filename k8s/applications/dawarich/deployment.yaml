@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: dawarich
 spec:
+  selector:
+    matchLabels:
+      app: dawarich
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: dawarich
     spec:
       securityContext:
         fsGroup: 1000

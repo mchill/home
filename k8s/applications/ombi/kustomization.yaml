@@ -1,20 +1,18 @@
 namespace: server
-commonLabels:
-  app: ombi
-  subdomain: ombi
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
-patches:
-  - target:
-      kind: IngressRoute
-    patch: |-
-      - op: add
-        path: /spec/routes/-
-        value:
-          match: Host("overseerr.mchill.io")
-          kind: Rule
-          services:
-            - name: $(APP)
-              port: 80
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: ombi
+      routes:
+        - match: Host("ombi.mchill.io")
+          disableForwardAuth: true
+        - match: Host("overseerr.mchill.io")
+          disableForwardAuth: true
+  - name: persistence
+    valuesInline:
+      app: ombi
+      size: 128Mi

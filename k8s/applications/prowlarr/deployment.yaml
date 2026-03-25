@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: prowlarr
 spec:
+  selector:
+    matchLabels:
+      app: prowlarr
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: prowlarr
     spec:
       securityContext:
         fsGroup: 1000

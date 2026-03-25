@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: flaresolverr
 spec:
+  selector:
+    matchLabels:
+      app: flaresolverr
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: flaresolverr
     spec:
       securityContext:
         fsGroup: 1000

@@ -1,9 +1,16 @@
 namespace: server
-commonLabels:
-  app: sonarr
-  subdomain: sonarr
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
   - service.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: sonarr
+      routes:
+        - match: Host("sonarr.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: sonarr
+      size: 1Gi

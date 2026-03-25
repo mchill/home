@@ -2,9 +2,6 @@
 k8s/**/secret*.yaml
 k8s/**/secret*.json
 
-# Helm
-charts/
-
 # Terraform
 terraform/.env
 terraform/.terraform/

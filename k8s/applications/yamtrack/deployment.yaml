@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: yamtrack
 spec:
+  selector:
+    matchLabels:
+      app: yamtrack
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: yamtrack
     spec:
       securityContext:
         fsGroup: 1000

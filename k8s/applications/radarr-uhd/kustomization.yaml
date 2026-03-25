@@ -1,8 +1,15 @@
 namespace: server
-commonLabels:
-  app: radarr-uhd
-  subdomain: radarr-uhd
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: radarr-uhd
+      routes:
+        - match: Host("radarr-uhd.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: radarr-uhd
+      size: 2Gi

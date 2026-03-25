@@ -1,8 +1,16 @@
 namespace: server
-commonLabels:
-  app: mealie
-  subdomain: recipes
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: mealie
+      routes:
+        - match: Host("recipes.mchill.io")
+          disableForwardAuth: true
+  - name: persistence
+    valuesInline:
+      app: mealie
+      size: 256Mi

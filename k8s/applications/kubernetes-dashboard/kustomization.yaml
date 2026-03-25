@@ -1,11 +1,15 @@
 namespace: server
-commonLabels:
-  app: kubernetes-dashboard
-  subdomain: k8s
 resources:
-  - ../../overlays/ingress
   - https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/alternative.yaml
   - cluster-role-binding.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: kubernetes-dashboard
+      routes:
+        - match: Host("k8s.mchill.io")
 patchesStrategicMerge:
   - |-
     $patch: delete
@@ -18,7 +22,7 @@ patchesStrategicMerge:
     apiVersion: v1
     kind: Service
     metadata:
-      name: $(APP)
+      name: kubernetes-dashboard
   - |-
     apiVersion: apps/v1
     kind: Deployment

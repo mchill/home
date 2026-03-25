@@ -7,9 +7,3 @@ resources:
   - sealed-secret.yaml
   - service.yaml
   - tls-store.yaml
-commonLabels:
-  app: traefik
-configMapGenerator:
-  - name: traefik-forward-auth
-    files:
-      - traefik-forward-auth.ini

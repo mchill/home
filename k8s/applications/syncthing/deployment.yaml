@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: syncthing
 spec:
+  selector:
+    matchLabels:
+      app: syncthing
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: syncthing
     spec:
       hostNetwork: true
       securityContext:

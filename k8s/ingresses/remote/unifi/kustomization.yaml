@@ -1,13 +1,13 @@
 namespace: server
-transformers:
-  - label-transformer.yaml
 resources:
-  - ../../../overlays/ingress
   - endpoint.yaml
-patches:
-  - target:
-      kind: IngressRoute
-    patch: |-
-      - op: replace
-        path: /spec/routes/0/services/0/scheme
-        value: https
+helmGlobals:
+  chartHome: ../../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: remote-unifi
+      addSelector: false
+      routes:
+        - match: Host("unifi.remote.mchill.io")
+          scheme: https

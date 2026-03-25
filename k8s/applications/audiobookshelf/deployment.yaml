@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: audiobookshelf
 spec:
+  selector:
+    matchLabels:
+      app: audiobookshelf
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: audiobookshelf
     spec:
       securityContext:
         fsGroup: 1000

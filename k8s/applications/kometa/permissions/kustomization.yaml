@@ -1,6 +1,4 @@
 namespace: server
-commonLabels:
-  app: kometa-permissions
 resources:
   - cron-job.yaml
 configMapGenerator:

@@ -1,8 +1,15 @@
 namespace: server
-commonLabels:
-  app: tdarr
-  subdomain: tdarr
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: tdarr
+      routes:
+        - match: Host("tdarr.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: tdarr
+      size: 2Gi

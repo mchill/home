@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: jitsi
 spec:
+  selector:
+    matchLabels:
+      app: jitsi
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: jitsi
     spec:
       securityContext:
         fsGroup: 1000

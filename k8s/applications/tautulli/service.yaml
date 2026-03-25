@@ -6,6 +6,8 @@ metadata:
     metallb.universe.tf/loadBalancerIPs: 192.168.1.83
 spec:
   type: LoadBalancer
+  selector:
+    app: tautulli
   ports:
     - name: ingress
       port: 80

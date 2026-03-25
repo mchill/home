@@ -1,6 +1,4 @@
 namespace: server
-commonLabels:
-  app: nut-exporter
 resources:
   - deployment.yaml
   - service.yaml

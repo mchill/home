@@ -1,8 +1,15 @@
 namespace: server
-commonLabels:
-  app: flaresolverr
-  subdomain: flaresolverr
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: flaresolverr
+      routes:
+        - match: Host("flaresolverr.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: flaresolverr
+      size: 128Mi

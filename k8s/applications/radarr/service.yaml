@@ -6,6 +6,8 @@ metadata:
     metallb.universe.tf/loadBalancerIPs: 192.168.1.84
 spec:
   type: LoadBalancer
+  selector:
+    app: radarr
   ports:
     - name: ingress
       port: 80

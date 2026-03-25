@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: radarr
 spec:
+  selector:
+    matchLabels:
+      app: radarr
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: radarr
     spec:
       securityContext:
         fsGroup: 1000

@@ -1,8 +1,5 @@
 namespace: server
-commonLabels:
-  app: minecraft
 resources:
-  - ../../overlays/persistence
   - deployment.yaml
   - service.yaml
 configMapGenerator:
@@ -10,3 +7,10 @@ configMapGenerator:
     files:
       - ops.json
       - whitelist.json
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: persistence
+    valuesInline:
+      app: minecraft
+      size: 4Gi

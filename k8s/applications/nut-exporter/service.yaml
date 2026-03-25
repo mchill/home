@@ -4,6 +4,8 @@ metadata:
   name: nut-exporter
 spec:
   type: ClusterIP
+  selector:
+    app: nut-exporter
   ports:
     - name: nut-exporter
       port: 9995

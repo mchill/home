@@ -1,7 +1,11 @@
 namespace: server
-commonLabels:
-  app: rclone
 resources:
-  - ../../overlays/persistence
   - cron-job.yaml
   - sealed-secret.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: persistence
+    valuesInline:
+      app: rclone
+      size: 128Mi

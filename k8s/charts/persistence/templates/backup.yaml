@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: $(VOLUME)-backup
+  name: "{{ .Values.app }}-backup"
 spec:
   schedule: "@daily"
   concurrencyPolicy: Forbid
@@ -17,16 +17,6 @@ spec:
             source: cronjob
         spec:
           restartPolicy: Never
-          affinity:
-            podAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                - topologyKey: kubernetes.io/hostname
-                  labelSelector:
-                    matchExpressions:
-                      - key: app
-                        operator: In
-                        values:
-                          - $(VOLUME)
           containers:
             - name: backup
               image: alpine:3.23
@@ -39,7 +29,7 @@ spec:
                 - |
                   apk add --no-cache openssh-client util-linux-misc;
                   ssh-keyscan -H 192.168.1.30 >> /root/.ssh/known_hosts;
-                  ssh mchill@192.168.1.30 -o BatchMode=yes "sudo /home/mchill/backup.sh ${VOLUME}";
+                  ssh mchill@192.168.1.30 -o BatchMode=yes "sudo /home/mchill/backup.sh {{ .Values.app }}";
                 # - |
                 #   apk add --no-cache openssh-client util-linux-misc;
                 #   ssh-keyscan -H 192.168.1.30 >> /root/.ssh/known_hosts;
@@ -50,24 +40,16 @@ spec:
               env:
                 - name: TZ
                   value: America/New_York
-                - name: VOLUME
-                  value: $(VOLUME)
               volumeMounts:
                 - name: ssh
                   readOnly: true
                   mountPath: /root/.ssh/id_rsa
                   subPath: id_rsa
-                - name: data
-                  readOnly: true
-                  mountPath: /backup/$(VOLUME)
           volumes:
             - name: ssh
               secret:
                 secretName: beelink1
                 defaultMode: 0600
-            - name: data
-              persistentVolumeClaim:
-                claimName: $(VOLUME)
           resources:
             limits:
               memory: 128Mi

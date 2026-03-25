@@ -1,6 +1,12 @@
 namespace: server
-transformers:
-  - label-transformer.yaml
 resources:
-  - ../../overlays/ingress
   - endpoint.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: pdu
+      addSelector: false
+      routes:
+        - match: Host("pdu.mchill.io")

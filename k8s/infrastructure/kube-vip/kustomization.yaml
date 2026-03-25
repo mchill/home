@@ -1,6 +1,4 @@
 namespace: kube-vip
-commonLabels:
-  app: kube-vip
 resources:
   - https://kube-vip.io/manifests/rbac.yaml
   - daemon-set.yaml

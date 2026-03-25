@@ -1,22 +1,18 @@
 namespace: server
-commonLabels:
-  app: errors
-  subdomain: ""
 resources:
-  - ../../overlays/ingress
   - daemon-set.yaml
 configMapGenerator:
   - name: errors
     files:
       - index.html
       - 401.html
-patches:
-  - target:
-      kind: IngressRoute
-    patch: |-
-      - op: replace
-        path: /spec/routes/0/match
-        value: HostRegexp(`{host:.+}`)
-      - op: add
-        path: /spec/routes/0/priority
-        value: 1
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: errors
+      routes:
+        - match: HostRegexp(`{host:.+}`)
+          disableForwardAuth: true
+          priority: 1

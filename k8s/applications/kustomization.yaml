@@ -1,0 +1,36 @@
+resources:
+  - audiobookshelf
+  - bazarr
+  - dawarich
+  - ddns
+  - errors
+  - flaresolverr
+  - homeassistant
+  - homer
+  - jitsi
+  - kometa
+  - kubernetes-dashboard
+  - mealie
+  - minecraft
+  - nut-exporter
+  - ombi
+  - peanut
+  - plex
+  - podcast-dl
+  - prowlarr
+  - qbittorrent
+  - radarr
+  - radarr-uhd
+  - rclone
+  - romm
+  - sonarr
+  - sonarr-uhd
+  - stardew
+  - static
+  - syncthing
+  - tautulli
+  - tubearchivist
+  - yamtrack
+
+  # - tdarr
+  # - photon

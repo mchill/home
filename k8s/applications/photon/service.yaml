@@ -4,6 +4,8 @@ metadata:
   name: photon
 spec:
   type: ClusterIP
+  selector:
+    app: photon
   ports:
     - name: ingress
       port: 80

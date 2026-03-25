@@ -1,9 +1,17 @@
 namespace: server
-commonLabels:
-  app: homeassistant
-  subdomain: home
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
   - service.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: homeassistant
+      routes:
+        - match: Host("home.mchill.io")
+          disableForwardAuth: true
+  - name: persistence
+    valuesInline:
+      app: homeassistant
+      size: 1Gi

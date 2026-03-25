@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: romm
 spec:
+  selector:
+    matchLabels:
+      app: romm
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: romm
     spec:
       securityContext:
         fsGroup: 1000

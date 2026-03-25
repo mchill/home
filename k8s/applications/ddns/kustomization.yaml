@@ -1,9 +1,16 @@
 namespace: server
-commonLabels:
-  app: ddns
-  subdomain: ddns
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
   - sealed-secret.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: ddns
+      routes:
+        - match: Host("ddns.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: ddns
+      size: 128Mi

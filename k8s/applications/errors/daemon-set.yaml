@@ -3,7 +3,13 @@ kind: DaemonSet
 metadata:
   name: errors
 spec:
+  selector:
+    matchLabels:
+      app: errors
   template:
+    metadata:
+      labels:
+        app: errors
     spec:
       containers:
         - name: errors

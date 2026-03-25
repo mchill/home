@@ -1,9 +1,16 @@
 namespace: server
-commonLabels:
-  app: dawarich
-  subdomain: dawarich
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
   - sealed-secret.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: dawarich
+      routes:
+        - match: Host("dawarich.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: dawarich
+      size: 8Gi

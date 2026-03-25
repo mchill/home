@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: sonarr-uhd
 spec:
+  selector:
+    matchLabels:
+      app: sonarr-uhd
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: sonarr-uhd
     spec:
       securityContext:
         fsGroup: 1000

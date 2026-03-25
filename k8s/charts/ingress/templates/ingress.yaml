@@ -1,0 +1,32 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .Values.app }}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  entryPoints:
+    - websecure
+  routes:
+{{- range .Values.routes }}
+    - kind: Rule
+      match: {{ .match }}
+      services:
+        - name: {{ default $.Values.app .service }}
+          scheme: {{ default "http" .scheme }}
+          port: {{ default 80 .port }}
+{{- if or (not .disableForwardAuth) .middlewares }}
+      middlewares:
+{{- if not .disableForwardAuth }}
+        - name: forward-auth
+          namespace: traefik
+{{- end }}
+{{- range .middlewares }}
+        - name: {{ .name }}
+          namespace: {{ default "server" .namespace }}
+{{- end }}
+{{- end }}
+{{- if .priority }}
+      priority: {{ .priority }}
+{{- end }}
+{{- end }}

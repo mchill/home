@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: tautulli
 spec:
+  selector:
+    matchLabels:
+      app: tautulli
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: tautulli
     spec:
       securityContext:
         fsGroup: 1000

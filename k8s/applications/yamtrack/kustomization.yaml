@@ -1,9 +1,16 @@
 namespace: server
-commonLabels:
-  app: yamtrack
-  subdomain: yamtrack
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
   - sealed-secret.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: yamtrack
+      routes:
+        - match: Host("yamtrack.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: yamtrack
+      size: 128Mi

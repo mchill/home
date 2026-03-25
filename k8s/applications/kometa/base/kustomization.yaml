@@ -1,6 +1,10 @@
 namespace: server
-commonLabels:
-  app: kometa
 resources:
-  - ../../../overlays/persistence
   - sealed-secret.yaml
+helmGlobals:
+  chartHome: ../../../charts
+helmCharts:
+  - name: persistence
+    valuesInline:
+      app: kometa
+      size: 512Mi

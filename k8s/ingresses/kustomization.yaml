@@ -1,0 +1,12 @@
+resources:
+  - ceph
+  - kvm
+  - minio
+  - nas
+  - pdu
+  - pihole
+  - proxmox
+  - unifi
+  - remote/nas
+  - remote/pihole
+  - remote/unifi

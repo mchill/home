@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: peanut
 spec:
+  selector:
+    matchLabels:
+      app: peanut
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: peanut
     spec:
       containers:
         - name: peanut

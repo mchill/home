@@ -1,8 +1,15 @@
 namespace: server
-commonLabels:
-  app: prowlarr
-  subdomain: prowlarr
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - deployment.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: prowlarr
+      routes:
+        - match: Host("prowlarr.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: prowlarr
+      size: 256Mi

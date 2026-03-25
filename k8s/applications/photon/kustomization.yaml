@@ -1,6 +1,4 @@
 namespace: server
-commonLabels:
-  app: photon
 resources:
   - deployment.yaml
   - service.yaml

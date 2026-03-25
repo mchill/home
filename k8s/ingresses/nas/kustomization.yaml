@@ -1,9 +1,15 @@
 namespace: server
-transformers:
-  - label-transformer.yaml
 resources:
-  - ../../overlays/ingress
   - endpoint.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: nas
+      addSelector: false
+      routes:
+        - match: Host("nas.mchill.io")
 patches:
   - target:
       kind: Service

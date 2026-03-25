@@ -1,11 +1,19 @@
 namespace: server
-commonLabels:
-  app: jitsi
-  subdomain: jitsi
 resources:
-  - ../../overlays/ingress
-  - ../../overlays/persistence
   - config-map.yaml
   - deployment.yaml
   - sealed-secret.yaml
   - service.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: jitsi
+      routes:
+        - match: Host("jitsi.mchill.io")
+          disableForwardAuth: true
+  - name: persistence
+    valuesInline:
+      app: jitsi
+      size: 128Mi
