@@ -1,16 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: server
-resources:
-  - endpoint.yaml
 helmGlobals:
   chartHome: ../../../charts
 helmCharts:
   - name: ingress
     valuesInline:
       app: remote-nas
-      service:
-        disableSelector: true
+      endpoint:
+        ip: 192.168.0.201
+        port: 5000
       ingress:
         routes:
           - match: Host("nas.remote.mchill.io")

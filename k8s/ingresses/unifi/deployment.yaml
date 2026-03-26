@@ -5,14 +5,14 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: unifi
+      app: unifi-proxy
   replicas: 1
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: unifi
+        app: unifi-proxy
     spec:
       securityContext:
         fsGroup: 1000
@@ -21,7 +21,7 @@ spec:
           image: node:22.22.1-alpine
           command: [node, /app/proxy.js]
           ports:
-            - name: proxy
+            - name: ingress
               containerPort: 3000
           env:
             - name: TZ

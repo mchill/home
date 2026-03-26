@@ -3,4 +3,13 @@ kind: Kustomization
 namespace: server
 resources:
   - deployment.yaml
-  - service.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: nut-exporter
+      service:
+        port: 9995
+      ingress:
+        enabled: false

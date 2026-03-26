@@ -4,7 +4,6 @@ namespace: server
 resources:
   - deployment.yaml
   - sealed-secret.yaml
-  - service.yaml
 helmGlobals:
   chartHome: ../../charts
 helmCharts:
@@ -15,6 +14,11 @@ helmCharts:
         routes:
           - match: Host("stardew.mchill.io")
             disableForwardAuth: true
+      loadBalancer:
+        ip: 192.168.1.86
+        port: 24642
+        targetPort: stardew
+        protocol: UDP
   - name: persistence
     valuesInline:
       app: stardew

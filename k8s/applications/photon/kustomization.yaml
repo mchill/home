@@ -3,4 +3,11 @@ kind: Kustomization
 namespace: server
 resources:
   - deployment.yaml
-  - service.yaml
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: photon
+      ingress:
+        enabled: false

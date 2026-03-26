@@ -1,16 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: server
-resources:
-  - endpoint.yaml
 helmGlobals:
   chartHome: ../../../charts
 helmCharts:
   - name: ingress
     valuesInline:
       app: remote-unifi
-      service:
-        disableSelector: true
+      endpoint:
+        ip: 192.168.0.1
+        port: 443
       ingress:
         routes:
           - match: Host("unifi.remote.mchill.io")

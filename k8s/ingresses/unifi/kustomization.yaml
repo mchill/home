@@ -3,8 +3,6 @@ kind: Kustomization
 namespace: server
 resources:
   - deployment.yaml
-  - endpoint.yaml
-  - service.yaml
 configMapGenerator:
   - name: unifi
     files:
@@ -15,8 +13,9 @@ helmCharts:
   - name: ingress
     valuesInline:
       app: unifi
-      service:
-        disableSelector: true
+      endpoint:
+        ip: 192.168.1.1
+        port: 443
       ingress:
         routes:
           - match: Host("unifi.mchill.io")
@@ -27,3 +26,10 @@ helmCharts:
               name: unifi-proxy
               scheme: https
               port: 3000
+  - name: ingress
+    valuesInline:
+      app: unifi-proxy
+      service:
+        port: 3000
+      ingress:
+        enabled: false

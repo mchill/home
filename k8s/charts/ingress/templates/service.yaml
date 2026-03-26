@@ -2,15 +2,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: "{{ .Values.app }}"
+  name: {{ .Values.app }}
 spec:
   type: ClusterIP
   ports:
-    - name: ingress
-      port: 80
-      targetPort: ingress
-{{- if not .Values.service.disableSelector }}
+    - name: {{ .Values.service.targetPort }}
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: {{ .Values.service.protocol }}
+{{- if not .Values.endpoint.ip }}
   selector:
-    app: "{{ .Values.app }}"
+    app: {{ .Values.app }}
 {{- end}}
 {{- end }}

@@ -11,7 +11,7 @@ helmCharts:
       app: peanut
       ingress:
         routes:
-          - match: Host("peanut.mchill.io")
+          - match: Host("nut.mchill.io")
   - name: persistence
     valuesInline:
       app: peanut

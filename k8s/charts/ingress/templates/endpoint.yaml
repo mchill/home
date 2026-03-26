@@ -1,0 +1,12 @@
+{{- if .Values.endpoint.ip }}
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ .Values.app }}
+subsets:
+  - addresses:
+      - ip: {{ .Values.endpoint.ip }}
+    ports:
+      - name: ingress
+        port: {{ .Values.endpoint.port }}
+{{- end }}

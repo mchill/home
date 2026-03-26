@@ -5,7 +5,6 @@ resources:
   - config-map.yaml
   - deployment.yaml
   - sealed-secret.yaml
-  - service.yaml
 helmGlobals:
   chartHome: ../../charts
 helmCharts:
@@ -16,6 +15,11 @@ helmCharts:
         routes:
           - match: Host("jitsi.mchill.io")
             disableForwardAuth: true
+      loadBalancer:
+        ip: 192.168.1.93
+        port: 10000
+        targetPort: jvb
+        protocol: UDP
   - name: persistence
     valuesInline:
       app: jitsi

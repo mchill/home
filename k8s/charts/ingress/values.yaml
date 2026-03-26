@@ -1,19 +1,21 @@
 app:
 
-ingress:
-  enabled: true
-  routes: []
+endpoint:
+  ip:
+  port:
 
 service:
   enabled: true
-  disableSelector: false
-
-endpoint:
-  enabled: false
-  ip:
-  port:
+  port: 80
+  targetPort: ingress
+  protocol: TCP
 
 loadBalancer:
-  enabled: false
   ip:
   port:
+  targetPort: ingress
+  protocol: TCP
+
+ingress:
+  enabled: true
+  routes: []

@@ -1,16 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: server
-resources:
-  - endpoint.yaml
 helmGlobals:
   chartHome: ../../charts
 helmCharts:
   - name: ingress
     valuesInline:
       app: minio
-      service:
-        disableSelector: true
+      endpoint:
+        ip: 192.168.1.10
+        port: 9001
       ingress:
         routes:
           - match: Host("minio.mchill.io")

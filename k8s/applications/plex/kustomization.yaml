@@ -3,7 +3,6 @@ kind: Kustomization
 namespace: server
 resources:
   - deployment.yaml
-  - service.yaml
 helmGlobals:
   chartHome: ../../charts
 helmCharts:
@@ -14,6 +13,9 @@ helmCharts:
         routes:
           - match: Host("plex.mchill.io")
             disableForwardAuth: true
+      loadBalancer:
+        ip: 192.168.1.82
+        port: 32400
   - name: persistence
     valuesInline:
       app: plex
