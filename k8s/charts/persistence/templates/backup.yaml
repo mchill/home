@@ -30,13 +30,6 @@ spec:
                   apk add --no-cache openssh-client util-linux-misc;
                   ssh-keyscan -H 192.168.1.30 >> /root/.ssh/known_hosts;
                   ssh mchill@192.168.1.30 -o BatchMode=yes "sudo /home/mchill/backup.sh {{ .Values.app }}";
-                # - |
-                #   apk add --no-cache openssh-client util-linux-misc;
-                #   ssh-keyscan -H 192.168.1.30 >> /root/.ssh/known_hosts;
-                #   fsfreeze -f /backup/$(VOLUME);
-                #   ssh mchill@192.168.1.30 -o BatchMode=yes "sudo /home/mchill/trim.sh ${VOLUME}" || true;
-                #   fsfreeze -u /backup/$(VOLUME);
-                #   ssh mchill@192.168.1.30 -o BatchMode=yes "sudo /home/mchill/backup.sh ${VOLUME}";
               env:
                 - name: TZ
                   value: America/New_York

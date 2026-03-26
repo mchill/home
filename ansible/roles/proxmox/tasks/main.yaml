@@ -29,3 +29,10 @@
         src: backup.sh
         dest: /home/mchill/backup.sh
         mode: "0644"
+
+    - name: Copy trim.sh file
+      become: false
+      ansible.builtin.copy:
+        src: trim.sh
+        dest: /home/mchill/trim.sh
+        mode: "0644"
