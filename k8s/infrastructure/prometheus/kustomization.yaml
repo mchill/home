@@ -2,7 +2,6 @@ namespace: monitoring
 resources:
   - config-map.yaml
   - helm.yaml
-  - sealed-secret.yaml
 helmGlobals:
   chartHome: ../../charts
 helmCharts:
@@ -20,12 +19,3 @@ helmCharts:
             service:
               name: prometheus-kube-prometheus-prometheus
               port: 9090
-patches:
-  - target:
-      group: batch
-      version: v1
-      kind: Job
-    patch: |-
-      - op: add
-        path: /spec/ttlSecondsAfterFinished
-        value: 0

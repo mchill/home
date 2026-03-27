@@ -1,4 +1,31 @@
+deploymentMode: SingleBinary
+
 loki:
-  isDefault: false
+  auth_enabled: false
+  commonConfig:
+    replication_factor: 1
+    path_prefix: /tmp/loki
+  storage:
+    type: filesystem
+    filesystem:
+      chunks_directory: /tmp/loki/chunks
+      rules_directory: /tmp/loki/rules
+  useTestSchema: true
+
+singleBinary:
+  replicas: 1
   persistence:
     enabled: false
+
+backend:
+  replicas: 0
+read:
+  replicas: 0
+write:
+  replicas: 0
+
+resultsCache:
+  enabled: false
+
+chunksCache:
+  enabled: false

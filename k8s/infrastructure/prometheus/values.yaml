@@ -1,75 +1,13 @@
+prometheusOperator:
+  admissionWebhooks:
+    certManager:
+      enabled: true
+
 grafana:
-  dashboardProviders:
-    dashboardproviders.yaml:
-      apiVersion: 1
-      providers:
-        - name: default
-          orgId: 1
-          folder: ""
-          type: file
-          disableDeletion: false
-          editable: false
-          options:
-            path: /var/lib/grafana/dashboards/default
-  dashboards:
-    default:
-      traefik:
-        gnetId: 4475
-        datasource: Prometheus
-      nut:
-        gnetId: 14371
-        datasource: Prometheus
-  testFramework:
-    enabled: false
-  persistence:
-    enabled: false
-    existingClaim: server
-    subPath: grafana
   adminPassword: admin
-  smtp:
-    existingSecret: grafana
-    userKey: GF_SMTP_USER
-    passwordKey: GF_SMTP_PASSWORD
-  env:
-    GF_AUTH_ANONYMOUS_ENABLED: "true"
-    GF_SMTP_ENABLED: "true"
-    GF_SMTP_HOST: smtp.gmail.com:587
-    GF_SMTP_FROM_ADDRESS: grafana@mchill.io
-prometheus:
-  prometheusSpec:
-    additionalScrapeConfigs:
-      - job_name: traefik
-        kubernetes_sd_configs:
-          - role: pod
-            selectors:
-              - role: pod
-                label: app=traefik
-        relabel_configs:
-          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
-            action: keep
-            regex: true
-          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
-            action: replace
-            target_label: __metrics_path__
-            regex: (.+)
-          - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
-            action: replace
-            regex: ([^:]+)(?::\\d+)?;(\\d+)
-            replacement: $1:$2
-            target_label: __address__
-          - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scheme]
-            action: replace
-            target_label: __scheme__
-            regex: (https?)
-      - job_name: nut
-        static_configs:
-          - targets:
-              - 192.168.1.10:3493
-        metrics_path: /nut
-        relabel_configs:
-          - source_labels: [__address__]
-            target_label: __param_target
-          - source_labels: [__param_target]
-            target_label: instance
-          - target_label: __address__
-            replacement: nut-exporter.server.svc.cluster.local:9995
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      url: http://loki-gateway.monitoring.svc.cluster.local
+      access: proxy
+      isDefault: false

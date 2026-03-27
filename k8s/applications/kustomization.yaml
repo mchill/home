@@ -12,7 +12,6 @@ resources:
   - kubernetes-dashboard
   - mealie
   - minecraft
-  - nut-exporter
   - ombi
   - peanut
   - plex
