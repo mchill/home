@@ -1,0 +1,126 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netbox
+spec:
+  selector:
+    matchLabels:
+      app: netbox
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: netbox
+    spec:
+      securityContext:
+        fsGroup: 1000
+      initContainers:
+        - name: plugins
+          image: netboxcommunity/netbox:v4.5.6
+          command:
+            - /bin/sh
+            - -c
+            - |
+              /usr/local/bin/uv pip install \
+                --target /plugins \
+                --python /opt/netbox/venv/bin/python \
+                netbox-topology-views;
+              /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py collectstatic --no-input;
+          envFrom:
+            - configMapRef:
+                name: netbox
+            - secretRef:
+                name: netbox
+          volumeMounts:
+            - name: netbox
+              mountPath: /plugins
+              subPath: plugins
+            - name: netbox
+              mountPath: /opt/netbox/netbox/static/netbox_topology_views
+              subPath: static
+      containers:
+        - name: netbox
+          image: netboxcommunity/netbox:v4.5.6
+          ports:
+            - name: ingress
+              containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: netbox
+            - secretRef:
+                name: netbox
+          volumeMounts:
+            - name: netbox
+              mountPath: /opt/netbox/netbox/media
+              subPath: media-files
+            - name: netbox
+              mountPath: /opt/netbox/netbox/reports
+              subPath: reports-files
+            - name: netbox
+              mountPath: /opt/netbox/netbox/scripts
+              subPath: scripts-files
+            - name: netbox
+              mountPath: /plugins
+              subPath: plugins
+            - name: netbox
+              mountPath: /opt/netbox/netbox/static/netbox_topology_views
+              subPath: static
+            - name: netbox-files
+              mountPath: /etc/netbox/config/plugins.py
+              subPath: plugins.py
+        - name: netbox-worker
+          image: netboxcommunity/netbox:v4.5.6
+          command:
+            - /opt/netbox/venv/bin/python
+            - /opt/netbox/netbox/manage.py
+            - rqworker
+          envFrom:
+            - configMapRef:
+                name: netbox
+            - secretRef:
+                name: netbox
+        - name: postgres
+          image: postgres:18.3-alpine
+          volumeMounts:
+            - name: netbox
+              mountPath: /var/lib/postgresql
+              subPath: postgres
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: POSTGRES_DB
+              value: netbox
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: netbox
+                  key: DB_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: netbox
+                  key: DB_PASSWORD
+        - name: redis
+          image: valkey/valkey:9.0.3-alpine
+          volumeMounts:
+            - name: netbox
+              mountPath: /data
+              subPath: redis-data
+          env:
+            - name: TZ
+              value: America/New_York
+      volumes:
+        - name: netbox
+          persistentVolumeClaim:
+            claimName: netbox
+        - name: netbox-files
+          configMap:
+            name: netbox-files
+      resources:
+        limits:
+          memory: 2Gi
+        requests:
+          cpu: 10m
+          memory: 2Gi

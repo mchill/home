@@ -1,0 +1,37 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: server
+resources:
+  - deployment.yaml
+  - sealed-secret.yaml
+configMapGenerator:
+  - name: netbox
+    literals:
+      - TZ=America/New_York
+      - DB_HOST=localhost
+      - DB_NAME=netbox
+      - DB_USER=netbox
+      - REDIS_HOST=localhost
+      - REDIS_DATABASE=0
+      - REDIS_CACHE_HOST=localhost
+      - REDIS_CACHE_DATABASE=1
+      - MEDIA_ROOT=/opt/netbox/netbox/media
+      - PYTHONPATH=/plugins
+      - RELEASE_CHECK_URL=https://api.github.com/repos/netbox-community/netbox/releases
+      - SKIP_SUPERUSER=true
+  - name: netbox-files
+    files:
+      - plugins.py
+helmGlobals:
+  chartHome: ../../charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: netbox
+      ingress:
+        routes:
+          - match: Host("netbox.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: netbox
+      size: 256Mi
