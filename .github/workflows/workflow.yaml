@@ -21,5 +21,5 @@ jobs:
       - name: Deploy server
         working-directory: k8s
         run: |
-          pushd ingresses && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side -f - && popd
-          pushd applications && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side -f - && popd
+          pushd ingresses && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side --force-conflicts -f - && popd
+          pushd applications && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side --force-conflicts -f - && popd

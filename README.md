@@ -85,6 +85,6 @@ ansible-playbook playbooks/configure_proxmox_vms.yaml -i inventory.yaml --extra-
 
 ```bash
 pushd k8s/infrastructure && ./apply.sh && popd
-pushd k8s/ingresses && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side -f - && popd
-pushd k8s/applications && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side -f - && popd
+pushd k8s/ingresses && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side --force-conflicts -f - && popd
+pushd k8s/applications && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side --force-conflicts -f - && popd
 ```
