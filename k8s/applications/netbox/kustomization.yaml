@@ -22,6 +22,8 @@ configMapGenerator:
   - name: netbox-files
     files:
       - plugins.py
+      - sync_datasheets.py
+      - sync_receipts.py
 helmGlobals:
   chartHome: ../../charts
 helmCharts:

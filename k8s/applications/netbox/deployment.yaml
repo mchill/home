@@ -26,7 +26,7 @@ spec:
               /usr/local/bin/uv pip install \
                 --target /plugins \
                 --python /opt/netbox/venv/bin/python \
-                netbox-topology-views;
+                netbox-attachments netbox-interface-synchronization netbox-topology-views netboxlabs-netbox-custom-objects;
               /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py collectstatic --no-input;
           envFrom:
             - configMapRef:
@@ -59,9 +59,6 @@ spec:
               mountPath: /opt/netbox/netbox/reports
               subPath: reports-files
             - name: netbox
-              mountPath: /opt/netbox/netbox/scripts
-              subPath: scripts-files
-            - name: netbox
               mountPath: /plugins
               subPath: plugins
             - name: netbox
@@ -70,6 +67,12 @@ spec:
             - name: netbox-files
               mountPath: /etc/netbox/config/plugins.py
               subPath: plugins.py
+            - name: netbox-files
+              mountPath: /opt/netbox/netbox/scripts/sync_datasheets.py
+              subPath: sync_datasheets.py
+            - name: netbox-files
+              mountPath: /opt/netbox/netbox/scripts/sync_receipts.py
+              subPath: sync_receipts.py
         - name: netbox-worker
           image: netboxcommunity/netbox:v4.5.6
           command:
@@ -81,6 +84,28 @@ spec:
                 name: netbox
             - secretRef:
                 name: netbox
+          volumeMounts:
+            - name: netbox
+              mountPath: /opt/netbox/netbox/media
+              subPath: media-files
+            - name: netbox
+              mountPath: /opt/netbox/netbox/reports
+              subPath: reports-files
+            - name: netbox
+              mountPath: /plugins
+              subPath: plugins
+            - name: netbox
+              mountPath: /opt/netbox/netbox/static/netbox_topology_views
+              subPath: static
+            - name: netbox-files
+              mountPath: /etc/netbox/config/plugins.py
+              subPath: plugins.py
+            - name: netbox-files
+              mountPath: /opt/netbox/netbox/scripts/sync_datasheets.py
+              subPath: sync_datasheets.py
+            - name: netbox-files
+              mountPath: /opt/netbox/netbox/scripts/sync_receipts.py
+              subPath: sync_receipts.py
         - name: postgres
           image: postgres:18.3-alpine
           volumeMounts:
