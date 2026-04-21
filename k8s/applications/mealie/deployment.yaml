@@ -42,7 +42,7 @@ spec:
             claimName: mealie
       resources:
         limits:
-          memory: 512Mi
+          memory: 1Gi
         requests:
           cpu: 10m
-          memory: 512Mi
+          memory: 1Gi

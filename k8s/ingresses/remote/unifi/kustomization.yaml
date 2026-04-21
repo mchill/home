@@ -8,7 +8,7 @@ helmCharts:
     valuesInline:
       app: remote-unifi
       endpoint:
-        ip: 192.168.0.1
+        ip: 192.168.121.1
         port: 443
       ingress:
         routes:

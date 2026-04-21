@@ -12,9 +12,6 @@ helmCharts:
       ingress:
         routes:
           - match: Host("sonarr.mchill.io")
-      loadBalancer:
-        ip: 192.168.1.85
-        port: 80
   - name: persistence
     valuesInline:
       app: sonarr
