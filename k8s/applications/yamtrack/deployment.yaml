@@ -18,7 +18,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: yamtrack
-          image: ghcr.io/fuzzygrim/yamtrack:0.25.0
+          image: ghcr.io/fuzzygrim/yamtrack:0.25.2
           ports:
             - name: ingress
               containerPort: 8000
@@ -49,7 +49,7 @@ spec:
               mountPath: /yamtrack/db
               subPath: db
         - name: redis
-          image: redis:8.6.1-alpine
+          image: redis:8.6.2-alpine
           volumeMounts:
             - name: yamtrack
               mountPath: /data
