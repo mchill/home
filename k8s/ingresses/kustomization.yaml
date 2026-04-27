@@ -8,5 +8,4 @@ resources:
   - proxmox
   - unifi
   - remote/nas
-  - remote/pihole
   - remote/unifi
