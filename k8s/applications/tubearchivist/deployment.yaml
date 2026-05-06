@@ -56,13 +56,13 @@ spec:
               mountPath: /youtube
               subPath: youtube/tubearchivist
         - name: redis
-          image: redis:7.4.8
+          image: redis:7.4.9
           volumeMounts:
             - name: tubearchivist
               mountPath: /data
               subPath: redis
         - name: elasticsearch
-          image: elasticsearch:8.19.14
+          image: elasticsearch:8.19.15
           env:
             - name: ES_JAVA_OPTS
               value: -Xms512m -Xmx512m
