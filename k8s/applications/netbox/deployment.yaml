@@ -18,7 +18,7 @@ spec:
         fsGroup: 1000
       initContainers:
         - name: plugins
-          image: netboxcommunity/netbox:v4.5.8
+          image: netboxcommunity/netbox:v4.6.0
           command:
             - /bin/sh
             - -c
@@ -42,7 +42,7 @@ spec:
               subPath: static
       containers:
         - name: netbox
-          image: netboxcommunity/netbox:v4.5.8
+          image: netboxcommunity/netbox:v4.6.0
           ports:
             - name: ingress
               containerPort: 8080
@@ -74,7 +74,7 @@ spec:
               mountPath: /opt/netbox/netbox/scripts/sync_receipts.py
               subPath: sync_receipts.py
         - name: netbox-worker
-          image: netboxcommunity/netbox:v4.5.8
+          image: netboxcommunity/netbox:v4.6.0
           command:
             - /opt/netbox/venv/bin/python
             - /opt/netbox/netbox/manage.py
@@ -128,7 +128,7 @@ spec:
                   name: netbox
                   key: DB_PASSWORD
         - name: redis
-          image: valkey/valkey:9.0.3-alpine
+          image: valkey/valkey:9.0.4-alpine
           volumeMounts:
             - name: netbox
               mountPath: /data

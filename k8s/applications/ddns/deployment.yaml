@@ -18,7 +18,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: ddns
-          image: qmcgaw/ddns-updater:v2.9.0
+          image: qmcgaw/ddns-updater:v2.10.0
           ports:
             - name: ingress
               containerPort: 8000
