@@ -156,7 +156,6 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 31,
       "links": [],
       "panels": [
         {
@@ -179,7 +178,7 @@ data:
                 "steps": [
                   {
                     "color": "green",
-                    "value": null
+                    "value": 0
                   },
                   {
                     "color": "red",
@@ -193,7 +192,7 @@ data:
           },
           "gridPos": {
             "h": 21,
-            "w": 12,
+            "w": 9,
             "x": 0,
             "y": 0
           },
@@ -206,7 +205,7 @@ data:
               "placement": "bottom",
               "showLegend": false
             },
-            "maxVizHeight": 25,
+            "maxVizHeight": 16,
             "minVizHeight": 16,
             "minVizWidth": 8,
             "namePlacement": "auto",
@@ -220,9 +219,10 @@ data:
             },
             "showUnfilled": true,
             "sizing": "manual",
+            "text": {},
             "valueMode": "color"
           },
-          "pluginVersion": "11.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -233,14 +233,13 @@ data:
               "exemplar": false,
               "expr": "sort_desc(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"}) / sum by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"}))",
               "format": "time_series",
-              "hide": false,
               "instant": true,
               "legendFormat": "__auto",
               "range": false,
               "refId": "A"
             }
           ],
-          "title": "Panel Title",
+          "title": "",
           "type": "bargauge"
         },
         {
@@ -259,9 +258,12 @@ data:
                   "type": "auto"
                 },
                 "filterable": false,
+                "footer": {
+                  "reducers": []
+                },
                 "inspect": false
               },
-              "decimals": 2,
+              "decimals": 0,
               "fieldMinMax": false,
               "mappings": [],
               "thresholds": {
@@ -269,7 +271,7 @@ data:
                 "steps": [
                   {
                     "color": "green",
-                    "value": null
+                    "value": 0
                   },
                   {
                     "color": "red",
@@ -277,13 +279,69 @@ data:
                   }
                 ]
               },
-              "unit": "decbytes"
+              "unit": "none"
             },
             "overrides": [
               {
                 "matcher": {
+                  "id": "byNames",
+                  "options": {
+                    "mode": "include",
+                    "names": [
+                      "Value #A",
+                      "Value #B"
+                    ]
+                  }
+                },
+                "properties": [
+                  {
+                    "id": "custom.footer.reducers",
+                    "value": [
+                      "sum"
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value #A"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "decbytes"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value #B"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "decbytes"
+                  }
+                ]
+              },
+              {
+                "matcher": {
                   "id": "byName",
                   "options": "Value #C"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percentunit"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value #F"
                 },
                 "properties": [
                   {
@@ -296,34 +354,24 @@ data:
           },
           "gridPos": {
             "h": 21,
-            "w": 12,
-            "x": 12,
+            "w": 15,
+            "x": 9,
             "y": 0
           },
           "id": 2,
           "options": {
             "cellHeight": "sm",
-            "footer": {
-              "countRows": false,
-              "enablePagination": false,
-              "fields": [
-                "Value #A",
-                "Value #B"
-              ],
-              "reducer": [
-                "sum"
-              ],
-              "show": true
-            },
+            "enablePagination": false,
+            "maxRowHeight": 16,
             "showHeader": true,
             "sortBy": [
               {
                 "desc": true,
-                "displayName": "Percent Used"
+                "displayName": "Percent Used (bytes)"
               }
             ]
           },
-          "pluginVersion": "11.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -334,7 +382,6 @@ data:
               "exemplar": false,
               "expr": "sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"})",
               "format": "table",
-              "hide": false,
               "instant": true,
               "legendFormat": "__auto",
               "range": false,
@@ -349,7 +396,6 @@ data:
               "exemplar": false,
               "expr": "sum by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"})",
               "format": "table",
-              "hide": false,
               "instant": true,
               "legendFormat": "__auto",
               "range": false,
@@ -364,14 +410,55 @@ data:
               "exemplar": false,
               "expr": "sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"}) / sum by (persistentvolumeclaim) (kubelet_volume_stats_capacity_bytes{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"})",
               "format": "table",
-              "hide": false,
               "instant": true,
               "legendFormat": "__auto",
               "range": false,
               "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum by (persistentvolumeclaim) (kubelet_volume_stats_inodes_used{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"})",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum by (persistentvolumeclaim) (kubelet_volume_stats_inodes{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"})",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "E"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum by (persistentvolumeclaim) (kubelet_volume_stats_inodes_used{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"}) / sum by (persistentvolumeclaim) (kubelet_volume_stats_inodes{namespace=\"server\",persistentvolumeclaim!~\"applications|libraries|googledrive\"})",
+              "format": "table",
+              "instant": true,
+              "legendFormat": "__auto",
+              "range": false,
+              "refId": "F"
             }
           ],
-          "title": "Panel Title",
+          "title": "",
           "transformations": [
             {
               "id": "joinByField",
@@ -386,16 +473,23 @@ data:
                 "excludeByName": {
                   "Time 1": true,
                   "Time 2": true,
-                  "Time 3": true
+                  "Time 3": true,
+                  "Time 4": true,
+                  "Time 5": true,
+                  "Time 6": true,
+                  "persistentvolumeclaim": false
                 },
                 "includeByName": {},
                 "indexByName": {},
                 "renameByName": {
                   "Time 1": "",
                   "Time 2": "",
-                  "Value #A": "Used",
-                  "Value #B": "Capacity",
-                  "Value #C": "Percent Used",
+                  "Value #A": "Used (bytes)",
+                  "Value #B": "Capacity (bytes)",
+                  "Value #C": "Percent Used (bytes)",
+                  "Value #D": "Used (inodes)",
+                  "Value #E": "Capacity (inode)",
+                  "Value #F": "Percent Used (inodes)",
                   "persistentvolumeclaim": "Volume"
                 }
               }
@@ -405,7 +499,7 @@ data:
         }
       ],
       "preload": false,
-      "schemaVersion": 40,
+      "schemaVersion": 42,
       "tags": [],
       "templating": {
         "list": []
@@ -418,6 +512,6 @@ data:
       "timezone": "browser",
       "title": "Volumes",
       "uid": "bfcei8q4o3aioa",
-      "version": 2,
+      "version": 1,
       "weekStart": ""
     }

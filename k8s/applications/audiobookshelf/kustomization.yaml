@@ -16,4 +16,4 @@ helmCharts:
   - name: persistence
     valuesInline:
       app: audiobookshelf
-      size: 512Mi
+      size: 128Mi
