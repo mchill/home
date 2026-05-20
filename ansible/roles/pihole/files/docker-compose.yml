@@ -1,0 +1,35 @@
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:2026.02.0
+    dns:
+      - 8.8.8.8
+    ports:
+      - 192.168.1.2:53:53/tcp
+      - 192.168.1.2:53:53/udp
+      - 192.168.1.2:80:80/tcp
+    environment:
+      TZ: America/New_York
+      FTLCONF_webserver_api_password: ""
+      FTLCONF_dns_listeningMode: ALL
+      FTLCONF_dns_rateLimit_count: "0"
+      FTLCONF_dns_rateLimit_interval: "0"
+    volumes:
+      - ./pihole/etc-pihole:/etc/pihole
+      - ./pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+    restart: always
+
+  kmip-server-dsm:
+    build:
+      context: kmip-server-dsm
+      network: host
+    ports:
+      - 5696:5696
+    volumes:
+      - type: bind
+        source: ./kmip-server-dsm/state
+        target: /var/lib/state
+      - type: bind
+        source: ./kmip-server-dsm/certs
+        target: /var/lib/certs
+    restart: always

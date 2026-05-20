@@ -1,0 +1,49 @@
+- name: Configure kmip-server-dsm
+  block:
+    - name: Clone kmip-server-dsm repository
+      ansible.builtin.git:
+        repo: rnurgaliyev/kmip-server-dsm
+        dest: "{{ ansible_facts.user_dir }}/kmip-server-dsm"
+        update: false
+
+    - name: Set SSL_SERVER_NAME config
+      ansible.builtin.lineinfile:
+        path: "{{ ansible_facts.user_dir }}/kmip-server-dsm/config.sh"
+        regexp: ^SSL_SERVER_NAME=
+        line: 'SSL_SERVER_NAME="IP:192.168.1.2"'
+
+    - name: Set SSL_CLIENT_NAME config
+      ansible.builtin.lineinfile:
+        path: "{{ ansible_facts.user_dir }}/kmip-server-dsm/config.sh"
+        regexp: ^SSL_CLIENT_NAME=
+        line: 'SSL_CLIENT_NAME="IP:192.168.1.10"'
+
+    - name: Set SSL_COUNTRY_NAME config
+      ansible.builtin.lineinfile:
+        path: "{{ ansible_facts.user_dir }}/kmip-server-dsm/config.sh"
+        regexp: ^SSL_COUNTRY_NAME=
+        line: 'SSL_COUNTRY_NAME="US"'
+
+    - name: Set SSL_STATE_OR_PROVINCE config
+      ansible.builtin.lineinfile:
+        path: "{{ ansible_facts.user_dir }}/kmip-server-dsm/config.sh"
+        regexp: ^SSL_STATE_OR_PROVINCE=
+        line: 'SSL_STATE_OR_PROVINCE="NC"'
+
+    - name: Set SSL_LOCALITY config
+      ansible.builtin.lineinfile:
+        path: "{{ ansible_facts.user_dir }}/kmip-server-dsm/config.sh"
+        regexp: ^SSL_LOCALITY=
+        line: 'SSL_LOCALITY="Raleigh"'
+
+- name: Start Docker containers
+  block:
+    - name: Copy Docker Compose file
+      ansible.builtin.copy:
+        src: docker-compose.yml
+        dest: "{{ ansible_facts.user_dir }}/docker-compose.yml"
+        mode: "0644"
+
+    - name: Start containers
+      ansible.builtin.shell:
+        cmd: docker compose up -d
