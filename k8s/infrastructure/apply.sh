@@ -26,6 +26,7 @@ kubectl apply --server-side -k kube-vip
 pushd traefik && helm upgrade --install --create-namespace -n traefik --version 27.0.2 --values values.yaml --post-renderer kustomize-renderer traefik traefik/traefik && popd
 pushd ceph && helm upgrade --install --create-namespace -n ceph-csi-rbd --version 3.16.0 --values values.yaml --post-renderer kustomize-renderer ceph-csi-rbd ceph-csi/ceph-csi-rbd && popd
 pushd intel && helm upgrade --install --create-namespace -n inteldeviceplugins-system --version 0.35.0 --post-renderer kustomize-renderer device-plugins-operator intel/intel-device-plugins-operator && popd
+pushd argo && helm upgrade --install --create-namespace -n argo --version 1.0.14 --values values.yaml --post-renderer kustomize-renderer argo argo/argo-workflows && popd
 
 pushd prometheus && helm upgrade --install --create-namespace -n monitoring --version 82.15.0 --values values.yaml --post-renderer kustomize-renderer prometheus prometheus/kube-prometheus-stack && popd
 pushd loki && helm upgrade --install --create-namespace -n monitoring --version 9.3.1 --values values.yaml loki grafana-community/loki && popd

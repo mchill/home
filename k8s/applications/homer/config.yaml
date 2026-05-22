@@ -92,62 +92,14 @@ services:
         subtitle: Cluster configuration
         logo: assets/logos/kubernetes.png
         url: https://k8s.mchill.io
-      - name: Home Assistant
-        subtitle: Home automation
-        logo: assets/logos/homeassistant.png
-        url: https://home.mchill.io
+      - name: Argo Workflows
+        subtitle: Workflow engine
+        logo: assets/logos/argo.png
+        url: https://argo.mchill.io
       - name: Stardew Valley
         subtitle: Game server
         logo: assets/logos/stardew.png
         url: https://stardew.mchill.io
-
-  - name: Network
-    icon: fas fa-wifi
-    items:
-      - name: Unifi
-        subtitle: Network controller
-        logo: assets/logos/unifi.png
-        url: https://unifi.mchill.io
-      - name: Pi-hole
-        subtitle: DNS sinkhole
-        logo: assets/logos/pihole.png
-        url: https://pihole.mchill.io
-      - name: Traefik
-        subtitle: Proxy configuration
-        logo: assets/logos/traefik.png
-        url: https://traefik.mchill.io
-      - name: GL.iNet Comet
-        subtitle: KVM over IP
-        logo: assets/logos/glinet.svg
-        url: https://kvm.mchill.io
-      - name: DDNS Monitor
-        subtitle: Domain management
-        logo: assets/logos/ddns.svg
-        url: https://ddns.mchill.io
-
-  - name: Monitoring
-    icon: fas fa-heart-pulse
-    items:
-      - name: Grafana
-        subtitle: Server monitoring
-        logo: assets/logos/grafana.png
-        url: https://grafana.mchill.io
-      - name: Prometheus
-        subtitle: Server metrics
-        logo: assets/logos/prometheus.png
-        url: https://prometheus.mchill.io
-      - name: PDU
-        subtitle: Power management
-        logo: assets/logos/cyberpower.png
-        url: https://pdu.mchill.io
-      - name: webNUT
-        subtitle: UPS metrics
-        logo: assets/logos/peanut.svg
-        url: https://nut.mchill.io
-      - name: Tautulli
-        subtitle: Plex statistics
-        logo: assets/logos/tautulli.png
-        url: https://tautulli.mchill.io
 
   - name: Media Mgmt
     icon: fas fa-tasks
@@ -168,6 +120,54 @@ services:
         subtitle: BitTorrent client
         logo: assets/logos/qbittorrent.png
         url: https://qbittorrent.mchill.io
+      - name: Tautulli
+        subtitle: Plex statistics
+        logo: assets/logos/tautulli.png
+        url: https://tautulli.mchill.io
+
+  - name: Monitoring
+    icon: fas fa-heart-pulse
+    items:
+      - name: Home Assistant
+        subtitle: Home automation
+        logo: assets/logos/homeassistant.png
+        url: https://home.mchill.io
+      - name: Grafana
+        subtitle: Server monitoring
+        logo: assets/logos/grafana.png
+        url: https://grafana.mchill.io
+      - name: Prometheus
+        subtitle: Server metrics
+        logo: assets/logos/prometheus.png
+        url: https://prometheus.mchill.io
+      - name: PDU
+        subtitle: Power management
+        logo: assets/logos/cyberpower.png
+        url: https://pdu.mchill.io
+      - name: webNUT
+        subtitle: UPS metrics
+        logo: assets/logos/peanut.svg
+        url: https://nut.mchill.io
+
+  - name: Network
+    icon: fas fa-wifi
+    items:
+      - name: Unifi
+        subtitle: Network controller
+        logo: assets/logos/unifi.png
+        url: https://unifi.mchill.io
+      - name: Pi-hole
+        subtitle: DNS sinkhole
+        logo: assets/logos/pihole.png
+        url: https://pihole.mchill.io
+      - name: Traefik
+        subtitle: Proxy configuration
+        logo: assets/logos/traefik.png
+        url: https://traefik.mchill.io
+      - name: DDNS Monitor
+        subtitle: Domain management
+        logo: assets/logos/ddns.svg
+        url: https://ddns.mchill.io
 
   - name: Files
     icon: fas fa-folder-open
@@ -192,6 +192,10 @@ services:
   - name: Remote
     icon: fas fa-globe
     items:
+      - name: GL.iNet Comet
+        subtitle: KVM over IP
+        logo: assets/logos/glinet.svg
+        url: https://kvm.mchill.io
       - name: Synology DSM
         subtitle: NAS
         logo: assets/logos/nas.png
