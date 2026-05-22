@@ -1,0 +1,25 @@
+namespace: traefik
+resources:
+  - certificate.yaml
+  - middleware.yaml
+  - sealed-secret.yaml
+  - service.yaml
+  - tls-store.yaml
+helmGlobals:
+  chartHome: ../../../helm/charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: traefik
+      service:
+        enabled: false
+      ingress:
+        routes:
+          - match: Host("traefik.mchill.io")
+            service:
+              kind: TraefikService
+              name: api@internal
+          - match: Host("auth.mchill.io")
+            service:
+              name: traefik-clusterip
+              port: 4181

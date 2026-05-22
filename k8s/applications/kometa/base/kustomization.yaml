@@ -4,7 +4,7 @@ namespace: server
 resources:
   - sealed-secret.yaml
 helmGlobals:
-  chartHome: ../../../charts
+  chartHome: ../../../helm/charts
 helmCharts:
   - name: persistence
     valuesInline:

@@ -5,7 +5,7 @@ resources:
   - cron-job.yaml
   - sealed-secret.yaml
 helmGlobals:
-  chartHome: ../../charts
+  chartHome: ../../helm/charts
 helmCharts:
   - name: persistence
     valuesInline:

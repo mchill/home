@@ -27,7 +27,7 @@ configMapGenerator:
       - JICOFO_AUTH_USER=focus
       - DISABLE_HTTPS=1
 helmGlobals:
-  chartHome: ../../charts
+  chartHome: ../../helm/charts
 helmCharts:
   - name: ingress
     valuesInline:

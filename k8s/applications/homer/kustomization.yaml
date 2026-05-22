@@ -8,7 +8,7 @@ configMapGenerator:
     files:
       - config.yaml
 helmGlobals:
-  chartHome: ../../charts
+  chartHome: ../../helm/charts
 helmCharts:
   - name: ingress
     valuesInline:

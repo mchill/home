@@ -5,7 +5,7 @@ resources:
   - https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/alternative.yaml
   - cluster-role-binding.yaml
 helmGlobals:
-  chartHome: ../../charts
+  chartHome: ../../helm/charts
 helmCharts:
   - name: ingress
     valuesInline:

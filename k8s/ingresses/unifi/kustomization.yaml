@@ -8,7 +8,7 @@ configMapGenerator:
     files:
       - proxy.js
 helmGlobals:
-  chartHome: ../../charts
+  chartHome: ../../helm/charts
 helmCharts:
   - name: ingress
     valuesInline:
