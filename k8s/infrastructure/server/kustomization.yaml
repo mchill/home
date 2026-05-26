@@ -5,4 +5,6 @@ resources:
   - namespace.yaml
   - pv.yaml
   - pvc.yaml
+  - role.yaml
+  - role-binding.yaml
   - sealed-secret.yaml
