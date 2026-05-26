@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: server
 resources:
-  - cron-job.yaml
+  - cron-workflow.yaml
   - sealed-secret.yaml
 helmGlobals:
   chartHome: ../../helm/charts

@@ -1,0 +1,108 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: tubearchivist
+spec:
+  schedules:
+    - 0 0 * * *
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 30
+  failedJobsHistoryLimit: 30
+  workflowSpec:
+    activeDeadlineSeconds: 3600
+    podGC:
+      strategy: OnWorkflowCompletion
+    podSpecPatch: |
+      securityContext:
+        fsGroup: 1000
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: "kubernetes.io/hostname"
+              labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - tubearchivist
+    onExit: notify
+    entrypoint: tubearchivist
+    volumes:
+      - name: libraries
+        persistentVolumeClaim:
+          claimName: libraries
+    templates:
+      - name: tubearchivist
+        retryStrategy:
+          limit: "2"
+        container:
+          image: python:3.14.4-alpine
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              apk add git;
+              git clone https://github.com/RoninTech/ta-helper.git;
+              pip install setuptools apprise python-dotenv html2text;
+              mkdir -p /youtube/symlinks/tmp;
+              cd /youtube/symlinks/tmp;
+              python /ta-helper/ta-helper.py;
+              rm -rf /youtube/symlinks/tmp;
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: LOGLEVEL
+              value: INFO
+            - name: TA_SERVER
+              value: http://tubearchivist.server.svc.cluster.local
+            - name: TA_CACHE
+              value: ""
+            - name: TA_MEDIA_FOLDER
+              value: ../../tubearchivist
+            - name: TARGET_FOLDER
+              value: /youtube/symlinks
+            - name: NOTIFICATIONS_ENABLED
+              value: "False"
+            - name: GENERATE_NFO
+              value: "True"
+            - name: QUICK
+              value: "False"
+            - name: CLEANUP_DELETED_VIDEOS
+              value: "True"
+          envFrom:
+            - secretRef:
+                name: tubearchivist
+          volumeMounts:
+            - name: libraries
+              mountPath: /youtube
+              subPath: youtube
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 10m
+              memory: 128Mi
+      - name: notify
+        container:
+          image: alpine:3.23
+          command:
+            - sh
+            - -c
+          args:
+            - |
+              if [ "{{workflow.status}}" = "Failed" ]; then
+                apk add --no-cache curl;
+                curl -X POST "$HOMEASSISTANT_WEBHOOK" \
+                  -H "Content-Type: application/json" \
+                  -d "{\"workflow\": \"{{workflow.name}}\", \"status\": \"{{workflow.status}}\"}";
+              fi
+          envFrom:
+            - secretRef:
+                name: backup
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 10m
+              memory: 128Mi
