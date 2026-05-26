@@ -31,4 +31,3 @@ pushd argo && helm upgrade --install --create-namespace -n argo --version 1.0.14
 pushd prometheus && helm upgrade --install --create-namespace -n monitoring --version 82.15.0 --values values.yaml --post-renderer kustomize-renderer prometheus prometheus/kube-prometheus-stack && popd
 pushd loki && helm upgrade --install --create-namespace -n monitoring --version 9.3.1 --values values.yaml loki grafana-community/loki && popd
 pushd alloy && helm upgrade --install --create-namespace -n monitoring --version 1.6.2 --values values.yaml alloy grafana/alloy && popd
-pushd event-exporter && helm upgrade --install --create-namespace -n monitoring --version 3.6.3 --values values.yaml --post-renderer kustomize-renderer event-exporter bitnami/kubernetes-event-exporter && popd
