@@ -1,3 +1,12 @@
+variable "init_pihole" {
+  type    = bool
+  default = false
+}
+
+locals {
+  init_pihole = var.init_pihole || var.initialize
+}
+
 resource "proxmox_virtual_environment_vm" "pihole" {
   lifecycle {
     ignore_changes = [initialization]
@@ -19,9 +28,15 @@ resource "proxmox_virtual_environment_vm" "pihole" {
   }
 
   # System
-  machine       = "pc"
-  bios          = "seabios"
+  machine       = "q35"
+  bios          = "ovmf"
   scsi_hardware = "virtio-scsi-single"
+  efi_disk {
+    datastore_id      = "local-lvm"
+    pre_enrolled_keys = true
+    type              = "4m"
+    file_format       = "raw"
+  }
 
   # Disks
   disk {
@@ -32,15 +47,16 @@ resource "proxmox_virtual_environment_vm" "pihole" {
     iothread     = true
     ssd          = true
     backup       = true
-    replicate    = true
+    replicate    = false
     aio          = "io_uring"
     file_format  = "raw"
   }
 
   # CPU
   cpu {
-    cores = 1
-    type  = "host"
+    cores    = 1
+    type     = "host"
+    affinity = "0-2"
   }
 
   # Memory
@@ -51,11 +67,20 @@ resource "proxmox_virtual_environment_vm" "pihole" {
   # Network
   network_device {
     bridge      = "vmbr0"
-    firewall    = true
+    firewall    = false
     model       = "virtio"
     mac_address = "BC:24:11:67:19:E8"
   }
 
   # Boot Order
-  boot_order = ["scsi0", "net0"]
+  boot_order = local.init_pihole ? ["ide2", "scsi0", "net0"] : ["scsi0", "net0"]
+
+  # CD Drive
+  dynamic "cdrom" {
+    for_each = local.init_pihole ? [1] : []
+    content {
+      interface = "ide2"
+      file_id   = "nfs:iso/ubuntu-24.04.4-live-server-amd64.iso"
+    }
+  }
 }

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-HELM_PLUGINS=../../helm/plugins
+export HELM_PLUGINS=../../helm/plugins
 
 curl -skSL https://raw.githubusercontent.com/kubernetes-csi/csi-driver-smb/v1.16.0/deploy/install-driver.sh | bash -s v1.16.0 --
 

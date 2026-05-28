@@ -12,6 +12,7 @@ resources:
   - kubernetes-dashboard
   - mealie
   - minecraft
+  - netbox
   - ombi
   - peanut
   - plex

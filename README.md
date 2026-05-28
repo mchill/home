@@ -63,16 +63,16 @@ terraform apply -var="initialize=true"
    2. Enable "Install OpenSSH server"
    3. Import SSH key from GitHub
 
-2. Enable passwordless sudo to allow Ansible to run later.
-
-   ```bash
-   echo "mchill ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/mchill
-   ```
-
-3. Reapply terraform configuration, removing the bootable CD and adding PCI and serial devices.
+2. Reapply terraform configuration, removing the bootable CD and adding PCI and serial devices.
 
    ```bash
    terraform apply
+   ```
+
+3. Enable passwordless sudo to allow Ansible to run later.
+
+   ```bash
+   echo "mchill ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/mchill
    ```
 
 ### Configure Virtual Machines

@@ -43,15 +43,16 @@ resource "proxmox_virtual_environment_vm" "k3s-agent-2" {
     iothread     = true
     ssd          = true
     backup       = true
-    replicate    = true
+    replicate    = false
     aio          = "io_uring"
     file_format  = "raw"
   }
 
   # CPU
   cpu {
-    cores = 4
-    type  = "host"
+    cores    = 3
+    type     = "host"
+    affinity = "0-2"
   }
 
   # Memory
@@ -62,7 +63,7 @@ resource "proxmox_virtual_environment_vm" "k3s-agent-2" {
   # Network
   network_device {
     bridge      = "vmbr0"
-    firewall    = true
+    firewall    = false
     model       = "virtio"
     mac_address = "BC:24:11:35:2F:52"
   }

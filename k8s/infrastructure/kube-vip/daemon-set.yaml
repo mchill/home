@@ -3,7 +3,13 @@ kind: DaemonSet
 metadata:
   name: kube-vip
 spec:
+  selector:
+    matchLabels:
+      app: kube-vip
   template:
+    metadata:
+      labels:
+        app: kube-vip
     spec:
       hostNetwork: true
       serviceAccountName: kube-vip
@@ -36,8 +42,12 @@ spec:
             - name: port
               value: "6443"
             - name: vip_interface
-              value: ens18
+              value: enp6s18
             - name: cp_enable
               value: "true"
             - name: vip_leaderelection
               value: "true"
+            - name: KUBERNETES_SERVICE_HOST
+              value: "127.0.0.1"
+            - name: KUBERNETES_SERVICE_PORT
+              value: "6443"

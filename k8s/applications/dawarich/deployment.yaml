@@ -147,7 +147,8 @@ spec:
             claimName: dawarich
       resources:
         limits:
-          memory: 3Gi
+          cpu: 1
+          memory: 34Gi
         requests:
-          cpu: 10m
-          memory: 3Gi
+          cpu: 1
+          memory: 4Gi

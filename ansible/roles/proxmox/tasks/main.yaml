@@ -36,3 +36,18 @@
         src: trim.sh
         dest: /home/mchill/trim.sh
         mode: "0644"
+
+    - name: Set GRUB_CMDLINE_LINUX_DEFAULT
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        regexp: ^GRUB_CMDLINE_LINUX_DEFAULT=
+        line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet isolcpus=3"'
+      register: grub_cmdline
+
+    - name: Update GRUB
+      when: grub_cmdline.changed
+      ansible.builtin.shell: update-grub
+
+    - name: Reboot
+      when: grub_cmdline.changed
+      ansible.builtin.reboot:

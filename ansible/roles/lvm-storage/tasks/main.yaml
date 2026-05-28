@@ -1,0 +1,23 @@
+- name: Configure thick LVM storage
+  become: true
+  block:
+    - name: Check if local-lvm is thin
+      shell: pvesm status | grep '^local-lvm' | grep -c 'lvmthin'
+      register: is_thin
+      failed_when: false
+
+    - name: Remove thin local-lvm storage
+      command: pvesm remove local-lvm
+      when: is_thin.stdout | int > 0
+
+    - name: Remove thin pool LV
+      lvol:
+        vg: pve
+        lv: data
+        state: absent
+        force: yes
+      when: is_thin.stdout | int > 0
+
+    - name: Add thick LVM storage
+      command: pvesm add lvm local-lvm --vgname pve --shared 0
+      when: is_thin.stdout | int > 0

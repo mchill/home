@@ -24,9 +24,15 @@ resource "proxmox_virtual_environment_vm" "k3s-server-3" {
   }
 
   # System
-  machine       = "pc"
-  bios          = "seabios"
+  machine       = "q35"
+  bios          = "ovmf"
   scsi_hardware = "virtio-scsi-single"
+  efi_disk {
+    datastore_id      = "local-lvm"
+    pre_enrolled_keys = true
+    type              = "4m"
+    file_format       = "raw"
+  }
 
   # Disks
   disk {
@@ -37,15 +43,16 @@ resource "proxmox_virtual_environment_vm" "k3s-server-3" {
     iothread     = true
     ssd          = true
     backup       = true
-    replicate    = true
+    replicate    = false
     aio          = "io_uring"
     file_format  = "raw"
   }
 
   # CPU
   cpu {
-    cores = 2
-    type  = "host"
+    cores    = 1
+    type     = "host"
+    affinity = "3"
   }
 
   # Memory
@@ -56,7 +63,7 @@ resource "proxmox_virtual_environment_vm" "k3s-server-3" {
   # Network
   network_device {
     bridge      = "vmbr0"
-    firewall    = true
+    firewall    = false
     model       = "virtio"
     mac_address = "BC:24:11:9E:8D:3D"
   }
