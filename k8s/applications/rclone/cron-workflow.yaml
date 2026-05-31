@@ -22,7 +22,7 @@ spec:
         retryStrategy:
           limit: "2"
         container:
-          image: rclone/rclone:1.73.5
+          image: rclone/rclone:1.74.2
           args:
             - sync
             - --check-first
