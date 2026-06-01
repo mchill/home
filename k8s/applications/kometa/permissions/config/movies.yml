@@ -10,7 +10,7 @@ collections:
       all:
         label: <<smart_label>>
   Kamaria:
-    radarr_taglist: kamaria.
+    radarr_taglist: kamaria, kamaria.
     smart_label:
       all:
         label: <<smart_label>>
