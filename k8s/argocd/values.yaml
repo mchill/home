@@ -1,0 +1,10 @@
+dex:
+  enabled: false
+
+server:
+  extraArgs:
+    - --disable-auth
+
+configs:
+  cm:
+    kustomize.buildOptions: --enable-helm --load-restrictor LoadRestrictionsNone

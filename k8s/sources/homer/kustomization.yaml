@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: server
+resources:
+  - deployment.yaml
+configMapGenerator:
+  - name: homer
+    files:
+      - config.yaml
+helmGlobals:
+  chartHome: ../../../helm/charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: homer
+      ingress:
+        routes:
+          - match: Host("mchill.io")
+            disableForwardAuth: true
+  - name: persistence
+    valuesInline:
+      app: homer
+      size: 128Mi

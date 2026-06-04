@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: server
+resources:
+  - deployment.yaml
+helmGlobals:
+  chartHome: ../../../helm/charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: flaresolverr
+      ingress:
+        routes:
+          - match: Host("flaresolverr.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: flaresolverr
+      size: 128Mi

@@ -1,0 +1,4 @@
+resources:
+  - cluster-issuer.yaml
+  - certificate.yaml
+  - sealed-secret.yaml

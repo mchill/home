@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: server
+resources:
+  - deployment.yaml
+  - sealed-secret.yaml
+helmGlobals:
+  chartHome: ../../../helm/charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: qbittorrent
+      ingress:
+        routes:
+          - match: Host("qbittorrent.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: qbittorrent
+      size: 128Mi

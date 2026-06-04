@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/crds/application-crd.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: intel-device-plugins
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  sources:
+    - repoURL: https://intel.github.io/helm-charts
+      chart: intel-device-plugins-operator
+      targetRevision: 0.35.0
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/intel-device-plugins
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: inteldeviceplugins-system
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

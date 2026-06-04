@@ -1,5 +1,0 @@
-namespace: kube-vip
-resources:
-  - https://kube-vip.io/manifests/rbac.yaml
-  - daemon-set.yaml
-  - namespace.yaml

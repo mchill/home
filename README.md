@@ -66,6 +66,7 @@ terraform apply -var="initialize=true"
 2. Reapply terraform configuration, removing the bootable CD and adding PCI and serial devices.
 
    ```bash
+   cd terraform
    terraform apply
    ```
 
@@ -78,13 +79,24 @@ terraform apply -var="initialize=true"
 ### Configure Virtual Machines
 
 ```bash
+cd ansible
 ansible-playbook playbooks/configure_proxmox_vms.yaml -i inventory.yaml --extra-vars "@variables.yaml"
 ```
 
 ### Deploy Workloads
 
 ```bash
-pushd k8s/infrastructure && ./apply.sh && popd
-pushd k8s/ingresses && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side --force-conflicts -f - && popd
-pushd k8s/applications && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side --force-conflicts -f - && popd
+cd k8s
+
+# Sealed Secrets key
+kubectl create namespace sealed-secrets
+kubectl apply -f applications/wave0/sealed-secrets/sealed-secrets-key.yaml
+
+# Argo CD
+helm repo add argo https://argoproj.github.io/argo-helm
+helm repo update
+helm upgrade --install --create-namespace -n argocd --version 9.5.17 --values argocd/values.yaml argocd argo/argo-cd
+
+# Workloads
+kubectl apply -f applications/root.yaml
 ```

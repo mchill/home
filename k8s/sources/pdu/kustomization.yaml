@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: server
+helmGlobals:
+  chartHome: ../../../helm/charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: pdu
+      endpoint:
+        ip: 192.168.1.11
+        port: 80
+      ingress:
+        routes:
+          - match: Host("pdu.mchill.io")

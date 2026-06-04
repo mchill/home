@@ -1,3 +1,0 @@
-namespace: ceph-csi-rbd
-resources:
-  - sealed-secret.yaml

@@ -1,6 +1,0 @@
-server:
-  authModes:
-    - server
-
-controller:
-  parallelism: 10

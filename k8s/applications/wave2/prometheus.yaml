@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/crds/application-crd.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      targetRevision: 82.15.0
+      helm:
+        releaseName: prometheus
+        values: |
+          prometheusOperator:
+            admissionWebhooks:
+              certManager:
+                enabled: true
+          grafana:
+            adminPassword: admin
+            additionalDataSources:
+              - name: Loki
+                type: loki
+                url: http://loki-gateway.monitoring.svc.cluster.local
+                access: proxy
+                isDefault: false
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/prometheus
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

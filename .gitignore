@@ -1,6 +1,7 @@
 # Kubernetes
 k8s/**/secret*.yaml
 k8s/**/secret*.json
+sealed-secrets-key.yaml
 
 # Terraform
 terraform/.env

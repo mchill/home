@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: server
+resources:
+  - deployment.yaml
+helmGlobals:
+  chartHome: ../../../helm/charts
+helmCharts:
+  - name: ingress
+    valuesInline:
+      app: peanut
+      ingress:
+        routes:
+          - match: Host("nut.mchill.io")
+  - name: persistence
+    valuesInline:
+      app: peanut
+      size: 128Mi

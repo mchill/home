@@ -1,6 +1,0 @@
-dex:
-  enabled: false
-
-configs:
-  secret:
-    argocdServerAdminPassword: $2a$10$vZ7zSpEf3VNiC2in9IVY9OhnmCzdnUHJPn/TtkgTFObky0h8kOMRm

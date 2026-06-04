@@ -1,0 +1,116 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/crds/application-crd.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  sources:
+    - repoURL: https://helm.traefik.io/traefik
+      chart: traefik
+      targetRevision: 27.0.2
+      helm:
+        values: |
+          deployment:
+            kind: DaemonSet
+            additionalContainers:
+              - name: traefik-forward-auth
+                image: r1cebank/traefik-forward-auth:multiarch
+                ports:
+                  - name: auth
+                    containerPort: 4181
+                env:
+                  - name: CONFIG
+                    value: /config
+                  - name: COOKIE_DOMAIN
+                    value: mchill.io
+                  - name: AUTH_HOST
+                    value: auth.mchill.io
+                  - name: WHITELIST
+                    value: matthewchill7@gmail.com
+                  - name: SECRET
+                    valueFrom:
+                      secretKeyRef:
+                        name: traefik
+                        key: SECRET
+                  - name: PROVIDERS_GOOGLE_CLIENT_ID
+                    valueFrom:
+                      secretKeyRef:
+                        name: traefik
+                        key: PROVIDERS_GOOGLE_CLIENT_ID
+                  - name: PROVIDERS_GOOGLE_CLIENT_SECRET
+                    valueFrom:
+                      secretKeyRef:
+                        name: traefik
+                        key: PROVIDERS_GOOGLE_CLIENT_SECRET
+          ingressRoute:
+            dashboard:
+              enabled: false
+          logs:
+            access:
+              enabled: true
+          globalArguments: []
+          additionalArguments:
+            - --api.insecure=true
+            - --serversTransport.insecureSkipVerify=true
+            - --metrics.prometheus
+          ports:
+            web:
+              port: 8000
+              exposedPort: 80
+              redirectTo:
+                port: websecure
+            websecure:
+              port: 8443
+              exposedPort: 443
+              tls:
+                enabled: true
+          service:
+            annotations:
+              metallb.universe.tf/loadBalancerIPs: 192.168.1.90
+          providers:
+            kubernetesCRD:
+              enabled: true
+              ingressClass: traefik
+              allowCrossNamespace: true
+              allowExternalNameServices: true
+            kubernetesIngress:
+              enabled: true
+              ingressClass: traefik
+            file:
+              enabled: true
+              content: |-
+                http:
+                  services:
+                    ceph:
+                      loadBalancer:
+                        sticky:
+                          cookie:
+                            name: ceph
+                            secure: true
+                            httpOnly: true
+                        healthCheck:
+                          interval: 5s
+                          timeout: 1s
+                        servers:
+                          - url: http://192.168.1.30:8080
+                          - url: http://192.168.1.31:8080
+                          - url: http://192.168.1.32:8080
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/traefik
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: traefik
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

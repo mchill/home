@@ -20,7 +20,7 @@ spec:
     volumes:
       - name: ssh
         secret:
-          secretName: beelink1
+          secretName: beelink1-ssh-key
           defaultMode: 0600
     templates:
       - name: backup
@@ -68,7 +68,7 @@ spec:
               fi
           envFrom:
             - secretRef:
-                name: backup
+                name: homeassistant-webhook
           resources:
             limits:
               memory: 128Mi
