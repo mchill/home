@@ -18,7 +18,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: flaresolverr
-          image: ghcr.io/flaresolverr/flaresolverr:v3.4.6
+          image: ghcr.io/flaresolverr/flaresolverr:v3.5.0
           ports:
             - name: ingress
               containerPort: 8191

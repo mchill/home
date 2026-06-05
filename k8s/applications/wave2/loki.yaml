@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://grafana-community.github.io/helm-charts
     chart: loki
-    targetRevision: 9.3.1
+    targetRevision: 9.5.13
     helm:
       values: |
         deploymentMode: SingleBinary
