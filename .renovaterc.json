@@ -10,7 +10,10 @@
   "schedule": ["before 3am on Saturday"],
   "includePaths": ["k8s/**"],
   "kubernetes": {
-    "managerFilePatterns": ["/^k8s/.*\\.yaml$/"]
+    "managerFilePatterns": ["/^k8s/sources/.*\\.yaml$/"]
+  },
+  "argocd": {
+    "managerFilePatterns": ["/^k8s/applications/.*\\.yaml$"]
   },
   "packageRules": [
     {
