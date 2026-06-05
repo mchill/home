@@ -3,23 +3,31 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  deploy:
-    name: deploy
+  lint:
+    name: Lint manifests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup kubectl
-        run: |
-          curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.25.0/bin/linux/amd64/kubectl"
-          chmod +x kubectl
-          sudo mv kubectl /usr/local/bin/kubectl
-          mkdir -p ~/.kube
-          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
-          chmod 0600 ~/.kube/config
-      - name: Deploy server
+
+      - name: Lint k8s/applications
         working-directory: k8s
         run: |
-          pushd ingresses && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side --force-conflicts -f - && popd
-          pushd applications && kubectl kustomize --enable-helm --load-restrictor=LoadRestrictionsNone | kubectl apply --server-side --force-conflicts -f - && popd
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+          ./kustomize build --enable-helm --load-restrictor=LoadRestrictionsNone applications > /dev/null
+          echo "✓ k8s/applications linting passed"
+
+      - name: Lint k8s/sources
+        working-directory: k8s
+        run: |
+          wget -qO - https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz | tar xz
+          ./kubeconform -strict -ignore-missing-schemas \
+            -ignore-filename-pattern 'homer/config' \
+            -ignore-filename-pattern 'kometa/(permissions|posters)/config' \
+            -ignore-filename-pattern 'minecraft/(ops|whitelist)' \
+            -ignore-filename-pattern 'ddns/secret' \
+            sources/

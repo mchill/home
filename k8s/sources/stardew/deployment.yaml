@@ -125,7 +125,7 @@ spec:
             - name: TIME_SPEED_LOCATION_NOTIFY
               value: "false"
             - name: TIME_SPEED_KEYS_FREEZE_TIME
-              value: N
+              value: "N"
             - name: TIME_SPEED_KEYS_INCREASE_TICK_INTERVAL
               value: OemPeriod
             - name: TIME_SPEED_KEYS_DECREASE_TICK_INTERVAL

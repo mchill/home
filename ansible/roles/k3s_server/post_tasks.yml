@@ -1,0 +1,21 @@
+- name: Update local kubeconfig with client credentials
+  when: inventory_hostname == groups['k3s_servers'][0]
+  block:
+    - name: Fetch kubeconfig
+      ansible.builtin.slurp:
+        src: /etc/rancher/k3s/k3s.yaml
+      register: k3s_kubeconfig
+
+    - name: Extract client credentials
+      set_fact:
+        client_cert: "{{ (k3s_kubeconfig.content | b64decode | from_yaml).users[0]['user']['client-certificate-data'] }}"
+        client_key: "{{ (k3s_kubeconfig.content | b64decode | from_yaml).users[0]['user']['client-key-data'] }}"
+
+    - name: Update local kubeconfig
+      delegate_to: localhost
+      gather_facts: false
+      shell: |
+        kubectl config set users.home.client-certificate-data "{{ client_cert }}"
+        kubectl config set users.home.client-key-data "{{ client_key }}"
+      environment:
+        KUBECONFIG: ~/.kube/config

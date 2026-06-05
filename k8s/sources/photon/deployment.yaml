@@ -3,10 +3,16 @@ kind: Deployment
 metadata:
   name: photon
 spec:
+  selector:
+    matchLabels:
+      app: photon
   replicas: 1
   strategy:
     type: Recreate
   template:
+    metadata:
+      labels:
+        app: photon
     spec:
       securityContext:
         fsGroup: 1000
