@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: static
+  name: photon
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -13,20 +13,16 @@ spec:
   sources:
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
-      path: k8s/sources/static
+      path: k8s/sources/photon
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
       path: k8s/helm/charts/ingress
       helm:
-        releaseName: static
+        releaseName: photon
         values: |
-          app: static
+          app: photon
           ingress:
-            routes:
-              - match: Host("static.mchill.io")
-                disableForwardAuth: true
-                middlewares:
-                  - name: static
+            enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: server

@@ -7,17 +7,3 @@ configMapGenerator:
   - name: homer
     files:
       - config.yaml
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: ingress
-    valuesInline:
-      app: homer
-      ingress:
-        routes:
-          - match: Host("mchill.io")
-            disableForwardAuth: true
-  - name: persistence
-    valuesInline:
-      app: homer
-      size: 128Mi

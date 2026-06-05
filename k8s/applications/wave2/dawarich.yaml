@@ -10,10 +10,28 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/sources/dawarich
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/dawarich
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        releaseName: dawarich
+        values: |
+          app: dawarich
+          ingress:
+            routes:
+              - match: Host("dawarich.mchill.io")
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        releaseName: dawarich
+        values: |
+          app: dawarich
+          size: 8Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: server

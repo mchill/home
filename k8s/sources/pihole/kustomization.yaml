@@ -3,18 +3,3 @@ kind: Kustomization
 namespace: server
 resources:
   - middleware.yaml
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: ingress
-    valuesInline:
-      app: pihole
-      endpoint:
-        ip: 192.168.1.2
-        port: 80
-      ingress:
-        routes:
-          - match: Host("pihole.mchill.io")
-          - match: Host("pihole.mchill.io") && Path("/")
-            middlewares:
-              - name: pihole

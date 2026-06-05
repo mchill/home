@@ -4,16 +4,3 @@ namespace: server
 resources:
   - deployment.yaml
   - sealed-secret.yaml
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: ingress
-    valuesInline:
-      app: dawarich
-      ingress:
-        routes:
-          - match: Host("dawarich.mchill.io")
-  - name: persistence
-    valuesInline:
-      app: dawarich
-      size: 8Gi

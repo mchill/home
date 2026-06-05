@@ -10,10 +10,30 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/sources/minecraft
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/minecraft
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        releaseName: minecraft
+        values: |
+          app: minecraft
+          ingress:
+            enabled: false
+          loadBalancer:
+            ip: 192.168.1.92
+            port: 25565
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        releaseName: minecraft
+        values: |
+          app: minecraft
+          size: 4Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: server

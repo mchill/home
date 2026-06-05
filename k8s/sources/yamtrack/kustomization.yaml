@@ -4,16 +4,3 @@ namespace: server
 resources:
   - deployment.yaml
   - sealed-secret.yaml
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: ingress
-    valuesInline:
-      app: yamtrack
-      ingress:
-        routes:
-          - match: Host("yamtrack.mchill.io")
-  - name: persistence
-    valuesInline:
-      app: yamtrack
-      size: 128Mi

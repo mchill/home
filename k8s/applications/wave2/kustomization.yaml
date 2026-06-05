@@ -26,6 +26,7 @@ resources:
   - ombi.yaml
   - pdu.yaml
   - peanut.yaml
+  # - photon.yaml
   - pihole.yaml
   - plex.yaml
   - podcast-dl.yaml
@@ -36,6 +37,8 @@ resources:
   - radarr-uhd.yaml
   - radarr.yaml
   - rclone.yaml
+  - remote-nas.yaml
+  - remote-unifi.yaml
   - romm.yaml
   - sonarr-uhd.yaml
   - sonarr.yaml
@@ -43,6 +46,7 @@ resources:
   - static.yaml
   - syncthing.yaml
   - tautulli.yaml
+  # - tdarr.yaml
   - tubearchivist.yaml
   - unifi.yaml
   - yamtrack.yaml

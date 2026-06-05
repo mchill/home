@@ -10,10 +10,30 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/sources/romm
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/romm
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        releaseName: romm
+        values: |
+          app: romm
+          ingress:
+            routes:
+              - match: Host("romm.mchill.io")
+              - match: Host("romm.mchill.io") && PathPrefix("/api")
+                disableForwardAuth: true
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        releaseName: romm
+        values: |
+          app: romm
+          size: 512Mi
   destination:
     server: https://kubernetes.default.svc
     namespace: server

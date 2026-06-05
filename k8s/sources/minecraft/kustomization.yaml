@@ -8,18 +8,3 @@ configMapGenerator:
     files:
       - ops.json
       - whitelist.json
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: ingress
-    valuesInline:
-      app: minecraft
-      ingress:
-        enabled: false
-      loadBalancer:
-        ip: 192.168.1.92
-        port: 25565
-  - name: persistence
-    valuesInline:
-      app: minecraft
-      size: 4Gi

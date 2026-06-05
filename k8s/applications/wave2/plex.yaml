@@ -10,10 +10,29 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/sources/plex
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/plex
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        releaseName: plex
+        values: |
+          app: plex
+          ingress:
+            routes:
+              - match: Host("plex.mchill.io")
+                disableForwardAuth: true
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        releaseName: plex
+        values: |
+          app: plex
+          size: 16Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: server

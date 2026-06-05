@@ -10,10 +10,34 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/sources/stardew
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/stardew
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        releaseName: stardew
+        values: |
+          app: stardew
+          ingress:
+            routes:
+              - match: Host("stardew.mchill.io")
+                disableForwardAuth: true
+          loadBalancer:
+            ip: 192.168.1.86
+            port: 24642
+            targetPort: stardew
+            protocol: UDP
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        releaseName: stardew
+        values: |
+          app: stardew
+          size: 128Mi
   destination:
     server: https://kubernetes.default.svc
     namespace: server

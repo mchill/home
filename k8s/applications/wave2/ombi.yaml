@@ -10,10 +10,31 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/sources/ombi
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/ombi
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        releaseName: ombi
+        values: |
+          app: ombi
+          ingress:
+            routes:
+              - match: Host("ombi.mchill.io")
+                disableForwardAuth: true
+              - match: Host("overseerr.mchill.io")
+                disableForwardAuth: true
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        releaseName: ombi
+        values: |
+          app: ombi
+          size: 128Mi
   destination:
     server: https://kubernetes.default.svc
     namespace: server

@@ -4,18 +4,3 @@ namespace: server
 resources:
   - deployment.yaml
   - sealed-secret.yaml
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: ingress
-    valuesInline:
-      app: romm
-      ingress:
-        routes:
-          - match: Host("romm.mchill.io")
-          - match: Host("romm.mchill.io") && PathPrefix("/api")
-            disableForwardAuth: true
-  - name: persistence
-    valuesInline:
-      app: romm
-      size: 512Mi

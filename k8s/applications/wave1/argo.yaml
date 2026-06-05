@@ -25,6 +25,21 @@ spec:
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
       path: k8s/sources/argo
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        releaseName: argo
+        values: |
+          app: argo
+          service:
+            enabled: false
+          ingress:
+            routes:
+              - match: Host("argo.mchill.io")
+                service:
+                  name: argo-argo-workflows-server
+                  port: 2746
   destination:
     server: https://kubernetes.default.svc
     namespace: argo

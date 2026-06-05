@@ -3,16 +3,3 @@ kind: Kustomization
 namespace: server
 resources:
   - deployment.yaml
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: ingress
-    valuesInline:
-      app: bazarr
-      ingress:
-        routes:
-          - match: Host("bazarr.mchill.io")
-  - name: persistence
-    valuesInline:
-      app: bazarr
-      size: 128Mi

@@ -10,10 +10,29 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/sources/mealie
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/mealie
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        releaseName: mealie
+        values: |
+          app: mealie
+          ingress:
+            routes:
+              - match: Host("recipes.mchill.io")
+                disableForwardAuth: true
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        releaseName: mealie
+        values: |
+          app: mealie
+          size: 256Mi
   destination:
     server: https://kubernetes.default.svc
     namespace: server

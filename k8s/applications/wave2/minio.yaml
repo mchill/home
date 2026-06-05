@@ -13,7 +13,16 @@ spec:
   source:
     repoURL: https://github.com/mchill/home.git
     targetRevision: HEAD
-    path: k8s/sources/minio
+    path: k8s/helm/charts/ingress
+    helm:
+      values: |
+        app: minio
+        endpoint:
+          ip: 192.168.1.10
+          port: 9001
+        ingress:
+          routes:
+            - match: Host("minio.mchill.io")
   destination:
     server: https://kubernetes.default.svc
     namespace: server

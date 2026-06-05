@@ -10,10 +10,34 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/sources/jitsi
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/jitsi
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        releaseName: jitsi
+        values: |
+          app: jitsi
+          ingress:
+            routes:
+              - match: Host("jitsi.mchill.io")
+                disableForwardAuth: true
+          loadBalancer:
+            ip: 192.168.1.93
+            port: 10000
+            targetPort: jvb
+            protocol: UDP
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        releaseName: jitsi
+        values: |
+          app: jitsi
+          size: 128Mi
   destination:
     server: https://kubernetes.default.svc
     namespace: server

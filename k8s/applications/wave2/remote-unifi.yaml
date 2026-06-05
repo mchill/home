@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: static
+  name: remote-unifi
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,23 +10,22 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  sources:
-    - repoURL: https://github.com/mchill/home.git
-      targetRevision: HEAD
-      path: k8s/sources/static
-    - repoURL: https://github.com/mchill/home.git
-      targetRevision: HEAD
-      path: k8s/helm/charts/ingress
-      helm:
-        releaseName: static
-        values: |
-          app: static
-          ingress:
-            routes:
-              - match: Host("static.mchill.io")
-                disableForwardAuth: true
-                middlewares:
-                  - name: static
+  source:
+    repoURL: https://github.com/mchill/home.git
+    targetRevision: HEAD
+    path: k8s/helm/charts/ingress
+    helm:
+      releaseName: remote-unifi
+      values: |
+        app: remote-unifi
+        endpoint:
+          ip: 192.168.121.1
+          port: 443
+        ingress:
+          routes:
+            - match: Host("unifi.remote.mchill.io")
+              service:
+                scheme: https
   destination:
     server: https://kubernetes.default.svc
     namespace: server

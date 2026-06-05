@@ -13,7 +13,18 @@ spec:
   source:
     repoURL: https://github.com/mchill/home.git
     targetRevision: HEAD
-    path: k8s/sources/proxmox
+    path: k8s/helm/charts/ingress
+    helm:
+      values: |
+        app: proxmox
+        endpoint:
+          ip: 192.168.1.30
+          port: 8006
+        ingress:
+          routes:
+            - match: Host("proxmox.mchill.io")
+              service:
+                scheme: https
   destination:
     server: https://kubernetes.default.svc
     namespace: server

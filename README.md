@@ -90,7 +90,7 @@ cd k8s
 
 # Sealed Secrets key
 kubectl create namespace sealed-secrets
-kubectl apply -f applications/wave0/sealed-secrets/sealed-secrets-key.yaml
+kubectl apply -f sources/sealed-secrets/sealed-secrets-key.yaml
 
 # Argo CD
 helm repo add argo https://argoproj.github.io/argo-helm

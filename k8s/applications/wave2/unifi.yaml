@@ -10,10 +10,41 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/sources/unifi
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/unifi
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        releaseName: unifi
+        values: |
+          app: unifi
+          endpoint:
+            ip: 192.168.1.1
+            port: 443
+          ingress:
+            routes:
+              - match: Host("unifi.mchill.io")
+                service:
+                  scheme: https
+              # - match: Host("unifi.mchill.io") && Path("/proxy/network/v2/api/site/default/topology")
+              #   service:
+              #     name: unifi-proxy
+              #     scheme: https
+              #     port: 3000
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        releaseName: unifi
+        values: |
+          app: unifi-proxy
+          service:
+            port: 3000
+          ingress:
+            enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: server

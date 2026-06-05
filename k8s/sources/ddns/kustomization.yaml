@@ -4,16 +4,3 @@ namespace: server
 resources:
   - deployment.yaml
   - sealed-secret.yaml
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: ingress
-    valuesInline:
-      app: ddns
-      ingress:
-        routes:
-          - match: Host("ddns.mchill.io")
-  - name: persistence
-    valuesInline:
-      app: ddns
-      size: 128Mi

@@ -8,14 +8,3 @@ configMapGenerator:
     files:
       - index.html
       - 401.html
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: ingress
-    valuesInline:
-      app: errors
-      ingress:
-        routes:
-          - match: HostRegexp(`{host:.+}`)
-            disableForwardAuth: true
-            priority: 1

@@ -3,16 +3,3 @@ kind: Kustomization
 namespace: server
 resources:
   - deployment.yaml
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: ingress
-    valuesInline:
-      app: sonarr-uhd
-      ingress:
-        routes:
-          - match: Host("sonarr-uhd.mchill.io")
-  - name: persistence
-    valuesInline:
-      app: sonarr-uhd
-      size: 512Mi

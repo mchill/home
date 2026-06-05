@@ -3,17 +3,3 @@ kind: Kustomization
 namespace: server
 resources:
   - deployment.yaml
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: ingress
-    valuesInline:
-      app: plex
-      ingress:
-        routes:
-          - match: Host("plex.mchill.io")
-            disableForwardAuth: true
-  - name: persistence
-    valuesInline:
-      app: plex
-      size: 16Gi

@@ -4,10 +4,3 @@ namespace: server
 resources:
   - cron-workflow.yaml
   - sealed-secret.yaml
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: persistence
-    valuesInline:
-      app: rclone
-      size: 128Mi

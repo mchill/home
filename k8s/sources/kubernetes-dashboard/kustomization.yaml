@@ -4,17 +4,6 @@ namespace: server
 resources:
   - https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/alternative.yaml
   - cluster-role-binding.yaml
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: ingress
-    valuesInline:
-      app: kubernetes-dashboard
-      ingress:
-        routes:
-          - match: Host("k8s.mchill.io")
-      service:
-        enabled: false
 patches:
   - patch: |-
       $patch: delete

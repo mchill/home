@@ -10,10 +10,29 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/sources/tubearchivist
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/tubearchivist
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        releaseName: tubearchivist
+        values: |
+          app: tubearchivist
+          ingress:
+            routes:
+              - match: Host("tube.mchill.io")
+                disableForwardAuth: true
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        releaseName: tubearchivist
+        values: |
+          app: tubearchivist
+          size: 128Mi
   destination:
     server: https://kubernetes.default.svc
     namespace: server

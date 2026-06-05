@@ -13,7 +13,16 @@ spec:
   source:
     repoURL: https://github.com/mchill/home.git
     targetRevision: HEAD
-    path: k8s/sources/pdu
+    path: k8s/helm/charts/ingress
+    helm:
+      values: |
+        app: pdu
+        endpoint:
+          ip: 192.168.1.11
+          port: 80
+        ingress:
+          routes:
+            - match: Host("pdu.mchill.io")
   destination:
     server: https://kubernetes.default.svc
     namespace: server

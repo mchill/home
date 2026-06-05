@@ -1,17 +1,3 @@
 resources:
   - role.yaml
   - role-binding.yaml
-helmGlobals:
-  chartHome: ../../../helm/charts
-helmCharts:
-  - name: ingress
-    valuesInline:
-      app: argo
-      service:
-        enabled: false
-      ingress:
-        routes:
-          - match: Host("argo.mchill.io")
-            service:
-              name: argo-argo-workflows-server
-              port: 2746
