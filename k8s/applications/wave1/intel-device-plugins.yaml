@@ -13,7 +13,7 @@ spec:
   sources:
     - repoURL: https://intel.github.io/helm-charts
       chart: intel-device-plugins-operator
-      targetRevision: 0.35.0
+      targetRevision: 0.36.0
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
       path: k8s/sources/intel-device-plugins

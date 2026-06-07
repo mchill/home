@@ -33,7 +33,7 @@ spec:
           limit: "2"
         initContainers:
           - name: render-config
-            image: bash:5.3.9
+            image: bash:5.3.12
             args:
               - -c
               - |
