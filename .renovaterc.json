@@ -45,17 +45,23 @@
       "versioning": "regex:^(?<minor>\\d{4})\\.(?<patch>\\d+)\\.(?<build>\\d+)$"
     },
     {
-      "matchPaths": ["k8s/sources/dawarich/**"],
+      "matchFileNames": [
+        "k8s/sources/dawarich/**"
+      ],
       "matchPackageNames": ["redis"],
       "allowedVersions": "< 8.0.0"
     },
     {
-      "matchPaths": ["k8s/sources/romm/**"],
+      "matchFileNames": [
+        "k8s/sources/romm/**"
+      ],
       "matchPackageNames": ["mariadb"],
       "allowedVersions": "< 12.0.0"
     },
     {
-      "matchPaths": ["k8s/sources/tubearchivist/**"],
+      "matchFileNames": [
+        "k8s/sources/tubearchivist/**"
+      ],
       "matchPackageNames": ["elasticsearch"],
       "allowedVersions": "< 9.0.0"
     }
