@@ -3,7 +3,7 @@
   "extends": [
     ":dependencyDashboard",
     ":ignoreModulesAndTests",
-    ":separateMultipleMajorReleases",
+    ":separateMajorReleases",
     "group:allNonMajor",
     "workarounds:all"
   ],
@@ -30,6 +30,39 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["ghcr.io/hotio/qbittorrent"],
       "versioning": "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["postgis/postgis"],
+      "versioning": "regex:^(?<major>\\d+)-(?<minor>\\d+)\\.(?<patch>\\d+)-alpine$"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": [
+        "homeassistant/home-assistant",
+        "itzg/minecraft-server"
+      ],
+      "versioning": "regex:^(?<minor>\\d{4})\\.(?<patch>\\d+)\\.(?<build>\\d+)$"
+    },
+    {
+      "matchFileNames": ["k8s/sources/dawarich/**"],
+      "matchPackageNames": ["postgis"],
+      "allowedVersions": "< 18.0.0"
+    },
+    {
+      "matchFileNames": ["k8s/sources/dawarich/**"],
+      "matchPackageNames": ["redis"],
+      "allowedVersions": "< 8.0.0"
+    },
+    {
+      "matchFileNames": ["k8s/sources/romm/**"],
+      "matchPackageNames": ["mariadb"],
+      "allowedVersions": "< 12.0.0"
+    },
+    {
+      "matchFileNames": ["k8s/sources/tubearchivist/**"],
+      "matchPackageNames": ["elasticsearch"],
+      "allowedVersions": "< 9.0.0"
     }
   ]
 }
