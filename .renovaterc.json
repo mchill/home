@@ -46,7 +46,7 @@
     },
     {
       "matchFileNames": ["k8s/sources/dawarich/**"],
-      "matchPackageNames": ["postgis"],
+      "matchPackageNames": ["postgis/postgis"],
       "allowedVersions": "< 18.0.0"
     },
     {
