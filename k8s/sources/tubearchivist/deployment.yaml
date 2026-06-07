@@ -56,7 +56,7 @@ spec:
               mountPath: /youtube
               subPath: youtube/tubearchivist
         - name: redis
-          image: redis:7.4.9
+          image: redis:8.8.0
           volumeMounts:
             - name: tubearchivist
               mountPath: /data
