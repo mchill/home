@@ -117,7 +117,7 @@ spec:
               mountPath: /var/app/storage
               subPath: storage
         - name: db
-          image: postgis/postgis:17-3.5-alpine
+          image: postgis/postgis:18-3.6-alpine
           env:
             - name: POSTGRES_DB
               value: dawarich
