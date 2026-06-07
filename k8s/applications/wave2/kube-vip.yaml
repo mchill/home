@@ -19,7 +19,7 @@ spec:
     namespace: server
   syncPolicy:
     automated:
-      prune: false
+      prune: true
       selfHeal: false
     syncOptions:
       - ServerSideApply=true

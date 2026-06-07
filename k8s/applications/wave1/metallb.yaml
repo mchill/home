@@ -22,7 +22,7 @@ spec:
     namespace: metallb-system
   syncPolicy:
     automated:
-      prune: false
+      prune: true
       selfHeal: false
     syncOptions:
       - CreateNamespace=true
