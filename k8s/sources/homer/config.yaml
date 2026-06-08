@@ -15,11 +15,18 @@ links:
   - name: GitHub
     icon: fab fa-github
     url: https://github.com/mchill/home
+  - name: Trello
+    icon: fab fa-trello
+    url: https://trello.com/b/XNVnSBvI/home-server
 
 services:
   - name: Tools
     icon: fas fa-wrench
     items:
+      - name: Home Assistant
+        subtitle: Home automation
+        logo: assets/logos/homeassistant.png
+        url: https://home.mchill.io
       - name: Mealie
         subtitle: Recipes
         logo: assets/logos/mealie.png
@@ -56,10 +63,18 @@ services:
         subtitle: Games
         logo: assets/logos/romm.png
         url: https://romm.mchill.io
+      - name: Stardew Valley
+        subtitle: Game server
+        logo: assets/logos/stardew.png
+        url: https://stardew.mchill.io
 
   - name: Libraries
     icon: fas fa-book
     items:
+      - name: Yamtrack
+        subtitle: Media tracker
+        logo: assets/logos/yamtrack.svg
+        url: https://yamtrack.mchill.io
       - name: Radarr
         subtitle: Movies
         logo: assets/logos/radarr.png
@@ -77,13 +92,85 @@ services:
         logo: assets/logos/sonarr.png
         url: https://sonarr-uhd.mchill.io
 
+  - name: Storage
+    icon: fas fa-folder-open
+    items:
+      - name: Ceph
+        subtitle: Distributed storage
+        logo: assets/logos/ceph.png
+        url: https://ceph.mchill.io
+      - name: Synology DSM
+        subtitle: NAS
+        logo: assets/logos/nas.png
+        url: https://nas.mchill.io
+      - name: MinIO
+        subtitle: Object storage
+        logo: assets/logos/minio.png
+        url: https://minio.mchill.io
+      - name: Syncthing
+        subtitle: File synchronization
+        logo: assets/logos/syncthing.png
+        url: https://syncthing.mchill.io
+      - name: Remote Synology DSM
+        subtitle: NAS
+        logo: assets/logos/nas.png
+        url: https://nas.remote.mchill.io
+
+  - name: Network
+    icon: fas fa-wifi
+    items:
+      - name: Unifi
+        subtitle: Network controller
+        logo: assets/logos/unifi.png
+        url: https://unifi.mchill.io
+      - name: Pi-hole
+        subtitle: DNS sinkhole
+        logo: assets/logos/pihole.png
+        url: https://pihole.mchill.io
+      - name: Traefik
+        subtitle: Proxy configuration
+        logo: assets/logos/traefik.png
+        url: https://traefik.mchill.io
+      - name: DDNS Monitor
+        subtitle: Domain management
+        logo: assets/logos/ddns.svg
+        url: https://ddns.mchill.io
+      - name: Remote Unifi
+        subtitle: Network controller
+        logo: assets/logos/unifi.png
+        url: https://unifi.remote.mchill.io
+
+  - name: Monitoring
+    icon: fas fa-heart-pulse
+    items:
+      - name: GL.iNet Comet
+        subtitle: KVM over IP
+        logo: assets/logos/glinet.svg
+        url: https://kvm.mchill.io
+      - name: Grafana
+        subtitle: Server monitoring
+        logo: assets/logos/grafana.png
+        url: https://grafana.mchill.io
+      - name: Prometheus
+        subtitle: Server metrics
+        logo: assets/logos/prometheus.png
+        url: https://prometheus.mchill.io
+      - name: PDU
+        subtitle: Power management
+        logo: assets/logos/cyberpower.png
+        url: https://pdu.mchill.io
+      - name: webNUT
+        subtitle: UPS metrics
+        logo: assets/logos/peanut.svg
+        url: https://nut.mchill.io
+
   - name: Server Mgmt
     icon: fas fa-server
     items:
-      - name: NetBox
-        subtitle: Server infrastructure
-        logo: assets/logos/netbox.png
-        url: https://netbox.mchill.io
+      - name: Argo CD
+        subtitle: Continuous delivery
+        logo: assets/logos/argocd.png
+        url: https://argocd.mchill.io
       - name: Proxmox
         subtitle: Virtualization
         logo: assets/logos/proxmox.png
@@ -96,10 +183,10 @@ services:
         subtitle: Workflow engine
         logo: assets/logos/argo.png
         url: https://argo.mchill.io
-      - name: Stardew Valley
-        subtitle: Game server
-        logo: assets/logos/stardew.png
-        url: https://stardew.mchill.io
+      - name: NetBox
+        subtitle: Server infrastructure
+        logo: assets/logos/netbox.png
+        url: https://netbox.mchill.io
 
   - name: Media Mgmt
     icon: fas fa-tasks
@@ -124,87 +211,3 @@ services:
         subtitle: Plex statistics
         logo: assets/logos/tautulli.png
         url: https://tautulli.mchill.io
-
-  - name: Monitoring
-    icon: fas fa-heart-pulse
-    items:
-      - name: Home Assistant
-        subtitle: Home automation
-        logo: assets/logos/homeassistant.png
-        url: https://home.mchill.io
-      - name: Grafana
-        subtitle: Server monitoring
-        logo: assets/logos/grafana.png
-        url: https://grafana.mchill.io
-      - name: Prometheus
-        subtitle: Server metrics
-        logo: assets/logos/prometheus.png
-        url: https://prometheus.mchill.io
-      - name: PDU
-        subtitle: Power management
-        logo: assets/logos/cyberpower.png
-        url: https://pdu.mchill.io
-      - name: webNUT
-        subtitle: UPS metrics
-        logo: assets/logos/peanut.svg
-        url: https://nut.mchill.io
-
-  - name: Network
-    icon: fas fa-wifi
-    items:
-      - name: Unifi
-        subtitle: Network controller
-        logo: assets/logos/unifi.png
-        url: https://unifi.mchill.io
-      - name: Pi-hole
-        subtitle: DNS sinkhole
-        logo: assets/logos/pihole.png
-        url: https://pihole.mchill.io
-      - name: Traefik
-        subtitle: Proxy configuration
-        logo: assets/logos/traefik.png
-        url: https://traefik.mchill.io
-      - name: DDNS Monitor
-        subtitle: Domain management
-        logo: assets/logos/ddns.svg
-        url: https://ddns.mchill.io
-
-  - name: Files
-    icon: fas fa-folder-open
-    items:
-      - name: Ceph
-        subtitle: Distributed storage
-        logo: assets/logos/ceph.png
-        url: https://ceph.mchill.io
-      - name: Synology DSM
-        subtitle: NAS
-        logo: assets/logos/nas.png
-        url: https://nas.mchill.io
-      - name: MinIO
-        subtitle: Object storage
-        logo: assets/logos/minio.png
-        url: https://minio.mchill.io
-      - name: Syncthing
-        subtitle: File synchronization
-        logo: assets/logos/syncthing.png
-        url: https://syncthing.mchill.io
-
-  - name: Remote
-    icon: fas fa-globe
-    items:
-      - name: GL.iNet Comet
-        subtitle: KVM over IP
-        logo: assets/logos/glinet.svg
-        url: https://kvm.mchill.io
-      - name: Synology DSM
-        subtitle: NAS
-        logo: assets/logos/nas.png
-        url: https://nas.remote.mchill.io
-      - name: Unifi
-        subtitle: Network controller
-        logo: assets/logos/unifi.png
-        url: https://unifi.remote.mchill.io
-      - name: Pi-hole
-        subtitle: DNS sinkhole
-        logo: assets/logos/pihole.png
-        url: https://pihole.remote.mchill.io

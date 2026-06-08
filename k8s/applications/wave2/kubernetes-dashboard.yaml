@@ -26,18 +26,6 @@ spec:
               - match: Host("k8s.mchill.io")
           service:
             enabled: false
-    - repoURL: https://github.com/mchill/home.git
-      targetRevision: HEAD
-      path: k8s/helm/charts/ingress
-      helm:
-        releaseName: kubernetes-dashboard
-        values: |
-          app: kubernetes-dashboard
-          ingress:
-            routes:
-              - match: Host("k8s.mchill.io")
-          service:
-            enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: server
