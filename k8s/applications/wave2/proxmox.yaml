@@ -22,7 +22,7 @@ spec:
           port: 8006
         ingress:
           routes:
-            - match: Host("proxmox.mchill.io")
+            - match: Host(`proxmox.mchill.io`)
               service:
                 scheme: https
   destination:

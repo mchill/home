@@ -13,7 +13,7 @@ spec:
   sources:
     - repoURL: https://helm.traefik.io/traefik
       chart: traefik
-      targetRevision: 27.0.2
+      targetRevision: 40.2.0
       helm:
         values: |
           deployment:
@@ -48,40 +48,28 @@ spec:
                       secretKeyRef:
                         name: traefik
                         key: PROVIDERS_GOOGLE_CLIENT_SECRET
-          ingressRoute:
-            dashboard:
-              enabled: false
           logs:
             access:
               enabled: true
-          globalArguments: []
           additionalArguments:
-            - --api.insecure=true
             - --serversTransport.insecureSkipVerify=true
-            - --metrics.prometheus
+          api:
+            insecure: true
           ports:
             web:
-              port: 8000
-              exposedPort: 80
-              redirectTo:
-                port: websecure
-            websecure:
-              port: 8443
-              exposedPort: 443
-              tls:
-                enabled: true
+              http:
+                redirections:
+                  entryPoint:
+                    to: websecure
+                    scheme: https
           service:
             annotations:
               metallb.universe.tf/loadBalancerIPs: 192.168.1.90
           providers:
             kubernetesCRD:
               enabled: true
-              ingressClass: traefik
               allowCrossNamespace: true
               allowExternalNameServices: true
-            kubernetesIngress:
-              enabled: true
-              ingressClass: traefik
             file:
               enabled: true
               content: |-
@@ -115,11 +103,11 @@ spec:
             enabled: false
           ingress:
             routes:
-              - match: Host("traefik.mchill.io")
+              - match: Host(`traefik.mchill.io`)
                 service:
                   kind: TraefikService
                   name: api@internal
-              - match: Host("auth.mchill.io")
+              - match: Host(`auth.mchill.io`)
                 service:
                   name: traefik-clusterip
                   port: 4181

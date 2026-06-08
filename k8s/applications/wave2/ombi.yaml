@@ -23,9 +23,9 @@ spec:
           app: ombi
           ingress:
             routes:
-              - match: Host("ombi.mchill.io")
+              - match: Host(`ombi.mchill.io`)
                 disableForwardAuth: true
-              - match: Host("overseerr.mchill.io")
+              - match: Host(`overseerr.mchill.io`)
                 disableForwardAuth: true
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD

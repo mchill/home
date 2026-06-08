@@ -1,10 +1,8 @@
 {{- if .Values.ingress.enabled }}
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: {{ .Values.app }}
-  annotations:
-    kubernetes.io/ingress.class: traefik
 spec:
   entryPoints:
     - websecure

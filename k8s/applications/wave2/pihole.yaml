@@ -26,8 +26,8 @@ spec:
             port: 80
           ingress:
             routes:
-              - match: Host("pihole.mchill.io")
-              - match: Host("pihole.mchill.io") && Path("/")
+              - match: Host(`pihole.mchill.io`)
+              - match: Host(`pihole.mchill.io`) && Path(`/`)
                 middlewares:
                   - name: pihole
   destination:

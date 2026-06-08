@@ -23,8 +23,8 @@ spec:
           app: romm
           ingress:
             routes:
-              - match: Host("romm.mchill.io")
-              - match: Host("romm.mchill.io") && PathPrefix("/api")
+              - match: Host(`romm.mchill.io`)
+              - match: Host(`romm.mchill.io`) && PathPrefix(`/api`)
                 disableForwardAuth: true
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD

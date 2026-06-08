@@ -23,7 +23,7 @@ spec:
           app: mealie
           ingress:
             routes:
-              - match: Host("recipes.mchill.io")
+              - match: Host(`recipes.mchill.io`)
                 disableForwardAuth: true
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD

@@ -36,7 +36,7 @@ spec:
             enabled: false
           ingress:
             routes:
-              - match: Host("argo.mchill.io")
+              - match: Host(`argo.mchill.io`)
                 service:
                   name: argo-argo-workflows-server
                   port: 2746

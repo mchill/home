@@ -22,7 +22,7 @@ spec:
           port: 80
         ingress:
           routes:
-            - match: Host("pdu.mchill.io")
+            - match: Host(`pdu.mchill.io`)
   destination:
     server: https://kubernetes.default.svc
     namespace: server

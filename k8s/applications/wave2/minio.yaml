@@ -22,7 +22,7 @@ spec:
           port: 9001
         ingress:
           routes:
-            - match: Host("minio.mchill.io")
+            - match: Host(`minio.mchill.io`)
   destination:
     server: https://kubernetes.default.svc
     namespace: server

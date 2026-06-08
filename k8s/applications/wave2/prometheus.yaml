@@ -43,10 +43,10 @@ spec:
             enabled: false
           ingress:
             routes:
-              - match: Host("grafana.mchill.io")
+              - match: Host(`grafana.mchill.io`)
                 service:
                   name: prometheus-grafana
-              - match: Host("prometheus.mchill.io")
+              - match: Host(`prometheus.mchill.io`)
                 service:
                   name: prometheus-kube-prometheus-prometheus
                   port: 9090

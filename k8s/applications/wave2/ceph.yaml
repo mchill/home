@@ -21,7 +21,7 @@ spec:
           enabled: false
         ingress:
           routes:
-            - match: Host("ceph.mchill.io")
+            - match: Host(`ceph.mchill.io`)
               service:
                 kind: TraefikService
                 name: ceph@file

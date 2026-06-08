@@ -23,7 +23,7 @@ spec:
           app: syncthing
           ingress:
             routes:
-              - match: Host("syncthing.mchill.io")
+              - match: Host(`syncthing.mchill.io`)
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
       path: k8s/helm/charts/persistence

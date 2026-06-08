@@ -26,10 +26,10 @@ spec:
             port: 443
           ingress:
             routes:
-              - match: Host("unifi.mchill.io")
+              - match: Host(`unifi.mchill.io`)
                 service:
                   scheme: https
-              # - match: Host("unifi.mchill.io") && Path("/proxy/network/v2/api/site/default/topology")
+              # - match: Host(`unifi.mchill.io`) && Path(`/proxy/network/v2/api/site/default/topology`)
               #   service:
               #     name: unifi-proxy
               #     scheme: https

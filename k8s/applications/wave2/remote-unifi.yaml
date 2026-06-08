@@ -23,7 +23,7 @@ spec:
           port: 443
         ingress:
           routes:
-            - match: Host("unifi.remote.mchill.io")
+            - match: Host(`unifi.remote.mchill.io`)
               service:
                 scheme: https
   destination:

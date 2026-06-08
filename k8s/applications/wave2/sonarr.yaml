@@ -23,7 +23,7 @@ spec:
           app: sonarr
           ingress:
             routes:
-              - match: Host("sonarr.mchill.io")
+              - match: Host(`sonarr.mchill.io`)
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
       path: k8s/helm/charts/persistence

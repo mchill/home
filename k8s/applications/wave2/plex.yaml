@@ -23,7 +23,7 @@ spec:
           app: plex
           ingress:
             routes:
-              - match: Host("plex.mchill.io")
+              - match: Host(`plex.mchill.io`)
                 disableForwardAuth: true
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD

@@ -23,7 +23,7 @@ spec:
           app: audiobookshelf
           ingress:
             routes:
-              - match: Host("books.mchill.io")
+              - match: Host(`books.mchill.io`)
                 disableForwardAuth: true
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD

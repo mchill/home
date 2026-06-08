@@ -21,7 +21,7 @@ spec:
           enabled: false
         ingress:
           routes:
-            - match: Host("argocd.mchill.io")
+            - match: Host(`argocd.mchill.io`)
               service:
                 name: argocd-server
                 scheme: https

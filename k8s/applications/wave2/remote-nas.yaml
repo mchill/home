@@ -23,7 +23,7 @@ spec:
           port: 5000
         ingress:
           routes:
-            - match: Host("nas.remote.mchill.io")
+            - match: Host(`nas.remote.mchill.io`)
   destination:
     server: https://kubernetes.default.svc
     namespace: server

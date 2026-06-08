@@ -23,7 +23,7 @@ spec:
           app: ddns
           ingress:
             routes:
-              - match: Host("ddns.mchill.io")
+              - match: Host(`ddns.mchill.io`)
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
       path: k8s/helm/charts/persistence

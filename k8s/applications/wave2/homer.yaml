@@ -23,7 +23,7 @@ spec:
           app: homer
           ingress:
             routes:
-              - match: Host("mchill.io")
+              - match: Host(`mchill.io`)
                 disableForwardAuth: true
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD

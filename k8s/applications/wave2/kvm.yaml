@@ -22,7 +22,7 @@ spec:
           port: 443
         ingress:
           routes:
-            - match: Host("kvm.mchill.io")
+            - match: Host(`kvm.mchill.io`)
               service:
                 scheme: https
   destination:

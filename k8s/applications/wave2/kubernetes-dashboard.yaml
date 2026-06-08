@@ -23,7 +23,7 @@ spec:
           app: kubernetes-dashboard
           ingress:
             routes:
-              - match: Host("k8s.mchill.io")
+              - match: Host(`k8s.mchill.io`)
           service:
             enabled: false
   destination:

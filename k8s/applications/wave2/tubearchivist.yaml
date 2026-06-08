@@ -23,7 +23,7 @@ spec:
           app: tubearchivist
           ingress:
             routes:
-              - match: Host("tube.mchill.io")
+              - match: Host(`tube.mchill.io`)
                 disableForwardAuth: true
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
