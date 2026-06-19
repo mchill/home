@@ -48,9 +48,8 @@ spec:
                       secretKeyRef:
                         name: traefik
                         key: PROVIDERS_GOOGLE_CLIENT_SECRET
-          logs:
-            access:
-              enabled: true
+          accessLog:
+            enabled: true
           additionalArguments:
             - --serversTransport.insecureSkipVerify=true
           api:
@@ -72,7 +71,7 @@ spec:
               allowExternalNameServices: true
             file:
               enabled: true
-              content: |-
+              content:
                 http:
                   services:
                     ceph:
