@@ -95,7 +95,9 @@ kubectl apply -f sources/sealed-secrets/sealed-secrets-key.yaml
 # Argo CD
 helm repo add argo https://argoproj.github.io/argo-helm
 helm repo update
-helm upgrade --install --create-namespace -n argocd --version 9.5.17 --values argocd/values.yaml argocd argo/argo-cd
+helm upgrade --install --create-namespace -n argocd \
+  --version $(yq '.spec.sources[0].targetRevision' applications/wave2/argocd.yaml) \
+  --values argocd/values.yaml argocd argo/argo-cd
 
 # Workloads
 kubectl apply -f applications/root.yaml
