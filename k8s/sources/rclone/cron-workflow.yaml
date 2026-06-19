@@ -68,7 +68,7 @@ spec:
               claimName: googledrive
       - name: notify
         container:
-          image: alpine:3.23
+          image: alpine:3.24
           command:
             - sh
             - -c

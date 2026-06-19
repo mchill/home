@@ -26,7 +26,7 @@ spec:
         retryStrategy:
           limit: "2"
         container:
-          image: node:24.16.0
+          image: node:24.17.0
           command:
             - /bin/bash
             - -c
@@ -60,7 +60,7 @@ spec:
               memory: 512Mi
       - name: notify
         container:
-          image: alpine:3.23
+          image: alpine:3.24
           command:
             - sh
             - -c

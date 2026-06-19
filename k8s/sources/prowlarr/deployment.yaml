@@ -18,7 +18,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: prowlarr
-          image: ghcr.io/linuxserver/prowlarr:2.3.5
+          image: ghcr.io/linuxserver/prowlarr:2.4.0
           ports:
             - name: ingress
               containerPort: 9696

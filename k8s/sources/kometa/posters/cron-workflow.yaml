@@ -33,7 +33,7 @@ spec:
           limit: "2"
         initContainers:
           - name: render-config
-            image: bash:5.3.12
+            image: bash:5.3.15
             args:
               - -c
               - |
@@ -83,7 +83,7 @@ spec:
               memory: 1Gi
       - name: notify
         container:
-          image: alpine:3.23
+          image: alpine:3.24
           command:
             - sh
             - -c

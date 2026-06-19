@@ -18,7 +18,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: tdarr-server
-          image: haveagitgat/tdarr:2.77.01
+          image: haveagitgat/tdarr:2.78.01
           ports:
             - name: ingress
               containerPort: 8265
@@ -64,7 +64,7 @@ spec:
               mountPath: /media/tv-requested
               subPath: tv/requested
         - name: tdarr-node
-          image: haveagitgat/tdarr_node:2.77.01
+          image: haveagitgat/tdarr_node:2.78.01
           env:
             - name: TZ
               value: America/New_York
