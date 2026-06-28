@@ -18,7 +18,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: dawarich
-          image: freikin/dawarich:1.8.1
+          image: freikin/dawarich:1.9.1
           command:
             - web-entrypoint.sh
           args:
@@ -73,7 +73,7 @@ spec:
               mountPath: /dawarich_db_data
               subPath: postgres
         - name: sidekiq
-          image: freikin/dawarich:1.8.1
+          image: freikin/dawarich:1.9.1
           command:
             - sidekiq-entrypoint.sh
           args:

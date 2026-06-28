@@ -56,7 +56,7 @@ spec:
                 mountPath: /config/sync.sh
                 subPath: sync.sh
         container:
-          image: kometateam/kometa:v2.3.1
+          image: kometateam/kometa:v2.4.4
           args:
             - --run
             - --read-only-config
