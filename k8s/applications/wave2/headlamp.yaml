@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kubernetes-dashboard
+  name: headlamp
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,19 +11,38 @@ metadata:
 spec:
   project: default
   sources:
+    - repoURL: https://kubernetes-sigs.github.io/headlamp
+      chart: headlamp
+      targetRevision: 0.43.0
+      helm:
+        releaseName: headlamp
+        values: |
+          config:
+            inCluster: false
+            extraArgs:
+              - "-kubeconfig=/etc/headlamp/kubeconfig"
+          volumes:
+            - name: kubeconfig
+              configMap:
+                name: headlamp-kubeconfig
+          volumeMounts:
+            - name: kubeconfig
+              mountPath: /etc/headlamp/kubeconfig
+              subPath: kubeconfig.yaml
+              readOnly: true
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
-      path: k8s/sources/kubernetes-dashboard
+      path: k8s/sources/headlamp
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
       path: k8s/helm/charts/ingress
       helm:
-        releaseName: kubernetes-dashboard
+        releaseName: headlamp
         values: |
-          app: kubernetes-dashboard
+          app: headlamp
           ingress:
             routes:
-              - match: Host(`k8s.mchill.io`)
+              - match: Host(`headlamp.mchill.io`)
           service:
             enabled: false
   destination:

@@ -10,12 +10,12 @@ resources:
   - ddns.yaml
   - errors.yaml
   - flaresolverr.yaml
+  - headlamp.yaml
   - homeassistant.yaml
   - homer.yaml
   - jitsi.yaml
   - kometa.yaml
   - kube-vip.yaml
-  - kubernetes-dashboard.yaml
   - kvm.yaml
   - loki.yaml
   - mealie.yaml
