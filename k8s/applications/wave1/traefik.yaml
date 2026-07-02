@@ -69,25 +69,6 @@ spec:
               enabled: true
               allowCrossNamespace: true
               allowExternalNameServices: true
-            file:
-              enabled: true
-              content:
-                http:
-                  services:
-                    ceph:
-                      loadBalancer:
-                        sticky:
-                          cookie:
-                            name: ceph
-                            secure: true
-                            httpOnly: true
-                        healthCheck:
-                          interval: 5s
-                          timeout: 1s
-                        servers:
-                          - url: http://192.168.1.30:8080
-                          - url: http://192.168.1.31:8080
-                          - url: http://192.168.1.32:8080
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
       path: k8s/sources/traefik

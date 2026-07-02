@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: beelink1
+spec:
+  type: ExternalName
+  externalName: beelink1.mchill.lan
+  ports:
+    - port: 8080
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: beelink2
+spec:
+  type: ExternalName
+  externalName: beelink2.mchill.lan
+  ports:
+    - port: 8080
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: beelink3
+spec:
+  type: ExternalName
+  externalName: beelink3.mchill.lan
+  ports:
+    - port: 8080
+      protocol: TCP
