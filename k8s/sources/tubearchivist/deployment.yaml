@@ -91,7 +91,7 @@ spec:
             claimName: libraries
       resources:
         limits:
-          memory: 3Gi
+          memory: 2Gi
         requests:
           cpu: 10m
-          memory: 3Gi
+          memory: 2Gi
