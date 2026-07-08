@@ -1,6 +1,15 @@
 dex:
   enabled: false
 
+repoServer:
+  env:
+    - name: HTTP_PROXY
+      value: http://192.168.1.2:8888
+    - name: HTTPS_PROXY
+      value: http://192.168.1.2:8888
+    - name: NO_PROXY
+      value: localhost,127.0.0.1,.svc,.cluster.local,kubernetes.default.svc
+
 server:
   extraArgs:
     - --disable-auth

@@ -22,6 +22,9 @@
     - name: Install k3s
       environment:
         INSTALL_K3S_CHANNEL: v1.35
+        CONTAINERD_HTTP_PROXY: http://192.168.1.2:8888
+        CONTAINERD_HTTPS_PROXY: http://192.168.1.2:8888
+        CONTAINERD_NO_PROXY: 127.0.0.1,192.168.1.0/24
       ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -s - server
       register: install_k3s
       changed_when: '"No change detected so skipping service start" not in install_k3s.stdout'

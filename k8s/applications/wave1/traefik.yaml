@@ -65,7 +65,7 @@ spec:
                   - name: LABEL_VALUE
                     value: "true"
                   - name: FOLDER
-                    value: /dynamic-config
+                    value: /etc/traefik/dynamic
                   - name: RESOURCE
                     value: configmap
                   - name: NAMESPACE
