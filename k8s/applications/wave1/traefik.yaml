@@ -18,6 +18,9 @@ spec:
         values: |
           deployment:
             kind: DaemonSet
+            additionalVolumes:
+              - name: dynamic-config
+                emptyDir: {}
             additionalContainers:
               - name: traefik-forward-auth
                 image: r1cebank/traefik-forward-auth:multiarch
@@ -33,6 +36,12 @@ spec:
                     value: auth.mchill.io
                   - name: WHITELIST
                     value: matthewchill7@gmail.com
+                  - name: HTTP_PROXY
+                    value: http://192.168.1.2:8888
+                  - name: HTTPS_PROXY
+                    value: http://192.168.1.2:8888
+                  - name: NO_PROXY
+                    value: localhost,127.0.0.1
                   - name: SECRET
                     valueFrom:
                       secretKeyRef:
@@ -48,10 +57,31 @@ spec:
                       secretKeyRef:
                         name: traefik
                         key: PROVIDERS_GOOGLE_CLIENT_SECRET
+              - name: dynamic-config
+                image: ghcr.io/kiwigrid/k8s-sidecar:2.8.1
+                env:
+                  - name: LABEL
+                    value: traefik-dynamic-config
+                  - name: LABEL_VALUE
+                    value: "true"
+                  - name: FOLDER
+                    value: /dynamic-config
+                  - name: RESOURCE
+                    value: configmap
+                  - name: NAMESPACE
+                    value: ALL
+                volumeMounts:
+                  - name: dynamic-config
+                    mountPath: /etc/traefik/dynamic
+          additionalVolumeMounts:
+            - name: dynamic-config
+              mountPath: /etc/traefik/dynamic
           accessLog:
             enabled: true
           additionalArguments:
             - --serversTransport.insecureSkipVerify=true
+            - --providers.file.directory=/etc/traefik/dynamic
+            - --providers.file.watch=true
           api:
             insecure: true
           ports:

@@ -33,3 +33,15 @@ services:
         source: ./kmip-server-dsm/certs
         target: /var/lib/certs
     restart: always
+
+  tinyproxy:
+    container_name: tinyproxy
+    image: kalaksi/tinyproxy:1.7
+    cap_drop:
+      - ALL
+    ports:
+      - 8888:8888
+    environment:
+      DISABLE_VIA_HEADER: "yes"
+      ALLOWED_NETWORKS: 192.168.1.0/24
+    restart: always

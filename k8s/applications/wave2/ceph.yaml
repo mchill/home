@@ -28,7 +28,7 @@ spec:
               - match: Host(`ceph.mchill.io`)
                 service:
                   kind: TraefikService
-                  name: ceph
+                  name: ceph@file
   destination:
     server: https://kubernetes.default.svc
     namespace: server

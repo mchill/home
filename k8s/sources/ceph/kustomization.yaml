@@ -1,6 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: server
-resources:
-  - service.yaml
-  - traefik-service.yaml
+configMapGenerator:
+  - name: traefik-dynamic-config
+    files:
+      - ceph-service.yaml
+    options:
+      labels:
+        traefik-dynamic-config: "true"

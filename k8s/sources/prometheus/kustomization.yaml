@@ -1,5 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: monitoring
-resources:
-  - config-map.yaml
+configMapGenerator:
+  - name: grafana-dashboards
+    files:
+      - jobs.json
+      - volumes.json
+    options:
+      labels:
+        grafana_dashboard: "1"
