@@ -2,7 +2,7 @@
 
 This is the configuration for my home server running in Kubernetes.
 
-![Home Server](https://github.com/mchill/home/workflows/Home%20Server/badge.svg)
+![Home Server](https://github.com/mchill/home/actions/workflows/workflow.yaml/badge.svg?branch=main)
 
 [App Dashboard](https://mchill.io)
 

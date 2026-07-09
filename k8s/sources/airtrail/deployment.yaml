@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airtrail
+spec:
+  selector:
+    matchLabels:
+      app: airtrail
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: airtrail
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: airtrail
+          image: johly/airtrail:v3.11.1
+          ports:
+            - name: ingress
+              containerPort: 3000
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: ORIGIN
+              value: https://airtrail.mchill.io
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: airtrail
+                  key: DB_URL
+            - name: DB_DATABASE_NAME
+              value: airtrail
+            - name: DB_USERNAME
+              value: airtrail
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: airtrail
+                  key: DB_PASSWORD
+            - name: UPLOAD_LOCATION
+              value: /app/uploads
+            - name: INTEGRATIONS_AERO_DATA_BOX_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: airtrail
+                  key: INTEGRATIONS_AERO_DATA_BOX_KEY
+          volumeMounts:
+            - name: airtrail
+              mountPath: /app/uploads
+              subPath: uploads
+        - name: db
+          image: postgres:16.14-alpine
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: POSTGRES_DB
+              value: airtrail
+            - name: POSTGRES_USER
+              value: airtrail
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: airtrail
+                  key: DB_PASSWORD
+          volumeMounts:
+            - name: airtrail
+              mountPath: /var/lib/postgresql/data
+              subPath: db
+      volumes:
+        - name: airtrail
+          persistentVolumeClaim:
+            claimName: airtrail
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          cpu: 10m
+          memory: 512Mi

@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/crds/application-crd.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: airtrail
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  sources:
+    # - repoURL: https://github.com/mchill/home.git
+    #   targetRevision: HEAD
+    #   path: k8s/sources/airtrail
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        releaseName: airtrail
+        values: |
+          app: airtrail
+          ingress:
+            routes:
+              - match: Host(`airtrail.mchill.io`)
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        releaseName: airtrail
+        values: |
+          app: airtrail
+          size: 128Mi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: server
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+      - ServerSideApply=true
