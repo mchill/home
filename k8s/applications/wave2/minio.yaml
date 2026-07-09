@@ -17,8 +17,9 @@ spec:
     helm:
       values: |
         app: minio
-        endpoint:
-          ip: 192.168.1.10
+        service:
+          type: ExternalName
+          host: nas.mchill.lan
           port: 9001
         ingress:
           routes:

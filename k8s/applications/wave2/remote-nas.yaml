@@ -18,8 +18,9 @@ spec:
       releaseName: remote-nas
       values: |
         app: remote-nas
-        endpoint:
-          ip: 192.168.121.10
+        service:
+          type: ExternalName
+          host: nas.remote.mchill.lan
           port: 5000
         ingress:
           routes:

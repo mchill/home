@@ -1,11 +1,9 @@
 app:
 
-endpoint:
-  ip:
-  port:
-
 service:
   enabled: true
+  type: ClusterIP
+  host:
   port: 80
   targetPort: ingress
   protocol: TCP

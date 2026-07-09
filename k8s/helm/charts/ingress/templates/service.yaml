@@ -4,14 +4,21 @@ kind: Service
 metadata:
   name: {{ .Values.app }}
 spec:
-  type: ClusterIP
+{{- if eq .Values.service.type "ExternalName" }}
+  type: ExternalName
+  externalName: {{ .Values.service.host }}
+  ports:
+    - name: {{ .Values.service.targetPort }}
+      port: {{ .Values.service.port }}
+      protocol: {{ .Values.service.protocol }}
+{{- else }}
+  type: {{ .Values.service.type }}
   ports:
     - name: {{ .Values.service.targetPort }}
       port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort }}
       protocol: {{ .Values.service.protocol }}
-{{- if not .Values.endpoint.ip }}
   selector:
     app: {{ .Values.app }}
-{{- end}}
+{{- end }}
 {{- end }}

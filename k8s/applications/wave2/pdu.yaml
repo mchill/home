@@ -17,8 +17,9 @@ spec:
     helm:
       values: |
         app: pdu
-        endpoint:
-          ip: 192.168.1.11
+        service:
+          type: ExternalName
+          host: pdu.mchill.lan
           port: 80
         ingress:
           routes:

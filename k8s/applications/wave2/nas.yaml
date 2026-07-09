@@ -17,8 +17,9 @@ spec:
     helm:
       values: |
         app: nas
-        endpoint:
-          ip: 192.168.1.10
+        service:
+          type: ExternalName
+          host: nas.mchill.lan
           port: 5000
         ingress:
           routes:

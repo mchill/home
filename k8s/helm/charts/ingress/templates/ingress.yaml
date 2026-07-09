@@ -16,7 +16,7 @@ spec:
           name: {{ default $.Values.app $service.name }}
 {{- if ne $service.kind "TraefikService" }}
           scheme: {{ default "http" $service.scheme }}
-          port: {{ default 80 $service.port }}
+          port: {{ default $.Values.service.port $service.port }}
 {{- end }}
 {{- if or (not .disableForwardAuth) .middlewares }}
       middlewares:

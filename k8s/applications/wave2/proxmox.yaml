@@ -17,8 +17,9 @@ spec:
     helm:
       values: |
         app: proxmox
-        endpoint:
-          ip: 192.168.1.30
+        service:
+          type: ExternalName
+          host: beelink1.mchill.lan
           port: 8006
         ingress:
           routes:

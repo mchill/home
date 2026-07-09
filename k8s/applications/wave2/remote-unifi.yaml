@@ -18,8 +18,9 @@ spec:
       releaseName: remote-unifi
       values: |
         app: remote-unifi
-        endpoint:
-          ip: 192.168.121.1
+        service:
+          type: ExternalName
+          host: unifi.remote.mchill.lan
           port: 443
         ingress:
           routes:
