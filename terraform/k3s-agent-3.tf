@@ -57,7 +57,7 @@ resource "proxmox_virtual_environment_vm" "k3s-agent-3" {
 
   # Memory
   memory {
-    dedicated = 16384
+    dedicated = 20480
   }
 
   # Network
