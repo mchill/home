@@ -11,7 +11,7 @@ terraform {
     key    = "proxmox.tfstate"
     region = "us-east-1"
     endpoints = {
-      s3 = "http://nas.mchill.lan:9000"
+      s3 = "http://192.168.1.10:9000"
     }
     skip_credentials_validation = true
     skip_requesting_account_id  = true
@@ -23,7 +23,7 @@ terraform {
 }
 
 provider "proxmox" {
-  endpoint = "https://beelink1.mchill.lan:8006/"
+  endpoint = "https://192.168.1.30:8006/"
   username = "root@pam"
   insecure = true
 }

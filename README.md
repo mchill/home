@@ -42,11 +42,11 @@ This is the configuration for my home server running in Kubernetes.
 
 5. If Ceph was installed for the first time, some values need to be replaced.
    - Replace the `clusterID` with the result of `ceph fsid` in:
-     - [k8s/infrastructure/ceph/values.yaml](k8s/infrastructure/ceph/values.yaml)
-     - [k8s/charts/persistence/templates/pv.yaml](k8s/charts/persistence/templates/pv.yaml)
+     - [k8s/applications/wave1/ceph-csi-rbd.yaml](k8s/infrastructure/ceph/values.yaml)
+     - [k8s/sources/shared/storage/pv.yaml](k8s/charts/persistence/templates/pv.yaml)
 
    - Replace the `userKey` with the result of `ceph auth get-key client.k8s` in:
-     - [k8s/infrastructure/ceph/secret.yaml](k8s/infrastructure/ceph/secret.yaml)
+     - [k8s/sources/shared/storage/secret.yaml](k8s/infrastructure/ceph/secret.yaml)
 
 ### Provision Virtual Machines
 
