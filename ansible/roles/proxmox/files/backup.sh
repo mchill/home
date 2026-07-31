@@ -19,10 +19,10 @@ cleanup;
 # Back up the image
 rbd snap create k8s/$VOLUME@backup;
 rbd device map --read-only k8s/$VOLUME@backup;
-rsync -ahL --copy-devices /dev/rbd/k8s/$VOLUME@backup kubernetes@192.168.1.10:/volume1/Ceph/$VOLUME.img;
+rsync -ahL --copy-devices /dev/rbd/k8s/$VOLUME@backup kubernetes@nas.mchill.lan:/volume1/Ceph/$VOLUME.img;
 
 # Back up the filesystem
 mount -o noload /dev/rbd/k8s/$VOLUME@backup /backup/$VOLUME;
 getfacl -R /backup/$VOLUME > /backup/$VOLUME.facl;
-rsync -ah /backup/$VOLUME.facl kubernetes@192.168.1.10:/volume1/Ceph;
-rsync -ahv --delete-before /backup/$VOLUME kubernetes@192.168.1.10:/volume1/Ceph;
+rsync -ah /backup/$VOLUME.facl kubernetes@nas.mchill.lan:/volume1/Ceph;
+rsync -ahv --delete-before /backup/$VOLUME kubernetes@nas.mchill.lan:/volume1/Ceph;

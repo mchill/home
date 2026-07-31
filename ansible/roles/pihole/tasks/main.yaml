@@ -10,13 +10,13 @@
       ansible.builtin.lineinfile:
         path: "{{ ansible_facts.user_dir }}/kmip-server-dsm/config.sh"
         regexp: ^SSL_SERVER_NAME=
-        line: 'SSL_SERVER_NAME="IP:192.168.1.2"'
+        line: 'SSL_SERVER_NAME="DNS:pihole.mchill.lan"'
 
     - name: Set SSL_CLIENT_NAME config
       ansible.builtin.lineinfile:
         path: "{{ ansible_facts.user_dir }}/kmip-server-dsm/config.sh"
         regexp: ^SSL_CLIENT_NAME=
-        line: 'SSL_CLIENT_NAME="IP:192.168.1.10"'
+        line: 'SSL_CLIENT_NAME="DNS:nas.mchill.lan"'
 
     - name: Set SSL_COUNTRY_NAME config
       ansible.builtin.lineinfile:

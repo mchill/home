@@ -19,7 +19,7 @@ spec:
         app: kvm
         service:
           type: ExternalName
-          host: kvm.mchill.lan
+          host: comet.mchill.lan
           port: 443
         ingress:
           routes:

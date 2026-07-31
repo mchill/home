@@ -36,8 +36,8 @@ spec:
           args:
             - |
               apk add --no-cache openssh-client util-linux-misc;
-              ssh-keyscan -H 192.168.1.30 >> /root/.ssh/known_hosts;
-              ssh mchill@192.168.1.30 -o BatchMode=yes "sudo /home/mchill/backup.sh {{ .Values.app }}";
+              ssh-keyscan -H beelink1.mchill.lan >> /root/.ssh/known_hosts;
+              ssh mchill@beelink1.mchill.lan -o BatchMode=yes "sudo /home/mchill/backup.sh {{ .Values.app }}";
           env:
             - name: TZ
               value: America/New_York
