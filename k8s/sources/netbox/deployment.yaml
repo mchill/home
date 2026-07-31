@@ -23,7 +23,7 @@ spec:
             - /bin/sh
             - -c
             - |
-              /usr/local/bin/uv pip install \
+              /usr/local/bin/uv pip install --upgrade \
                 --target /plugins \
                 --python /opt/netbox/venv/bin/python \
                 netbox-attachments netbox-interface-synchronization netbox-topology-views netboxlabs-netbox-custom-objects;
