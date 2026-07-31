@@ -43,7 +43,7 @@ spec:
               mountPath: /mods
       containers:
         - name: minecraft
-          image: itzg/minecraft-server:2026.6.1
+          image: itzg/minecraft-server:2026.7.2
           ports:
             - name: ingress
               containerPort: 25565
