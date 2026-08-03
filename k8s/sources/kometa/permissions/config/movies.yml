@@ -14,3 +14,8 @@ collections:
     smart_label:
       all:
         label: <<smart_label>>
+  Ziyi:
+    radarr_taglist: zoehong826
+    smart_label:
+      all:
+        label: <<smart_label>>
