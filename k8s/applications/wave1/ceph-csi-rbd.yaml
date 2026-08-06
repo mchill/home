@@ -10,18 +10,18 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
-  source:
-    repoURL: https://ceph.github.io/csi-charts
-    chart: ceph-csi-rbd
-    targetRevision: v3.17.0
-    helm:
-      values: |
-        csiConfig:
-          - clusterID: a4ad5514-e58b-48d1-a0b4-8feef8685b43
-            monitors:
-              - beelink1.mchill.lan:3300
-              - beelink2.mchill.lan:3300
-              - beelink3.mchill.lan:3300
+  sources:
+    - repoURL: https://ceph.github.io/csi-charts
+      chart: ceph-csi-rbd
+      targetRevision: v3.17.0
+      helm:
+        values: |
+          csiConfig:
+            - clusterID: a4ad5514-e58b-48d1-a0b4-8feef8685b43
+              monitors:
+                - beelink1.mchill.lan:3300
+                - beelink2.mchill.lan:3300
+                - beelink3.mchill.lan:3300
   destination:
     server: https://kubernetes.default.svc
     namespace: ceph-csi-rbd

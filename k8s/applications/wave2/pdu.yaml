@@ -10,20 +10,20 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/helm/charts/ingress
-    helm:
-      values: |
-        app: pdu
-        service:
-          type: ExternalName
-          host: pdu.mchill.lan
-          port: 80
-        ingress:
-          routes:
-            - match: Host(`pdu.mchill.io`)
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        values: |
+          app: pdu
+          service:
+            type: ExternalName
+            host: pdu.mchill.lan
+            port: 80
+          ingress:
+            routes:
+              - match: Host(`pdu.mchill.io`)
   destination:
     server: https://kubernetes.default.svc
     namespace: server

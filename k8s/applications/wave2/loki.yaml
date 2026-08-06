@@ -10,38 +10,38 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://grafana-community.github.io/helm-charts
-    chart: loki
-    targetRevision: 18.7.1
-    helm:
-      values: |
-        deploymentMode: Monolithic
-        loki:
-          auth_enabled: false
-          commonConfig:
-            replication_factor: 1
-            path_prefix: /tmp/loki
-          storage:
-            type: filesystem
-            filesystem:
-              chunks_directory: /tmp/loki/chunks
-              rules_directory: /tmp/loki/rules
-          useTestSchema: true
-        singleBinary:
-          replicas: 1
-          persistence:
+  sources:
+    - repoURL: https://grafana-community.github.io/helm-charts
+      chart: loki
+      targetRevision: 18.7.1
+      helm:
+        values: |
+          deploymentMode: Monolithic
+          loki:
+            auth_enabled: false
+            commonConfig:
+              replication_factor: 1
+              path_prefix: /tmp/loki
+            storage:
+              type: filesystem
+              filesystem:
+                chunks_directory: /tmp/loki/chunks
+                rules_directory: /tmp/loki/rules
+            useTestSchema: true
+          singleBinary:
+            replicas: 1
+            persistence:
+              enabled: false
+          backend:
+            replicas: 0
+          read:
+            replicas: 0
+          write:
+            replicas: 0
+          resultsCache:
             enabled: false
-        backend:
-          replicas: 0
-        read:
-          replicas: 0
-        write:
-          replicas: 0
-        resultsCache:
-          enabled: false
-        chunksCache:
-          enabled: false
+          chunksCache:
+            enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring

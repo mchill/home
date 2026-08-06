@@ -10,10 +10,10 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/sources/shared
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/shared
   destination:
     server: https://kubernetes.default.svc
     namespace: server

@@ -10,21 +10,20 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/helm/charts/ingress
-    helm:
-      releaseName: remote-nas
-      values: |
-        app: remote-nas
-        service:
-          type: ExternalName
-          host: nas.remote.mchill.lan
-          port: 5000
-        ingress:
-          routes:
-            - match: Host(`nas.remote.mchill.io`)
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        values: |
+          app: remote-nas
+          service:
+            type: ExternalName
+            host: nas.remote.mchill.lan
+            port: 5000
+          ingress:
+            routes:
+              - match: Host(`nas.remote.mchill.io`)
   destination:
     server: https://kubernetes.default.svc
     namespace: server

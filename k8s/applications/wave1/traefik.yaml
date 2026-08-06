@@ -106,7 +106,6 @@ spec:
       targetRevision: HEAD
       path: k8s/helm/charts/ingress
       helm:
-        releaseName: traefik
         values: |
           app: traefik
           service:

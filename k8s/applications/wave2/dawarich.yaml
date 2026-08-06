@@ -18,7 +18,6 @@ spec:
       targetRevision: HEAD
       path: k8s/helm/charts/ingress
       helm:
-        releaseName: dawarich
         values: |
           app: dawarich
           ingress:
@@ -28,7 +27,6 @@ spec:
       targetRevision: HEAD
       path: k8s/helm/charts/persistence
       helm:
-        releaseName: dawarich
         values: |
           app: dawarich
           size: 8Gi

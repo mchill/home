@@ -10,23 +10,22 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/mchill/home.git
-    targetRevision: HEAD
-    path: k8s/helm/charts/ingress
-    helm:
-      releaseName: remote-unifi
-      values: |
-        app: remote-unifi
-        service:
-          type: ExternalName
-          host: unifi.remote.mchill.lan
-          port: 443
-        ingress:
-          routes:
-            - match: Host(`unifi.remote.mchill.io`)
-              service:
-                scheme: https
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        values: |
+          app: remote-unifi
+          service:
+            type: ExternalName
+            host: unifi.remote.mchill.lan
+            port: 443
+          ingress:
+            routes:
+              - match: Host(`unifi.remote.mchill.io`)
+                service:
+                  scheme: https
   destination:
     server: https://kubernetes.default.svc
     namespace: server
