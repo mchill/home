@@ -16,31 +16,6 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
-      initContainers:
-        - name: mods
-          image: bash:5.3.15
-          args:
-            - -c
-            - |
-              mods=(
-                # https://www.curseforge.com/minecraft/mc-mods/fabric-api
-                https://cdn.modrinth.com/data/P7dR8mSH/versions/0.26.0%2B1.16/fabric-api-0.26.0%2B1.16.jar
-
-                # https://www.curseforge.com/minecraft/mc-mods/phosphor
-                https://cdn.modrinth.com/data/hEOCdOgW/versions/mc1.16.3-0.7.0/phosphor-fabric-mc1.16.3-0.7.0%2Bbuild.10.jar
-
-                # https://www.curseforge.com/minecraft/mc-mods/lithium
-                https://cdn.modrinth.com/data/gvQqBUqZ/versions/mc1.16.4-0.6.0/lithium-fabric-mc1.16.4-0.6.0.jar
-              );
-
-              apk add --no-cache wget
-              for mod in "${mods[@]}"
-              do
-                wget -P /mods/ -nc $mod
-              done
-          volumeMounts:
-            - name: mods
-              mountPath: /mods
       containers:
         - name: minecraft
           image: itzg/minecraft-server:2026.7.2
@@ -58,8 +33,8 @@ spec:
               value: 1.16.4
             - name: TYPE
               value: FABRIC
-            - name: REMOVE_OLD_MODS
-              value: "TRUE"
+            - name: MODRINTH_PROJECTS
+              value: fabric-api,phosphor,lithium
           volumeMounts:
             - name: minecraft
               mountPath: /data
@@ -69,8 +44,6 @@ spec:
             - name: config
               mountPath: /data/whitelist.json
               subPath: whitelist.json
-            - name: mods
-              mountPath: /mods
       volumes:
         - name: minecraft
           persistentVolumeClaim:
@@ -78,8 +51,6 @@ spec:
         - name: config
           configMap:
             name: minecraft
-        - name: mods
-          emptyDir: {}
       resources:
         limits:
           cpu: 1
