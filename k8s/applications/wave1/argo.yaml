@@ -34,7 +34,7 @@ spec:
             routes:
               - match: Host(`argo.mchill.io`)
                 service:
-                  name: argo-workflows-argo-workflows-server
+                  name: argo-workflows-server
                   port: 2746
   destination:
     server: https://kubernetes.default.svc

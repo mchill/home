@@ -109,7 +109,7 @@ spec:
             claimName: applications
       resources:
         limits:
-          memory: 2048Mi
+          memory: 512Mi
         requests:
           cpu: 10m
-          memory: 2048Mi
+          memory: 512Mi
