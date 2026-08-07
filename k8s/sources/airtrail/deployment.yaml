@@ -53,7 +53,7 @@ spec:
               mountPath: /app/uploads
               subPath: uploads
         - name: db
-          image: postgres:16.14-alpine
+          image: postgres:18.4-alpine
           env:
             - name: TZ
               value: America/New_York
