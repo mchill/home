@@ -24,6 +24,7 @@ resources:
   - minio.yaml
   - nas.yaml
   - netbox.yaml
+  - nextcloud.yaml
   - ombi.yaml
   - pdu.yaml
   - peanut.yaml

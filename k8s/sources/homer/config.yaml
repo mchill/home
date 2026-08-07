@@ -107,6 +107,10 @@ services:
         subtitle: Object storage
         logo: assets/logos/minio.png
         url: https://minio.mchill.io
+      - name: Nextcloud
+        subtitle: File sharing
+        logo: assets/logos/nextcloud.png
+        url: https://nextcloud.mchill.io
       - name: Syncthing
         subtitle: File synchronization
         logo: assets/logos/syncthing.png

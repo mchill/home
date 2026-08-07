@@ -1,0 +1,115 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud
+spec:
+  selector:
+    matchLabels:
+      app: nextcloud
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nextcloud
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: nextcloud
+          image: nextcloud:34.0.2-apache
+          ports:
+            - name: ingress
+              containerPort: 80
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: POSTGRES_HOST
+              value: localhost
+            - name: POSTGRES_DB
+              value: nextcloud
+            - name: POSTGRES_USER
+              value: nextcloud
+            - name: REDIS_HOST
+              value: localhost
+            - name: TRUSTED_PROXIES
+              value: 10.42.0.0/16
+            - name: OVERWRITEPROTOCOL
+              value: https
+            - name: OVERWRITECLIURL
+              value: https://nextcloud.mchill.io
+            - name: NEXTCLOUD_TRUSTED_DOMAINS
+              value: nextcloud.mchill.io
+          envFrom:
+            - secretRef:
+                name: nextcloud
+          volumeMounts:
+            - name: nextcloud
+              mountPath: /var/www/html
+              subPath: html
+            - name: applications
+              mountPath: /var/www/html/data
+              subPath: nextcloud/data
+        - name: cron
+          image: nextcloud:34.0.2-apache
+          command:
+            - /cron.sh
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: REDIS_HOST
+              value: localhost
+            - name: REDIS_HOST_PORT
+              value: "6379"
+            - name: TRUSTED_PROXIES
+              value: 10.42.0.0/16
+            - name: OVERWRITEPROTOCOL
+              value: https
+            - name: OVERWRITECLIURL
+              value: https://nextcloud.mchill.io
+          volumeMounts:
+            - name: nextcloud
+              mountPath: /var/www/html
+              subPath: html
+            - name: applications
+              mountPath: /var/www/html/data
+              subPath: nextcloud/data
+        - name: db
+          image: postgres:17.10-alpine
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: POSTGRES_DB
+              value: nextcloud
+            - name: POSTGRES_USER
+              value: nextcloud
+          envFrom:
+            - secretRef:
+                name: nextcloud
+          volumeMounts:
+            - name: nextcloud
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+        - name: redis
+          image: redis:8.10.0-alpine
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: nextcloud
+              mountPath: /data
+              subPath: redis
+      volumes:
+        - name: nextcloud
+          persistentVolumeClaim:
+            claimName: nextcloud
+        - name: applications
+          persistentVolumeClaim:
+            claimName: applications
+      resources:
+        limits:
+          memory: 2048Mi
+        requests:
+          cpu: 10m
+          memory: 2048Mi

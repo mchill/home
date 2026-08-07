@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/crds/application-crd.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nextcloud
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/sources/nextcloud
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/ingress
+      helm:
+        values: |
+          app: nextcloud
+          ingress:
+            routes:
+              - match: Host(`nextcloud.mchill.io`)
+                disableForwardAuth: true
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: nextcloud
+          size: 4Gi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: server
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+      - ServerSideApply=true
