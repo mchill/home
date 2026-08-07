@@ -1,0 +1,115 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: immich
+spec:
+  selector:
+    matchLabels:
+      app: immich
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: immich
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: immich
+          image: ghcr.io/immich-app/immich-server:v3.1.0
+          ports:
+            - name: ingress
+              containerPort: 2283
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: DB_HOSTNAME
+              value: localhost
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_DATABASE_NAME
+              value: immich
+            - name: DB_USERNAME
+              value: immich
+            - name: REDIS_HOSTNAME
+              value: localhost
+            - name: IMMICH_MACHINE_LEARNING_URL
+              value: http://localhost:3003
+          envFrom:
+            - secretRef:
+                name: immich
+          volumeMounts:
+            - name: libraries
+              mountPath: /data
+              subPath: photos/immich
+            - name: libraries
+              readOnly: true
+              mountPath: /mnt/media/apple-photos
+              subPath: photos/Apple Photos
+        - name: machine-learning
+          image: ghcr.io/immich-app/immich-machine-learning:v3.1.0-openvino
+          ports:
+            - name: ml
+              containerPort: 3003
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: immich
+              mountPath: /cache
+              subPath: model-cache
+          resources:
+            limits:
+              gpu.intel.com/i915: 1
+            requests:
+              gpu.intel.com/i915: 1
+        - name: db
+          image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: POSTGRES_DB
+              value: immich
+            - name: POSTGRES_USER
+              value: immich
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: immich
+                  key: DB_PASSWORD
+            - name: POSTGRES_INITDB_ARGS
+              value: --data-checksums
+          volumeMounts:
+            - name: immich
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+            - name: shm
+              mountPath: /dev/shm
+        - name: redis
+          image: valkey/valkey:9.1.1-alpine
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: immich
+              mountPath: /data
+              subPath: redis
+      volumes:
+        - name: immich
+          persistentVolumeClaim:
+            claimName: immich
+        - name: libraries
+          persistentVolumeClaim:
+            claimName: libraries
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 128Mi
+      resources:
+        limits:
+          memory: 2Gi
+        requests:
+          cpu: 500m
+          memory: 2Gi

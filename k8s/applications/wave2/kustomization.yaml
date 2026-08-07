@@ -14,6 +14,7 @@ resources:
   - headlamp.yaml
   - homeassistant.yaml
   - homer.yaml
+  - immich.yaml
   - jitsi.yaml
   - kometa.yaml
   - kube-vip.yaml

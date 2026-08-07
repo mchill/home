@@ -38,6 +38,11 @@
     },
     {
       "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/immich-app/postgres"],
+      "versioning": "regex:^(?<major>\\d+)-vectorchord(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)-pgvectors\\d+\\.\\d+\\.\\d+$"
+    },
+    {
+      "matchDatasources": ["docker"],
       "matchPackageNames": [
         "homeassistant/home-assistant",
         "itzg/minecraft-server"
