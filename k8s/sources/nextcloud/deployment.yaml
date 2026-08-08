@@ -90,7 +90,7 @@ spec:
               mountPath: /mnt/family
               subPath: photos/external/family
         - name: db
-          image: postgres:17.10-alpine
+          image: postgres:18.4-alpine
           env:
             - name: TZ
               value: America/New_York
