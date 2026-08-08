@@ -42,7 +42,15 @@ spec:
             - name: NEXTCLOUD_TRUSTED_DOMAINS
               value: nextcloud.mchill.io
             - name: PHP_MEMORY_LIMIT
-              value: 128M
+              value: 256M
+            - name: MAGICK_MEMORY_LIMIT
+              value: 128MiB
+            - name: MAGICK_MAP_LIMIT
+              value: 128MiB
+            - name: MAGICK_DISK_LIMIT
+              value: 1GiB
+            - name: MAGICK_THREAD_LIMIT
+              value: "1"
           envFrom:
             - secretRef:
                 name: nextcloud
@@ -120,7 +128,7 @@ spec:
             claimName: libraries
       resources:
         limits:
-          memory: 512Mi
+          memory: 1Gi
         requests:
           cpu: 10m
-          memory: 512Mi
+          memory: 1Gi

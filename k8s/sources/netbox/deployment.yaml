@@ -23,9 +23,11 @@ spec:
             - /bin/sh
             - -c
             - |
+              /usr/local/bin/uv pip freeze --python /opt/netbox/venv/bin/python > /tmp/constraints.txt;
               /usr/local/bin/uv pip install --upgrade \
                 --target /plugins \
                 --python /opt/netbox/venv/bin/python \
+                --constraint /tmp/constraints.txt \
                 netbox-attachments netbox-interface-synchronization netbox-topology-views netboxlabs-netbox-custom-objects;
               /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py collectstatic --no-input;
           envFrom:
