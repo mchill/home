@@ -18,7 +18,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: minecraft
-          image: itzg/minecraft-server:2026.7.2
+          image: itzg/minecraft-server:2026.8.0
           ports:
             - name: ingress
               containerPort: 25565
