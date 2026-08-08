@@ -43,14 +43,6 @@ spec:
               value: nextcloud.mchill.io
             - name: PHP_MEMORY_LIMIT
               value: 256M
-            - name: MAGICK_MEMORY_LIMIT
-              value: 128MiB
-            - name: MAGICK_MAP_LIMIT
-              value: 128MiB
-            - name: MAGICK_DISK_LIMIT
-              value: 1GiB
-            - name: MAGICK_THREAD_LIMIT
-              value: "1"
           envFrom:
             - secretRef:
                 name: nextcloud
@@ -116,6 +108,11 @@ spec:
             - name: nextcloud
               mountPath: /data
               subPath: redis
+        - name: imaginary
+          image: nextcloud/aio-imaginary:20260805_083533
+          env:
+            - name: TZ
+              value: America/New_York
       volumes:
         - name: nextcloud
           persistentVolumeClaim:
