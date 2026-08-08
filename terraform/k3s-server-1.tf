@@ -33,6 +33,9 @@ resource "proxmox_virtual_environment_vm" "k3s-server-1" {
     type              = "4m"
     file_format       = "raw"
   }
+  agent {
+    enabled = true
+  }
 
   # Disks
   disk {

@@ -1,0 +1,25 @@
+- name: Configure QEMU guest agent
+  become: true
+  block:
+    - name: Install qemu-guest-agent
+      ansible.builtin.apt:
+        pkg:
+          - qemu-guest-agent
+        state: present
+        update_cache: true
+
+    - name: Enable qemu-guest-agent service
+      ansible.builtin.systemd:
+        name: qemu-guest-agent
+        enabled: true
+
+    - name: Check for guest agent virtio port
+      ansible.builtin.stat:
+        path: /dev/virtio-ports/org.qemu.guest_agent.0
+      register: guest_agent_port
+
+    - name: Start qemu-guest-agent service
+      when: guest_agent_port.stat.exists
+      ansible.builtin.systemd:
+        name: qemu-guest-agent
+        state: started

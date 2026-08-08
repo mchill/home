@@ -2,6 +2,7 @@
   hosts: pihole
   roles:
     - oh_my_zsh
+    - qemu_guest_agent
     - dns
     - docker
     - pihole
@@ -10,6 +11,7 @@
   hosts: k3s_servers
   roles:
     - oh_my_zsh
+    - qemu_guest_agent
     - inotify
     - k3s_server
 
@@ -17,6 +19,7 @@
   hosts: k3s_agents
   roles:
     - oh_my_zsh
+    - qemu_guest_agent
     - inotify
     - gpu
     - k3s_agent

@@ -37,6 +37,9 @@ resource "proxmox_virtual_environment_vm" "pihole" {
     type              = "4m"
     file_format       = "raw"
   }
+  agent {
+    enabled = true
+  }
 
   # Disks
   disk {
