@@ -67,6 +67,11 @@ spec:
               readOnly: true
               mountPath: /mnt/media/external
               subPath: photos/external
+          resources:
+            limits:
+              gpu.intel.com/i915: 1
+            requests:
+              gpu.intel.com/i915: 1
         - name: machine-learning
           image: ghcr.io/immich-app/immich-machine-learning:v3.1.0-openvino
           env:
@@ -74,6 +79,8 @@ spec:
               value: America/New_York
             - name: MACHINE_LEARNING_OPENVINO_PRECISION
               value: FP16
+            - name: MACHINE_LEARNING_HTTP_KEEPALIVE_TIMEOUT_S
+              value: "60"
           volumeMounts:
             - name: immich
               mountPath: /cache
@@ -131,7 +138,7 @@ spec:
       resources:
         limits:
           cpu: 1
-          memory: 3Gi
+          memory: 4Gi
         requests:
-          cpu: 500m
-          memory: 3Gi
+          cpu: 100m
+          memory: 4Gi
