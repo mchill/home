@@ -41,6 +41,8 @@ spec:
               value: https://nextcloud.mchill.io
             - name: NEXTCLOUD_TRUSTED_DOMAINS
               value: nextcloud.mchill.io
+            - name: PHP_MEMORY_LIMIT
+              value: 128M
           envFrom:
             - secretRef:
                 name: nextcloud
@@ -51,6 +53,9 @@ spec:
             - name: applications
               mountPath: /var/www/html/data
               subPath: nextcloud/data
+            - name: libraries
+              mountPath: /mnt/family
+              subPath: photos/external/family
         - name: cron
           image: nextcloud:34.0.2-apache
           command:
@@ -75,6 +80,9 @@ spec:
             - name: applications
               mountPath: /var/www/html/data
               subPath: nextcloud/data
+            - name: libraries
+              mountPath: /mnt/family
+              subPath: photos/external/family
         - name: db
           image: postgres:17.10-alpine
           env:
@@ -107,6 +115,9 @@ spec:
         - name: applications
           persistentVolumeClaim:
             claimName: applications
+        - name: libraries
+          persistentVolumeClaim:
+            claimName: libraries
       resources:
         limits:
           memory: 512Mi

@@ -161,5 +161,5 @@ spec:
           cpu: 1
           memory: 1Gi
         requests:
-          cpu: 1
+          cpu: 500m
           memory: 1Gi

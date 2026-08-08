@@ -22,7 +22,7 @@ spec:
           app: immich
           ingress:
             routes:
-              - match: Host(`immich.mchill.io`)
+              - match: Host(`photos.mchill.io`)
                 disableForwardAuth: true
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
@@ -30,7 +30,7 @@ spec:
       helm:
         values: |
           app: immich
-          size: 2Gi
+          size: 4Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: server
