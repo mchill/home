@@ -79,6 +79,7 @@ spec:
           accessLog:
             enabled: true
           additionalArguments:
+            - --entryPoints.websecure.transport.respondingTimeouts.readTimeout=600
             - --serversTransport.insecureSkipVerify=true
             - --providers.file.directory=/etc/traefik/dynamic
             - --providers.file.watch=true
