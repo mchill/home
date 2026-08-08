@@ -30,7 +30,7 @@ spec:
       helm:
         values: |
           app: nextcloud
-          size: 2Gi
+          size: 4Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: server
