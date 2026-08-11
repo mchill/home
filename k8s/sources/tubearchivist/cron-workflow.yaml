@@ -12,21 +12,8 @@ spec:
     activeDeadlineSeconds: 3600
     podGC:
       strategy: OnWorkflowCompletion
-    podSpecPatch: |
-      securityContext:
-        fsGroup: 1000
-      affinity:
-        podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - topologyKey: "kubernetes.io/hostname"
-              labelSelector:
-                matchExpressions:
-                  - key: app
-                    operator: In
-                    values:
-                      - tubearchivist
-    onExit: notify
     entrypoint: tubearchivist
+    onExit: notify
     volumes:
       - name: libraries
         persistentVolumeClaim:
