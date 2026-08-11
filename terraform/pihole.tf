@@ -57,9 +57,8 @@ resource "proxmox_virtual_environment_vm" "pihole" {
 
   # CPU
   cpu {
-    cores    = 1
-    type     = "host"
-    affinity = "0-2"
+    cores = 1
+    type  = "host"
   }
 
   # Memory

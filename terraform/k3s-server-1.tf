@@ -53,9 +53,8 @@ resource "proxmox_virtual_environment_vm" "k3s-server-1" {
 
   # CPU
   cpu {
-    cores    = 1
-    type     = "host"
-    affinity = "3"
+    cores = 1
+    type  = "host"
   }
 
   # Memory
