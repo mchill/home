@@ -25,13 +25,10 @@ spec:
               value: America/New_York
             - name: AUTH_DISABLED
               value: "true"
-          volumeMounts:
-            - name: peanut
-              mountPath: /config
-      volumes:
-        - name: peanut
-          persistentVolumeClaim:
-            claimName: peanut
+            - name: DISABLE_CONFIG_FILE
+              value: "true"
+            - name: NUT_SERVERS
+              value: '[{"HOST":"192.168.1.10","PORT":3493}]'
       resources:
         limits:
           memory: 256Mi
