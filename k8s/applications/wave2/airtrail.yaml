@@ -29,7 +29,7 @@ spec:
       helm:
         values: |
           app: airtrail
-          size: 128Mi
+          size: 256Mi
   destination:
     server: https://kubernetes.default.svc
     namespace: server

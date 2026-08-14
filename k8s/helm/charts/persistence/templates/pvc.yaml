@@ -8,5 +8,4 @@ spec:
   resources:
     requests:
       storage: "{{ .Values.size }}"
-  storageClassName: ""
-  volumeName: "{{ .Values.app }}"
+  storageClassName: truenas-iscsi

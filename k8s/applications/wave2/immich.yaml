@@ -30,7 +30,7 @@ spec:
       helm:
         values: |
           app: immich
-          size: 4Gi
+          size: 8Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: server

@@ -29,7 +29,7 @@ spec:
       helm:
         values: |
           app: netbox
-          size: 256Mi
+          size: 512Mi
   destination:
     server: https://kubernetes.default.svc
     namespace: server
