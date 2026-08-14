@@ -1,0 +1,29 @@
+- name: Configure iSCSI initiator
+  become: true
+  block:
+    - name: Install open-iscsi
+      ansible.builtin.apt:
+        pkg:
+          - open-iscsi
+        state: present
+        update_cache: true
+
+    - name: Set unique initiator name
+      ansible.builtin.copy:
+        content: "InitiatorName=iqn.2026-08.io.mchill:{{ ansible_hostname }}\n"
+        dest: /etc/iscsi/initiatorname.iscsi
+        owner: root
+        group: root
+        mode: "0600"
+      notify: Restart iscsid
+
+    - name: Enable iscsid service
+      ansible.builtin.systemd:
+        name: iscsid
+        enabled: true
+        state: started
+
+    - name: Enable open-iscsi service
+      ansible.builtin.systemd:
+        name: open-iscsi
+        enabled: true

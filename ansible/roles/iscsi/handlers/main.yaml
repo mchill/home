@@ -1,0 +1,5 @@
+- name: Restart iscsid
+  become: true
+  ansible.builtin.systemd:
+    name: iscsid
+    state: restarted
