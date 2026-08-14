@@ -7,11 +7,13 @@
         regexp: ^deb
         replace: #deb
 
-    - name: Disable Ceph enterprise repository
-      ansible.builtin.replace:
-        path: /etc/apt/sources.list.d/ceph.list
-        regexp: ^deb
-        replace: #deb
+    - name: Remove Ceph repositories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /etc/apt/sources.list.d/ceph.list
+        - /etc/apt/sources.list.d/ceph.sources
 
     - name: Add PVE no-subscription repository
       ansible.builtin.apt_repository:
@@ -22,17 +24,3 @@
     - name: Update APT cache
       ansible.builtin.apt:
         update_cache: true
-
-    - name: Copy backup.sh file
-      become: false
-      ansible.builtin.copy:
-        src: backup.sh
-        dest: /home/mchill/backup.sh
-        mode: "0644"
-
-    - name: Copy trim.sh file
-      become: false
-      ansible.builtin.copy:
-        src: trim.sh
-        dest: /home/mchill/trim.sh
-        mode: "0644"

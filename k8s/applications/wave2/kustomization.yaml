@@ -6,7 +6,6 @@ resources:
   - argocd.yaml
   - audiobookshelf.yaml
   - bazarr.yaml
-  - ceph.yaml
   - dawarich.yaml
   - ddns.yaml
   - errors.yaml

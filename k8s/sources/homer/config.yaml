@@ -95,10 +95,6 @@ services:
   - name: Storage
     icon: fas fa-folder-open
     items:
-      - name: Ceph
-        subtitle: Distributed storage
-        logo: assets/logos/ceph.png
-        url: https://ceph.mchill.io
       - name: Synology DSM
         subtitle: NAS
         logo: assets/logos/nas.png

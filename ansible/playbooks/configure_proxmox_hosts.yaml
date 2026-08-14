@@ -3,6 +3,5 @@
   roles:
     - oh_my_zsh
     - proxmox
-    - ceph
     - lvm-storage
     - gpu_passthrough
