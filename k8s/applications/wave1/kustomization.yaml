@@ -5,6 +5,7 @@ resources:
   - ceph-csi-rbd.yaml
   - cert-manager.yaml
   - csi-driver-smb.yaml
+  - democratic-csi.yaml
   - intel-device-plugins.yaml
   - metallb.yaml
   - shared.yaml
