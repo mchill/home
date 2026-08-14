@@ -53,6 +53,9 @@ spec:
             - name: applications
               mountPath: /var/www/html/data
               subPath: nextcloud/data
+            - name: nextcloud
+              mountPath: /var/www/html/data/appdata_ocxz00ovrlk0
+              subPath: appdata
             - name: libraries
               mountPath: /mnt/family
               subPath: photos/external/family
@@ -80,6 +83,9 @@ spec:
             - name: applications
               mountPath: /var/www/html/data
               subPath: nextcloud/data
+            - name: nextcloud
+              mountPath: /var/www/html/data/appdata_ocxz00ovrlk0
+              subPath: appdata
             - name: libraries
               mountPath: /mnt/family
               subPath: photos/external/family
