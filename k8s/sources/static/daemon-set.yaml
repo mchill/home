@@ -21,13 +21,12 @@ spec:
             - name: TZ
               value: America/New_York
           volumeMounts:
-            - name: libraries
+            - name: podcasts
               mountPath: /usr/share/nginx/html/podcasts
-              subPath: podcasts
       volumes:
-        - name: libraries
+        - name: podcasts
           persistentVolumeClaim:
-            claimName: libraries
+            claimName: podcasts
       resources:
         limits:
           memory: 128Mi

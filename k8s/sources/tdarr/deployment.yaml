@@ -44,24 +44,24 @@ spec:
               subPath: configs
             - name: tdarr-bulk
               mountPath: /temp
-            - name: libraries
+            - name: movies
               mountPath: /media/movies
-              subPath: movies/sd
-            - name: libraries
+              subPath: sd
+            - name: movies-uhd
               mountPath: /media/movies-uhd
-              subPath: movies/uhd
-            - name: libraries
+              subPath: uhd
+            - name: movies
               mountPath: /media/movies-requested
-              subPath: movies/requested
-            - name: libraries
+              subPath: requested
+            - name: shows
               mountPath: /media/tv
-              subPath: tv/sd
-            - name: libraries
+              subPath: sd
+            - name: shows-uhd
               mountPath: /media/tv-uhd
-              subPath: tv/uhd
-            - name: libraries
+              subPath: uhd
+            - name: shows
               mountPath: /media/tv-requested
-              subPath: tv/requested
+              subPath: requested
         - name: tdarr-node
           image: haveagitgat/tdarr_node:2.85.01
           env:
@@ -85,24 +85,24 @@ spec:
               subPath: configs
             - name: tdarr-bulk
               mountPath: /temp
-            - name: libraries
+            - name: movies
               mountPath: /media/movies
-              subPath: movies/sd
-            - name: libraries
+              subPath: sd
+            - name: movies-uhd
               mountPath: /media/movies-uhd
-              subPath: movies/uhd
-            - name: libraries
+              subPath: uhd
+            - name: movies
               mountPath: /media/movies-requested
-              subPath: movies/requested
-            - name: libraries
+              subPath: requested
+            - name: shows
               mountPath: /media/tv
-              subPath: tv/sd
-            - name: libraries
+              subPath: sd
+            - name: shows-uhd
               mountPath: /media/tv-uhd
-              subPath: tv/uhd
-            - name: libraries
+              subPath: uhd
+            - name: shows
               mountPath: /media/tv-requested
-              subPath: tv/requested
+              subPath: requested
       volumes:
         - name: tdarr
           persistentVolumeClaim:
@@ -110,9 +110,18 @@ spec:
         - name: tdarr-bulk
           persistentVolumeClaim:
             claimName: tdarr-bulk
-        - name: libraries
+        - name: movies
           persistentVolumeClaim:
-            claimName: libraries
+            claimName: movies
+        - name: movies-uhd
+          persistentVolumeClaim:
+            claimName: movies-uhd
+        - name: shows
+          persistentVolumeClaim:
+            claimName: shows
+        - name: shows-uhd
+          persistentVolumeClaim:
+            claimName: shows-uhd
       resources:
         limits:
           memory: 1Gi

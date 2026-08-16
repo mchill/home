@@ -34,12 +34,12 @@ spec:
           volumeMounts:
             - name: radarr
               mountPath: /config
-            - name: libraries
+            - name: movies
               mountPath: /movies
-              subPath: movies/sd
-            - name: libraries
+              subPath: sd
+            - name: movies
               mountPath: /movies-requested
-              subPath: movies/requested
+              subPath: requested
             - name: radarr-trash
               mountPath: /trash
             - name: qbittorrent-bulk
@@ -54,9 +54,9 @@ spec:
         - name: qbittorrent-bulk
           persistentVolumeClaim:
             claimName: qbittorrent-bulk
-        - name: libraries
+        - name: movies
           persistentVolumeClaim:
-            claimName: libraries
+            claimName: movies
       resources:
         limits:
           memory: 512Mi

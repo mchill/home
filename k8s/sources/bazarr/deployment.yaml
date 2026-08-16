@@ -32,19 +32,22 @@ spec:
           volumeMounts:
             - name: bazarr
               mountPath: /config
-            - name: libraries
+            - name: shows
               mountPath: /tv
-              subPath: tv/sd
-            - name: libraries
+              subPath: sd
+            - name: movies
               mountPath: /movies
-              subPath: movies/sd
+              subPath: sd
       volumes:
         - name: bazarr
           persistentVolumeClaim:
             claimName: bazarr
-        - name: libraries
+        - name: shows
           persistentVolumeClaim:
-            claimName: libraries
+            claimName: shows
+        - name: movies
+          persistentVolumeClaim:
+            claimName: movies
       resources:
         limits:
           memory: 512Mi

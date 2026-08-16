@@ -43,15 +43,14 @@ spec:
             - name: romm
               mountPath: /redis-data
               subPath: redis
-            - name: libraries
+            - name: games
               mountPath: /romm/library
-              subPath: games
-            - name: libraries
+            - name: games
               mountPath: /romm/assets
-              subPath: games/assets
-            - name: libraries
+              subPath: assets
+            - name: games
               mountPath: /romm/resources
-              subPath: games/resources
+              subPath: resources
         - name: db
           image: mariadb:11.8.8
           env:
@@ -70,9 +69,9 @@ spec:
         - name: romm
           persistentVolumeClaim:
             claimName: romm
-        - name: libraries
+        - name: games
           persistentVolumeClaim:
-            claimName: libraries
+            claimName: games
       resources:
         limits:
           memory: 1Gi

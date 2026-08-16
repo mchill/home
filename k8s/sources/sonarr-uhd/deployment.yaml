@@ -34,9 +34,9 @@ spec:
           volumeMounts:
             - name: sonarr-uhd
               mountPath: /config
-            - name: libraries
+            - name: shows-uhd
               mountPath: /tv-uhd
-              subPath: tv/uhd
+              subPath: uhd
             - name: sonarr-uhd-trash
               mountPath: /trash
             - name: qbittorrent-bulk
@@ -51,9 +51,9 @@ spec:
         - name: qbittorrent-bulk
           persistentVolumeClaim:
             claimName: qbittorrent-bulk
-        - name: libraries
+        - name: shows-uhd
           persistentVolumeClaim:
-            claimName: libraries
+            claimName: shows-uhd
       resources:
         limits:
           memory: 512Mi

@@ -48,9 +48,9 @@ spec:
             - name: CPU_CORES
               value: "1"
           volumeMounts:
-            - name: libraries
+            - name: photos
               mountPath: /data
-              subPath: photos/immich
+              subPath: immich
             - name: immich-bulk
               mountPath: /data/encoded-video
               subPath: encoded-video
@@ -63,10 +63,10 @@ spec:
             - name: immich
               mountPath: /data/backups
               subPath: backups
-            - name: libraries
+            - name: photos
               readOnly: true
               mountPath: /mnt/media/external
-              subPath: photos/external
+              subPath: external
           resources:
             limits:
               gpu.intel.com/i915: 1
@@ -128,9 +128,9 @@ spec:
         - name: immich-bulk
           persistentVolumeClaim:
             claimName: immich-bulk
-        - name: libraries
+        - name: photos
           persistentVolumeClaim:
-            claimName: libraries
+            claimName: photos
         - name: shm
           emptyDir:
             medium: Memory

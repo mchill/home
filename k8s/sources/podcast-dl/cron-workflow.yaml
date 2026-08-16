@@ -18,9 +18,9 @@ spec:
     onExit: notify
     entrypoint: podcast-dl
     volumes:
-      - name: libraries
+      - name: podcasts
         persistentVolumeClaim:
-          claimName: libraries
+          claimName: podcasts
     templates:
       - name: podcast-dl
         retryStrategy:
@@ -49,9 +49,8 @@ spec:
             - name: GID
               value: "1000"
           volumeMounts:
-            - name: libraries
+            - name: podcasts
               mountPath: /podcasts
-              subPath: podcasts
           resources:
             limits:
               memory: 512Mi

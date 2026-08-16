@@ -34,12 +34,12 @@ spec:
           volumeMounts:
             - name: sonarr
               mountPath: /config
-            - name: libraries
+            - name: shows
               mountPath: /tv
-              subPath: tv/sd
-            - name: libraries
+              subPath: sd
+            - name: shows
               mountPath: /tv-requested
-              subPath: tv/requested
+              subPath: requested
             - name: sonarr-trash
               mountPath: /trash
             - name: qbittorrent-bulk
@@ -54,9 +54,9 @@ spec:
         - name: qbittorrent-bulk
           persistentVolumeClaim:
             claimName: qbittorrent-bulk
-        - name: libraries
+        - name: shows
           persistentVolumeClaim:
-            claimName: libraries
+            claimName: shows
       resources:
         limits:
           memory: 512Mi

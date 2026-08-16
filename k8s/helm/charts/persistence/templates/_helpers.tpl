@@ -33,13 +33,12 @@
 {{- end -}}
 
 {{- define "persistence.dataset" -}}
-{{- $parents := dict "hddpool1" "hddpool1/secure/apps" "hddpool2" "hddpool2/secure/apps" -}}
 {{- $pool := include "persistence.pool" . -}}
-{{- $parent := index $parents $pool -}}
-{{- if not $parent -}}
-{{- fail (printf "persistence: no smb dataset parent for pool %q (app %q)" $pool .Values.app) -}}
+{{- if not (has $pool (list "hddpool1" "hddpool2")) -}}
+{{- fail (printf "persistence: smb is only available on hddpool1/hddpool2, got %q (app %q)" $pool .Values.app) -}}
 {{- end -}}
-{{- printf "%s/%s" $parent (include "persistence.share" .) -}}
+{{- $leaf := default (include "persistence.share" .) .Values.dataset -}}
+{{- printf "%s/secure/%s/%s" $pool .Values.parent $leaf -}}
 {{- end -}}
 
 {{- define "persistence.source" -}}

@@ -14,6 +14,138 @@ spec:
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
       path: k8s/sources/shared
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: audiobooks
+          type: smb
+          pool: hddpool1
+          share: hddpool1-audiobooks
+          parent: media
+          dataset: audiobooks
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: documents
+          type: smb
+          pool: hddpool1
+          share: hddpool1-documents
+          parent: media
+          dataset: documents
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: extras
+          type: smb
+          pool: hddpool1
+          share: hddpool1-extras
+          parent: media
+          dataset: extras
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: games
+          type: smb
+          pool: hddpool1
+          share: hddpool1-games
+          parent: media
+          dataset: games
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: movies
+          type: smb
+          pool: hddpool1
+          share: hddpool1-movies
+          parent: media
+          dataset: movies
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: movies-uhd
+          type: smb
+          pool: hddpool2
+          share: hddpool2-movies
+          parent: media
+          dataset: movies
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: music
+          type: smb
+          pool: hddpool1
+          share: hddpool1-music
+          parent: media
+          dataset: music
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: photos
+          type: smb
+          pool: hddpool1
+          share: hddpool1-photos
+          parent: media
+          dataset: photos
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: podcasts
+          type: smb
+          pool: hddpool1
+          share: hddpool1-podcasts
+          parent: media
+          dataset: podcasts
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: shows
+          type: smb
+          pool: hddpool1
+          share: hddpool1-shows
+          parent: media
+          dataset: shows
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: shows-uhd
+          type: smb
+          pool: hddpool2
+          share: hddpool2-shows
+          parent: media
+          dataset: shows
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: youtube
+          type: smb
+          pool: hddpool1
+          share: hddpool1-youtube
+          parent: media
+          dataset: youtube
   destination:
     server: https://kubernetes.default.svc
     namespace: server

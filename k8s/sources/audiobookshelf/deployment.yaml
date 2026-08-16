@@ -32,19 +32,20 @@ spec:
             - name: audiobookshelf
               mountPath: /config
               subPath: config
-            - name: libraries
+            - name: audiobooks
               mountPath: /audiobooks
-              subPath: audiobooks
-            - name: libraries
+            - name: podcasts
               mountPath: /podcasts
-              subPath: podcasts
       volumes:
         - name: audiobookshelf
           persistentVolumeClaim:
             claimName: audiobookshelf
-        - name: libraries
+        - name: audiobooks
           persistentVolumeClaim:
-            claimName: libraries
+            claimName: audiobooks
+        - name: podcasts
+          persistentVolumeClaim:
+            claimName: podcasts
       resources:
         limits:
           memory: 1Gi

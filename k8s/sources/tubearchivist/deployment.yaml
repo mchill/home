@@ -52,9 +52,9 @@ spec:
             - name: tubearchivist-bulk
               mountPath: /cache/import
               subPath: import
-            - name: libraries
+            - name: youtube
               mountPath: /youtube
-              subPath: youtube/tubearchivist
+              subPath: tubearchivist
         - name: redis
           image: redis:8.10.0
           volumeMounts:
@@ -86,9 +86,9 @@ spec:
         - name: tubearchivist-bulk
           persistentVolumeClaim:
             claimName: tubearchivist-bulk
-        - name: libraries
+        - name: youtube
           persistentVolumeClaim:
-            claimName: libraries
+            claimName: youtube
       resources:
         limits:
           memory: 3Gi

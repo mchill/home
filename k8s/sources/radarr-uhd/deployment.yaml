@@ -34,9 +34,9 @@ spec:
           volumeMounts:
             - name: radarr-uhd
               mountPath: /config
-            - name: libraries
+            - name: movies-uhd
               mountPath: /movies-uhd
-              subPath: movies/uhd
+              subPath: uhd
             - name: radarr-uhd-trash
               mountPath: /trash
             - name: qbittorrent-bulk
@@ -51,9 +51,9 @@ spec:
         - name: qbittorrent-bulk
           persistentVolumeClaim:
             claimName: qbittorrent-bulk
-        - name: libraries
+        - name: movies-uhd
           persistentVolumeClaim:
-            claimName: libraries
+            claimName: movies-uhd
       resources:
         limits:
           memory: 512Mi

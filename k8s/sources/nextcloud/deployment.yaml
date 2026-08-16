@@ -56,9 +56,9 @@ spec:
             - name: nextcloud
               mountPath: /var/www/html/data/appdata_ocxz00ovrlk0
               subPath: appdata
-            - name: libraries
+            - name: photos
               mountPath: /mnt/family
-              subPath: photos/external/family
+              subPath: external/family
         - name: cron
           image: nextcloud:34.0.2-apache
           command:
@@ -86,9 +86,9 @@ spec:
             - name: nextcloud
               mountPath: /var/www/html/data/appdata_ocxz00ovrlk0
               subPath: appdata
-            - name: libraries
+            - name: photos
               mountPath: /mnt/family
-              subPath: photos/external/family
+              subPath: external/family
         - name: db
           image: postgres:17.10-alpine
           env:
@@ -126,9 +126,9 @@ spec:
         - name: nextcloud-bulk
           persistentVolumeClaim:
             claimName: nextcloud-bulk
-        - name: libraries
+        - name: photos
           persistentVolumeClaim:
-            claimName: libraries
+            claimName: photos
       resources:
         limits:
           memory: 1Gi

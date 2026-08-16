@@ -21,9 +21,15 @@ spec:
       - name: kometa
         persistentVolumeClaim:
           claimName: kometa
-      - name: libraries
+      - name: movies
         persistentVolumeClaim:
-          claimName: libraries
+          claimName: movies
+      - name: shows
+        persistentVolumeClaim:
+          claimName: shows
+      - name: extras
+        persistentVolumeClaim:
+          claimName: extras
       - name: config
         configMap:
           name: kometa-posters
@@ -47,8 +53,12 @@ spec:
               - name: kometa
                 mountPath: /config
                 subPath: posters
-              - name: libraries
-                mountPath: /data
+              - name: movies
+                mountPath: /data/movies
+              - name: shows
+                mountPath: /data/tv
+              - name: extras
+                mountPath: /data/extras
               - name: config
                 mountPath: /config_src/config.yaml
                 subPath: config.yaml
@@ -67,8 +77,12 @@ spec:
             - name: kometa
               mountPath: /config
               subPath: posters
-            - name: libraries
-              mountPath: /data
+            - name: movies
+              mountPath: /data/movies
+            - name: shows
+              mountPath: /data/tv
+            - name: extras
+              mountPath: /data/extras
             - name: config
               mountPath: /config/movies.yml
               subPath: movies.yml
