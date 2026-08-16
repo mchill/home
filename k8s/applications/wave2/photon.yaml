@@ -28,7 +28,7 @@ spec:
       helm:
         values: |
           app: photon
-          size: 150Gi
+          size: 128Gi
           type: iscsi
           pool: hddpool1
   destination:
