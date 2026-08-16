@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: democratic-csi
+  name: democratic-csi-hdd
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -20,9 +20,9 @@ spec:
       helm:
         values: |
           csiDriver:
-            name: org.democratic-csi.iscsi
+            name: org.democratic-csi.iscsi-hdd
           storageClasses:
-            - name: truenas-iscsi
+            - name: truenas-iscsi-hdd
               defaultClass: false
               reclaimPolicy: Retain
               volumeBindingMode: Immediate
@@ -63,8 +63,8 @@ spec:
                 apiKey: "${TRUENAS_API_KEY}"
                 allowInsecure: true
               zfs:
-                datasetParentName: ssdpool/secure/k8s
-                detachedSnapshotsDatasetParentName: ssdpool/secure/k8s-snaps
+                datasetParentName: hddpool1/secure/k8s
+                detachedSnapshotsDatasetParentName: hddpool1/secure/k8s-snaps
                 zvolCompression:
                 zvolDedup:
                 zvolEnableReservation: true
@@ -83,7 +83,7 @@ spec:
                 extentXenCompat: false
                 extentDisablePhysicalBlocksize: true
                 extentBlocksize: 512
-                extentRpm: "SSD"
+                extentRpm: "7200"
                 extentAvailThreshold: 0
               _private:
                 csi:

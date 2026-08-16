@@ -5,6 +5,7 @@ resources:
   - cert-manager.yaml
   - csi-driver-smb.yaml
   - democratic-csi.yaml
+  - democratic-csi-hdd.yaml
   - intel-device-plugins.yaml
   - metallb.yaml
   - shared.yaml
