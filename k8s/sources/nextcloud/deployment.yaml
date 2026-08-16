@@ -50,9 +50,9 @@ spec:
             - name: nextcloud
               mountPath: /var/www/html
               subPath: html
-            - name: applications
+            - name: nextcloud-bulk
               mountPath: /var/www/html/data
-              subPath: nextcloud/data
+              subPath: data
             - name: nextcloud
               mountPath: /var/www/html/data/appdata_ocxz00ovrlk0
               subPath: appdata
@@ -80,9 +80,9 @@ spec:
             - name: nextcloud
               mountPath: /var/www/html
               subPath: html
-            - name: applications
+            - name: nextcloud-bulk
               mountPath: /var/www/html/data
-              subPath: nextcloud/data
+              subPath: data
             - name: nextcloud
               mountPath: /var/www/html/data/appdata_ocxz00ovrlk0
               subPath: appdata
@@ -123,9 +123,9 @@ spec:
         - name: nextcloud
           persistentVolumeClaim:
             claimName: nextcloud
-        - name: applications
+        - name: nextcloud-bulk
           persistentVolumeClaim:
-            claimName: applications
+            claimName: nextcloud-bulk
         - name: libraries
           persistentVolumeClaim:
             claimName: libraries

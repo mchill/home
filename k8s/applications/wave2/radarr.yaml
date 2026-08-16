@@ -30,6 +30,17 @@ spec:
         values: |
           app: radarr
           size: 2Gi
+          type: iscsi
+          pool: ssdpool
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: radarr-trash
+          type: smb
+          pool: hddpool2
+          share: radarr
   destination:
     server: https://kubernetes.default.svc
     namespace: server

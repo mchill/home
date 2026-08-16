@@ -21,6 +21,8 @@ spec:
         values: |
           app: kometa
           size: 512Mi
+          type: iscsi
+          pool: ssdpool
   destination:
     server: https://kubernetes.default.svc
     namespace: server

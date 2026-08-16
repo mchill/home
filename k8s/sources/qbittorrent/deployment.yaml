@@ -63,16 +63,15 @@ spec:
             - name: qbittorrent
               mountPath: /config
               subPath: config
-            - name: applications
+            - name: qbittorrent-bulk
               mountPath: /data
-              subPath: qbittorrent
       volumes:
         - name: qbittorrent
           persistentVolumeClaim:
             claimName: qbittorrent
-        - name: applications
+        - name: qbittorrent-bulk
           persistentVolumeClaim:
-            claimName: applications
+            claimName: qbittorrent-bulk
       resources:
         limits:
           memory: 2Gi

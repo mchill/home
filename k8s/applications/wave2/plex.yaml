@@ -31,6 +31,17 @@ spec:
         values: |
           app: plex
           size: 16Gi
+          type: iscsi
+          pool: ssdpool
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: plex-bulk
+          type: smb
+          pool: hddpool2
+          share: plex
   destination:
     server: https://kubernetes.default.svc
     namespace: server

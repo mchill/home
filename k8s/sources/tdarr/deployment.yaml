@@ -42,9 +42,8 @@ spec:
             - name: tdarr
               mountPath: /app/configs
               subPath: configs
-            - name: applications
+            - name: tdarr-bulk
               mountPath: /temp
-              subPath: tdarr
             - name: libraries
               mountPath: /media/movies
               subPath: movies/sd
@@ -84,9 +83,8 @@ spec:
             - name: tdarr
               mountPath: /app/configs
               subPath: configs
-            - name: applications
+            - name: tdarr-bulk
               mountPath: /temp
-              subPath: tdarr
             - name: libraries
               mountPath: /media/movies
               subPath: movies/sd
@@ -109,9 +107,9 @@ spec:
         - name: tdarr
           persistentVolumeClaim:
             claimName: tdarr
-        - name: applications
+        - name: tdarr-bulk
           persistentVolumeClaim:
-            claimName: applications
+            claimName: tdarr-bulk
         - name: libraries
           persistentVolumeClaim:
             claimName: libraries

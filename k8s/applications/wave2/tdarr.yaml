@@ -30,6 +30,17 @@ spec:
         values: |
           app: tdarr
           size: 2Gi
+          type: iscsi
+          pool: ssdpool
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: tdarr-bulk
+          type: smb
+          pool: hddpool2
+          share: tdarr
   destination:
     server: https://kubernetes.default.svc
     namespace: server

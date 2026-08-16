@@ -51,9 +51,9 @@ spec:
             - name: libraries
               mountPath: /data
               subPath: photos/immich
-            - name: applications
+            - name: immich-bulk
               mountPath: /data/encoded-video
-              subPath: immich/encoded-video
+              subPath: encoded-video
             - name: immich
               mountPath: /data/thumbs
               subPath: thumbs
@@ -125,9 +125,9 @@ spec:
         - name: immich
           persistentVolumeClaim:
             claimName: immich
-        - name: applications
+        - name: immich-bulk
           persistentVolumeClaim:
-            claimName: applications
+            claimName: immich-bulk
         - name: libraries
           persistentVolumeClaim:
             claimName: libraries

@@ -1,2 +1,6 @@
 app: ""
 size: ""
+type: ""
+pool: ""
+share: ""
+createShare: false

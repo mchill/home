@@ -34,13 +34,12 @@ spec:
             - name: SKIP_MD5_CHECK
               value: "TRUE"
           volumeMounts:
-            - name: applications
+            - name: photon
               mountPath: /photon/data
-              subPath: photon
       volumes:
-        - name: applications
+        - name: photon
           persistentVolumeClaim:
-            claimName: applications
+            claimName: photon
       resources:
         limits:
           memory: 512Mi

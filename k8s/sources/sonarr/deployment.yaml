@@ -40,19 +40,20 @@ spec:
             - name: libraries
               mountPath: /tv-requested
               subPath: tv/requested
-            - name: applications
+            - name: sonarr-trash
               mountPath: /trash
-              subPath: trash
-            - name: applications
+            - name: qbittorrent-bulk
               mountPath: /data
-              subPath: qbittorrent
       volumes:
         - name: sonarr
           persistentVolumeClaim:
             claimName: sonarr
-        - name: applications
+        - name: sonarr-trash
           persistentVolumeClaim:
-            claimName: applications
+            claimName: sonarr-trash
+        - name: qbittorrent-bulk
+          persistentVolumeClaim:
+            claimName: qbittorrent-bulk
         - name: libraries
           persistentVolumeClaim:
             claimName: libraries

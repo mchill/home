@@ -31,6 +31,17 @@ spec:
         values: |
           app: immich
           size: 8Gi
+          type: iscsi
+          pool: ssdpool
+    - repoURL: https://github.com/mchill/home.git
+      targetRevision: HEAD
+      path: k8s/helm/charts/persistence
+      helm:
+        values: |
+          app: immich-bulk
+          type: smb
+          pool: hddpool1
+          share: immich
   destination:
     server: https://kubernetes.default.svc
     namespace: server

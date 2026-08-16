@@ -40,19 +40,20 @@ spec:
             - name: libraries
               mountPath: /movies-requested
               subPath: movies/requested
-            - name: applications
+            - name: radarr-trash
               mountPath: /trash
-              subPath: trash
-            - name: applications
+            - name: qbittorrent-bulk
               mountPath: /data
-              subPath: qbittorrent
       volumes:
         - name: radarr
           persistentVolumeClaim:
             claimName: radarr
-        - name: applications
+        - name: radarr-trash
           persistentVolumeClaim:
-            claimName: applications
+            claimName: radarr-trash
+        - name: qbittorrent-bulk
+          persistentVolumeClaim:
+            claimName: qbittorrent-bulk
         - name: libraries
           persistentVolumeClaim:
             claimName: libraries

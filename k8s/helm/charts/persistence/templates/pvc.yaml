@@ -3,9 +3,16 @@ kind: PersistentVolumeClaim
 metadata:
   name: "{{ .Values.app }}"
 spec:
+{{- if eq (include "persistence.type" .) "smb" }}
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  volumeName: "{{ .Values.app }}"
+{{- else }}
   accessModes:
     - ReadWriteOnce
+  storageClassName: {{ include "persistence.storageClass" . }}
+{{- end }}
   resources:
     requests:
-      storage: "{{ .Values.size }}"
-  storageClassName: truenas-iscsi
+      storage: {{ include "persistence.size" . }}

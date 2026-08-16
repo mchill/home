@@ -34,9 +34,8 @@ spec:
           volumeMounts:
             - name: plex
               mountPath: /config
-            - name: applications
+            - name: plex-bulk
               mountPath: /transcode
-              subPath: plex
             - name: libraries
               mountPath: /data/movies
               subPath: movies/sd
@@ -73,9 +72,9 @@ spec:
         - name: plex
           persistentVolumeClaim:
             claimName: plex
-        - name: applications
+        - name: plex-bulk
           persistentVolumeClaim:
-            claimName: applications
+            claimName: plex-bulk
         - name: libraries
           persistentVolumeClaim:
             claimName: libraries

@@ -37,19 +37,20 @@ spec:
             - name: libraries
               mountPath: /tv-uhd
               subPath: tv/uhd
-            - name: applications
+            - name: sonarr-uhd-trash
               mountPath: /trash
-              subPath: trash
-            - name: applications
+            - name: qbittorrent-bulk
               mountPath: /data
-              subPath: qbittorrent
       volumes:
         - name: sonarr-uhd
           persistentVolumeClaim:
             claimName: sonarr-uhd
-        - name: applications
+        - name: sonarr-uhd-trash
           persistentVolumeClaim:
-            claimName: applications
+            claimName: sonarr-uhd-trash
+        - name: qbittorrent-bulk
+          persistentVolumeClaim:
+            claimName: qbittorrent-bulk
         - name: libraries
           persistentVolumeClaim:
             claimName: libraries
