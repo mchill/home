@@ -28,7 +28,7 @@ resources:
   - ombi.yaml
   - pdu.yaml
   - peanut.yaml
-  # - photon.yaml
+  - photon.yaml
   - pihole.yaml
   - plex.yaml
   - podcast-dl.yaml

@@ -30,7 +30,7 @@ spec:
       helm:
         values: |
           app: immich
-          size: 8Gi
+          size: 12Gi
           type: iscsi
           pool: ssdpool
   destination:

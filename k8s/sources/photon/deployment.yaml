@@ -30,8 +30,6 @@ spec:
               value: DISABLED
             - name: INITIAL_DOWNLOAD
               value: "FALSE"
-            - name: DOWNLOAD_MAX_RETRIES
-              value: "10"
             - name: SKIP_MD5_CHECK
               value: "TRUE"
           volumeMounts:

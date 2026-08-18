@@ -30,7 +30,7 @@ spec:
       helm:
         values: |
           app: nextcloud
-          size: 2Gi
+          size: 4Gi
           type: iscsi
           pool: ssdpool
   destination:

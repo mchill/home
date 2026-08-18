@@ -25,95 +25,95 @@ services:
     items:
       - name: Home Assistant
         subtitle: Home automation
-        logo: assets/logos/homeassistant.png
+        logo: assets/logos/home-assistant.svg
         url: https://home.mchill.io
       - name: Mealie
         subtitle: Recipes
-        logo: assets/logos/mealie.png
+        logo: assets/logos/mealie.svg
         url: https://recipes.mchill.io
-      - name: Dawarich
-        subtitle: Timeline
-        logo: assets/logos/dawarich.png
-        url: https://dawarich.mchill.io
       - name: Ombi
         subtitle: Plex requests
-        logo: assets/logos/ombi.png
+        logo: assets/logos/ombi.svg
         url: https://ombi.mchill.io
       - name: Jitsi
         subtitle: Video conferencing
-        logo: assets/logos/jitsi.png
+        logo: assets/logos/jitsi-meet.svg
         url: https://jitsi.mchill.io
+      - name: Stardew Valley
+        subtitle: Game server
+        logo: assets/logos/stardew-valley.png
+        url: https://stardew.mchill.io
 
   - name: Media
     icon: fas fa-compact-disc
     items:
       - name: Plex
         subtitle: Videos
-        logo: assets/logos/plex.png
+        logo: assets/logos/plex.svg
         url: https://plex.mchill.io
+      - name: Immich
+        subtitle: Photos
+        logo: assets/logos/immich.svg
+        url: https://photos.mchill.io
       - name: Tube Archivist
         subtitle: YouTube
-        logo: assets/logos/tubearchivist.jpg
+        logo: assets/logos/tube-archivist.png
         url: https://tube.mchill.io
       - name: Audiobookshelf
         subtitle: Audiobooks
-        logo: assets/logos/audiobookshelf.png
+        logo: assets/logos/audiobookshelf.svg
         url: https://books.mchill.io
       - name: RomM
         subtitle: Games
-        logo: assets/logos/romm.png
+        logo: assets/logos/romm.svg
         url: https://romm.mchill.io
-      - name: Stardew Valley
-        subtitle: Game server
-        logo: assets/logos/stardew.png
-        url: https://stardew.mchill.io
 
-  - name: Libraries
-    icon: fas fa-book
+  - name: Media Mgmt
+    icon: fas fa-download
     items:
-      - name: Yamtrack
-        subtitle: Media tracker
-        logo: assets/logos/yamtrack.svg
-        url: https://yamtrack.mchill.io
-      - name: Radarr
-        subtitle: Movies
-        logo: assets/logos/radarr.png
-        url: https://radarr.mchill.io
-      - name: UHD Radarr
-        subtitle: UHD Movies
-        logo: assets/logos/radarr.png
-        url: https://radarr-uhd.mchill.io
-      - name: Sonarr
-        subtitle: TV shows
-        logo: assets/logos/sonarr.png
-        url: https://sonarr.mchill.io
-      - name: UHD Sonarr
-        subtitle: UHD TV shows
-        logo: assets/logos/sonarr.png
-        url: https://sonarr-uhd.mchill.io
+      - name: Prowlarr
+        subtitle: Indexer aggregator
+        logo: assets/logos/prowlarr.svg
+        url: https://prowlarr.mchill.io
+      - name: Bazarr
+        subtitle: Subtitles
+        logo: assets/logos/bazarr.svg
+        url: https://bazarr.mchill.io
+      - name: Tdarr
+        subtitle: Transcoder
+        logo: assets/logos/tdarr.png
+        url: https://tdarr.mchill.io
+      - name: qBittorrent
+        subtitle: BitTorrent client
+        logo: assets/logos/qbittorrent.svg
+        url: https://qbittorrent.mchill.io
+      - name: Tautulli
+        subtitle: Plex statistics
+        logo: assets/logos/tautulli.svg
+        url: https://tautulli.mchill.io
 
   - name: Storage
     icon: fas fa-folder-open
     items:
       - name: TrueNAS
         subtitle: NAS
-        logo: assets/logos/truenas.png
+        logo: assets/logos/truenas.svg
         url: https://nas.mchill.io
       - name: Garage
         subtitle: Object storage
-        logo: assets/logos/garage.svg
+        logo: assets/logos/grafana.svg
         url: https://garage.mchill.io
       - name: Nextcloud
         subtitle: File sharing
-        logo: assets/logos/nextcloud.png
+        logo: assets/logos/nextcloud.svg
         url: https://nextcloud.mchill.io
       - name: Syncthing
         subtitle: File synchronization
-        logo: assets/logos/syncthing.png
+        logo: assets/logos/syncthing.svg
         url: https://syncthing.mchill.io
       - name: Remote TrueNAS
         subtitle: NAS
-        logo: assets/logos/truenas.png
+        logo: assets/logos/truenas.svg
         url: https://nas.remote.mchill.io
 
   - name: Network
@@ -121,23 +121,23 @@ services:
     items:
       - name: Unifi
         subtitle: Network controller
-        logo: assets/logos/unifi.png
+        logo: assets/logos/unifi-controller.png
         url: https://unifi.mchill.io
       - name: Pi-hole
         subtitle: DNS sinkhole
-        logo: assets/logos/pihole.png
+        logo: assets/logos/pi-hole.svg
         url: https://pihole.mchill.io
       - name: Traefik
         subtitle: Proxy configuration
-        logo: assets/logos/traefik.png
+        logo: assets/logos/traefik.svg
         url: https://traefik.mchill.io
       - name: DDNS Monitor
         subtitle: Domain management
-        logo: assets/logos/ddns.svg
+        logo: assets/logos/ddns-updater.svg
         url: https://ddns.mchill.io
       - name: Remote Unifi
         subtitle: Network controller
-        logo: assets/logos/unifi.png
+        logo: assets/logos/unifi-controller.png
         url: https://unifi.remote.mchill.io
 
   - name: Monitoring
@@ -149,65 +149,77 @@ services:
         url: https://kvm.mchill.io
       - name: Grafana
         subtitle: Server monitoring
-        logo: assets/logos/grafana.png
+        logo: assets/logos/grafana.svg
         url: https://grafana.mchill.io
       - name: Prometheus
         subtitle: Server metrics
-        logo: assets/logos/prometheus.png
+        logo: assets/logos/prometheus.svg
         url: https://prometheus.mchill.io
       - name: PDU
         subtitle: Power management
         logo: assets/logos/cyberpower.png
         url: https://pdu.mchill.io
       - name: webNUT
-        subtitle: UPS metrics
+        subtitle: UPS metricsP
         logo: assets/logos/peanut.svg
         url: https://nut.mchill.io
+
+  - name: Libraries
+    icon: fas fa-book
+    items:
+      - name: Radarr
+        subtitle: Movies
+        logo: assets/logos/radarr.svg
+        url: https://radarr.mchill.io
+      - name: UHD Radarr
+        subtitle: UHD Movies
+        logo: assets/logos/radarr-4k.svg
+        url: https://radarr-uhd.mchill.io
+      - name: Sonarr
+        subtitle: TV shows
+        logo: assets/logos/sonarr.svg
+        url: https://sonarr.mchill.io
+      - name: UHD Sonarr
+        subtitle: UHD TV shows
+        logo: assets/logos/sonarr-4k.svg
+        url: https://sonarr-uhd.mchill.io
 
   - name: Server Mgmt
     icon: fas fa-server
     items:
       - name: Argo CD
         subtitle: Continuous delivery
-        logo: assets/logos/argocd.png
+        logo: assets/logos/argo-cd.svg
         url: https://argocd.mchill.io
       - name: Proxmox
         subtitle: Virtualization
-        logo: assets/logos/proxmox.png
+        logo: assets/logos/proxmox.svg
         url: https://proxmox.mchill.io
-      - name: K8s Dashboard
-        subtitle: Cluster configuration
-        logo: assets/logos/kubernetes.png
-        url: https://k8s.mchill.io
+      - name: Headlamp
+        subtitle: K8s dashboard
+        logo: assets/logos/headlamp.svg
+        url: https://headlamp.mchill.io
       - name: Argo Workflows
         subtitle: Workflow engine
-        logo: assets/logos/argo.png
+        logo: assets/logos/argo-cd.svg
         url: https://argo.mchill.io
-      - name: NetBox
-        subtitle: Server infrastructure
-        logo: assets/logos/netbox.png
-        url: https://netbox.mchill.io
 
-  - name: Media Mgmt
+  - name: Tracking
     icon: fas fa-tasks
     items:
-      - name: Prowlarr
-        subtitle: Indexer aggregator
-        logo: assets/logos/prowlarr.png
-        url: https://prowlarr.mchill.io
-      - name: Bazarr
-        subtitle: Subtitles
-        logo: assets/logos/bazarr.png
-        url: https://bazarr.mchill.io
-      - name: Tdarr
-        subtitle: Transcoder
-        logo: assets/logos/tdarr.png
-        url: https://tdarr.mchill.io
-      - name: qBittorrent
-        subtitle: BitTorrent client
-        logo: assets/logos/qbittorrent.png
-        url: https://qbittorrent.mchill.io
-      - name: Tautulli
-        subtitle: Plex statistics
-        logo: assets/logos/tautulli.png
-        url: https://tautulli.mchill.io
+      - name: Dawarich
+        subtitle: Location timeline
+        logo: assets/logos/dawarich.svg
+        url: https://dawarich.mchill.io
+      - name: AirTrail
+        subtitle: Flight tracker
+        logo: assets/logos/air-trail.svg
+        url: https://airtrail.mchill.io
+      - name: Yamtrack
+        subtitle: Media tracker
+        logo: assets/logos/yamtrack.svg
+        url: https://yamtrack.mchill.io
+      - name: NetBox
+        subtitle: Server infrastructure
+        logo: assets/logos/netbox-dark.svg
+        url: https://netbox.mchill.io
