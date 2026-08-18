@@ -16,6 +16,7 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: tautulli
           image: tautulli/tautulli:v2.17.2

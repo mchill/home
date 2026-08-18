@@ -16,6 +16,7 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: prowlarr
           image: ghcr.io/linuxserver/prowlarr:2.5.2

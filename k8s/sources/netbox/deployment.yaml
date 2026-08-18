@@ -16,6 +16,7 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
       initContainers:
         - name: plugins
           image: netboxcommunity/netbox:v4.6.7

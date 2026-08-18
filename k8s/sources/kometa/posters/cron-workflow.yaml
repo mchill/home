@@ -15,6 +15,7 @@ spec:
     podSpecPatch: |
       securityContext:
         fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
     onExit: notify
     entrypoint: kometa
     volumes:

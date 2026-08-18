@@ -11,9 +11,6 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/mchill/home.git
-      targetRevision: HEAD
-      path: k8s/sources/democratic-csi
     - repoURL: https://democratic-csi.github.io/charts/
       chart: democratic-csi
       targetRevision: 0.15.1

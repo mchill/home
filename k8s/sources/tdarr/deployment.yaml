@@ -16,6 +16,7 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: tdarr-server
           image: haveagitgat/tdarr:2.85.01

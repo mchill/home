@@ -17,6 +17,7 @@ spec:
       enableServiceLinks: false
       securityContext:
         fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: immich
           image: ghcr.io/immich-app/immich-server:v3.1.0

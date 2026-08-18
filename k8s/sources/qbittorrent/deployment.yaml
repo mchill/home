@@ -16,6 +16,7 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
         sysctls:
           - name: net.ipv4.conf.all.src_valid_mark
             value: "1"
