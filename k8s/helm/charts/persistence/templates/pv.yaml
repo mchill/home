@@ -28,5 +28,5 @@ spec:
       source: "{{ include "persistence.source" . }}"
     nodeStageSecretRef:
       name: truenas-credentials
-      namespace: server
+      namespace: democratic-csi
 {{- end }}
