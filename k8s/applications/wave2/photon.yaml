@@ -28,9 +28,9 @@ spec:
       helm:
         values: |
           app: photon
-          size: 192Gi
+          size: 36Gi
           type: iscsi
-          pool: hddpool1
+          pool: ssdpool
   destination:
     server: https://kubernetes.default.svc
     namespace: server
