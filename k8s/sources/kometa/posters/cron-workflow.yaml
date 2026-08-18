@@ -21,15 +21,9 @@ spec:
       - name: kometa
         persistentVolumeClaim:
           claimName: kometa
-      - name: movies
+      - name: hddpool1-media
         persistentVolumeClaim:
-          claimName: movies
-      - name: shows
-        persistentVolumeClaim:
-          claimName: shows
-      - name: extras
-        persistentVolumeClaim:
-          claimName: extras
+          claimName: hddpool1-media
       - name: config
         configMap:
           name: kometa-posters
@@ -53,12 +47,15 @@ spec:
               - name: kometa
                 mountPath: /config
                 subPath: posters
-              - name: movies
+              - name: hddpool1-media
                 mountPath: /data/movies
-              - name: shows
+                subPath: movies
+              - name: hddpool1-media
                 mountPath: /data/tv
-              - name: extras
+                subPath: shows
+              - name: hddpool1-media
                 mountPath: /data/extras
+                subPath: extras
               - name: config
                 mountPath: /config_src/config.yaml
                 subPath: config.yaml
@@ -77,12 +74,15 @@ spec:
             - name: kometa
               mountPath: /config
               subPath: posters
-            - name: movies
+            - name: hddpool1-media
               mountPath: /data/movies
-            - name: shows
+              subPath: movies
+            - name: hddpool1-media
               mountPath: /data/tv
-            - name: extras
+              subPath: shows
+            - name: hddpool1-media
               mountPath: /data/extras
+              subPath: extras
             - name: config
               mountPath: /config/movies.yml
               subPath: movies.yml

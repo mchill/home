@@ -34,29 +34,28 @@ spec:
           volumeMounts:
             - name: radarr
               mountPath: /config
-            - name: movies
+            - name: hddpool1-media
               mountPath: /movies
-              subPath: sd
-            - name: movies
+              subPath: movies/sd
+            - name: hddpool1-media
               mountPath: /movies-requested
-              subPath: requested
-            - name: radarr-trash
+              subPath: movies/requested
+            - name: hddpool2-apps
               mountPath: /trash
-            - name: qbittorrent-bulk
+              subPath: radarr
+            - name: hddpool2-apps
               mountPath: /data
+              subPath: qbittorrent
       volumes:
         - name: radarr
           persistentVolumeClaim:
             claimName: radarr
-        - name: radarr-trash
+        - name: hddpool2-apps
           persistentVolumeClaim:
-            claimName: radarr-trash
-        - name: qbittorrent-bulk
+            claimName: hddpool2-apps
+        - name: hddpool1-media
           persistentVolumeClaim:
-            claimName: qbittorrent-bulk
-        - name: movies
-          persistentVolumeClaim:
-            claimName: movies
+            claimName: hddpool1-media
       resources:
         limits:
           memory: 512Mi

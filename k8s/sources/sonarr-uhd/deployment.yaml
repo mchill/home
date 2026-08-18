@@ -34,26 +34,25 @@ spec:
           volumeMounts:
             - name: sonarr-uhd
               mountPath: /config
-            - name: shows-uhd
+            - name: hddpool2-media
               mountPath: /tv-uhd
-              subPath: uhd
-            - name: sonarr-uhd-trash
+              subPath: shows/uhd
+            - name: hddpool2-apps
               mountPath: /trash
-            - name: qbittorrent-bulk
+              subPath: sonarr-uhd
+            - name: hddpool2-apps
               mountPath: /data
+              subPath: qbittorrent
       volumes:
         - name: sonarr-uhd
           persistentVolumeClaim:
             claimName: sonarr-uhd
-        - name: sonarr-uhd-trash
+        - name: hddpool2-apps
           persistentVolumeClaim:
-            claimName: sonarr-uhd-trash
-        - name: qbittorrent-bulk
+            claimName: hddpool2-apps
+        - name: hddpool2-media
           persistentVolumeClaim:
-            claimName: qbittorrent-bulk
-        - name: shows-uhd
-          persistentVolumeClaim:
-            claimName: shows-uhd
+            claimName: hddpool2-media
       resources:
         limits:
           memory: 512Mi

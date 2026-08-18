@@ -42,26 +42,27 @@ spec:
             - name: tdarr
               mountPath: /app/configs
               subPath: configs
-            - name: tdarr-bulk
+            - name: hddpool2-apps
               mountPath: /temp
-            - name: movies
+              subPath: tdarr
+            - name: hddpool1-media
               mountPath: /media/movies
-              subPath: sd
-            - name: movies-uhd
+              subPath: movies/sd
+            - name: hddpool2-media
               mountPath: /media/movies-uhd
-              subPath: uhd
-            - name: movies
+              subPath: movies/uhd
+            - name: hddpool1-media
               mountPath: /media/movies-requested
-              subPath: requested
-            - name: shows
+              subPath: movies/requested
+            - name: hddpool1-media
               mountPath: /media/tv
-              subPath: sd
-            - name: shows-uhd
+              subPath: shows/sd
+            - name: hddpool2-media
               mountPath: /media/tv-uhd
-              subPath: uhd
-            - name: shows
+              subPath: shows/uhd
+            - name: hddpool1-media
               mountPath: /media/tv-requested
-              subPath: requested
+              subPath: shows/requested
         - name: tdarr-node
           image: haveagitgat/tdarr_node:2.85.01
           env:
@@ -83,45 +84,40 @@ spec:
             - name: tdarr
               mountPath: /app/configs
               subPath: configs
-            - name: tdarr-bulk
+            - name: hddpool2-apps
               mountPath: /temp
-            - name: movies
+              subPath: tdarr
+            - name: hddpool1-media
               mountPath: /media/movies
-              subPath: sd
-            - name: movies-uhd
+              subPath: movies/sd
+            - name: hddpool2-media
               mountPath: /media/movies-uhd
-              subPath: uhd
-            - name: movies
+              subPath: movies/uhd
+            - name: hddpool1-media
               mountPath: /media/movies-requested
-              subPath: requested
-            - name: shows
+              subPath: movies/requested
+            - name: hddpool1-media
               mountPath: /media/tv
-              subPath: sd
-            - name: shows-uhd
+              subPath: shows/sd
+            - name: hddpool2-media
               mountPath: /media/tv-uhd
-              subPath: uhd
-            - name: shows
+              subPath: shows/uhd
+            - name: hddpool1-media
               mountPath: /media/tv-requested
-              subPath: requested
+              subPath: shows/requested
       volumes:
         - name: tdarr
           persistentVolumeClaim:
             claimName: tdarr
-        - name: tdarr-bulk
+        - name: hddpool2-apps
           persistentVolumeClaim:
-            claimName: tdarr-bulk
-        - name: movies
+            claimName: hddpool2-apps
+        - name: hddpool1-media
           persistentVolumeClaim:
-            claimName: movies
-        - name: movies-uhd
+            claimName: hddpool1-media
+        - name: hddpool2-media
           persistentVolumeClaim:
-            claimName: movies-uhd
-        - name: shows
-          persistentVolumeClaim:
-            claimName: shows
-        - name: shows-uhd
-          persistentVolumeClaim:
-            claimName: shows-uhd
+            claimName: hddpool2-media
       resources:
         limits:
           memory: 1Gi

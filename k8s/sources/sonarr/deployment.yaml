@@ -34,29 +34,28 @@ spec:
           volumeMounts:
             - name: sonarr
               mountPath: /config
-            - name: shows
+            - name: hddpool1-media
               mountPath: /tv
-              subPath: sd
-            - name: shows
+              subPath: shows/sd
+            - name: hddpool1-media
               mountPath: /tv-requested
-              subPath: requested
-            - name: sonarr-trash
+              subPath: shows/requested
+            - name: hddpool2-apps
               mountPath: /trash
-            - name: qbittorrent-bulk
+              subPath: sonarr
+            - name: hddpool2-apps
               mountPath: /data
+              subPath: qbittorrent
       volumes:
         - name: sonarr
           persistentVolumeClaim:
             claimName: sonarr
-        - name: sonarr-trash
+        - name: hddpool2-apps
           persistentVolumeClaim:
-            claimName: sonarr-trash
-        - name: qbittorrent-bulk
+            claimName: hddpool2-apps
+        - name: hddpool1-media
           persistentVolumeClaim:
-            claimName: qbittorrent-bulk
-        - name: shows
-          persistentVolumeClaim:
-            claimName: shows
+            claimName: hddpool1-media
       resources:
         limits:
           memory: 512Mi

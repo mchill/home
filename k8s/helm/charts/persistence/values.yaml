@@ -2,7 +2,3 @@ app: ""
 size: ""
 type: ""
 pool: ""
-share: ""
-parent: apps
-dataset: ""
-createShare: false

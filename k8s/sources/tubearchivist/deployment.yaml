@@ -46,15 +46,15 @@ spec:
             - name: tubearchivist
               mountPath: /cache
               subPath: cache
-            - name: tubearchivist-bulk
+            - name: hddpool2-apps
               mountPath: /cache/download
-              subPath: download
-            - name: tubearchivist-bulk
+              subPath: tubearchivist/download
+            - name: hddpool2-apps
               mountPath: /cache/import
-              subPath: import
-            - name: youtube
+              subPath: tubearchivist/import
+            - name: hddpool1-media
               mountPath: /youtube
-              subPath: tubearchivist
+              subPath: youtube/tubearchivist
         - name: redis
           image: redis:8.10.0
           volumeMounts:
@@ -83,12 +83,12 @@ spec:
         - name: tubearchivist
           persistentVolumeClaim:
             claimName: tubearchivist
-        - name: tubearchivist-bulk
+        - name: hddpool2-apps
           persistentVolumeClaim:
-            claimName: tubearchivist-bulk
-        - name: youtube
+            claimName: hddpool2-apps
+        - name: hddpool1-media
           persistentVolumeClaim:
-            claimName: youtube
+            claimName: hddpool1-media
       resources:
         limits:
           memory: 3Gi

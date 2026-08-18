@@ -18,9 +18,9 @@ spec:
     onExit: notify
     entrypoint: podcast-dl
     volumes:
-      - name: podcasts
+      - name: hddpool1-media
         persistentVolumeClaim:
-          claimName: podcasts
+          claimName: hddpool1-media
     templates:
       - name: podcast-dl
         retryStrategy:
@@ -49,8 +49,9 @@ spec:
             - name: GID
               value: "1000"
           volumeMounts:
-            - name: podcasts
+            - name: hddpool1-media
               mountPath: /podcasts
+              subPath: podcasts
           resources:
             limits:
               memory: 512Mi

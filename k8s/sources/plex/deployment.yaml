@@ -34,33 +34,36 @@ spec:
           volumeMounts:
             - name: plex
               mountPath: /config
-            - name: plex-bulk
+            - name: hddpool2-apps
               mountPath: /transcode
-            - name: movies
+              subPath: plex
+            - name: hddpool1-media
               mountPath: /data/movies
-              subPath: sd
-            - name: movies-uhd
+              subPath: movies/sd
+            - name: hddpool2-media
               mountPath: /data/movies-uhd
-              subPath: uhd
-            - name: movies
+              subPath: movies/uhd
+            - name: hddpool1-media
               mountPath: /data/movies-requested
-              subPath: requested
-            - name: extras
+              subPath: movies/requested
+            - name: hddpool1-media
               mountPath: /data/extras
-              subPath: sd
-            - name: shows
+              subPath: extras/sd
+            - name: hddpool1-media
               mountPath: /data/tv
-              subPath: sd
-            - name: shows-uhd
+              subPath: shows/sd
+            - name: hddpool2-media
               mountPath: /data/tv-uhd
-              subPath: uhd
-            - name: shows
+              subPath: shows/uhd
+            - name: hddpool1-media
               mountPath: /data/tv-requested
-              subPath: requested
-            - name: music
+              subPath: shows/requested
+            - name: hddpool1-media
               mountPath: /data/music
-            - name: youtube
+              subPath: music
+            - name: hddpool1-media
               mountPath: /data/youtube
+              subPath: youtube
           resources:
             limits:
               gpu.intel.com/i915: 1
@@ -70,30 +73,15 @@ spec:
         - name: plex
           persistentVolumeClaim:
             claimName: plex
-        - name: plex-bulk
+        - name: hddpool2-apps
           persistentVolumeClaim:
-            claimName: plex-bulk
-        - name: movies
+            claimName: hddpool2-apps
+        - name: hddpool1-media
           persistentVolumeClaim:
-            claimName: movies
-        - name: movies-uhd
+            claimName: hddpool1-media
+        - name: hddpool2-media
           persistentVolumeClaim:
-            claimName: movies-uhd
-        - name: extras
-          persistentVolumeClaim:
-            claimName: extras
-        - name: shows
-          persistentVolumeClaim:
-            claimName: shows
-        - name: shows-uhd
-          persistentVolumeClaim:
-            claimName: shows-uhd
-        - name: music
-          persistentVolumeClaim:
-            claimName: music
-        - name: youtube
-          persistentVolumeClaim:
-            claimName: youtube
+            claimName: hddpool2-media
       resources:
         limits:
           cpu: 1

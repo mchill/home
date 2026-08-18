@@ -15,9 +15,9 @@ spec:
     entrypoint: tubearchivist
     onExit: notify
     volumes:
-      - name: youtube
+      - name: hddpool1-media
         persistentVolumeClaim:
-          claimName: youtube
+          claimName: hddpool1-media
     templates:
       - name: tubearchivist
         retryStrategy:
@@ -61,8 +61,9 @@ spec:
             - secretRef:
                 name: tubearchivist
           volumeMounts:
-            - name: youtube
+            - name: hddpool1-media
               mountPath: /youtube
+              subPath: youtube
           resources:
             limits:
               memory: 128Mi

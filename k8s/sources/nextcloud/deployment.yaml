@@ -50,15 +50,15 @@ spec:
             - name: nextcloud
               mountPath: /var/www/html
               subPath: html
-            - name: nextcloud-bulk
+            - name: hddpool1-apps
               mountPath: /var/www/html/data
-              subPath: data
+              subPath: nextcloud/data
             - name: nextcloud
               mountPath: /var/www/html/data/appdata_ocxz00ovrlk0
               subPath: appdata
-            - name: photos
+            - name: hddpool1-media
               mountPath: /mnt/family
-              subPath: external/family
+              subPath: photos/external/family
         - name: cron
           image: nextcloud:34.0.2-apache
           command:
@@ -80,15 +80,15 @@ spec:
             - name: nextcloud
               mountPath: /var/www/html
               subPath: html
-            - name: nextcloud-bulk
+            - name: hddpool1-apps
               mountPath: /var/www/html/data
-              subPath: data
+              subPath: nextcloud/data
             - name: nextcloud
               mountPath: /var/www/html/data/appdata_ocxz00ovrlk0
               subPath: appdata
-            - name: photos
+            - name: hddpool1-media
               mountPath: /mnt/family
-              subPath: external/family
+              subPath: photos/external/family
         - name: db
           image: postgres:17.10-alpine
           env:
@@ -123,12 +123,12 @@ spec:
         - name: nextcloud
           persistentVolumeClaim:
             claimName: nextcloud
-        - name: nextcloud-bulk
+        - name: hddpool1-apps
           persistentVolumeClaim:
-            claimName: nextcloud-bulk
-        - name: photos
+            claimName: hddpool1-apps
+        - name: hddpool1-media
           persistentVolumeClaim:
-            claimName: photos
+            claimName: hddpool1-media
       resources:
         limits:
           memory: 1Gi

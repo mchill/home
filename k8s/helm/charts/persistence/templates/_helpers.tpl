@@ -28,19 +28,6 @@
 {{- end -}}
 {{- end -}}
 
-{{- define "persistence.share" -}}
-{{- default .Values.app .Values.share -}}
-{{- end -}}
-
-{{- define "persistence.dataset" -}}
-{{- $pool := include "persistence.pool" . -}}
-{{- if not (has $pool (list "hddpool1" "hddpool2")) -}}
-{{- fail (printf "persistence: smb is only available on hddpool1/hddpool2, got %q (app %q)" $pool .Values.app) -}}
-{{- end -}}
-{{- $leaf := default (include "persistence.share" .) .Values.dataset -}}
-{{- printf "%s/secure/%s/%s" $pool .Values.parent $leaf -}}
-{{- end -}}
-
 {{- define "persistence.source" -}}
-{{- printf "//truenas.mchill.lan/%s" (include "persistence.share" .) -}}
+{{- printf "//truenas.mchill.lan/%s" .Values.app -}}
 {{- end -}}
