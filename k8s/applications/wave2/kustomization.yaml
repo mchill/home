@@ -10,6 +10,7 @@ resources:
   - ddns.yaml
   - errors.yaml
   - flaresolverr.yaml
+  - garage.yaml
   - headlamp.yaml
   - homeassistant.yaml
   - homer.yaml
@@ -21,7 +22,6 @@ resources:
   - loki.yaml
   - mealie.yaml
   - minecraft.yaml
-  - minio.yaml
   - nas.yaml
   - netbox.yaml
   - nextcloud.yaml

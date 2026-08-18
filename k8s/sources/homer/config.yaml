@@ -95,14 +95,14 @@ services:
   - name: Storage
     icon: fas fa-folder-open
     items:
-      - name: Synology DSM
+      - name: TrueNAS
         subtitle: NAS
-        logo: assets/logos/nas.png
+        logo: assets/logos/truenas.png
         url: https://nas.mchill.io
-      - name: MinIO
+      - name: Garage
         subtitle: Object storage
-        logo: assets/logos/minio.png
-        url: https://minio.mchill.io
+        logo: assets/logos/garage.svg
+        url: https://garage.mchill.io
       - name: Nextcloud
         subtitle: File sharing
         logo: assets/logos/nextcloud.png
@@ -111,9 +111,9 @@ services:
         subtitle: File synchronization
         logo: assets/logos/syncthing.png
         url: https://syncthing.mchill.io
-      - name: Remote Synology DSM
+      - name: Remote TrueNAS
         subtitle: NAS
-        logo: assets/logos/nas.png
+        logo: assets/logos/truenas.png
         url: https://nas.remote.mchill.io
 
   - name: Network

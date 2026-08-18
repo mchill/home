@@ -11,7 +11,7 @@ terraform {
     key    = "proxmox.tfstate"
     region = "us-east-1"
     endpoints = {
-      s3 = "http://192.168.1.10:9000"
+      s3 = "http://192.168.1.199:3900"
     }
     skip_credentials_validation = true
     skip_requesting_account_id  = true
