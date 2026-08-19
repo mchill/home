@@ -17,6 +17,32 @@ spec:
       securityContext:
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
+      initContainers:
+        - name: stage-index
+          image: rtuszik/photon-docker:2.3.1
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -eu
+              if [ -d /photon/data/photon_data/node_1 ]; then
+                echo "index already staged"
+                exit 0
+              fi
+              df -h /photon/data
+              rm -rf /photon/data/.staging
+              cp -a /nas/photon_data /photon/data/.staging
+              mv /photon/data/.staging /photon/data/photon_data
+              chown -R 9011:9011 /photon/data/photon_data
+              du -sh /photon/data/photon_data
+              df -h /photon/data
+          volumeMounts:
+            - name: hddpool1-apps
+              mountPath: /nas
+              subPath: photon
+              readOnly: true
+            - name: data
+              mountPath: /photon/data
       containers:
         - name: photon
           image: rtuszik/photon-docker:2.3.1
@@ -32,16 +58,27 @@ spec:
               value: "FALSE"
             - name: SKIP_MD5_CHECK
               value: "TRUE"
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: ingress
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
           volumeMounts:
-            - name: photon
+            - name: data
               mountPath: /photon/data
       volumes:
-        - name: photon
+        - name: hddpool1-apps
           persistentVolumeClaim:
-            claimName: photon
+            claimName: hddpool1-apps
+        - name: data
+          emptyDir:
+            sizeLimit: 40Gi
       resources:
         limits:
-          memory: 1Gi
+          memory: 2Gi
         requests:
           cpu: 100m
-          memory: 1Gi
+          memory: 2Gi

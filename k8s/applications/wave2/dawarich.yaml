@@ -29,7 +29,7 @@ spec:
       helm:
         values: |
           app: dawarich
-          size: 8Gi
+          size: 12Gi
           type: iscsi
           pool: ssdpool
   destination:

@@ -1,0 +1,51 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: photon-seed
+  namespace: server
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 14400
+  template:
+    spec:
+      restartPolicy: Never
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+        - name: seed
+          image: rtuszik/photon-docker:2.3.1
+          command:
+            - /bin/bash
+            - -o
+            - pipefail
+            - -c
+            - |
+              set -eu
+              URL=https://download1.graphhopper.com/public/photon-db-planet-reverse-only.tar.bz2
+              DATA=/photon/data/photon_data
+
+              if [ -d "$DATA/node_1" ]; then
+                echo "index already present, skipping download"
+                exit 0
+              fi
+
+              df -h /photon/data
+              curl -fL --retry 5 --retry-delay 10 --retry-connrefused "$URL" \
+                | tar xzf - -C /photon/data
+              du -sh "$DATA"
+              df -h /photon/data
+          volumeMounts:
+            - name: photon
+              mountPath: /photon/data
+              subPath: photon
+      volumes:
+        - name: photon
+          persistentVolumeClaim:
+            claimName: hddpool1-apps
+      resources:
+        limits:
+          memory: 128Mi
+        requests:
+          cpu: 10m
+          memory: 128Mi

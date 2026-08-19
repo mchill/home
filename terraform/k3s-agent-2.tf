@@ -41,7 +41,7 @@ resource "proxmox_virtual_environment_vm" "k3s-agent-2" {
   disk {
     interface    = "scsi0"
     datastore_id = "local-lvm"
-    size         = 64
+    size         = 128
     discard      = "on"
     iothread     = true
     ssd          = true

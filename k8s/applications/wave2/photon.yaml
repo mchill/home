@@ -22,15 +22,6 @@ spec:
           app: photon
           ingress:
             enabled: false
-    - repoURL: https://github.com/mchill/home.git
-      targetRevision: HEAD
-      path: k8s/helm/charts/persistence
-      helm:
-        values: |
-          app: photon
-          size: 36Gi
-          type: iscsi
-          pool: ssdpool
   destination:
     server: https://kubernetes.default.svc
     namespace: server
