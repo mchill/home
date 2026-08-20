@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: truenas-unlock
+spec:
+  selector:
+    matchLabels:
+      app: truenas-unlock
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: truenas-unlock
+    spec:
+      containers:
+        - name: truenas-unlock
+          image: thorpejosh/truenas-zfs-unlock:v3.1.2
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: TRUENAS_HOST
+              value: truenas.mchill.lan
+            - name: SKIP_CERT_VERIFY
+              value: "true"
+            - name: CRONTAB
+              value: "*/10 * * * * * * unlock"
+          envFrom:
+            - secretRef:
+                name: truenas-unlock
+      resources:
+        limits:
+          memory: 128Mi
+        requests:
+          cpu: 10m
+          memory: 128Mi

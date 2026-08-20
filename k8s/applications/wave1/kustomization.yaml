@@ -9,3 +9,4 @@ resources:
   - metallb.yaml
   - shared.yaml
   - traefik.yaml
+  - truenas-unlock.yaml
