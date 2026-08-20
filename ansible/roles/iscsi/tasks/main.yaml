@@ -17,6 +17,26 @@
         mode: "0600"
       notify: Restart iscsid
 
+    - name: Set iSCSI session replacement timeout
+      ansible.builtin.lineinfile:
+        path: /etc/iscsi/iscsid.conf
+        regexp: '^\s*#?\s*node\.session\.timeo\.replacement_timeout\s*='
+        line: "node.session.timeo.replacement_timeout = 3600"
+        owner: root
+        group: root
+        mode: "0600"
+      notify: Restart iscsid
+
+    - name: Apply replacement timeout to existing node records
+      ansible.builtin.command:
+        cmd: >-
+          iscsiadm -m node -o update
+          -n node.session.timeo.replacement_timeout
+          -v 3600
+      register: iscsi_node_update
+      changed_when: iscsi_node_update.rc == 0
+      failed_when: iscsi_node_update.rc not in [0, 21]
+
     - name: Enable iscsid service
       ansible.builtin.systemd:
         name: iscsid
