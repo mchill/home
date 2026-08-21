@@ -48,6 +48,7 @@ resources:
   - syncthing.yaml
   - tautulli.yaml
   # - tdarr.yaml
+  - truenas-exporter.yaml
   - tubearchivist.yaml
   - unifi.yaml
   - yamtrack.yaml

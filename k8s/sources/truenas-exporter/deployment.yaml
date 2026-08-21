@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: truenas-exporter
+spec:
+  selector:
+    matchLabels:
+      app: truenas-exporter
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: truenas-exporter
+    spec:
+      securityContext:
+        runAsUser: 65534
+        runAsGroup: 65534
+        runAsNonRoot: true
+      containers:
+        - name: exporter
+          image: python:3.13-alpine
+          command:
+            - python3
+            - /app/exporter.py
+          ports:
+            - name: metrics
+              containerPort: 9812
+          env:
+            - name: TRUENAS_URL
+              value: http://truenas.mchill.lan
+            - name: DATASET_PREFIXES
+              value: ssdpool/secure/k8s/
+            - name: SCRAPE_INTERVAL
+              value: "60"
+            - name: TRUENAS_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: truenas-api
+                  key: TRUENAS_API_KEY
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            failureThreshold: 5
+          volumeMounts:
+            - name: config
+              mountPath: /app
+      volumes:
+        - name: config
+          configMap:
+            name: truenas-exporter
+      resources:
+        limits:
+          memory: 128Mi
+        requests:
+          cpu: 10m
+          memory: 128Mi

@@ -10,3 +10,6 @@ terraform/terraform.tfstate
 
 # Ansible
 ansible/variables.yaml
+
+# Python
+__pycache__/

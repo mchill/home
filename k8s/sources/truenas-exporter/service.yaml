@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: truenas-exporter
+  labels:
+    app: truenas-exporter
+spec:
+  selector:
+    app: truenas-exporter
+  ports:
+    - name: metrics
+      port: 9812
+      targetPort: metrics

@@ -6,6 +6,7 @@ configMapGenerator:
     files:
       - jobs.json
       - volumes.json
+      - zvols.json
     options:
       labels:
         grafana_dashboard: "1"
