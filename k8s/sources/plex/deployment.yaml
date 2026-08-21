@@ -37,7 +37,10 @@ spec:
               mountPath: /config
             - name: hddpool2-apps
               mountPath: /transcode
-              subPath: plex
+              subPath: plex/transcode
+            - name: hddpool2-apps
+              mountPath: /db-backups
+              subPath: plex/db-backups
             - name: hddpool1-media
               mountPath: /data/movies
               subPath: movies/sd
