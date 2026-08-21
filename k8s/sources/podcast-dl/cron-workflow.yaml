@@ -27,7 +27,7 @@ spec:
         retryStrategy:
           limit: "2"
         container:
-          image: node:24.18.1
+          image: node:24.19.0
           command:
             - /bin/bash
             - -c

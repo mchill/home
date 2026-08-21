@@ -19,7 +19,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: yamtrack
-          image: ghcr.io/fuzzygrim/yamtrack:0.25.3
+          image: ghcr.io/fuzzygrim/yamtrack:0.26.1
           ports:
             - name: ingress
               containerPort: 8000
@@ -50,7 +50,7 @@ spec:
               mountPath: /yamtrack/db
               subPath: db
         - name: redis
-          image: redis:8.10.0-alpine
+          image: redis:8.10.1-alpine
           volumeMounts:
             - name: yamtrack
               mountPath: /data
