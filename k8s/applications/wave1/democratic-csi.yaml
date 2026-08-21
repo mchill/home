@@ -67,7 +67,7 @@ spec:
                 detachedSnapshotsDatasetParentName: ssdpool/secure/k8s-snaps
                 zvolCompression:
                 zvolDedup:
-                zvolEnableReservation: true
+                zvolEnableReservation: false
                 zvolBlocksize:
               iscsi:
                 targetPortal: "truenas.mchill.lan:3260"
