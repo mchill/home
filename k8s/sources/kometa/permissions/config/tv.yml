@@ -10,7 +10,7 @@ collections:
       all:
         label: <<smart_label>>
   Kamaria:
-    sonarr_taglist: kamaria.
+    sonarr_taglist: kamaria, kamaria.
     smart_label:
       all:
         label: <<smart_label>>
