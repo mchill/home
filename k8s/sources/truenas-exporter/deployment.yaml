@@ -31,7 +31,7 @@ spec:
             - name: TRUENAS_URL
               value: http://truenas.mchill.lan
             - name: DATASET_PREFIXES
-              value: ssdpool/secure/k8s/
+              value: ssdpool/replicated/secure/k8s/
             - name: SCRAPE_INTERVAL
               value: "60"
             - name: TRUENAS_API_KEY

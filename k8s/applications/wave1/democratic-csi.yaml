@@ -63,8 +63,8 @@ spec:
                 apiKey: "${TRUENAS_API_KEY}"
                 allowInsecure: true
               zfs:
-                datasetParentName: ssdpool/secure/k8s
-                detachedSnapshotsDatasetParentName: ssdpool/secure/k8s-snaps
+                datasetParentName: ssdpool/replicated/secure/k8s
+                detachedSnapshotsDatasetParentName: ssdpool/replicated/secure/k8s-snaps
                 zvolCompression:
                 zvolDedup:
                 zvolEnableReservation: false
