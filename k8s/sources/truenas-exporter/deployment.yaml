@@ -29,7 +29,9 @@ spec:
               containerPort: 9812
           env:
             - name: TRUENAS_URL
-              value: http://truenas.mchill.lan
+              value: wss://truenas.mchill.lan/api/current
+            - name: TRUENAS_TLS_VERIFY
+              value: "false"
             - name: DATASET_PREFIXES
               value: ssdpool/replicated/secure/k8s/
             - name: SCRAPE_INTERVAL

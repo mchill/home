@@ -1,731 +1,1111 @@
 {
-  "annotations": {
-    "list": [
-      {
-        "builtIn": 1,
-        "datasource": {
-          "type": "grafana",
-          "uid": "-- Grafana --"
-        },
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "type": "dashboard"
-      }
-    ]
-  },
-  "editable": true,
-  "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
-  "links": [],
-  "preload": false,
-  "schemaVersion": 42,
-  "tags": ["truenas", "zfs"],
-  "templating": {
-    "list": []
-  },
-  "time": {
-    "from": "now-7d",
-    "to": "now"
-  },
-  "timepicker": {},
-  "timezone": "browser",
-  "title": "zvols",
-  "uid": "truenas-zvols",
-  "version": 1,
-  "weekStart": "",
-  "panels": [
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "type": "stat",
-      "title": "Total Allocation",
-      "id": 1,
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 0,
-        "y": 0
-      },
-      "pluginVersion": "12.4.2",
-      "fieldConfig": {
-        "defaults": {
-          "unit": "decbytes",
-          "decimals": 1,
-          "mappings": [],
-          "color": {
-            "mode": "fixed",
-            "fixedColor": "blue"
-          }
-        },
-        "overrides": []
-      },
-      "options": {
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "orientation": "auto",
-        "textMode": "auto",
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto"
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum(truenas_zvol_used_bytes)",
-          "legendFormat": "{{volume}}",
-          "refId": "A"
-        }
-      ]
+ "annotations": {
+  "list": [
+   {
+    "builtIn": 1,
+    "datasource": {
+     "type": "grafana",
+     "uid": "-- Grafana --"
     },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "type": "stat",
-      "title": "Held by Snapshots",
-      "id": 2,
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 8,
-        "y": 0
-      },
-      "pluginVersion": "12.4.2",
-      "fieldConfig": {
-        "defaults": {
-          "unit": "decbytes",
-          "decimals": 1,
-          "mappings": [],
-          "color": {
-            "mode": "fixed",
-            "fixedColor": "orange"
-          }
-        },
-        "overrides": []
-      },
-      "options": {
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "orientation": "auto",
-        "textMode": "auto",
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto"
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum(truenas_zvol_usedbysnapshots_bytes)",
-          "legendFormat": "{{volume}}",
-          "refId": "A"
-        }
-      ]
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "type": "stat",
-      "title": "Held by Reservations",
-      "id": 3,
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 16,
-        "y": 0
-      },
-      "pluginVersion": "12.4.2",
-      "fieldConfig": {
-        "defaults": {
-          "unit": "decbytes",
-          "decimals": 1,
-          "mappings": [],
-          "color": {
-            "mode": "fixed",
-            "fixedColor": "purple"
-          }
-        },
-        "overrides": []
-      },
-      "options": {
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "orientation": "auto",
-        "textMode": "auto",
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto"
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum(truenas_zvol_usedbyrefreservation_bytes)",
-          "legendFormat": "{{volume}}",
-          "refId": "A"
-        }
-      ]
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "type": "table",
-      "title": "zvol allocation breakdown",
-      "id": 10,
-      "gridPos": {
-        "h": 14,
-        "w": 24,
-        "x": 0,
-        "y": 4
-      },
-      "pluginVersion": "12.4.2",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": "left",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "filterable": true,
-            "footer": {
-              "reducers": []
-            },
-            "inspect": false
-          },
-          "decimals": 1,
-          "mappings": [],
-          "unit": "decbytes",
-          "color": {
-            "mode": "thresholds"
-          },
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "text",
-                "value": 0
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Volume Size"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "decbytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Total Allocation"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "decbytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Live Data"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "decbytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Snapshots"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "decbytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Reservation"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "decbytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "In-Guest Used"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "decbytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Untrimmed"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "decbytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Alloc / Size"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percentunit"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "include",
-                "names": [
-                  "Volume Size",
-                  "Total Allocation",
-                  "Live Data",
-                  "Snapshots",
-                  "Reservation",
-                  "In-Guest Used",
-                  "Untrimmed"
-                ]
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.footer.reducers",
-                "value": ["sum"]
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Alloc / Size"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "gauge",
-                  "mode": "gradient"
-                }
-              },
-              {
-                "id": "max",
-                "value": 2.5
-              },
-              {
-                "id": "min",
-                "value": 0
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": 0
-                    },
-                    {
-                      "color": "yellow",
-                      "value": 1.2
-                    },
-                    {
-                      "color": "red",
-                      "value": 1.8
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Snapshots"
-            },
-            "properties": [
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-text"
-                }
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "text",
-                      "value": 0
-                    },
-                    {
-                      "color": "orange",
-                      "value": 2000000000.0
-                    },
-                    {
-                      "color": "red",
-                      "value": 8000000000.0
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "options": {
-        "cellHeight": "sm",
-        "showHeader": true,
-        "footer": {
-          "show": true,
-          "reducer": ["sum"]
-        },
-        "sortBy": [
-          {
-            "desc": true,
-            "displayName": "Total Allocation"
-          }
-        ]
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum by (volume) (truenas_zvol_volsize_bytes)",
-          "legendFormat": "__auto",
-          "refId": "A",
-          "format": "table",
-          "instant": true,
-          "range": false,
-          "exemplar": false
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum by (volume) (truenas_zvol_used_bytes)",
-          "legendFormat": "__auto",
-          "refId": "B",
-          "format": "table",
-          "instant": true,
-          "range": false,
-          "exemplar": false
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum by (volume) (truenas_zvol_usedbydataset_bytes)",
-          "legendFormat": "__auto",
-          "refId": "C",
-          "format": "table",
-          "instant": true,
-          "range": false,
-          "exemplar": false
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum by (volume) (truenas_zvol_usedbysnapshots_bytes)",
-          "legendFormat": "__auto",
-          "refId": "D",
-          "format": "table",
-          "instant": true,
-          "range": false,
-          "exemplar": false
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum by (volume) (truenas_zvol_usedbyrefreservation_bytes)",
-          "legendFormat": "__auto",
-          "refId": "E",
-          "format": "table",
-          "instant": true,
-          "range": false,
-          "exemplar": false
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\"))",
-          "legendFormat": "__auto",
-          "refId": "F",
-          "format": "table",
-          "instant": true,
-          "range": false,
-          "exemplar": false
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum by (volume) (truenas_zvol_usedbydataset_bytes) - on(volume) group_left() label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")",
-          "legendFormat": "__auto",
-          "refId": "G",
-          "format": "table",
-          "instant": true,
-          "range": false,
-          "exemplar": false
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum by (volume) (truenas_zvol_used_bytes) / sum by (volume) (truenas_zvol_volsize_bytes)",
-          "legendFormat": "__auto",
-          "refId": "H",
-          "format": "table",
-          "instant": true,
-          "range": false,
-          "exemplar": false
-        }
-      ],
-      "transformations": [
-        {
-          "id": "joinByField",
-          "options": {
-            "byField": "volume",
-            "mode": "outer"
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time 1": true,
-              "Time 2": true,
-              "Time 3": true,
-              "Time 4": true,
-              "Time 5": true,
-              "Time 6": true,
-              "Time 7": true,
-              "Time 8": true
-            },
-            "includeByName": {},
-            "indexByName": {},
-            "renameByName": {
-              "volume": "Volume",
-              "Value #A": "Volume Size",
-              "Value #B": "Total Allocation",
-              "Value #C": "Live Data",
-              "Value #D": "Snapshots",
-              "Value #E": "Reservation",
-              "Value #F": "In-Guest Used",
-              "Value #G": "Untrimmed",
-              "Value #H": "Alloc / Size"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "type": "timeseries",
-      "title": "Snapshot usage",
-      "id": 20,
-      "description": "Space held by snapshots per zvol. A volume climbing here is churning.",
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 18
-      },
-      "pluginVersion": "12.4.2",
-      "fieldConfig": {
-        "defaults": {
-          "unit": "decbytes",
-          "decimals": 1,
-          "mappings": [],
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "drawStyle": "line",
-            "lineWidth": 1,
-            "fillOpacity": 8,
-            "showPoints": "never",
-            "spanNulls": true,
-            "axisPlacement": "auto",
-            "scaleDistribution": {
-              "type": "linear"
-            }
-          }
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "calcs": ["lastNotNull", "max"]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "truenas_zvol_usedbysnapshots_bytes",
-          "legendFormat": "{{volume}}",
-          "refId": "A"
-        }
-      ]
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "type": "timeseries",
-      "title": "Snapshot growth (24h)",
-      "id": 21,
-      "description": "Change in snapshot-held space over 24h. This is the churn detector.",
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 18
-      },
-      "pluginVersion": "12.4.2",
-      "fieldConfig": {
-        "defaults": {
-          "unit": "decbytes",
-          "decimals": 1,
-          "mappings": [],
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "drawStyle": "line",
-            "lineWidth": 1,
-            "fillOpacity": 8,
-            "showPoints": "never",
-            "spanNulls": true,
-            "axisPlacement": "auto",
-            "scaleDistribution": {
-              "type": "linear"
-            }
-          }
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "calcs": ["lastNotNull", "max"]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "delta(truenas_zvol_usedbysnapshots_bytes[24h])",
-          "legendFormat": "{{volume}}",
-          "refId": "A"
-        }
-      ]
-    }
+    "enable": true,
+    "hide": true,
+    "iconColor": "rgba(0, 211, 255, 1)",
+    "name": "Annotations & Alerts",
+    "type": "dashboard"
+   }
   ]
+ },
+ "editable": true,
+ "fiscalYearStartMonth": 0,
+ "graphTooltip": 0,
+ "links": [],
+ "preload": false,
+ "schemaVersion": 42,
+ "tags": [
+  "truenas",
+  "zfs"
+ ],
+ "templating": {
+  "list": [
+   {
+    "name": "volume",
+    "label": "Volume",
+    "type": "query",
+    "datasource": {
+     "type": "prometheus",
+     "uid": "prometheus"
+    },
+    "definition": "label_values(truenas_zvol_used_bytes, volume)",
+    "query": {
+     "qryType": 1,
+     "query": "label_values(truenas_zvol_used_bytes, volume)",
+     "refId": "PrometheusVariableQueryEditor-VariableQuery"
+    },
+    "multi": true,
+    "includeAll": false,
+    "current": {},
+    "options": [],
+    "refresh": 1,
+    "sort": 1,
+    "hide": 0,
+    "skipUrlSync": false,
+    "regex": "",
+    "allowCustomValue": false
+   }
+  ]
+ },
+ "time": {
+  "from": "now-7d",
+  "to": "now"
+ },
+ "timepicker": {},
+ "timezone": "browser",
+ "title": "zvols",
+ "uid": "truenas-zvols",
+ "version": 1,
+ "weekStart": "",
+ "panels": [
+  {
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "type": "stat",
+   "title": "Total Allocation",
+   "id": 1,
+   "gridPos": {
+    "h": 4,
+    "w": 8,
+    "x": 0,
+    "y": 0
+   },
+   "pluginVersion": "13.0.2",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "bytes",
+     "decimals": 1,
+     "mappings": [],
+     "color": {
+      "mode": "fixed",
+      "fixedColor": "blue"
+     }
+    },
+    "overrides": []
+   },
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "orientation": "auto",
+    "textMode": "auto",
+    "colorMode": "value",
+    "graphMode": "area",
+    "justifyMode": "auto"
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum(truenas_zvol_used_bytes{volume=~\"$volume\"})",
+     "legendFormat": "{{volume}}",
+     "refId": "A"
+    }
+   ]
+  },
+  {
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "type": "stat",
+   "title": "Held by Snapshots",
+   "id": 2,
+   "gridPos": {
+    "h": 4,
+    "w": 8,
+    "x": 8,
+    "y": 0
+   },
+   "pluginVersion": "13.0.2",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "bytes",
+     "decimals": 1,
+     "mappings": [],
+     "color": {
+      "mode": "fixed",
+      "fixedColor": "orange"
+     }
+    },
+    "overrides": []
+   },
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "orientation": "auto",
+    "textMode": "auto",
+    "colorMode": "value",
+    "graphMode": "area",
+    "justifyMode": "auto"
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum(truenas_zvol_usedbysnapshots_bytes{volume=~\"$volume\"})",
+     "legendFormat": "{{volume}}",
+     "refId": "A"
+    }
+   ]
+  },
+  {
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "type": "stat",
+   "title": "Untrimmed",
+   "id": 3,
+   "gridPos": {
+    "h": 4,
+    "w": 8,
+    "x": 16,
+    "y": 0
+   },
+   "pluginVersion": "13.0.2",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "bytes",
+     "decimals": 1,
+     "mappings": [],
+     "color": {
+      "mode": "fixed",
+      "fixedColor": "yellow"
+     }
+    },
+    "overrides": []
+   },
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "orientation": "auto",
+    "textMode": "auto",
+    "colorMode": "value",
+    "graphMode": "area",
+    "justifyMode": "auto"
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum(clamp_min(sum by (volume) (truenas_zvol_logicalreferenced_bytes{volume=~\"$volume\"}) - sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")), 0))",
+     "legendFormat": "{{volume}}",
+     "refId": "A"
+    }
+   ]
+  },
+  {
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "type": "barchart",
+   "id": 11,
+   "title": "Allocation by volume",
+   "description": "Two rows per volume. physical = Live Data + Snapshots (post-compression blocks on the pool). logical = In-Guest Used + Untrimmed (pre-compression bytes). Live Data against the logical bar is the live compression ratio.",
+   "gridPos": {
+    "h": 24,
+    "w": 24,
+    "x": 0,
+    "y": 4
+   },
+   "pluginVersion": "13.0.2",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "bytes",
+     "decimals": 1,
+     "mappings": [],
+     "color": {
+      "mode": "palette-classic"
+     },
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "text",
+        "value": 0
+       }
+      ]
+     },
+     "custom": {
+      "lineWidth": 0,
+      "fillOpacity": 85,
+      "gradientMode": "none",
+      "axisPlacement": "auto",
+      "axisLabel": "",
+      "axisSoftMin": 0,
+      "axisCenteredZero": false,
+      "axisColorMode": "text",
+      "scaleDistribution": {
+       "type": "linear"
+      },
+      "hideFrom": {
+       "legend": false,
+       "tooltip": false,
+       "viz": false
+      },
+      "thresholdsStyle": {
+       "mode": "off"
+      }
+     }
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Live Data"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "blue"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Snapshots"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "orange"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "In-Guest Used"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "green"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Untrimmed"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "yellow"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "orientation": "horizontal",
+    "xField": "Row",
+    "xTickLabelRotation": 0,
+    "xTickLabelSpacing": 0,
+    "xTickLabelMaxLength": 0,
+    "showValue": "never",
+    "stacking": "normal",
+    "groupWidth": 0.7,
+    "barWidth": 0.9,
+    "barRadius": 0,
+    "fullHighlight": false,
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom",
+     "showLegend": true,
+     "calcs": []
+    },
+    "tooltip": {
+     "mode": "multi",
+     "sort": "none"
+    }
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (row) (label_replace(sum by (volume) (truenas_zvol_usedbydataset_bytes{volume=~\"$volume\"}), \"row\", \"$1 (physical)\", \"volume\", \"(.*)\"))",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "A"
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (row) (label_replace(sum by (volume) (truenas_zvol_usedbysnapshots_bytes{volume=~\"$volume\"}), \"row\", \"$1 (physical)\", \"volume\", \"(.*)\"))",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "B"
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (row) (label_replace(sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")) and on(volume) truenas_zvol_used_bytes{volume=~\"$volume\"}, \"row\", \"$1 (logical)\", \"volume\", \"(.*)\"))",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "C"
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (row) (label_replace(clamp_min(sum by (volume) (truenas_zvol_logicalreferenced_bytes{volume=~\"$volume\"}) - sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")), 0), \"row\", \"$1 (logical)\", \"volume\", \"(.*)\"))",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "D"
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "(sum by (row) (label_replace(sum by (volume) (truenas_zvol_used_bytes{volume=~\"$volume\"}), \"row\", \"$1 (physical)\", \"volume\", \"(.*)\")) + 1) or sum by (row) (label_replace(sum by (volume) (truenas_zvol_used_bytes{volume=~\"$volume\"}), \"row\", \"$1 (logical)\", \"volume\", \"(.*)\"))",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "Z"
+    }
+   ],
+   "transformations": [
+    {
+     "id": "joinByField",
+     "options": {
+      "byField": "row",
+      "mode": "outer"
+     }
+    },
+    {
+     "id": "organize",
+     "options": {
+      "excludeByName": {
+       "Time 1": true,
+       "Time 2": true,
+       "Time 3": true,
+       "Time 4": true,
+       "Time 5": true
+      },
+      "includeByName": {},
+      "indexByName": {},
+      "renameByName": {
+       "row": "Row",
+       "Value #Z": "sortkey",
+       "Value #A": "Live Data",
+       "Value #B": "Snapshots",
+       "Value #C": "In-Guest Used",
+       "Value #D": "Untrimmed"
+      }
+     }
+    },
+    {
+     "id": "sortBy",
+     "options": {
+      "fields": {},
+      "sort": [
+       {
+        "field": "sortkey",
+        "desc": true
+       }
+      ]
+     }
+    },
+    {
+     "id": "organize",
+     "options": {
+      "excludeByName": {
+       "sortkey": true
+      },
+      "includeByName": {},
+      "indexByName": {},
+      "renameByName": {}
+     }
+    }
+   ]
+  },
+  {
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "type": "table",
+   "title": "zvol allocation breakdown",
+   "id": 10,
+   "gridPos": {
+    "h": 14,
+    "w": 24,
+    "x": 0,
+    "y": 28
+   },
+   "pluginVersion": "13.0.2",
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "align": "left",
+      "cellOptions": {
+       "type": "auto"
+      },
+      "filterable": true,
+      "inspect": false
+     },
+     "decimals": 1,
+     "mappings": [],
+     "unit": "bytes",
+     "color": {
+      "mode": "thresholds"
+     },
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "text",
+        "value": 0
+       }
+      ]
+     }
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Volume Size"
+      },
+      "properties": [
+       {
+        "id": "unit",
+        "value": "bytes"
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Total Allocation"
+      },
+      "properties": [
+       {
+        "id": "unit",
+        "value": "bytes"
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Live Data"
+      },
+      "properties": [
+       {
+        "id": "unit",
+        "value": "bytes"
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Snapshots"
+      },
+      "properties": [
+       {
+        "id": "unit",
+        "value": "bytes"
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "In-Guest Used"
+      },
+      "properties": [
+       {
+        "id": "unit",
+        "value": "bytes"
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Untrimmed"
+      },
+      "properties": [
+       {
+        "id": "unit",
+        "value": "bytes"
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "In-Guest Used / Size"
+      },
+      "properties": [
+       {
+        "id": "unit",
+        "value": "percentunit"
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Inodes Used"
+      },
+      "properties": [
+       {
+        "id": "unit",
+        "value": "percentunit"
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "In-Guest Used / Size"
+      },
+      "properties": [
+       {
+        "id": "custom.cellOptions",
+        "value": {
+         "type": "gauge",
+         "mode": "gradient"
+        }
+       },
+       {
+        "id": "max",
+        "value": 1
+       },
+       {
+        "id": "min",
+        "value": 0
+       },
+       {
+        "id": "decimals",
+        "value": 0
+       },
+       {
+        "id": "thresholds",
+        "value": {
+         "mode": "absolute",
+         "steps": [
+          {
+           "color": "green",
+           "value": 0
+          },
+          {
+           "color": "yellow",
+           "value": 0.75
+          },
+          {
+           "color": "red",
+           "value": 0.9
+          }
+         ]
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Inodes Used"
+      },
+      "properties": [
+       {
+        "id": "custom.cellOptions",
+        "value": {
+         "type": "gauge",
+         "mode": "gradient"
+        }
+       },
+       {
+        "id": "max",
+        "value": 1
+       },
+       {
+        "id": "min",
+        "value": 0
+       },
+       {
+        "id": "decimals",
+        "value": 0
+       },
+       {
+        "id": "thresholds",
+        "value": {
+         "mode": "absolute",
+         "steps": [
+          {
+           "color": "green",
+           "value": 0
+          },
+          {
+           "color": "yellow",
+           "value": 0.8
+          },
+          {
+           "color": "red",
+           "value": 0.9
+          }
+         ]
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Snapshots"
+      },
+      "properties": [
+       {
+        "id": "custom.cellOptions",
+        "value": {
+         "type": "color-text"
+        }
+       },
+       {
+        "id": "thresholds",
+        "value": {
+         "mode": "absolute",
+         "steps": [
+          {
+           "color": "text",
+           "value": 0
+          },
+          {
+           "color": "orange",
+           "value": 2147483648
+          },
+          {
+           "color": "red",
+           "value": 8589934592
+          }
+         ]
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Untrimmed"
+      },
+      "properties": [
+       {
+        "id": "custom.cellOptions",
+        "value": {
+         "type": "color-text"
+        }
+       },
+       {
+        "id": "thresholds",
+        "value": {
+         "mode": "absolute",
+         "steps": [
+          {
+           "color": "text",
+           "value": 0
+          },
+          {
+           "color": "yellow",
+           "value": 1073741824
+          },
+          {
+           "color": "orange",
+           "value": 4294967296
+          }
+         ]
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "cellHeight": "sm",
+    "showHeader": true,
+    "footer": {
+     "show": true,
+     "reducer": [
+      "sum"
+     ],
+     "countRows": false,
+     "enablePagination": false,
+     "fields": [
+      "Volume Size",
+      "Total Allocation",
+      "Live Data",
+      "Snapshots",
+      "In-Guest Used",
+      "Untrimmed"
+     ]
+    },
+    "sortBy": [
+     {
+      "desc": true,
+      "displayName": "In-Guest Used / Size"
+     }
+    ]
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (volume) (truenas_zvol_volsize_bytes{volume=~\"$volume\"})",
+     "legendFormat": "__auto",
+     "refId": "A",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (volume) (truenas_zvol_used_bytes{volume=~\"$volume\"})",
+     "legendFormat": "__auto",
+     "refId": "B",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (volume) (truenas_zvol_usedbydataset_bytes{volume=~\"$volume\"})",
+     "legendFormat": "__auto",
+     "refId": "C",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (volume) (truenas_zvol_usedbysnapshots_bytes{volume=~\"$volume\"})",
+     "legendFormat": "__auto",
+     "refId": "D",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")) and on(volume) truenas_zvol_used_bytes{volume=~\"$volume\"}",
+     "legendFormat": "__auto",
+     "refId": "E",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "clamp_min(sum by (volume) (truenas_zvol_logicalreferenced_bytes{volume=~\"$volume\"}) - sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")), 0)",
+     "legendFormat": "__auto",
+     "refId": "F",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")) / sum by (volume) (truenas_zvol_volsize_bytes{volume=~\"$volume\"})",
+     "legendFormat": "__auto",
+     "refId": "G",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_inodes_used{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")) / sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_inodes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")) and on(volume) truenas_zvol_used_bytes{volume=~\"$volume\"}",
+     "legendFormat": "__auto",
+     "refId": "H",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false
+    }
+   ],
+   "transformations": [
+    {
+     "id": "joinByField",
+     "options": {
+      "byField": "volume",
+      "mode": "outer"
+     }
+    },
+    {
+     "id": "organize",
+     "options": {
+      "excludeByName": {
+       "Time 1": true,
+       "Time 2": true,
+       "Time 3": true,
+       "Time 4": true,
+       "Time 5": true,
+       "Time 6": true,
+       "Time 7": true,
+       "Time 8": true
+      },
+      "includeByName": {},
+      "indexByName": {},
+      "renameByName": {
+       "volume": "Volume",
+       "Value #A": "Volume Size",
+       "Value #B": "Total Allocation",
+       "Value #C": "Live Data",
+       "Value #D": "Snapshots",
+       "Value #E": "In-Guest Used",
+       "Value #F": "Untrimmed",
+       "Value #G": "In-Guest Used / Size",
+       "Value #H": "Inodes Used"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "type": "timeseries",
+   "title": "Snapshot usage",
+   "id": 20,
+   "description": "Space held by snapshots per zvol. A volume climbing here is churning.",
+   "gridPos": {
+    "h": 9,
+    "w": 12,
+    "x": 0,
+    "y": 42
+   },
+   "pluginVersion": "13.0.2",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "bytes",
+     "decimals": 1,
+     "mappings": [],
+     "color": {
+      "mode": "palette-classic"
+     },
+     "custom": {
+      "drawStyle": "line",
+      "lineWidth": 1,
+      "fillOpacity": 8,
+      "showPoints": "never",
+      "spanNulls": true,
+      "axisPlacement": "auto",
+      "scaleDistribution": {
+       "type": "linear"
+      }
+     }
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "right",
+     "showLegend": true,
+     "calcs": [
+      "lastNotNull",
+      "max"
+     ]
+    },
+    "tooltip": {
+     "mode": "multi",
+     "sort": "desc"
+    }
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "truenas_zvol_usedbysnapshots_bytes{volume=~\"$volume\"}",
+     "legendFormat": "{{volume}}",
+     "refId": "A"
+    }
+   ]
+  },
+  {
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "type": "timeseries",
+   "title": "Snapshot growth (24h)",
+   "id": 21,
+   "description": "Change in snapshot-held space over 24h. This is the churn detector.",
+   "gridPos": {
+    "h": 9,
+    "w": 12,
+    "x": 12,
+    "y": 42
+   },
+   "pluginVersion": "13.0.2",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "bytes",
+     "decimals": 1,
+     "mappings": [],
+     "color": {
+      "mode": "palette-classic"
+     },
+     "custom": {
+      "drawStyle": "line",
+      "lineWidth": 1,
+      "fillOpacity": 8,
+      "showPoints": "never",
+      "spanNulls": true,
+      "axisPlacement": "auto",
+      "scaleDistribution": {
+       "type": "linear"
+      }
+     }
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "right",
+     "showLegend": true,
+     "calcs": [
+      "lastNotNull",
+      "max"
+     ]
+    },
+    "tooltip": {
+     "mode": "multi",
+     "sort": "desc"
+    }
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "delta(truenas_zvol_usedbysnapshots_bytes{volume=~\"$volume\"}[24h])",
+     "legendFormat": "{{volume}}",
+     "refId": "A"
+    }
+   ]
+  }
+ ]
 }
