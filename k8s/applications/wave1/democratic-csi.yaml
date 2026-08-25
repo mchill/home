@@ -27,6 +27,8 @@ spec:
               reclaimPolicy: Retain
               volumeBindingMode: Immediate
               allowVolumeExpansion: true
+              mountOptions:
+                - discard
               parameters:
                 fsType: ext4
                 csi.storage.k8s.io/node-stage-secret-name: truenas-chap

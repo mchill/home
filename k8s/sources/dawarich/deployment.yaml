@@ -103,8 +103,8 @@ spec:
                   key: POSTGRES_PASSWORD
             - name: PHOTON_API_USE_HTTPS
               value: "false"
-            - name: PHOTON_API_HOST
-              value: photon.server.svc.cluster.local
+            # - name: PHOTON_API_HOST
+            #   value: photon.server.svc.cluster.local
             - name: SELF_HOSTED
               value: "true"
           volumeMounts:
