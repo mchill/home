@@ -38,10 +38,10 @@ spec:
             - name: syncthing
               mountPath: /var/syncthing
             - name: media
-              mountPath: /data/obsidian/notes/personal
+              mountPath: /data/obsidian/Personal Notes
               subPath: documents/personal
             - name: media
-              mountPath: /data/obsidian/notes/work
+              mountPath: /data/obsidian/Work Notes
               subPath: documents/work
       volumes:
         - name: syncthing
