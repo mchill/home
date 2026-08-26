@@ -11,7 +11,7 @@
 {{- end -}}
 
 {{- define "persistence.storageClass" -}}
-{{- $classes := dict "ssdpool" "truenas-iscsi" "hddpool1" "truenas-iscsi-hdd" -}}
+{{- $classes := dict "ssdpool" "truenas-iscsi" -}}
 {{- $pool := include "persistence.pool" . -}}
 {{- $class := index $classes $pool -}}
 {{- if not $class -}}
