@@ -35,25 +35,25 @@ spec:
           volumeMounts:
             - name: sonarr-uhd
               mountPath: /config
-            - name: hddpool2-media
+            - name: media
               mountPath: /tv-uhd
               subPath: shows/uhd
-            - name: hddpool2-apps
+            - name: scratch
               mountPath: /trash
               subPath: sonarr-uhd
-            - name: hddpool2-apps
+            - name: scratch
               mountPath: /data
               subPath: qbittorrent
       volumes:
         - name: sonarr-uhd
           persistentVolumeClaim:
             claimName: sonarr-uhd
-        - name: hddpool2-apps
+        - name: scratch
           persistentVolumeClaim:
-            claimName: hddpool2-apps
-        - name: hddpool2-media
+            claimName: scratch
+        - name: media
           persistentVolumeClaim:
-            claimName: hddpool2-media
+            claimName: media
       resources:
         limits:
           memory: 512Mi

@@ -15,9 +15,9 @@ spec:
     entrypoint: tubearchivist
     onExit: notify
     volumes:
-      - name: hddpool1-media
+      - name: media
         persistentVolumeClaim:
-          claimName: hddpool1-media
+          claimName: media
     templates:
       - name: tubearchivist
         retryStrategy:
@@ -61,7 +61,7 @@ spec:
             - secretRef:
                 name: tubearchivist
           volumeMounts:
-            - name: hddpool1-media
+            - name: media
               mountPath: /youtube
               subPath: youtube
           resources:

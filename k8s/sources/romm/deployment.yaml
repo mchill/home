@@ -44,13 +44,13 @@ spec:
             - name: romm
               mountPath: /redis-data
               subPath: redis
-            - name: hddpool1-media
+            - name: media
               mountPath: /romm/library
               subPath: games
-            - name: hddpool1-media
+            - name: media
               mountPath: /romm/assets
               subPath: games/assets
-            - name: hddpool1-media
+            - name: media
               mountPath: /romm/resources
               subPath: games/resources
         - name: db
@@ -71,9 +71,9 @@ spec:
         - name: romm
           persistentVolumeClaim:
             claimName: romm
-        - name: hddpool1-media
+        - name: media
           persistentVolumeClaim:
-            claimName: hddpool1-media
+            claimName: media
       resources:
         limits:
           memory: 1Gi

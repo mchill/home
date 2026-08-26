@@ -37,7 +37,7 @@ spec:
               du -sh /photon/data/photon_data
               df -h /photon/data
           volumeMounts:
-            - name: hddpool1-apps
+            - name: apps
               mountPath: /nas
               subPath: photon
               readOnly: true
@@ -70,9 +70,9 @@ spec:
             - name: data
               mountPath: /photon/data
       volumes:
-        - name: hddpool1-apps
+        - name: apps
           persistentVolumeClaim:
-            claimName: hddpool1-apps
+            claimName: apps
         - name: data
           emptyDir:
             sizeLimit: 40Gi

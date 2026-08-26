@@ -35,37 +35,37 @@ spec:
           volumeMounts:
             - name: plex
               mountPath: /config
-            - name: hddpool2-apps
+            - name: scratch
               mountPath: /transcode
               subPath: plex/transcode
-            - name: hddpool2-apps
+            - name: scratch
               mountPath: /db-backups
               subPath: plex/db-backups
-            - name: hddpool1-media
+            - name: media
               mountPath: /data/movies
               subPath: movies/sd
-            - name: hddpool2-media
+            - name: media
               mountPath: /data/movies-uhd
               subPath: movies/uhd
-            - name: hddpool1-media
+            - name: media
               mountPath: /data/movies-requested
               subPath: movies/requested
-            - name: hddpool1-media
+            - name: media
               mountPath: /data/extras
               subPath: extras/sd
-            - name: hddpool1-media
+            - name: media
               mountPath: /data/tv
               subPath: shows/sd
-            - name: hddpool2-media
+            - name: media
               mountPath: /data/tv-uhd
               subPath: shows/uhd
-            - name: hddpool1-media
+            - name: media
               mountPath: /data/tv-requested
               subPath: shows/requested
-            - name: hddpool1-media
+            - name: media
               mountPath: /data/music
               subPath: music
-            - name: hddpool1-media
+            - name: media
               mountPath: /data/youtube
               subPath: youtube
           resources:
@@ -77,15 +77,12 @@ spec:
         - name: plex
           persistentVolumeClaim:
             claimName: plex
-        - name: hddpool2-apps
+        - name: scratch
           persistentVolumeClaim:
-            claimName: hddpool2-apps
-        - name: hddpool1-media
+            claimName: scratch
+        - name: media
           persistentVolumeClaim:
-            claimName: hddpool1-media
-        - name: hddpool2-media
-          persistentVolumeClaim:
-            claimName: hddpool2-media
+            claimName: media
       resources:
         limits:
           cpu: 1

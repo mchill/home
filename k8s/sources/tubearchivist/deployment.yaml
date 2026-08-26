@@ -47,13 +47,13 @@ spec:
             - name: tubearchivist
               mountPath: /cache
               subPath: cache
-            - name: hddpool2-apps
+            - name: scratch
               mountPath: /cache/download
               subPath: tubearchivist/download
-            - name: hddpool2-apps
+            - name: scratch
               mountPath: /cache/import
               subPath: tubearchivist/import
-            - name: hddpool1-media
+            - name: media
               mountPath: /youtube
               subPath: youtube/tubearchivist
         - name: redis
@@ -84,12 +84,12 @@ spec:
         - name: tubearchivist
           persistentVolumeClaim:
             claimName: tubearchivist
-        - name: hddpool2-apps
+        - name: scratch
           persistentVolumeClaim:
-            claimName: hddpool2-apps
-        - name: hddpool1-media
+            claimName: scratch
+        - name: media
           persistentVolumeClaim:
-            claimName: hddpool1-media
+            claimName: media
       resources:
         limits:
           memory: 3Gi

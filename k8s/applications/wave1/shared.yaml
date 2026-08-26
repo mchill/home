@@ -19,28 +19,21 @@ spec:
       path: k8s/helm/charts/persistence
       helm:
         values: |
-          app: hddpool1-media
+          app: media
           type: smb
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
       path: k8s/helm/charts/persistence
       helm:
         values: |
-          app: hddpool1-apps
+          app: apps
           type: smb
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD
       path: k8s/helm/charts/persistence
       helm:
         values: |
-          app: hddpool2-media
-          type: smb
-    - repoURL: https://github.com/mchill/home.git
-      targetRevision: HEAD
-      path: k8s/helm/charts/persistence
-      helm:
-        values: |
-          app: hddpool2-apps
+          app: scratch
           type: smb
   destination:
     server: https://kubernetes.default.svc

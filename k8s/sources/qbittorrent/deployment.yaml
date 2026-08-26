@@ -64,16 +64,16 @@ spec:
             - name: qbittorrent
               mountPath: /config
               subPath: config
-            - name: hddpool2-apps
+            - name: scratch
               mountPath: /data
               subPath: qbittorrent
       volumes:
         - name: qbittorrent
           persistentVolumeClaim:
             claimName: qbittorrent
-        - name: hddpool2-apps
+        - name: scratch
           persistentVolumeClaim:
-            claimName: hddpool2-apps
+            claimName: scratch
       resources:
         limits:
           memory: 2Gi

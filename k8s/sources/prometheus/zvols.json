@@ -42,15 +42,24 @@
      "refId": "PrometheusVariableQueryEditor-VariableQuery"
     },
     "multi": true,
-    "includeAll": false,
-    "current": {},
+    "includeAll": true,
+    "current": {
+     "selected": true,
+     "text": [
+      "All"
+     ],
+     "value": [
+      "$__all"
+     ]
+    },
     "options": [],
     "refresh": 1,
     "sort": 1,
     "hide": 0,
     "skipUrlSync": false,
     "regex": "",
-    "allowCustomValue": false
+    "allowCustomValue": false,
+    "allValue": ".*"
    }
   ]
  },
@@ -234,11 +243,11 @@
    },
    "type": "barchart",
    "id": 11,
-   "title": "Allocation by volume",
-   "description": "Two rows per volume. physical = Live Data + Snapshots (post-compression blocks on the pool). logical = In-Guest Used + Untrimmed (pre-compression bytes). Live Data against the logical bar is the live compression ratio.",
+   "title": "Physical allocation",
+   "description": "Live Data + Snapshots = Total Allocation. Post-compression blocks on the pool.",
    "gridPos": {
-    "h": 24,
-    "w": 24,
+    "h": 18,
+    "w": 12,
     "x": 0,
     "y": 4
    },
@@ -312,42 +321,12 @@
         }
        }
       ]
-     },
-     {
-      "matcher": {
-       "id": "byName",
-       "options": "In-Guest Used"
-      },
-      "properties": [
-       {
-        "id": "color",
-        "value": {
-         "mode": "fixed",
-         "fixedColor": "green"
-        }
-       }
-      ]
-     },
-     {
-      "matcher": {
-       "id": "byName",
-       "options": "Untrimmed"
-      },
-      "properties": [
-       {
-        "id": "color",
-        "value": {
-         "mode": "fixed",
-         "fixedColor": "yellow"
-        }
-       }
-      ]
      }
     ]
    },
    "options": {
     "orientation": "horizontal",
-    "xField": "Row",
+    "xField": "Volume",
     "xTickLabelRotation": 0,
     "xTickLabelSpacing": 0,
     "xTickLabelMaxLength": 0,
@@ -375,7 +354,7 @@
       "uid": "prometheus"
      },
      "editorMode": "code",
-     "expr": "sum by (row) (label_replace(sum by (volume) (truenas_zvol_usedbydataset_bytes{volume=~\"$volume\"}), \"row\", \"$1 (physical)\", \"volume\", \"(.*)\"))",
+     "expr": "sum by (volume) (truenas_zvol_usedbydataset_bytes{volume=~\"$volume\"})",
      "format": "table",
      "instant": true,
      "range": false,
@@ -389,7 +368,7 @@
       "uid": "prometheus"
      },
      "editorMode": "code",
-     "expr": "sum by (row) (label_replace(sum by (volume) (truenas_zvol_usedbysnapshots_bytes{volume=~\"$volume\"}), \"row\", \"$1 (physical)\", \"volume\", \"(.*)\"))",
+     "expr": "sum by (volume) (truenas_zvol_usedbysnapshots_bytes{volume=~\"$volume\"})",
      "format": "table",
      "instant": true,
      "range": false,
@@ -403,35 +382,7 @@
       "uid": "prometheus"
      },
      "editorMode": "code",
-     "expr": "sum by (row) (label_replace(sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")) and on(volume) truenas_zvol_used_bytes{volume=~\"$volume\"}, \"row\", \"$1 (logical)\", \"volume\", \"(.*)\"))",
-     "format": "table",
-     "instant": true,
-     "range": false,
-     "exemplar": false,
-     "legendFormat": "__auto",
-     "refId": "C"
-    },
-    {
-     "datasource": {
-      "type": "prometheus",
-      "uid": "prometheus"
-     },
-     "editorMode": "code",
-     "expr": "sum by (row) (label_replace(clamp_min(sum by (volume) (truenas_zvol_logicalreferenced_bytes{volume=~\"$volume\"}) - sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")), 0), \"row\", \"$1 (logical)\", \"volume\", \"(.*)\"))",
-     "format": "table",
-     "instant": true,
-     "range": false,
-     "exemplar": false,
-     "legendFormat": "__auto",
-     "refId": "D"
-    },
-    {
-     "datasource": {
-      "type": "prometheus",
-      "uid": "prometheus"
-     },
-     "editorMode": "code",
-     "expr": "(sum by (row) (label_replace(sum by (volume) (truenas_zvol_used_bytes{volume=~\"$volume\"}), \"row\", \"$1 (physical)\", \"volume\", \"(.*)\")) + 1) or sum by (row) (label_replace(sum by (volume) (truenas_zvol_used_bytes{volume=~\"$volume\"}), \"row\", \"$1 (logical)\", \"volume\", \"(.*)\"))",
+     "expr": "sum by (volume) (truenas_zvol_used_bytes{volume=~\"$volume\"})",
      "format": "table",
      "instant": true,
      "range": false,
@@ -444,7 +395,7 @@
     {
      "id": "joinByField",
      "options": {
-      "byField": "row",
+      "byField": "volume",
       "mode": "outer"
      }
     },
@@ -454,19 +405,15 @@
       "excludeByName": {
        "Time 1": true,
        "Time 2": true,
-       "Time 3": true,
-       "Time 4": true,
-       "Time 5": true
+       "Time 3": true
       },
       "includeByName": {},
       "indexByName": {},
       "renameByName": {
-       "row": "Row",
-       "Value #Z": "sortkey",
+       "volume": "Volume",
+       "Value #Z": "Total Allocation",
        "Value #A": "Live Data",
-       "Value #B": "Snapshots",
-       "Value #C": "In-Guest Used",
-       "Value #D": "Untrimmed"
+       "Value #B": "Snapshots"
       }
      }
     },
@@ -476,7 +423,7 @@
       "fields": {},
       "sort": [
        {
-        "field": "sortkey",
+        "field": "Total Allocation",
         "desc": true
        }
       ]
@@ -486,7 +433,213 @@
      "id": "organize",
      "options": {
       "excludeByName": {
-       "sortkey": true
+       "Total Allocation": true
+      },
+      "includeByName": {},
+      "indexByName": {},
+      "renameByName": {}
+     }
+    }
+   ]
+  },
+  {
+   "datasource": {
+    "type": "prometheus",
+    "uid": "prometheus"
+   },
+   "type": "barchart",
+   "id": 12,
+   "title": "Capacity",
+   "description": "In-Guest Used + Free = Volume Size. Sorted identically to Physical allocation, so each row is the same volume in both panels.",
+   "gridPos": {
+    "h": 18,
+    "w": 12,
+    "x": 12,
+    "y": 4
+   },
+   "pluginVersion": "13.0.2",
+   "fieldConfig": {
+    "defaults": {
+     "unit": "bytes",
+     "decimals": 1,
+     "mappings": [],
+     "color": {
+      "mode": "palette-classic"
+     },
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "text",
+        "value": 0
+       }
+      ]
+     },
+     "custom": {
+      "lineWidth": 0,
+      "fillOpacity": 85,
+      "gradientMode": "none",
+      "axisPlacement": "auto",
+      "axisLabel": "",
+      "axisSoftMin": 0,
+      "axisCenteredZero": false,
+      "axisColorMode": "text",
+      "scaleDistribution": {
+       "type": "linear"
+      },
+      "hideFrom": {
+       "legend": false,
+       "tooltip": false,
+       "viz": false
+      },
+      "thresholdsStyle": {
+       "mode": "off"
+      }
+     }
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "In-Guest Used"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "green"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Free"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "mode": "fixed",
+         "fixedColor": "#7f8288"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "options": {
+    "orientation": "horizontal",
+    "xField": "Volume",
+    "xTickLabelRotation": 0,
+    "xTickLabelSpacing": 0,
+    "xTickLabelMaxLength": 0,
+    "showValue": "never",
+    "stacking": "normal",
+    "groupWidth": 0.7,
+    "barWidth": 0.9,
+    "barRadius": 0,
+    "fullHighlight": false,
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom",
+     "showLegend": true,
+     "calcs": []
+    },
+    "tooltip": {
+     "mode": "multi",
+     "sort": "none"
+    }
+   },
+   "targets": [
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")) and on(volume) truenas_zvol_used_bytes{volume=~\"$volume\"}",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "A"
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "clamp_min(sum by (volume) (truenas_zvol_volsize_bytes{volume=~\"$volume\"}) - sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")), 0)",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "B"
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (volume) (truenas_zvol_used_bytes{volume=~\"$volume\"})",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "Z"
+    }
+   ],
+   "transformations": [
+    {
+     "id": "joinByField",
+     "options": {
+      "byField": "volume",
+      "mode": "outer"
+     }
+    },
+    {
+     "id": "organize",
+     "options": {
+      "excludeByName": {
+       "Time 1": true,
+       "Time 2": true,
+       "Time 3": true
+      },
+      "includeByName": {},
+      "indexByName": {},
+      "renameByName": {
+       "volume": "Volume",
+       "Value #Z": "Total Allocation",
+       "Value #A": "In-Guest Used",
+       "Value #B": "Free"
+      }
+     }
+    },
+    {
+     "id": "sortBy",
+     "options": {
+      "fields": {},
+      "sort": [
+       {
+        "field": "Total Allocation",
+        "desc": true
+       }
+      ]
+     }
+    },
+    {
+     "id": "organize",
+     "options": {
+      "excludeByName": {
+       "Total Allocation": true
       },
       "includeByName": {},
       "indexByName": {},
@@ -507,7 +660,7 @@
     "h": 14,
     "w": 24,
     "x": 0,
-    "y": 28
+    "y": 22
    },
    "pluginVersion": "13.0.2",
    "fieldConfig": {
@@ -612,6 +765,18 @@
      {
       "matcher": {
        "id": "byName",
+       "options": "Compression"
+      },
+      "properties": [
+       {
+        "id": "unit",
+        "value": "none"
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
        "options": "In-Guest Used / Size"
       },
       "properties": [
@@ -630,6 +795,40 @@
        {
         "id": "unit",
         "value": "percentunit"
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Compression"
+      },
+      "properties": [
+       {
+        "id": "decimals",
+        "value": 2
+       },
+       {
+        "id": "custom.cellOptions",
+        "value": {
+         "type": "color-text"
+        }
+       },
+       {
+        "id": "thresholds",
+        "value": {
+         "mode": "absolute",
+         "steps": [
+          {
+           "color": "text",
+           "value": 0
+          },
+          {
+           "color": "green",
+           "value": 1.5
+          }
+         ]
+        }
        }
       ]
      },
@@ -831,12 +1030,12 @@
      },
      "editorMode": "code",
      "expr": "sum by (volume) (truenas_zvol_volsize_bytes{volume=~\"$volume\"})",
-     "legendFormat": "__auto",
-     "refId": "A",
      "format": "table",
      "instant": true,
      "range": false,
-     "exemplar": false
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "A"
     },
     {
      "datasource": {
@@ -845,12 +1044,12 @@
      },
      "editorMode": "code",
      "expr": "sum by (volume) (truenas_zvol_used_bytes{volume=~\"$volume\"})",
-     "legendFormat": "__auto",
-     "refId": "B",
      "format": "table",
      "instant": true,
      "range": false,
-     "exemplar": false
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "B"
     },
     {
      "datasource": {
@@ -859,12 +1058,12 @@
      },
      "editorMode": "code",
      "expr": "sum by (volume) (truenas_zvol_usedbydataset_bytes{volume=~\"$volume\"})",
-     "legendFormat": "__auto",
-     "refId": "C",
      "format": "table",
      "instant": true,
      "range": false,
-     "exemplar": false
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "C"
     },
     {
      "datasource": {
@@ -873,12 +1072,12 @@
      },
      "editorMode": "code",
      "expr": "sum by (volume) (truenas_zvol_usedbysnapshots_bytes{volume=~\"$volume\"})",
-     "legendFormat": "__auto",
-     "refId": "D",
      "format": "table",
      "instant": true,
      "range": false,
-     "exemplar": false
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "D"
     },
     {
      "datasource": {
@@ -887,12 +1086,12 @@
      },
      "editorMode": "code",
      "expr": "sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")) and on(volume) truenas_zvol_used_bytes{volume=~\"$volume\"}",
-     "legendFormat": "__auto",
-     "refId": "E",
      "format": "table",
      "instant": true,
      "range": false,
-     "exemplar": false
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "E"
     },
     {
      "datasource": {
@@ -901,12 +1100,26 @@
      },
      "editorMode": "code",
      "expr": "clamp_min(sum by (volume) (truenas_zvol_logicalreferenced_bytes{volume=~\"$volume\"}) - sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")), 0)",
-     "legendFormat": "__auto",
-     "refId": "F",
      "format": "table",
      "instant": true,
      "range": false,
-     "exemplar": false
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "F"
+    },
+    {
+     "datasource": {
+      "type": "prometheus",
+      "uid": "prometheus"
+     },
+     "editorMode": "code",
+     "expr": "sum by (volume) (truenas_zvol_logicalreferenced_bytes{volume=~\"$volume\"}) / sum by (volume) (truenas_zvol_referenced_bytes{volume=~\"$volume\"})",
+     "format": "table",
+     "instant": true,
+     "range": false,
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "G"
     },
     {
      "datasource": {
@@ -915,12 +1128,12 @@
      },
      "editorMode": "code",
      "expr": "sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_used_bytes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")) / sum by (volume) (truenas_zvol_volsize_bytes{volume=~\"$volume\"})",
-     "legendFormat": "__auto",
-     "refId": "G",
      "format": "table",
      "instant": true,
      "range": false,
-     "exemplar": false
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "H"
     },
     {
      "datasource": {
@@ -929,12 +1142,12 @@
      },
      "editorMode": "code",
      "expr": "sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_inodes_used{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")) / sum by (volume) (label_replace(sum by (persistentvolumeclaim) (kubelet_volume_stats_inodes{namespace=\"server\"}), \"volume\", \"$1\", \"persistentvolumeclaim\", \"(.*)\")) and on(volume) truenas_zvol_used_bytes{volume=~\"$volume\"}",
-     "legendFormat": "__auto",
-     "refId": "H",
      "format": "table",
      "instant": true,
      "range": false,
-     "exemplar": false
+     "exemplar": false,
+     "legendFormat": "__auto",
+     "refId": "I"
     }
    ],
    "transformations": [
@@ -956,7 +1169,8 @@
        "Time 5": true,
        "Time 6": true,
        "Time 7": true,
-       "Time 8": true
+       "Time 8": true,
+       "Time 9": true
       },
       "includeByName": {},
       "indexByName": {},
@@ -968,8 +1182,9 @@
        "Value #D": "Snapshots",
        "Value #E": "In-Guest Used",
        "Value #F": "Untrimmed",
-       "Value #G": "In-Guest Used / Size",
-       "Value #H": "Inodes Used"
+       "Value #G": "Compression",
+       "Value #H": "In-Guest Used / Size",
+       "Value #I": "Inodes Used"
       }
      }
     }
@@ -988,7 +1203,7 @@
     "h": 9,
     "w": 12,
     "x": 0,
-    "y": 42
+    "y": 36
    },
    "pluginVersion": "13.0.2",
    "fieldConfig": {
@@ -1035,7 +1250,7 @@
       "uid": "prometheus"
      },
      "editorMode": "code",
-     "expr": "truenas_zvol_usedbysnapshots_bytes{volume=~\"$volume\"}",
+     "expr": "sum by (volume) (truenas_zvol_usedbysnapshots_bytes{volume=~\"$volume\"})",
      "legendFormat": "{{volume}}",
      "refId": "A"
     }
@@ -1054,7 +1269,7 @@
     "h": 9,
     "w": 12,
     "x": 12,
-    "y": 42
+    "y": 36
    },
    "pluginVersion": "13.0.2",
    "fieldConfig": {
@@ -1101,7 +1316,7 @@
       "uid": "prometheus"
      },
      "editorMode": "code",
-     "expr": "delta(truenas_zvol_usedbysnapshots_bytes{volume=~\"$volume\"}[24h])",
+     "expr": "sum by (volume) (delta(truenas_zvol_usedbysnapshots_bytes{volume=~\"$volume\"}[24h]))",
      "legendFormat": "{{volume}}",
      "refId": "A"
     }

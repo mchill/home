@@ -51,13 +51,13 @@ spec:
             - name: nextcloud
               mountPath: /var/www/html
               subPath: html
-            - name: hddpool1-apps
+            - name: apps
               mountPath: /var/www/html/data
               subPath: nextcloud/data
             - name: nextcloud
               mountPath: /var/www/html/data/appdata_ocxz00ovrlk0
               subPath: appdata
-            - name: hddpool1-media
+            - name: media
               mountPath: /mnt/family
               subPath: photos/external/family
         - name: cron
@@ -81,13 +81,13 @@ spec:
             - name: nextcloud
               mountPath: /var/www/html
               subPath: html
-            - name: hddpool1-apps
+            - name: apps
               mountPath: /var/www/html/data
               subPath: nextcloud/data
             - name: nextcloud
               mountPath: /var/www/html/data/appdata_ocxz00ovrlk0
               subPath: appdata
-            - name: hddpool1-media
+            - name: media
               mountPath: /mnt/family
               subPath: photos/external/family
         - name: db
@@ -124,12 +124,12 @@ spec:
         - name: nextcloud
           persistentVolumeClaim:
             claimName: nextcloud
-        - name: hddpool1-apps
+        - name: apps
           persistentVolumeClaim:
-            claimName: hddpool1-apps
-        - name: hddpool1-media
+            claimName: apps
+        - name: media
           persistentVolumeClaim:
-            claimName: hddpool1-media
+            claimName: media
       resources:
         limits:
           memory: 1Gi

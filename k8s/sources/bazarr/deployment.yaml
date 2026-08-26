@@ -33,19 +33,19 @@ spec:
           volumeMounts:
             - name: bazarr
               mountPath: /config
-            - name: hddpool1-media
+            - name: media
               mountPath: /tv
               subPath: shows/sd
-            - name: hddpool1-media
+            - name: media
               mountPath: /movies
               subPath: movies/sd
       volumes:
         - name: bazarr
           persistentVolumeClaim:
             claimName: bazarr
-        - name: hddpool1-media
+        - name: media
           persistentVolumeClaim:
-            claimName: hddpool1-media
+            claimName: media
       resources:
         limits:
           memory: 512Mi

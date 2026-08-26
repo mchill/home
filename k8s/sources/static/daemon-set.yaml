@@ -21,13 +21,13 @@ spec:
             - name: TZ
               value: America/New_York
           volumeMounts:
-            - name: hddpool1-media
+            - name: media
               mountPath: /usr/share/nginx/html/podcasts
               subPath: podcasts
       volumes:
-        - name: hddpool1-media
+        - name: media
           persistentVolumeClaim:
-            claimName: hddpool1-media
+            claimName: media
       resources:
         limits:
           memory: 128Mi

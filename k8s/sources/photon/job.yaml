@@ -42,7 +42,7 @@ spec:
       volumes:
         - name: photon
           persistentVolumeClaim:
-            claimName: hddpool1-apps
+            claimName: apps
       resources:
         limits:
           memory: 128Mi

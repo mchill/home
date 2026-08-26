@@ -37,19 +37,19 @@ spec:
           volumeMounts:
             - name: syncthing
               mountPath: /var/syncthing
-            - name: hddpool1-media
+            - name: media
               mountPath: /data/obsidian/notes/personal
               subPath: documents/personal
-            - name: hddpool1-media
+            - name: media
               mountPath: /data/obsidian/notes/work
               subPath: documents/work
       volumes:
         - name: syncthing
           persistentVolumeClaim:
             claimName: syncthing
-        - name: hddpool1-media
+        - name: media
           persistentVolumeClaim:
-            claimName: hddpool1-media
+            claimName: media
       resources:
         limits:
           memory: 256Mi
