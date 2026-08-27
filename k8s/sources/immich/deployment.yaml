@@ -92,7 +92,7 @@ spec:
             requests:
               gpu.intel.com/i915: 1
         - name: db
-          image: ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0
+          image: ghcr.io/immich-app/postgres:17-vectorchord0.4.3-pgvectors0.3.0
           env:
             - name: TZ
               value: America/New_York
