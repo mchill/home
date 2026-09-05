@@ -19,7 +19,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: proxy
-          image: node:24.18.1-alpine
+          image: node:24.20.0-alpine
           command: [node, /app/proxy.js]
           ports:
             - name: ingress
