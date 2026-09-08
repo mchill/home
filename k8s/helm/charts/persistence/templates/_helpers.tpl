@@ -29,5 +29,5 @@
 {{- end -}}
 
 {{- define "persistence.source" -}}
-{{- printf "//truenas.mchill.lan/%s" .Values.app -}}
+{{- printf "//192.168.1.19/%s" .Values.app -}}
 {{- end -}}
