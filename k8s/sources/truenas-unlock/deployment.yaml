@@ -17,6 +17,16 @@ spec:
       containers:
         - name: truenas-unlock
           image: thorpejosh/truenas-zfs-unlock:v3.1.2
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              chmod u+w /usr/local/bin/unlock
+              sed 's|^\( *\)dataset="\${var##\*__}".*|\1dataset="$$(printf %s "${var#*__}" \| sed "s#__#/#g")"|' /usr/local/bin/unlock > /tmp/unlock
+              cat /tmp/unlock > /usr/local/bin/unlock
+              grep -q 's#__#/#g' /usr/local/bin/unlock || { echo "unlock patch did not apply"; exit 1; }
+              exec /bin/sh /entry.sh
           env:
             - name: TZ
               value: America/New_York
