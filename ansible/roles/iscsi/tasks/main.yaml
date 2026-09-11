@@ -15,7 +15,7 @@
         owner: root
         group: root
         mode: "0600"
-      notify: Restart iscsid
+      register: iscsi_initiator_name
 
     - name: Set iSCSI session replacement timeout
       ansible.builtin.lineinfile:
@@ -25,7 +25,7 @@
         owner: root
         group: root
         mode: "0600"
-      notify: Restart iscsid
+      register: iscsi_replacement_timeout
 
     - name: Apply replacement timeout to existing node records
       ansible.builtin.command:
@@ -37,11 +37,37 @@
       changed_when: iscsi_node_update.rc == 0
       failed_when: iscsi_node_update.rc not in [0, 21]
 
+    - name: Create iscsid drop-in directory
+      ansible.builtin.file:
+        path: /etc/systemd/system/iscsid.service.d
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Order iscsid after systemd-resolved
+      ansible.builtin.copy:
+        content: |
+          [Unit]
+          After=systemd-resolved.service
+        dest: /etc/systemd/system/iscsid.service.d/after-resolved.conf
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Restart iscsid service
+      when: iscsi_initiator_name.changed or iscsi_replacement_timeout.changed
+      ansible.builtin.systemd:
+        name: iscsid
+        state: restarted
+        daemon_reload: true
+
     - name: Enable iscsid service
       ansible.builtin.systemd:
         name: iscsid
         enabled: true
         state: started
+        daemon_reload: true
 
     - name: Enable open-iscsi service
       ansible.builtin.systemd:
