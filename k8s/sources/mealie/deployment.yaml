@@ -19,7 +19,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: mealie
-          image: hkotel/mealie:v3.22.0
+          image: hkotel/mealie:v3.25.1
           ports:
             - name: ingress
               containerPort: 9000

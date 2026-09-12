@@ -20,7 +20,7 @@ spec:
         runAsNonRoot: true
       containers:
         - name: exporter
-          image: python:3.13-alpine
+          image: python:3.14-alpine
           command:
             - python3
             - /app/exporter.py

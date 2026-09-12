@@ -20,7 +20,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: immich
-          image: ghcr.io/immich-app/immich-server:v3.1.0
+          image: ghcr.io/immich-app/immich-server:v3.2.0
           ports:
             - name: ingress
               containerPort: 2283
@@ -74,7 +74,7 @@ spec:
             requests:
               gpu.intel.com/i915: 1
         - name: machine-learning
-          image: ghcr.io/immich-app/immich-machine-learning:v3.1.0-openvino
+          image: ghcr.io/immich-app/immich-machine-learning:v3.2.0-openvino
           env:
             - name: TZ
               value: America/New_York
@@ -114,7 +114,7 @@ spec:
             - name: shm
               mountPath: /dev/shm
         - name: redis
-          image: valkey/valkey:9.1.1-alpine
+          image: valkey/valkey:9.1.2-alpine
           env:
             - name: TZ
               value: America/New_York
