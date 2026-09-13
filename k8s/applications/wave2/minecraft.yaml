@@ -23,7 +23,7 @@ spec:
           ingress:
             enabled: false
           loadBalancer:
-            ip: 192.168.1.92
+            ip: 192.168.111.56
             port: 25565
     - repoURL: https://github.com/mchill/home.git
       targetRevision: HEAD

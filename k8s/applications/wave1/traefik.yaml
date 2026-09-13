@@ -37,9 +37,9 @@ spec:
                   - name: WHITELIST
                     value: matthewchill7@gmail.com
                   - name: HTTP_PROXY
-                    value: http://pihole.mchill.lan:8888
+                    value: http://tinyproxy.mchill.lan:8888
                   - name: HTTPS_PROXY
-                    value: http://pihole.mchill.lan:8888
+                    value: http://tinyproxy.mchill.lan:8888
                   - name: NO_PROXY
                     value: localhost,127.0.0.1
                   - name: SECRET
@@ -94,7 +94,7 @@ spec:
                     scheme: https
           service:
             annotations:
-              metallb.universe.tf/loadBalancerIPs: 192.168.1.90
+              metallb.universe.tf/loadBalancerIPs: 192.168.111.55
           providers:
             kubernetesCRD:
               enabled: true

@@ -25,7 +25,7 @@ spec:
               - match: Host(`stardew.mchill.io`)
                 disableForwardAuth: true
           loadBalancer:
-            ip: 192.168.1.86
+            ip: 192.168.111.53
             port: 24642
             targetPort: stardew
             protocol: UDP

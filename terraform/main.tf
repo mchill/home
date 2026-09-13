@@ -11,7 +11,7 @@ terraform {
     key    = "proxmox.tfstate"
     region = "us-east-1"
     endpoints = {
-      s3 = "http://192.168.1.19:3900"
+      s3 = "http://192.168.111.10:3900"
     }
     skip_credentials_validation = true
     skip_requesting_account_id  = true
@@ -23,7 +23,7 @@ terraform {
 }
 
 provider "proxmox" {
-  endpoint = "https://192.168.1.30:8006/"
+  endpoint = "https://192.168.111.10:8006/"
   username = "root@pam"
   insecure = true
 }

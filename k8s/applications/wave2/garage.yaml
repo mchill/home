@@ -19,7 +19,7 @@ spec:
           app: garage
           service:
             type: ExternalName
-            host: truenas.mchill.lan
+            host: nas.mchill.lan
             port: 3909
           ingress:
             routes:

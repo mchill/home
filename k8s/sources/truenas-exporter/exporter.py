@@ -9,7 +9,7 @@ import time
 import urllib.parse
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-URL = os.environ.get("TRUENAS_URL", "wss://truenas.mchill.lan/api/current")
+URL = os.environ.get("TRUENAS_URL", "wss://nas.mchill.lan/api/current")
 KEY = os.environ["TRUENAS_API_KEY"]
 PREFIXES = [p for p in os.environ.get("DATASET_PREFIXES", "").split(",") if p]
 INTERVAL = int(os.environ.get("SCRAPE_INTERVAL", "60"))

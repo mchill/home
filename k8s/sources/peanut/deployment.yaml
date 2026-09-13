@@ -28,7 +28,7 @@ spec:
             - name: DISABLE_CONFIG_FILE
               value: "true"
             - name: NUT_SERVERS
-              value: '[{"HOST":"truenas.mchill.lan","PORT":3493}]'
+              value: '[{"HOST":"nas.mchill.lan","PORT":3493}]'
       resources:
         limits:
           memory: 256Mi

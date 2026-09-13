@@ -29,5 +29,5 @@
 {{- end -}}
 
 {{- define "persistence.source" -}}
-{{- printf "//192.168.1.19/%s" .Values.app -}}
+{{- printf "//192.168.111.10/%s" .Values.app -}}
 {{- end -}}
