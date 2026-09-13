@@ -13,11 +13,12 @@ This is the configuration for my home server running in Kubernetes.
 ### Configure Hosts
 
 1. Install Proxmox.
+   a. Set maxroot to 64 GB.
+   b. Set maxvz to 0 GB.
 
 2. Create user.
 
    ```bash
-   apt update
    apt install sudo
    useradd -m mchill
    passwd mchill

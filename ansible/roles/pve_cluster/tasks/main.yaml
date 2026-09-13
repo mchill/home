@@ -1,0 +1,75 @@
+- name: Configure PVE cluster
+  become: true
+  block:
+    - name: Identify primary node
+      ansible.builtin.set_fact:
+        pve_primary_address: "{{ hostvars[groups['proxmox_hosts'][0]]['ansible_host'] }}"
+
+    - name: Check cluster membership
+      ansible.builtin.command: pvecm status
+      register: pvecm_status
+      changed_when: false
+      failed_when: false
+      check_mode: false
+
+    - name: Read root public key
+      ansible.builtin.slurp:
+        src: /root/.ssh/id_rsa.pub
+      register: root_public_key
+
+    - name: Authorize peer root keys
+      when: item != inventory_hostname
+      ansible.builtin.lineinfile:
+        path: /etc/pve/priv/authorized_keys
+        line: "{{ hostvars[item].root_public_key.content | b64decode | trim }}"
+        create: true
+        mode: "0600"
+        unsafe_writes: true
+      loop: "{{ groups['proxmox_hosts'] }}"
+
+    - name: Create cluster
+      when:
+        - pve_primary | default(false)
+        - pvecm_status.rc != 0
+      ansible.builtin.command: pvecm create home --link0 {{ ansible_host }}
+
+    - name: Wait for cluster quorum
+      when:
+        - pve_primary | default(false)
+        - pvecm_status.rc != 0
+      ansible.builtin.command: corosync-quorumtool -s
+      register: pvecm_quorum
+      until: pvecm_quorum.rc == 0
+      retries: 30
+      delay: 2
+      changed_when: false
+      check_mode: false
+
+    - name: Scan primary host key
+      when:
+        - not (pve_primary | default(false))
+        - pvecm_status.rc != 0
+      ansible.builtin.command: ssh-keyscan {{ pve_primary_address }}
+      register: pve_primary_host_key
+      changed_when: false
+      check_mode: false
+
+    - name: Trust primary host key
+      when:
+        - not (pve_primary | default(false))
+        - pvecm_status.rc != 0
+      ansible.builtin.known_hosts:
+        path: /root/.ssh/known_hosts
+        name: "{{ pve_primary_address }}"
+        key: "{{ item }}"
+      loop: "{{ pve_primary_host_key.stdout_lines | default([]) | select('search', '^[^#]') | list }}"
+
+    - name: Join cluster
+      when:
+        - not (pve_primary | default(false))
+        - pvecm_status.rc != 0
+      ansible.builtin.command: >-
+        pvecm add {{ pve_primary_address }}
+        --link0 {{ ansible_host }}
+        --use_ssh
+      throttle: 1

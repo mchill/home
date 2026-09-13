@@ -1,7 +1,10 @@
 - name: Configure Proxmox Hosts
   hosts: proxmox_hosts
   roles:
-    - oh_my_zsh
     - proxmox
-    - lvm-storage
+    - pve_cluster
+    - oh_my_zsh
+    - lvm_storage
+    - nfs_storage
+    - etcd_storage
     - gpu_passthrough

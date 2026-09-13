@@ -5,38 +5,35 @@ all:
 
 ungrouped:
   hosts:
-    pihole:
-      ansible_host: 192.168.1.2
     comet:
-      ansible_host: 192.168.1.12
+      ansible_host: 192.168.111.15
       ansible_user: root
-    raspberrypi:
-      ansible_host: 192.168.1.13
 
 proxmox_hosts:
   hosts:
     beelink1:
-      ansible_host: 192.168.1.30
+      ansible_host: 192.168.111.11
+      pve_primary: true
     beelink2:
-      ansible_host: 192.168.1.31
+      ansible_host: 192.168.111.12
     beelink3:
-      ansible_host: 192.168.1.32
+      ansible_host: 192.168.111.13
 
 k3s_servers:
   hosts:
     k3s_server_1:
-      ansible_host: 192.168.1.51
+      ansible_host: 192.168.111.21
       k3s_primary: true
     k3s_server_2:
-      ansible_host: 192.168.1.52
+      ansible_host: 192.168.111.22
     k3s_server_3:
-      ansible_host: 192.168.1.53
+      ansible_host: 192.168.111.23
 
 k3s_agents:
   hosts:
     k3s_agent_1:
-      ansible_host: 192.168.1.54
+      ansible_host: 192.168.111.24
     k3s_agent_2:
-      ansible_host: 192.168.1.55
+      ansible_host: 192.168.111.25
     k3s_agent_3:
-      ansible_host: 192.168.1.56
+      ansible_host: 192.168.111.26

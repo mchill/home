@@ -4,7 +4,17 @@
       become: true
       ansible.builtin.apt:
         pkg:
+          - git
           - zsh
+
+    - name: Check for existing oh-my-zsh installation
+      register: oh_my_zsh
+      ansible.builtin.stat:
+        path: ~/.oh-my-zsh
+
+    - name: Install oh-my-zsh
+      when: not oh_my_zsh.stat.exists
+      ansible.builtin.shell: sh -c "yes | $(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
     - name: Copy .zshrc file
       ansible.builtin.copy:
@@ -15,15 +25,6 @@
           source $ZSH/oh-my-zsh.sh
         dest: ~/.zshrc
         mode: "0644"
-
-    - name: Check for existing oh-my-zsh installation
-      register: oh_my_zsh
-      ansible.builtin.stat:
-        path: ~/.oh-my-zsh
-
-    - name: Install oh-my-zsh
-      when: not oh_my_zsh.stat.exists
-      ansible.builtin.shell: sh -c "yes | $(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
     - name: Set zsh as default shell
       become: true

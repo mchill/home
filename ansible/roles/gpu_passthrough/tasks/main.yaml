@@ -25,7 +25,6 @@
           vfio
           vfio_iommu_type1
           vfio_pci
-          vfio_virqfd
         dest: /etc/modules-load.d/vfio.conf
         mode: "0644"
       register: vfio_modules

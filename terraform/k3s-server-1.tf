@@ -51,6 +51,19 @@ resource "proxmox_virtual_environment_vm" "k3s-server-1" {
     file_format  = "raw"
   }
 
+  disk {
+    interface    = "scsi1"
+    datastore_id = "etcd-lvm"
+    size         = 32
+    discard      = "on"
+    iothread     = true
+    ssd          = true
+    backup       = true
+    replicate    = false
+    aio          = "io_uring"
+    file_format  = "raw"
+  }
+
   # CPU
   cpu {
     cores = 1

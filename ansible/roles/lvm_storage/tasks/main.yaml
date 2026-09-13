@@ -1,0 +1,12 @@
+- name: Configure thick LVM storage
+  become: true
+  block:
+    - name: Check for existing local-lvm storage
+      ansible.builtin.command: pvesm status --storage local-lvm
+      register: local_lvm
+      changed_when: false
+      failed_when: false
+
+    - name: Add thick LVM storage
+      ansible.builtin.command: pvesm add lvm local-lvm --vgname pve --shared 0
+      when: local_lvm.rc != 0

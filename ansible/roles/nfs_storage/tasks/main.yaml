@@ -1,0 +1,16 @@
+- name: Configure NFS storage
+  become: true
+  block:
+    - name: Check for existing nfs storage
+      ansible.builtin.command: pvesm status --storage nfs
+      register: nfs_storage
+      changed_when: false
+      failed_when: false
+
+    - name: Add NFS storage
+      ansible.builtin.command: >-
+        pvesm add nfs nfs
+        --server 192.168.111.10
+        --export /mnt/hddpool/replicated/secure/proxmox
+        --content iso
+      when: nfs_storage.rc != 0

@@ -1,0 +1,16 @@
+- name: Configure etcd disk
+  become: true
+  block:
+    - name: Create etcd filesystem
+      community.general.filesystem:
+        fstype: ext4
+        dev: /dev/sdb
+        opts: -L etcd
+
+    - name: Mount etcd volume
+      ansible.posix.mount:
+        path: /var/lib/rancher/k3s/server/db
+        src: LABEL=etcd
+        fstype: ext4
+        opts: defaults,noatime
+        state: mounted

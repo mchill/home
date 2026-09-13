@@ -1,0 +1,17 @@
+- name: Configure etcd LVM storage
+  become: true
+  block:
+    - name: Create etcd volume group
+      community.general.lvg:
+        vg: etcd
+        pvs: /dev/sdb
+
+    - name: Check for existing etcd storage
+      ansible.builtin.command: pvesm status --storage etcd-lvm
+      register: etcd_storage
+      changed_when: false
+      failed_when: false
+
+    - name: Add etcd LVM storage
+      ansible.builtin.command: pvesm add lvm etcd-lvm --vgname etcd --shared 0
+      when: etcd_storage.rc != 0
