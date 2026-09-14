@@ -2,7 +2,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.98.1"
+      version = "0.113.1"
     }
   }
 
@@ -18,12 +18,12 @@ terraform {
     skip_metadata_api_check     = true
     skip_region_validation      = true
     skip_s3_checksum            = true
-    force_path_style            = true
+    use_path_style              = true
   }
 }
 
 provider "proxmox" {
-  endpoint = "https://192.168.111.10:8006/"
+  endpoint = "https://192.168.111.11:8006/"
   username = "root@pam"
   insecure = true
 }

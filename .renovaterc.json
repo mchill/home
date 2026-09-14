@@ -8,7 +8,7 @@
     "workarounds:all"
   ],
   "schedule": ["before 3am on Saturday"],
-  "includePaths": ["k8s/**"],
+  "includePaths": ["k8s/**", "terraform/**"],
   "kubernetes": {
     "managerFilePatterns": ["/^k8s/sources/.*\\.yaml$/"]
   },
@@ -16,6 +16,10 @@
     "managerFilePatterns": ["/^k8s/applications/.*\\.yaml$/"]
   },
   "packageRules": [
+    {
+      "matchManagers": ["terraform"],
+      "groupName": "terraform"
+    },
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": [

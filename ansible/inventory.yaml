@@ -22,18 +22,18 @@ proxmox_hosts:
 k3s_servers:
   hosts:
     k3s_server_1:
-      ansible_host: 192.168.111.21
+      ansible_host: 192.168.111.41
       k3s_primary: true
     k3s_server_2:
-      ansible_host: 192.168.111.22
+      ansible_host: 192.168.111.42
     k3s_server_3:
-      ansible_host: 192.168.111.23
+      ansible_host: 192.168.111.43
 
 k3s_agents:
   hosts:
     k3s_agent_1:
-      ansible_host: 192.168.111.24
+      ansible_host: 192.168.111.44
     k3s_agent_2:
-      ansible_host: 192.168.111.25
+      ansible_host: 192.168.111.45
     k3s_agent_3:
-      ansible_host: 192.168.111.26
+      ansible_host: 192.168.111.46

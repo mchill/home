@@ -34,7 +34,10 @@ resource "proxmox_virtual_environment_vm" "k3s-agent-3" {
     file_format       = "raw"
   }
   agent {
-    enabled = true
+    enabled = !local.init_agent_3
+    wait_for_ip {
+      disabled = true
+    }
   }
 
   # Disks
@@ -74,12 +77,9 @@ resource "proxmox_virtual_environment_vm" "k3s-agent-3" {
   boot_order = local.init_agent_3 ? ["ide2", "scsi0", "net0"] : ["scsi0", "net0"]
 
   # CD Drive
-  dynamic "cdrom" {
-    for_each = local.init_agent_3 ? [1] : []
-    content {
-      interface = "ide2"
-      file_id   = "nfs:iso/ubuntu-24.04.4-live-server-amd64.iso"
-    }
+  cdrom {
+    interface = "ide2"
+    file_id   = local.init_agent_3 ? "nfs:iso/ubuntu-26.04.1-live-server-amd64.iso" : "none"
   }
 
   # PCI Devices

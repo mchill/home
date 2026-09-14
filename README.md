@@ -51,7 +51,7 @@ terraform apply -var="initialize=true"
 
 ### Install Operating System
 
-1. Install Ubuntu Server 24.04. Keep defaults except where noted below.
+1. Install Ubuntu Server. Keep defaults except where noted below.
    1. Disable "Set up this disk as an LVM group"
    2. Enable "Install OpenSSH server"
    3. Import SSH key from GitHub
@@ -59,8 +59,7 @@ terraform apply -var="initialize=true"
 2. Reapply terraform configuration, removing the bootable CD and adding PCI and serial devices.
 
    ```bash
-   cd terraform
-   terraform apply
+   terraform apply -refresh=false
    ```
 
 3. Enable passwordless sudo to allow Ansible to run later.
