@@ -1,5 +1,5 @@
 title: App Dashboard
-subtitle: Home Server
+subtitle: Primary Site
 documentTitle: Home
 icon: fas fa-home
 
@@ -12,6 +12,12 @@ connectivityCheck: false
 theme: default
 
 links:
+  - name: Primary Site
+    icon: fas fa-house
+    url: ""
+  - name: Remote Site
+    icon: fas fa-globe
+    url: "#remote"
   - name: GitHub
     icon: fab fa-github
     url: https://github.com/mchill/home
@@ -111,10 +117,6 @@ services:
         subtitle: File synchronization
         logo: assets/logos/syncthing.svg
         url: https://syncthing.mchill.io
-      - name: Remote TrueNAS
-        subtitle: NAS
-        logo: assets/logos/truenas.svg
-        url: https://nas.remote.mchill.io
 
   - name: Network
     icon: fas fa-wifi
@@ -131,18 +133,14 @@ services:
         subtitle: Proxy configuration
         logo: assets/logos/traefik.svg
         url: https://traefik.mchill.io
-      - name: Remote Unifi
-        subtitle: Network controller
-        logo: assets/logos/unifi-controller.png
-        url: https://unifi.remote.mchill.io
-
-  - name: Monitoring
-    icon: fas fa-heart-pulse
-    items:
       - name: GL.iNet Comet
         subtitle: KVM over IP
         logo: assets/logos/glinet.svg
         url: https://kvm.mchill.io
+
+  - name: Monitoring
+    icon: fas fa-heart-pulse
+    items:
       - name: Grafana
         subtitle: Server monitoring
         logo: assets/logos/grafana.svg
@@ -156,7 +154,7 @@ services:
         logo: assets/logos/cyberpower.png
         url: https://pdu.mchill.io
       - name: webNUT
-        subtitle: UPS metricsP
+        subtitle: UPS metrics
         logo: assets/logos/peanut.svg
         url: https://nut.mchill.io
 

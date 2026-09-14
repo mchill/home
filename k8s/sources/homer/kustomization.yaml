@@ -7,3 +7,4 @@ configMapGenerator:
   - name: homer
     files:
       - config.yaml
+      - remote.yaml

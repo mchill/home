@@ -1,0 +1,47 @@
+title: App Dashboard
+subtitle: Remote Site
+documentTitle: Home
+icon: fas fa-home
+
+header: true
+footer: false
+
+columns: "3"
+connectivityCheck: false
+
+theme: default
+
+links:
+  - name: Primary Site
+    icon: fas fa-house
+    url: ""
+  - name: Remote Site
+    icon: fas fa-globe
+    url: "#remote"
+  - name: GitHub
+    icon: fab fa-github
+    url: https://github.com/mchill/home
+  - name: Trello
+    icon: fab fa-trello
+    url: https://trello.com/b/XNVnSBvI/home-server
+
+services:
+  - name: Apps
+    icon: fas fa-folder
+    items:
+      - name: Unifi
+        subtitle: Network controller
+        logo: assets/logos/unifi-controller.png
+        url: https://unifi.remote.mchill.io
+      - name: TrueNAS
+        subtitle: NAS
+        logo: assets/logos/truenas.svg
+        url: https://nas.remote.mchill.io
+      - name: Pi-hole
+        subtitle: DNS sinkhole
+        logo: assets/logos/pi-hole.svg
+        url: https://pihole.remote.mchill.io
+      - name: Home Assistant
+        subtitle: Home automation
+        logo: assets/logos/home-assistant.svg
+        url: https://home.remote.mchill.io
