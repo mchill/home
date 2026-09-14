@@ -101,7 +101,7 @@ services:
         url: https://nas.mchill.io
       - name: Garage
         subtitle: Object storage
-        logo: assets/logos/grafana.svg
+        logo: assets/logos/garage.svg
         url: https://garage.mchill.io
       - name: Nextcloud
         subtitle: File sharing

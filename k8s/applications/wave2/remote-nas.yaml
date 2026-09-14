@@ -20,7 +20,7 @@ spec:
           service:
             type: ExternalName
             host: nas.remote.mchill.lan
-            port: 5000
+            port: 80
           ingress:
             routes:
               - match: Host(`nas.remote.mchill.io`)

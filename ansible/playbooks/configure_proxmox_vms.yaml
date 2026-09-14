@@ -3,6 +3,7 @@
   roles:
     - oh_my_zsh
     - qemu_guest_agent
+    - nic_offload
     - inotify
     - iscsi
     - etcd_disk
@@ -13,6 +14,7 @@
   roles:
     - oh_my_zsh
     - qemu_guest_agent
+    - nic_offload
     - inotify
     - iscsi
     - gpu

@@ -1,0 +1,44 @@
+- name: Configure NIC offload
+  become: true
+  block:
+    - name: Install ethtool
+      ansible.builtin.apt:
+        pkg:
+          - ethtool
+        state: present
+        update_cache: true
+
+    - name: Create NIC offload service
+      ansible.builtin.copy:
+        content: |
+          [Unit]
+          Description=Disable TX checksum offload for VXLAN
+          After=network-online.target
+          Wants=network-online.target
+
+          [Service]
+          Type=oneshot
+          RemainAfterExit=true
+          ExecStart=/usr/sbin/ethtool -K {{ ansible_facts.default_ipv4.interface }} tx-checksum-ip-generic off
+
+          [Install]
+          WantedBy=multi-user.target
+        dest: /etc/systemd/system/nic-offload.service
+        owner: root
+        group: root
+        mode: "0644"
+      register: nic_offload_unit
+
+    - name: Restart NIC offload service
+      when: nic_offload_unit.changed
+      ansible.builtin.systemd:
+        name: nic-offload
+        state: restarted
+        daemon_reload: true
+
+    - name: Enable NIC offload service
+      ansible.builtin.systemd:
+        name: nic-offload
+        enabled: true
+        state: started
+        daemon_reload: true
