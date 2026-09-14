@@ -7,7 +7,6 @@ resources:
   - audiobookshelf.yaml
   - bazarr.yaml
   - dawarich.yaml
-  - ddns.yaml
   - errors.yaml
   - flaresolverr.yaml
   - garage.yaml

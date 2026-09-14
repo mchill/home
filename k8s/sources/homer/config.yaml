@@ -131,10 +131,6 @@ services:
         subtitle: Proxy configuration
         logo: assets/logos/traefik.svg
         url: https://traefik.mchill.io
-      - name: DDNS Monitor
-        subtitle: Domain management
-        logo: assets/logos/ddns-updater.svg
-        url: https://ddns.mchill.io
       - name: Remote Unifi
         subtitle: Network controller
         logo: assets/logos/unifi-controller.png
