@@ -73,3 +73,13 @@
       ansible.builtin.systemd:
         name: open-iscsi
         enabled: true
+
+    - name: Mask multipathd units
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        enabled: false
+        state: stopped
+        masked: true
+      loop:
+        - multipathd.service
+        - multipathd.socket

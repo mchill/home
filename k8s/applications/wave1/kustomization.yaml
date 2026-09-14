@@ -10,3 +10,4 @@ resources:
   - shared.yaml
   - traefik.yaml
   - truenas-unlock.yaml
+  - volume-recovery.yaml
