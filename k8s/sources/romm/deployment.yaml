@@ -19,7 +19,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: romm
-          image: rommapp/romm:5.1.0
+          image: rommapp/romm:5.2.0
           ports:
             - name: ingress
               containerPort: 8080
@@ -54,7 +54,7 @@ spec:
               mountPath: /romm/resources
               subPath: games/resources
         - name: db
-          image: mariadb:11.8.8
+          image: mariadb:11.8.9
           env:
             - name: MYSQL_DATABASE
               value: romm

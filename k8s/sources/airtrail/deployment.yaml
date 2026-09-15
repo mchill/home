@@ -19,7 +19,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: airtrail
-          image: johly/airtrail:v3.11.1
+          image: johly/airtrail:v3.12.0
           ports:
             - name: ingress
               containerPort: 3000
@@ -54,7 +54,7 @@ spec:
               mountPath: /app/uploads
               subPath: uploads
         - name: db
-          image: postgres:16.14-alpine
+          image: postgres:16.15-alpine
           env:
             - name: TZ
               value: America/New_York
