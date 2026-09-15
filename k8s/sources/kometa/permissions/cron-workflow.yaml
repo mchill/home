@@ -50,7 +50,7 @@ spec:
                 mountPath: /config_src/config.yaml
                 subPath: config.yaml
         container:
-          image: kometateam/kometa:v2.4.6
+          image: kometateam/kometa:v2.4.8
           args:
             - --run
             - --read-only-config
