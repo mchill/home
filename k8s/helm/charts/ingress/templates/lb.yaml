@@ -7,6 +7,7 @@ metadata:
     metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancer.ip }}
 spec:
   type: LoadBalancer
+  externalTrafficPolicy: Local
   ports:
     - name: {{ .Values.loadBalancer.targetPort }}
       port: {{ .Values.loadBalancer.port }}
