@@ -109,7 +109,7 @@ spec:
               value: --data-checksums
           volumeMounts:
             - name: immich
-              mountPath: /var/lib/postgresql/data
+              mountPath: /var/lib/postgresql
               subPath: postgres
             - name: shm
               mountPath: /dev/shm
