@@ -27,8 +27,8 @@ jobs:
           wget -qO - https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz | tar xz
           ./kubeconform -strict -ignore-missing-schemas \
             -ignore-filename-pattern 'ddns/secret' \
-            -ignore-filename-pattern 'homer/config' \
+            -ignore-filename-pattern 'homer/(config|remote)' \
             -ignore-filename-pattern 'kometa/(permissions|posters)/config' \
             -ignore-filename-pattern 'minecraft/(ops|whitelist)' \
-            -ignore-filename-pattern 'prometheus/(jobs|volumes|zvols)' \
+            -ignore-filename-pattern 'prometheus/volumes' \
             sources/
