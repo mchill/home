@@ -43,7 +43,7 @@
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": ["ghcr.io/immich-app/postgres"],
-      "versioning": "regex:^(?<major>\\d+)-vectorchord(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)-pgvectors\\d+\\.\\d+\\.\\d+$"
+      "versioning": "regex:^(?<major>\\d+)-vectorchord(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$"
     },
     {
       "matchDatasources": ["docker"],
