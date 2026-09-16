@@ -2,6 +2,7 @@ all:
   vars:
     ansible_user: mchill
     ansible_python_interpreter: auto_silent
+    system_timezone: America/New_York
 
 ungrouped:
   hosts:

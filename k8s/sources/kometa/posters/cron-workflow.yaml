@@ -4,7 +4,8 @@ metadata:
   name: kometa-posters
 spec:
   schedules:
-    - "0 0 * * *"
+    - "30 0 * * *"
+  timezone: America/New_York
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 30
   failedJobsHistoryLimit: 30

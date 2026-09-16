@@ -1,0 +1,26 @@
+- name: Configure timezone and time synchronization
+  become: true
+  block:
+    - name: Install chrony
+      ansible.builtin.apt:
+        pkg:
+          - chrony
+        state: present
+        update_cache: true
+
+    - name: Enable chrony service
+      ansible.builtin.systemd:
+        name: chrony
+        enabled: true
+        state: started
+
+    - name: Check current timezone
+      ansible.builtin.command:
+        cmd: timedatectl show --property=Timezone --value
+      register: current_timezone
+      changed_when: false
+
+    - name: Set system timezone
+      when: current_timezone.stdout != system_timezone
+      ansible.builtin.command:
+        cmd: "timedatectl set-timezone {{ system_timezone }}"

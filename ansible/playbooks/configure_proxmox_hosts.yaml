@@ -4,6 +4,7 @@
     - proxmox
     - pve_cluster
     - oh_my_zsh
+    - timezone
     - lvm_storage
     - nfs_storage
     - etcd_storage
