@@ -22,7 +22,6 @@ spec:
           app: flaresolverr
           ingress:
             enabled: false
-
   destination:
     server: https://kubernetes.default.svc
     namespace: server

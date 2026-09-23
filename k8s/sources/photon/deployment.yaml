@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: photon
-  replicas: 0
+  replicas: 1
   strategy:
     type: Recreate
   template:
@@ -58,6 +58,8 @@ spec:
               value: "FALSE"
             - name: SKIP_MD5_CHECK
               value: "TRUE"
+            - name: JAVA_PARAMS
+              value: -Xmx768m
           readinessProbe:
             httpGet:
               path: /status
