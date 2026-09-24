@@ -40,6 +40,7 @@ resources:
   - remote-nas.yaml
   - remote-unifi.yaml
   - romm.yaml
+  - scrutiny.yaml
   - sonarr-uhd.yaml
   - sonarr.yaml
   - stardew.yaml

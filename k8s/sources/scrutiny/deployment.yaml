@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scrutiny
+spec:
+  selector:
+    matchLabels:
+      app: scrutiny
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: scrutiny
+    spec:
+      containers:
+        - name: scrutiny
+          image: ghcr.io/analogj/scrutiny:v0.9.3-web
+          ports:
+            - name: ingress
+              containerPort: 8080
+          env:
+            - name: TZ
+              value: America/New_York
+            - name: SCRUTINY_WEB_INFLUXDB_HOST
+              value: localhost
+            - name: SCRUTINY_WEB_INFLUXDB_PORT
+              value: "8086"
+          volumeMounts:
+            - name: scrutiny
+              mountPath: /opt/scrutiny/config
+              subPath: config
+        - name: influxdb
+          image: influxdb:2.9.1-alpine
+          env:
+            - name: TZ
+              value: America/New_York
+          volumeMounts:
+            - name: scrutiny
+              mountPath: /var/lib/influxdb2
+              subPath: influxdb
+      volumes:
+        - name: scrutiny
+          persistentVolumeClaim:
+            claimName: scrutiny
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          cpu: 10m
+          memory: 512Mi

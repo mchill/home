@@ -1,0 +1,76 @@
+- name: Configure Scrutiny collector
+  become: true
+  vars:
+    scrutiny_version: v0.9.3
+    scrutiny_api_endpoint: http://192.168.111.51:8080
+  block:
+    - name: Install smartmontools
+      ansible.builtin.apt:
+        pkg:
+          - smartmontools
+        state: present
+        update_cache: true
+
+    - name: Create Scrutiny directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - /opt/scrutiny/bin
+        - /opt/scrutiny/config
+
+    - name: Download collector binary
+      ansible.builtin.get_url:
+        url: >-
+          https://github.com/AnalogJ/scrutiny/releases/download/{{ scrutiny_version }}/scrutiny-collector-metrics-linux-amd64
+        dest: /opt/scrutiny/bin/scrutiny-collector-metrics-{{ scrutiny_version }}
+        mode: "0755"
+
+    - name: Link collector binary
+      ansible.builtin.file:
+        src: /opt/scrutiny/bin/scrutiny-collector-metrics-{{ scrutiny_version }}
+        dest: /opt/scrutiny/bin/scrutiny-collector-metrics
+        state: link
+
+    - name: Copy collector config file
+      ansible.builtin.template:
+        src: collector.yaml.j2
+        dest: /opt/scrutiny/config/collector.yaml
+        mode: "0644"
+
+    - name: Copy collector service file
+      ansible.builtin.copy:
+        content: |
+          [Unit]
+          Description=Scrutiny SMART metrics collector
+          Wants=network-online.target
+          After=network-online.target
+
+          [Service]
+          Type=oneshot
+          ExecStart=/opt/scrutiny/bin/scrutiny-collector-metrics run --config /opt/scrutiny/config/collector.yaml
+        dest: /etc/systemd/system/scrutiny-collector.service
+        mode: "0644"
+
+    - name: Copy collector timer file
+      ansible.builtin.copy:
+        content: |
+          [Unit]
+          Description=Run the Scrutiny SMART metrics collector daily
+
+          [Timer]
+          OnCalendar=*-*-* 01:00:00
+          Persistent=true
+
+          [Install]
+          WantedBy=timers.target
+        dest: /etc/systemd/system/scrutiny-collector.timer
+        mode: "0644"
+
+    - name: Enable collector timer
+      ansible.builtin.systemd:
+        name: scrutiny-collector.timer
+        enabled: true
+        state: started
+        daemon_reload: true

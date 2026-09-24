@@ -8,4 +8,5 @@
     - lvm_storage
     - nfs_storage
     - etcd_storage
+    - scrutiny_collector
     - gpu_passthrough
