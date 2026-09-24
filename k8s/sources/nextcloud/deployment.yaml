@@ -91,7 +91,7 @@ spec:
               mountPath: /mnt/family
               subPath: photos/external/family
         - name: db
-          image: postgres:17.11-alpine
+          image: postgres:18.6-alpine
           env:
             - name: TZ
               value: America/New_York
@@ -104,7 +104,7 @@ spec:
                 name: nextcloud
           volumeMounts:
             - name: nextcloud
-              mountPath: /var/lib/postgresql/data
+              mountPath: /var/lib/postgresql
               subPath: postgres
         - name: redis
           image: redis:8.10.1-alpine

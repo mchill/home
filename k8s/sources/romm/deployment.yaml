@@ -54,7 +54,7 @@ spec:
               mountPath: /romm/resources
               subPath: games/resources
         - name: db
-          image: mariadb:11.8.9
+          image: mariadb:12.3.3
           env:
             - name: MYSQL_DATABASE
               value: romm

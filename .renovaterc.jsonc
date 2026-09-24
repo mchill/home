@@ -5,73 +5,77 @@
     ":ignoreModulesAndTests",
     ":separateMajorReleases",
     "group:allNonMajor",
-    "workarounds:all"
+    "workarounds:all",
   ],
   "schedule": ["before 3am on Saturday"],
   "includePaths": ["k8s/**", "terraform/**"],
   "kubernetes": {
-    "managerFilePatterns": ["/^k8s/sources/.*\\.yaml$/"]
+    "managerFilePatterns": ["/^k8s/sources/.*\\.yaml$/"],
   },
   "argocd": {
-    "managerFilePatterns": ["/^k8s/applications/.*\\.yaml$/"]
+    "managerFilePatterns": ["/^k8s/applications/.*\\.yaml$/"],
   },
   "packageRules": [
     {
       "matchManagers": ["terraform"],
-      "groupName": "terraform"
+      "groupName": "terraform",
     },
+
+    // Handle non-standard Docker image versioning
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": [
         "jitsi/jicofo",
         "jitsi/jvb",
         "jitsi/prosody",
-        "jitsi/web"
+        "jitsi/web",
       ],
-      "versioning": "regex:^stable-(?<minor>\\d+)$"
+      "versioning": "regex:^stable-(?<minor>\\d+)$",
     },
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": ["ghcr.io/hotio/qbittorrent"],
-      "versioning": "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+      "versioning": "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
     },
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": ["postgis/postgis"],
-      "versioning": "regex:^(?<major>\\d+)-(?<minor>\\d+)\\.(?<patch>\\d+)-alpine$"
+      "versioning": "regex:^(?<major>\\d+)-(?<minor>\\d+)\\.(?<patch>\\d+)-alpine$",
     },
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": ["ghcr.io/immich-app/postgres"],
-      "versioning": "regex:^(?<major>\\d+)-vectorchord(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$"
+      "versioning": "regex:^(?<major>\\d+)-vectorchord(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$",
     },
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": [
         "homeassistant/home-assistant",
-        "itzg/minecraft-server"
+        "itzg/minecraft-server",
       ],
-      "versioning": "regex:^(?<minor>\\d{4})\\.(?<patch>\\d+)\\.(?<build>\\d+)$"
+      "versioning": "regex:^(?<minor>\\d{4})\\.(?<patch>\\d+)\\.(?<build>\\d+)$",
     },
+
+    // Prevent database major version updates
     {
       "matchFileNames": ["k8s/sources/dawarich/**"],
       "matchPackageNames": ["postgis/postgis"],
-      "allowedVersions": "< 18.0.0"
+      "allowedVersions": "< 18.0.0",
     },
     {
       "matchFileNames": ["k8s/sources/dawarich/**"],
       "matchPackageNames": ["redis"],
-      "allowedVersions": "< 8.0.0"
+      "allowedVersions": "< 8.0.0",
     },
     {
       "matchFileNames": ["k8s/sources/romm/**"],
       "matchPackageNames": ["mariadb"],
-      "allowedVersions": "< 12.0.0"
+      "allowedVersions": "< 13.0.0",
     },
     {
       "matchFileNames": ["k8s/sources/tubearchivist/**"],
       "matchPackageNames": ["elasticsearch"],
-      "allowedVersions": "< 9.0.0"
-    }
-  ]
+      "allowedVersions": "< 9.0.0",
+    },
+  ],
 }
