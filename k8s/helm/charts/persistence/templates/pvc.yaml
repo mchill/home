@@ -11,7 +11,7 @@ spec:
 {{- else }}
   accessModes:
     - ReadWriteOnce
-  storageClassName: {{ include "persistence.storageClass" . }}
+  storageClassName: truenas-iscsi
 {{- end }}
   resources:
     requests:

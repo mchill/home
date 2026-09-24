@@ -31,7 +31,6 @@ spec:
           app: tautulli
           size: 1Gi
           type: iscsi
-          pool: ssdpool
   destination:
     server: https://kubernetes.default.svc
     namespace: server

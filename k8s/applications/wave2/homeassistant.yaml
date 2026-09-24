@@ -35,7 +35,6 @@ spec:
           app: homeassistant
           size: 1Gi
           type: iscsi
-          pool: ssdpool
   destination:
     server: https://kubernetes.default.svc
     namespace: server

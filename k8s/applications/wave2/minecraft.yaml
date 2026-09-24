@@ -33,7 +33,6 @@ spec:
           app: minecraft
           size: 4Gi
           type: iscsi
-          pool: ssdpool
   destination:
     server: https://kubernetes.default.svc
     namespace: server

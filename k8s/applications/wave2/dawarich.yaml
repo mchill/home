@@ -31,7 +31,6 @@ spec:
           app: dawarich
           size: 12Gi
           type: iscsi
-          pool: ssdpool
   destination:
     server: https://kubernetes.default.svc
     namespace: server

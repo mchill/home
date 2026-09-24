@@ -34,7 +34,6 @@ spec:
           app: ombi
           size: 128Mi
           type: iscsi
-          pool: ssdpool
   destination:
     server: https://kubernetes.default.svc
     namespace: server
