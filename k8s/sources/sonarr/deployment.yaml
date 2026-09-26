@@ -19,7 +19,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: sonarr
-          image: ghcr.io/linuxserver/sonarr:4.0.19
+          image: ghcr.io/linuxserver/sonarr:4.0.20
           ports:
             - name: ingress
               containerPort: 8989

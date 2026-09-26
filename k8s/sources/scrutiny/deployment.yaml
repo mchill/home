@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: scrutiny
-          image: ghcr.io/analogj/scrutiny:v0.9.3-web
+          image: ghcr.io/analogj/scrutiny:v0.9.4-web
           ports:
             - name: ingress
               containerPort: 8080
