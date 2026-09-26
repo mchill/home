@@ -19,7 +19,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: bazarr
-          image: ghcr.io/linuxserver/bazarr:1.6.1
+          image: ghcr.io/linuxserver/bazarr:1.6.2
           ports:
             - name: ingress
               containerPort: 6767
