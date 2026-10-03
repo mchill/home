@@ -24,7 +24,7 @@ spec:
         retryStrategy:
           limit: "2"
         container:
-          image: python:3.14.7-alpine
+          image: python:3.14.8-alpine
           command:
             - /bin/sh
             - -c
