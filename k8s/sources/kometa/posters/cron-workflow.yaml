@@ -35,7 +35,7 @@ spec:
           limit: "2"
         initContainers:
           - name: render-config
-            image: bash:5.3.15
+            image: bash:5.3.20
             args:
               - -c
               - |
@@ -65,7 +65,7 @@ spec:
                 mountPath: /config/sync.sh
                 subPath: sync.sh
         container:
-          image: kometateam/kometa:v2.4.8
+          image: kometateam/kometa:v2.5.1
           args:
             - --run
             - --read-only-config
