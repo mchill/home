@@ -19,7 +19,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: nextcloud
-          image: nextcloud:34.0.4-apache
+          image: nextcloud:34.0.5-apache
           ports:
             - name: ingress
               containerPort: 80
@@ -61,7 +61,7 @@ spec:
               mountPath: /mnt/family
               subPath: photos/external/family
         - name: cron
-          image: nextcloud:34.0.4-apache
+          image: nextcloud:34.0.5-apache
           command:
             - /cron.sh
           env:
@@ -107,7 +107,7 @@ spec:
               mountPath: /var/lib/postgresql
               subPath: postgres
         - name: redis
-          image: redis:8.10.1-alpine
+          image: redis:8.10.2-alpine
           env:
             - name: TZ
               value: America/New_York
