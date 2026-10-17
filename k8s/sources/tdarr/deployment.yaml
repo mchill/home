@@ -65,7 +65,7 @@ spec:
               mountPath: /media/tv-requested
               subPath: shows/requested
         - name: tdarr-node
-          image: haveagitgat/tdarr_node:2.87.01
+          image: haveagitgat/tdarr_node:3.01.00
           env:
             - name: TZ
               value: America/New_York
