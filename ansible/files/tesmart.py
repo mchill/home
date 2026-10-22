@@ -4,7 +4,7 @@ import socket
 import sys
 import time
 
-HOST = "kvm.mchill.lan"
+HOST = "192.168.111.16"
 PORT = 5000
 TIMEOUT = 1.0
 
