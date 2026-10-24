@@ -107,7 +107,7 @@ spec:
               mountPath: /var/lib/postgresql
               subPath: postgres
         - name: redis
-          image: redis:8.10.1-alpine
+          image: redis:8.10.2-alpine
           env:
             - name: TZ
               value: America/New_York
