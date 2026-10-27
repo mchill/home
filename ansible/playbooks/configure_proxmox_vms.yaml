@@ -6,6 +6,7 @@
     - qemu_guest_agent
     - nic_offload
     - inotify
+    - bbr
     - iscsi
     - etcd_disk
     - k3s_server
@@ -18,6 +19,7 @@
     - qemu_guest_agent
     - nic_offload
     - inotify
+    - bbr
     - iscsi
     - gpu
     - k3s_agent

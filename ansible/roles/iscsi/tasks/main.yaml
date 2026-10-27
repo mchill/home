@@ -10,7 +10,7 @@
 
     - name: Set unique initiator name
       ansible.builtin.copy:
-        content: "InitiatorName=iqn.2026-08.io.mchill:{{ ansible_hostname }}\n"
+        content: "InitiatorName=iqn.2026-08.io.mchill:{{ ansible_facts.hostname }}\n"
         dest: /etc/iscsi/initiatorname.iscsi
         owner: root
         group: root
