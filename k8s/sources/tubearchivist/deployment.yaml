@@ -26,10 +26,6 @@ spec:
           env:
             - name: TZ
               value: America/New_York
-            - name: HOST_UID
-              value: "1000"
-            - name: HOST_GID
-              value: "1000"
             - name: TA_HOST
               value: https://tube.mchill.io http://tubearchivist.server.svc.cluster.local
             - name: REDIS_CON
