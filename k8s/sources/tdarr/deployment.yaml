@@ -19,7 +19,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: tdarr-server
-          image: haveagitgat/tdarr:2.96.01
+          image: haveagitgat/tdarr:3.04.00
           ports:
             - name: ingress
               containerPort: 8265
