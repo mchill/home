@@ -19,7 +19,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: dawarich
-          image: freikin/dawarich:1.19.0
+          image: freikin/dawarich:1.21.0
           command:
             - web-entrypoint.sh
           args:
@@ -74,7 +74,7 @@ spec:
               mountPath: /dawarich_db_data
               subPath: postgres
         - name: sidekiq
-          image: freikin/dawarich:1.19.0
+          image: freikin/dawarich:1.21.0
           command:
             - sidekiq-entrypoint.sh
           args:
@@ -118,7 +118,7 @@ spec:
               mountPath: /var/app/storage
               subPath: storage
         - name: db
-          image: postgis/postgis:17-3.6-alpine
+          image: postgis/postgis:17-3.7-alpine
           env:
             - name: POSTGRES_DB
               value: dawarich
