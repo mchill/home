@@ -7,6 +7,7 @@
     - nic_offload
     - inotify
     - bbr
+    - hung_task
     - iscsi
     - etcd_disk
     - k3s_server
@@ -20,6 +21,7 @@
     - nic_offload
     - inotify
     - bbr
+    - hung_task
     - iscsi
     - gpu
     - k3s_agent

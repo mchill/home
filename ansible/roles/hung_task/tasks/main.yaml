@@ -1,0 +1,11 @@
+- name: Configure hung task detector
+  become: true
+  block:
+    - name: Set hung task sysctl values
+      ansible.builtin.sysctl:
+        name: "{{ item.name }}"
+        value: "{{ item.value }}"
+        sysctl_file: /etc/sysctl.d/90-hung-task.conf
+        reload: true
+      loop:
+        - { name: kernel.hung_task_warnings, value: -1 }
