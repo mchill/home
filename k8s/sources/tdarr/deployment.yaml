@@ -19,7 +19,7 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
       containers:
         - name: tdarr-server
-          image: haveagitgat/tdarr:3.04.00
+          image: haveagitgat/tdarr:3.08.00
           ports:
             - name: ingress
               containerPort: 8265
@@ -65,7 +65,7 @@ spec:
               mountPath: /media/tv-requested
               subPath: shows/requested
         - name: tdarr-node
-          image: haveagitgat/tdarr_node:3.04.00
+          image: haveagitgat/tdarr_node:3.08.00
           env:
             - name: TZ
               value: America/New_York
