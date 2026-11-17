@@ -67,10 +67,10 @@ spec:
               subPath: youtube
           resources:
             limits:
-              memory: 256Mi
+              memory: 512Mi
             requests:
               cpu: 10m
-              memory: 256Mi
+              memory: 512Mi
       - name: notify
         container:
           image: alpine:3.24

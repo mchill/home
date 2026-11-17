@@ -8,6 +8,7 @@
     - inotify
     - bbr
     - hung_task
+    - apparmor
     - iscsi
     - etcd_disk
     - k3s_server
@@ -22,6 +23,7 @@
     - inotify
     - bbr
     - hung_task
+    - apparmor
     - iscsi
     - gpu
     - k3s_agent

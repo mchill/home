@@ -1,0 +1,9 @@
+- name: Configure AppArmor
+  become: true
+  block:
+    - name: Allow container processes to signal each other
+      ansible.builtin.sysctl:
+        name: kernel.apparmor_restrict_unprivileged_unconfined
+        value: 0
+        sysctl_file: /etc/sysctl.d/90-apparmor.conf
+        reload: true
