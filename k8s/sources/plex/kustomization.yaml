@@ -3,3 +3,9 @@ kind: Kustomization
 namespace: server
 resources:
   - deployment.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+configMapGenerator:
+  - name: plex
+    files:
+      - config/tubearchivist-plex.patch

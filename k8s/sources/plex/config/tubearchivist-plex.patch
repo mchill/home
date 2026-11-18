@@ -1,0 +1,54 @@
+--- a/Contents/Code/__init__.py
++++ b/Contents/Code/__init__.py
+@@ -824,8 +824,10 @@
+     metadata.title = channel_title
+ 
+     if TA_CONFIG["online"]:
+-        thumb_channel = "{}_{}".format(
+-            ch_metadata["refresh_date"], ch_metadata["thumb_url"]
++        thumb_channel = (
++            "{}_{}".format(ch_metadata["refresh_date"], ch_metadata["thumb_url"])
++            if ch_metadata["thumb_url"]
++            else None
+         )
+         if thumb_channel and thumb_channel not in metadata.posters:
+             metadata.posters[thumb_channel] = Proxy.Media(  # type: ignore # noqa: F821, E501
+@@ -853,8 +855,12 @@
+         else:
+             Log("[ ] Posters: {}".format(thumb_channel))  # type: ignore # noqa: F821, E501
+ 
+-        tvart_channel = "{}_{}".format(
+-            ch_metadata["refresh_date"], ch_metadata["tvart_url"]
++        metadata.posters.validate_keys([thumb_channel] if thumb_channel else [])
++
++        tvart_channel = (
++            "{}_{}".format(ch_metadata["refresh_date"], ch_metadata["tvart_url"])
++            if ch_metadata["tvart_url"]
++            else None
+         )
+         if tvart_channel and tvart_channel not in metadata.art:
+             metadata.art[tvart_channel] = Proxy.Media(  # type: ignore # noqa: F821, E501
+@@ -882,8 +888,12 @@
+         else:
+             Log("[ ] Art: {}".format(tvart_channel))  # type: ignore # noqa: F821, E501
+ 
+-        banner_channel = "{}_{}".format(
+-            ch_metadata["refresh_date"], ch_metadata["banner_url"]
++        metadata.art.validate_keys([tvart_channel] if tvart_channel else [])
++
++        banner_channel = (
++            "{}_{}".format(ch_metadata["refresh_date"], ch_metadata["banner_url"])
++            if ch_metadata["banner_url"]
++            else None
+         )
+         if banner_channel and banner_channel not in metadata.banners:
+             metadata.banners[banner_channel] = Proxy.Media(  # type: ignore # noqa: F821, E501
+@@ -911,6 +921,8 @@
+         else:
+             Log("[ ] Banners: {}".format(banner_channel))  # type: ignore # noqa: F821, E501
+ 
++        metadata.banners.validate_keys([banner_channel] if banner_channel else [])
++
+         metadata.roles.clear()
+         role = metadata.roles.new()
+         role.role = channel_title

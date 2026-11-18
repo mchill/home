@@ -8,7 +8,7 @@
     "workarounds:all",
   ],
   "schedule": ["before 3am on Saturday"],
-  "includePaths": ["k8s/**", "terraform/**"],
+  "includePaths": ["k8s/**", "terraform/**", "ansible/**"],
   "kubernetes": {
     "managerFilePatterns": ["/^k8s/sources/.*\\.yaml$/"],
   },
@@ -22,6 +22,21 @@
       "matchStrings": [
         "github\\.com/(?<depName>tubearchivist/tubearchivist-plex)/archive/refs/tags/(?<currentValue>v[\\d.]+)\\.tar\\.gz",
       ],
+      "datasourceTemplate": "github-releases",
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^k8s/sources/.*\\.yaml$/"],
+      "matchStrings": [
+        "npm install -g (?<depName>[@\\w./-]+)@(?<currentValue>\\d[\\w.-]*)",
+      ],
+      "datasourceTemplate": "npm",
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^ansible/roles/scrutiny_collector/tasks/main\\.yaml$/"],
+      "matchStrings": ["scrutiny_version: (?<currentValue>v[\\d.]+)"],
+      "depNameTemplate": "AnalogJ/scrutiny",
       "datasourceTemplate": "github-releases",
     },
   ],

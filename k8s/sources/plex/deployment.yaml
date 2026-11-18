@@ -27,8 +27,10 @@ spec:
             - |
               url=https://github.com/tubearchivist/tubearchivist-plex/archive/refs/tags/v0.1.8.tar.gz
               pms="/config/Library/Application Support/Plex Media Server"
+              apk add --no-cache patch
               mkdir /tmp/plugin
               wget -qO- "$url" | tar xz -C /tmp/plugin --strip-components 1
+              patch -p1 -d /tmp/plugin < /patches/tubearchivist-plex.patch
               rm -rf "$pms/Plug-ins/TubeArchivist-Agent.bundle"
               mkdir -p "$pms/Plug-ins/TubeArchivist-Agent.bundle" "$pms/Scanners/Series"
               cp -r /tmp/plugin/Contents "$pms/Plug-ins/TubeArchivist-Agent.bundle/"
@@ -37,6 +39,8 @@ spec:
           volumeMounts:
             - name: plex
               mountPath: /config
+            - name: patches
+              mountPath: /patches
       containers:
         - name: plex
           image: ghcr.io/linuxserver/plex:1.43.5
@@ -103,6 +107,9 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media
+        - name: patches
+          configMap:
+            name: plex
       resources:
         limits:
           cpu: 1
