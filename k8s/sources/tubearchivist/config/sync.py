@@ -9,13 +9,21 @@ SERVER = os.environ["TA_SERVER"]
 TOKEN = os.environ["TA_TOKEN"]
 MEDIA_FOLDER = os.environ["TA_MEDIA_FOLDER"]
 TARGET_FOLDER = os.environ["TARGET_FOLDER"]
+ARTWORK = {
+    "channel_thumb_url": "poster.jpg",
+    "channel_banner_url": "banner.jpg",
+    "channel_tvart_url": "fanart.jpg",
+}
+
+
+def fetch(path):
+    request = urllib.request.Request(f"{SERVER}{path}", headers={"Authorization": f"Token {TOKEN}"})
+    with urllib.request.urlopen(request, timeout=60) as response:
+        return response.read()
 
 
 def get(path, **params):
-    url = f"{SERVER}/api/{path}/?{urllib.parse.urlencode(params)}"
-    request = urllib.request.Request(url, headers={"Authorization": f"Token {TOKEN}"})
-    with urllib.request.urlopen(request, timeout=60) as response:
-        return json.load(response)
+    return json.loads(fetch(f"/api/{path}/?{urllib.parse.urlencode(params)}"))
 
 
 def get_all(path, **params):
@@ -41,6 +49,17 @@ def link(target, path):
     if not os.path.lexists(path):
         os.symlink(target, path)
         print(f"Linked {path}")
+
+
+def download(url_path, path):
+    data = fetch(url_path)
+    if os.path.exists(path):
+        with open(path, "rb") as f:
+            if f.read() == data:
+                return
+    with open(path, "wb") as f:
+        f.write(data)
+    print(f"Downloaded {path}")
 
 
 def write_nfo(path, root, fields):
@@ -98,6 +117,9 @@ def sync():
             "plot": channel["channel_description"] or "",
             "premiered": channel["channel_last_refresh"][:10],
         })
+        for field, filename in ARTWORK.items():
+            if channel.get(field):
+                download(channel[field], os.path.join(folder, filename))
 
         for video in get_all("video", channel=channel["channel_id"]):
             stem = os.path.join(
