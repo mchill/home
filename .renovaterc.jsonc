@@ -15,6 +15,16 @@
   "argocd": {
     "managerFilePatterns": ["/^k8s/applications/.*\\.yaml$/"],
   },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^k8s/sources/plex/deployment\\.yaml$/"],
+      "matchStrings": [
+        "github\\.com/(?<depName>tubearchivist/tubearchivist-plex)/archive/refs/tags/(?<currentValue>v[\\d.]+)\\.tar\\.gz",
+      ],
+      "datasourceTemplate": "github-releases",
+    },
+  ],
   "packageRules": [
     {
       "matchManagers": ["terraform"],

@@ -17,6 +17,26 @@ spec:
       securityContext:
         fsGroup: 1000
         fsGroupChangePolicy: OnRootMismatch
+      initContainers:
+        - name: install-tubearchivist-plugin
+          image: alpine:3.24
+          command:
+            - sh
+            - -euc
+          args:
+            - |
+              url=https://github.com/tubearchivist/tubearchivist-plex/archive/refs/tags/v0.1.8.tar.gz
+              pms="/config/Library/Application Support/Plex Media Server"
+              mkdir /tmp/plugin
+              wget -qO- "$url" | tar xz -C /tmp/plugin --strip-components 1
+              rm -rf "$pms/Plug-ins/TubeArchivist-Agent.bundle"
+              mkdir -p "$pms/Plug-ins/TubeArchivist-Agent.bundle" "$pms/Scanners/Series"
+              cp -r /tmp/plugin/Contents "$pms/Plug-ins/TubeArchivist-Agent.bundle/"
+              cp "/tmp/plugin/Scanners/Series/TubeArchivist Series Scanner.py" "$pms/Scanners/Series/"
+              chown -R 1000:1000 "$pms/Plug-ins/TubeArchivist-Agent.bundle" "$pms/Scanners/Series"
+          volumeMounts:
+            - name: plex
+              mountPath: /config
       containers:
         - name: plex
           image: ghcr.io/linuxserver/plex:1.43.5
