@@ -5,3 +5,9 @@ resources:
   - cron-workflow.yaml
   - deployment.yaml
   - sealed-secret.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+configMapGenerator:
+  - name: tubearchivist-sync
+    files:
+      - config/sync.py

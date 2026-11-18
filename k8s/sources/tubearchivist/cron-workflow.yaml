@@ -19,6 +19,9 @@ spec:
       - name: media
         persistentVolumeClaim:
           claimName: media
+      - name: config
+        configMap:
+          name: tubearchivist-sync
     templates:
       - name: tubearchivist
         retryStrategy:
@@ -26,38 +29,18 @@ spec:
         container:
           image: python:3.15.2-alpine
           command:
-            - /bin/sh
-            - -c
-          args:
-            - |
-              apk add git;
-              git clone https://github.com/RoninTech/ta-helper.git;
-              pip install setuptools apprise python-dotenv html2text;
-              mkdir -p /youtube/symlinks/tmp;
-              cd /youtube/symlinks/tmp;
-              python /ta-helper/ta-helper.py;
-              rm -rf /youtube/symlinks/tmp;
+            - python
+            - -u
+            - /config/sync.py
           env:
             - name: TZ
               value: America/New_York
-            - name: LOGLEVEL
-              value: INFO
             - name: TA_SERVER
               value: http://tubearchivist.server.svc.cluster.local
-            - name: TA_CACHE
-              value: ""
             - name: TA_MEDIA_FOLDER
               value: ../../tubearchivist
             - name: TARGET_FOLDER
               value: /youtube/symlinks
-            - name: NOTIFICATIONS_ENABLED
-              value: "False"
-            - name: GENERATE_NFO
-              value: "True"
-            - name: QUICK
-              value: "False"
-            - name: CLEANUP_DELETED_VIDEOS
-              value: "True"
           envFrom:
             - secretRef:
                 name: tubearchivist
@@ -65,12 +48,14 @@ spec:
             - name: media
               mountPath: /youtube
               subPath: youtube
+            - name: config
+              mountPath: /config
           resources:
             limits:
-              memory: 512Mi
+              memory: 64Mi
             requests:
               cpu: 10m
-              memory: 512Mi
+              memory: 64Mi
       - name: notify
         container:
           image: alpine:3.24
