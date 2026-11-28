@@ -36,7 +36,7 @@ spec:
             - |
               apt update
               apt install -y ffmpeg
-              npm install -g podcast-dl@9.1.0
+              npm install -g podcast-dl@12.1.7
               for d in /podcasts/*/; do
                 [ -f "${d}rss.txt" ] || continue
                 podcast-dl --url $(cat "${d}rss.txt") \
