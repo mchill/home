@@ -50,7 +50,7 @@ spec:
               mountPath: /yamtrack/db
               subPath: db
         - name: redis
-          image: redis:8.10.3-alpine
+          image: redis:8.12.0-alpine
           volumeMounts:
             - name: yamtrack
               mountPath: /data
